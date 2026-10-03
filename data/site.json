@@ -1,0 +1,27 @@
+{
+  "name": "Wellness Signal",
+  "internal_key": "WellSignal",
+  "tagline": "Health Insights for Healthier Tomorrow.",
+  "positioning": "Evidence-aware wellness reporting that connects consumer behavior, markets, lifestyle trends, and research without presenting wellness claims as medical conclusions.",
+  "url": "https://wellsignal.org",
+  "staging_url": "https://staging.wellsignal.org",
+  "locale": "en-US",
+  "launch_status": "building",
+  "contact_email": null,
+  "publisher": null,
+  "required_seo_tool": "Ahrefs",
+  "secondary_seo_tool": "Ubersuggest",
+  "fonts": {
+    "display": "Cormorant Garamond",
+    "body": "Source Sans 3",
+    "technical": "Source Sans 3"
+  },
+  "colors": {
+    "forest": "#1F6B4F",
+    "sage": "#A7C3AE",
+    "terracotta": "#C97B63",
+    "cream": "#F8F5EF",
+    "charcoal": "#2D2D2D",
+    "white": "#FFFFFF"
+  }
+}

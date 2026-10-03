@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "content_id": "B10",
+  "slug": "/beauty-aesthetics/hims-hers-business-model/",
+  "status": "scaffolded",
+  "required_seo_tool": "Ahrefs",
+  "secondary_seo_tool": "Ubersuggest",
+  "keyword_queries": [
+    "hims and hers business model"
+  ],
+  "ranking_competitors": [],
+  "sources": [],
+  "statistics": [],
+  "claims": [],
+  "study_context": [],
+  "internal_link_targets": [
+    "A1",
+    "A3",
+    "B9"
+  ],
+  "fact_check": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  },
+  "evidence_review": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  },
+  "qa": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  }
+}

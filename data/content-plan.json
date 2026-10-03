@@ -1,0 +1,346 @@
+[
+  {
+    "id": "A1",
+    "type": "article",
+    "title": "Wellness Statistics on Participation and Spending",
+    "primary_keyword": "wellness statistics",
+    "slug": "/wellness/wellness-statistics/",
+    "hub": "Wellness",
+    "cluster": "Wellness Economy",
+    "role": "Hub",
+    "internal_link_targets": [
+      "A3",
+      "A4",
+      "A5",
+      "A6",
+      "A7"
+    ],
+    "publish_order": 1
+  },
+  {
+    "id": "A2",
+    "type": "article",
+    "title": "Fitness Statistics by Activity and Age",
+    "primary_keyword": "fitness statistics",
+    "slug": "/fitness/fitness-statistics-activity-age/",
+    "hub": "Fitness",
+    "cluster": "Fitness Participation",
+    "role": "Hub",
+    "internal_link_targets": [
+      "A9",
+      "A10",
+      "B1",
+      "B3",
+      "B6"
+    ],
+    "publish_order": 2
+  },
+  {
+    "id": "A3",
+    "type": "article",
+    "title": "Global Wellness Industry Statistics by Sector",
+    "primary_keyword": "global wellness industry statistics",
+    "slug": "/wellness/global-wellness-industry-statistics/",
+    "hub": "Wellness",
+    "cluster": "Wellness Economy",
+    "role": "Hub",
+    "internal_link_targets": [
+      "A1",
+      "A4",
+      "A6",
+      "A7",
+      "B9"
+    ],
+    "publish_order": 3
+  },
+  {
+    "id": "A4",
+    "type": "article",
+    "title": "Corporate Wellness Market Size and Employer Spending",
+    "primary_keyword": "corporate wellness market size",
+    "slug": "/work-wellness/corporate-wellness-market-size/",
+    "hub": "Work & Wellness",
+    "cluster": "Workplace Wellness",
+    "role": "Hub",
+    "internal_link_targets": [
+      "A5",
+      "B7",
+      "B8",
+      "A1"
+    ],
+    "publish_order": 4
+  },
+  {
+    "id": "A5",
+    "type": "article",
+    "title": "Workplace Wellness Statistics on Access and Participation",
+    "primary_keyword": "workplace wellness statistics",
+    "slug": "/work-wellness/workplace-wellness-statistics/",
+    "hub": "Work & Wellness",
+    "cluster": "Workplace Wellness",
+    "role": "Supporting",
+    "internal_link_targets": [
+      "A4",
+      "B7",
+      "B8"
+    ],
+    "publish_order": 5
+  },
+  {
+    "id": "A6",
+    "type": "article",
+    "title": "Wellness Tourism Statistics on Trips and Spending",
+    "primary_keyword": "wellness tourism statistics",
+    "slug": "/wellness-travel/wellness-tourism-statistics/",
+    "hub": "Travel & Retreats",
+    "cluster": "Wellness Travel",
+    "role": "Supporting",
+    "internal_link_targets": [
+      "A1",
+      "A3",
+      "A7"
+    ],
+    "publish_order": 6
+  },
+  {
+    "id": "A7",
+    "type": "article",
+    "title": "Longevity Industry Statistics on Investment",
+    "primary_keyword": "longevity industry statistics",
+    "slug": "/longevity-recovery/longevity-industry-statistics/",
+    "hub": "Longevity & Recovery",
+    "cluster": "Longevity & Recovery",
+    "role": "Hub",
+    "internal_link_targets": [
+      "A1",
+      "A3",
+      "A8",
+      "B4",
+      "B5"
+    ],
+    "publish_order": 7
+  },
+  {
+    "id": "A8",
+    "type": "article",
+    "title": "Healthy Aging Statistics on Activity and Function",
+    "primary_keyword": "healthy aging statistics",
+    "slug": "/longevity-recovery/healthy-aging-statistics/",
+    "hub": "Longevity & Recovery",
+    "cluster": "Longevity & Recovery",
+    "role": "Supporting",
+    "internal_link_targets": [
+      "A7",
+      "A2",
+      "B4",
+      "B5"
+    ],
+    "publish_order": 8
+  },
+  {
+    "id": "A9",
+    "type": "article",
+    "title": "Fitness Industry Statistics by Business Model",
+    "primary_keyword": "fitness industry statistics",
+    "slug": "/fitness/fitness-industry-statistics/",
+    "hub": "Fitness",
+    "cluster": "Fitness Market",
+    "role": "Hub",
+    "internal_link_targets": [
+      "A2",
+      "A10",
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "publish_order": 9
+  },
+  {
+    "id": "A10",
+    "type": "article",
+    "title": "Gym Membership Statistics Beyond Sign-Ups",
+    "primary_keyword": "gym membership statistics",
+    "slug": "/fitness/gym-membership-statistics/",
+    "hub": "Fitness",
+    "cluster": "Fitness Market",
+    "role": "Supporting",
+    "internal_link_targets": [
+      "A2",
+      "A9",
+      "B1",
+      "B2"
+    ],
+    "publish_order": 10
+  },
+  {
+    "id": "B1",
+    "type": "blog",
+    "title": "The ClassPass Business Model and Studio Partners",
+    "primary_keyword": "classpass business model",
+    "slug": "/fitness/classpass-business-model/",
+    "hub": "Fitness",
+    "cluster": "Fitness Platforms",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A2",
+      "A9",
+      "A10",
+      "B2",
+      "B6"
+    ],
+    "publish_order": 11
+  },
+  {
+    "id": "B2",
+    "type": "blog",
+    "title": "Mindbody Business Model Beyond Booking Software",
+    "primary_keyword": "mindbody business model",
+    "slug": "/fitness/mindbody-business-model/",
+    "hub": "Fitness",
+    "cluster": "Fitness Platforms",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A9",
+      "A10",
+      "B1"
+    ],
+    "publish_order": 12
+  },
+  {
+    "id": "B3",
+    "type": "blog",
+    "title": "Peloton Business Model: Hardware and Memberships",
+    "primary_keyword": "peloton business model",
+    "slug": "/fitness/peloton-business-model/",
+    "hub": "Fitness",
+    "cluster": "Connected Fitness",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A2",
+      "A9",
+      "A10",
+      "B4",
+      "B6"
+    ],
+    "publish_order": 13
+  },
+  {
+    "id": "B4",
+    "type": "blog",
+    "title": "WHOOP Business Model and Device Access",
+    "primary_keyword": "whoop business model",
+    "slug": "/fitness/whoop-business-model/",
+    "hub": "Fitness",
+    "cluster": "Recovery & Wearables",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A2",
+      "A7",
+      "A8",
+      "B5",
+      "B6"
+    ],
+    "publish_order": 14
+  },
+  {
+    "id": "B5",
+    "type": "blog",
+    "title": "Oura Business Model Beyond the Ring Purchase",
+    "primary_keyword": "oura business model",
+    "slug": "/mind-sleep/oura-business-model/",
+    "hub": "Mind & Sleep",
+    "cluster": "Sleep & Wearables",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A7",
+      "A8",
+      "B4",
+      "B7",
+      "B8"
+    ],
+    "publish_order": 15
+  },
+  {
+    "id": "B6",
+    "type": "blog",
+    "title": "Strava Business Model Across Free and Paid Features",
+    "primary_keyword": "strava business model",
+    "slug": "/fitness/strava-business-model/",
+    "hub": "Fitness",
+    "cluster": "Fitness Platforms",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A2",
+      "B1",
+      "B3",
+      "B4"
+    ],
+    "publish_order": 16
+  },
+  {
+    "id": "B7",
+    "type": "blog",
+    "title": "Calm Business Model Through Consumer and Employer Plans",
+    "primary_keyword": "calm business model",
+    "slug": "/mind-sleep/calm-business-model/",
+    "hub": "Mind & Sleep",
+    "cluster": "Mind & Sleep",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A1",
+      "A4",
+      "A5",
+      "B8"
+    ],
+    "publish_order": 17
+  },
+  {
+    "id": "B8",
+    "type": "blog",
+    "title": "Headspace Business Model and Organizational Buyers",
+    "primary_keyword": "headspace business model",
+    "slug": "/mind-sleep/headspace-business-model/",
+    "hub": "Mind & Sleep",
+    "cluster": "Mind & Sleep",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A1",
+      "A4",
+      "A5",
+      "B7"
+    ],
+    "publish_order": 18
+  },
+  {
+    "id": "B9",
+    "type": "blog",
+    "title": "Noom Business Model Across Program Types",
+    "primary_keyword": "noom business model",
+    "slug": "/wellness/noom-business-model/",
+    "hub": "Wellness",
+    "cluster": "Consumer Wellness Platforms",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A1",
+      "A3",
+      "B10"
+    ],
+    "publish_order": 19
+  },
+  {
+    "id": "B10",
+    "type": "blog",
+    "title": "Hims and Hers Business Model and Recurring Revenue",
+    "primary_keyword": "hims and hers business model",
+    "slug": "/beauty-aesthetics/hims-hers-business-model/",
+    "hub": "Beauty & Aesthetics",
+    "cluster": "Consumer Wellness Platforms",
+    "role": "Commercial Support",
+    "internal_link_targets": [
+      "A1",
+      "A3",
+      "B9"
+    ],
+    "publish_order": 20
+  }
+]

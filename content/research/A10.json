@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "content_id": "A10",
+  "slug": "/fitness/gym-membership-statistics/",
+  "status": "scaffolded",
+  "required_seo_tool": "Ahrefs",
+  "secondary_seo_tool": "Ubersuggest",
+  "keyword_queries": [
+    "gym membership statistics"
+  ],
+  "ranking_competitors": [],
+  "sources": [],
+  "statistics": [],
+  "claims": [],
+  "study_context": [],
+  "internal_link_targets": [
+    "A2",
+    "A9",
+    "B1",
+    "B2"
+  ],
+  "fact_check": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  },
+  "evidence_review": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  },
+  "qa": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  }
+}
