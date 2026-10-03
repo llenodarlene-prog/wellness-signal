@@ -1,0 +1,42 @@
+[
+  {
+    "path": "assets/brand/wellness-signal-logo-01.png",
+    "width": 1254,
+    "height": 1254,
+    "role": "brand source variant",
+    "alt": "Wellness Signal logo variant",
+    "deploy": true
+  },
+  {
+    "path": "assets/brand/wellness-signal-logo-02.png",
+    "width": 1254,
+    "height": 1254,
+    "role": "brand source variant",
+    "alt": "Wellness Signal logo variant",
+    "deploy": true
+  },
+  {
+    "path": "assets/brand/wellness-signal-logo-03.png",
+    "width": 1448,
+    "height": 1086,
+    "role": "brand source variant",
+    "alt": "Wellness Signal logo variant",
+    "deploy": true
+  },
+  {
+    "path": "assets/brand/wellness-signal-logo-04.png",
+    "width": 1122,
+    "height": 1402,
+    "role": "brand source variant",
+    "alt": "Wellness Signal logo variant",
+    "deploy": true
+  },
+  {
+    "path": "assets/brand/wellness-signal-logo-05.png",
+    "width": 1448,
+    "height": 1086,
+    "role": "brand source variant",
+    "alt": "Wellness Signal logo variant",
+    "deploy": true
+  }
+]

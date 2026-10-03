@@ -1,0 +1,58 @@
+{
+  "primary": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "About Us",
+      "href": "/about/"
+    },
+    {
+      "label": "Wellness",
+      "href": "/wellness/"
+    },
+    {
+      "label": "Fitness",
+      "href": "/fitness/"
+    },
+    {
+      "label": "Mind & Sleep",
+      "href": "/mind-sleep/"
+    },
+    {
+      "label": "Longevity & Recovery",
+      "href": "/longevity-recovery/"
+    },
+    {
+      "label": "Beauty & Aesthetics",
+      "href": "/beauty-aesthetics/"
+    },
+    {
+      "label": "Work & Wellness",
+      "href": "/work-wellness/"
+    },
+    {
+      "label": "Travel & Retreats",
+      "href": "/wellness-travel/"
+    },
+    {
+      "label": "Contact Us",
+      "href": "/contact/"
+    }
+  ],
+  "footer": [
+    {
+      "label": "About Us",
+      "href": "/about/"
+    },
+    {
+      "label": "Contact Us",
+      "href": "/contact/"
+    },
+    {
+      "label": "Privacy Policy",
+      "href": "/privacy/"
+    }
+  ]
+}

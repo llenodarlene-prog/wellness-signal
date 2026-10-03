@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "content_id": "A3",
+  "slug": "/wellness/global-wellness-industry-statistics/",
+  "status": "scaffolded",
+  "required_seo_tool": "Ahrefs",
+  "secondary_seo_tool": "Ubersuggest",
+  "keyword_queries": [
+    "global wellness industry statistics"
+  ],
+  "ranking_competitors": [],
+  "sources": [],
+  "statistics": [],
+  "claims": [],
+  "study_context": [],
+  "internal_link_targets": [
+    "A1",
+    "A4",
+    "A6",
+    "A7",
+    "B9"
+  ],
+  "fact_check": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  },
+  "evidence_review": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  },
+  "qa": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  }
+}

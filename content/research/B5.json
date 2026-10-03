@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "content_id": "B5",
+  "slug": "/mind-sleep/oura-business-model/",
+  "status": "scaffolded",
+  "required_seo_tool": "Ahrefs",
+  "secondary_seo_tool": "Ubersuggest",
+  "keyword_queries": [
+    "oura business model"
+  ],
+  "ranking_competitors": [],
+  "sources": [],
+  "statistics": [],
+  "claims": [],
+  "study_context": [],
+  "internal_link_targets": [
+    "A7",
+    "A8",
+    "B4",
+    "B7",
+    "B8"
+  ],
+  "fact_check": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  },
+  "evidence_review": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  },
+  "qa": {
+    "status": "pending",
+    "reviewer": null,
+    "date_utc": null
+  }
+}
