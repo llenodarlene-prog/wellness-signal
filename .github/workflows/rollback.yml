@@ -1,0 +1,39 @@
+name: Roll back deployment
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Protected environment
+        required: true
+        type: choice
+        options: [staging, production]
+      release:
+        description: Exact verified release directory name
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  rollback:
+    environment: "${{ inputs.environment }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Activate known-good release
+        env:
+          DEPLOY_HOST: "${{ secrets.DEPLOY_HOST }}"
+          DEPLOY_PORT: "${{ vars.DEPLOY_PORT }}"
+          DEPLOY_USER: "${{ secrets.DEPLOY_USER }}"
+          DEPLOY_ROOT: "${{ secrets.DEPLOY_ROOT }}"
+          DEPLOY_SSH_KEY: "${{ secrets.DEPLOY_SSH_KEY }}"
+          SSH_KNOWN_HOSTS: "${{ secrets.SSH_KNOWN_HOSTS }}"
+          RELEASE: "${{ inputs.release }}"
+        run: |
+          set -euo pipefail
+          deploy_port="${DEPLOY_PORT:-65002}"
+          if [[ ! "$deploy_port" =~ ^[0-9]{1,5}$ ]] || (( 10#$deploy_port < 1 || 10#$deploy_port > 65535 )); then echo 'Invalid SSH port' >&2; exit 2; fi
+          if [[ ! "$RELEASE" =~ ^release-[a-f0-9]{40}$ ]]; then echo 'Invalid release name' >&2; exit 2; fi
+          if [[ ! "$DEPLOY_ROOT" =~ ^/[A-Za-z0-9._/-]+$ ]] || [[ "$DEPLOY_ROOT" == "/" ]]; then echo 'Invalid deploy root' >&2; exit 2; fi
+          known_hosts="$(mktemp)"; key_file="$(mktemp)"; trap 'rm -f "$known_hosts" "$key_file"' EXIT
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > "$known_hosts"
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$key_file"; chmod 600 "$key_file"
+          ssh -p "$deploy_port" -i "$key_file" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$known_hosts" "$DEPLOY_USER@$DEPLOY_HOST" "test -f '$DEPLOY_ROOT/releases/$RELEASE/index.html' && ln -sfn '$DEPLOY_ROOT/releases/$RELEASE' '$DEPLOY_ROOT/current.new' && mv -Tf '$DEPLOY_ROOT/current.new' '$DEPLOY_ROOT/current'"
