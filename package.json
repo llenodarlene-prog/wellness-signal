@@ -1,0 +1,16 @@
+{
+  "name": "wellness-signal",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "release:check": "node scripts/check-release.mjs",
+    "schedule": "node scripts/schedule.mjs",
+    "verify": "npm run clean && npm run build && npm run check"
+  }
+}
