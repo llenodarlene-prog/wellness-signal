@@ -26,8 +26,10 @@ if (!html.includes(`<link rel="canonical" href="${canonicalBase}/">`)) throw new
 if (!html.includes(`<meta name="robots" content="${expectedRobots}`)) throw new Error(`/: expected ${expectedRobots} robots directive`);
 
 for (const route of ['/robots.txt', '/sitemap.xml']) {
-  const response = await fetch(`${base}${route}`);
+  const response = await fetch(`${base}${route}`, { cache: 'no-store' });
   if (!response.ok) throw new Error(`${route}: HTTP ${response.status}`);
+  const text = await response.text();
+  if (route === '/sitemap.xml' && !text.includes('<urlset')) throw new Error('/sitemap.xml: not a sitemap');
 }
 
 console.log(`Smoke test passed for ${base}`);
