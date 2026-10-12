@@ -12,9 +12,20 @@ if (expectedRobots === 'noindex' && base === canonicalBase) {
   throw new Error('refusing a noindex smoke test against the production domain');
 }
 
+const withCacheBust = (url, attempt = 1) => {
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}smoke=${Date.now()}-${attempt}`;
+};
+
 let home;
 for (let attempt = 1; attempt <= 5; attempt += 1) {
-  home = await fetch(`${base}/`, { cache: 'no-store' });
+  home = await fetch(withCacheBust(`${base}/`, attempt), {
+    cache: 'no-store',
+    headers: {
+      'Cache-Control': 'no-cache, no-store, max-age=0',
+      Pragma: 'no-cache',
+    },
+  });
   if (home.ok) break;
   if (attempt < 5) await new Promise(resolve => setTimeout(resolve, attempt * 4000));
 }
@@ -26,7 +37,13 @@ if (!html.includes(`<link rel="canonical" href="${canonicalBase}/">`)) throw new
 if (!html.includes(`<meta name="robots" content="${expectedRobots}`)) throw new Error(`/: expected ${expectedRobots} robots directive`);
 
 for (const route of ['/robots.txt', '/sitemap.xml']) {
-  const response = await fetch(`${base}${route}`, { cache: 'no-store' });
+  const response = await fetch(withCacheBust(`${base}${route}`), {
+    cache: 'no-store',
+    headers: {
+      'Cache-Control': 'no-cache, no-store, max-age=0',
+      Pragma: 'no-cache',
+    },
+  });
   if (!response.ok) throw new Error(`${route}: HTTP ${response.status}`);
   const text = await response.text();
   if (route === '/sitemap.xml' && !text.includes('<urlset')) throw new Error('/sitemap.xml: not a sitemap');
