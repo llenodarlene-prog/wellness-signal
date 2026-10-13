@@ -24,7 +24,7 @@ export const pages = [
     description: 'Research-backed insights into wellness trends, fitness, sleep, longevity, beauty, workplace wellbeing, and wellness travel.',
     hero: {
       h1: 'Wellness Research Beyond the Headlines',
-      eyebrow: 'Health Insights for a Healthier Tomorrow',
+      eyebrow: 'Health Insights for Healthier Tomorrow.',
       image: 'desk-sea-view',
       p: [
         'Wellness is more than a personal routine. It is shaping consumer habits, new technologies, business decisions, and the way people approach everyday health.',
@@ -34,6 +34,7 @@ export const pages = [
       cta: { label: 'Explore Our Articles', href: '#coverage' },
     },
     sections: [
+      { type: 'facts' },
       {
         id: 'coverage', h2: 'Explore Our Coverage',
         p: ['Wellness spans many areas of everyday life. Our editorial coverage brings together research, consumer behaviour, and industry developments across seven key topics.'],
@@ -47,7 +48,9 @@ export const pages = [
           "Whether you're researching a wellness market, following consumer behaviour, or reviewing a new industry trend, we bring the relevant information together in one place.",
         ],
         cta: { label: 'Browse Our Research', href: '#coverage' },
+        steps: true,
       },
+      { type: 'chart' },
       {
         h2: 'Evidence Before Assumptions', tone: 'forest',
         p: [
@@ -58,6 +61,7 @@ export const pages = [
           'Our aim is to keep wellness reporting accurate, accessible, and useful.',
         ],
         cta: { label: 'About Wellness Signal', href: '/about/' },
+        separations: true,
       },
       {
         h2: 'Latest from Wellness Signal',
@@ -95,6 +99,7 @@ export const pages = [
       {
         h2: 'What We Cover',
         p: ['Our editorial coverage spans seven areas:'],
+        coverageIcons: true,
         list: [
           '**Wellness:** Consumer habits, nutrition trends, wellness spending, and industry research.',
           '**Fitness:** Exercise participation, fitness businesses, training trends, and wearable technology.',
@@ -119,6 +124,7 @@ export const pages = [
           { h3: 'Clear Communication', p: ['We explain technical information in straightforward language without removing essential context or overstating conclusions.'] },
         ],
       },
+      { type: 'ladder' },
       {
         h2: 'Who We Write For',
         p: [
@@ -173,6 +179,7 @@ export const pages = [
         ],
         headingLevel: 2,
       },
+      { type: 'lens' },
       latest('Wellness', 'Read research and insights covering wellness statistics, consumer behaviour, nutrition trends, and industry developments.'),
     ],
   },
@@ -198,6 +205,7 @@ export const pages = [
           { h3: 'Training Trends and Exercise Research', p: ['From strength training and running to Pilates and yoga, exercise preferences continue to evolve.', 'We examine research into different activities, participation patterns, and how new training approaches gain attention.'] },
         ],
       },
+      { type: 'lens' },
       latest('Fitness', 'Browse fitness statistics, exercise research, gym industry developments, and technology trends.'),
     ],
   },
@@ -223,6 +231,7 @@ export const pages = [
           { h3: 'Sleep Technology and Wellness Products', p: ['Sleep trackers, smart devices, digital programmes, and consumer products have become prominent within the wellness market.', 'We explore how these technologies are used, what they measure, and whether published research supports their claims.'] },
         ],
       },
+      { type: 'lens' },
       latest('Mind & Sleep', 'Read coverage of sleep research, meditation, mindfulness, stress statistics, and related industry developments.'),
     ],
   },
@@ -248,6 +257,7 @@ export const pages = [
           { h3: 'Longevity and Recovery Markets', p: ['Fitness studios, wellness resorts, specialised clinics, and technology businesses are responding to demand for recovery and healthy-aging services.', 'We explore market trends, business models, and consumer behaviour while keeping commercial growth separate from demonstrated clinical benefits.'] },
         ],
       },
+      { type: 'lens' },
       latest('Longevity & Recovery', 'Browse research on healthy aging, recovery methods, wellness technologies, and industry statistics.'),
     ],
   },
@@ -273,6 +283,7 @@ export const pages = [
           { h3: 'Beauty Industry Statistics', p: ['Market reports provide information about spending, product categories, and changes in consumer demand.', 'We review these findings with attention to geographic scope, market definitions, and the difference between actual revenue and projected growth.'] },
         ],
       },
+      { type: 'lens' },
       latest('Beauty & Aesthetics', 'Read articles covering skincare research, aesthetic services, beauty technology, and market developments.'),
     ],
   },
@@ -299,6 +310,7 @@ export const pages = [
           { h3: 'Corporate Wellness Industry Trends', p: ['Digital platforms, employee benefits providers, and specialised wellness businesses operate within a diverse corporate market.', 'We explore purchasing trends, market research, and developments influencing employer decisions.'] },
         ],
       },
+      { type: 'lens' },
       latest('Work & Wellness', 'Browse research on employee wellbeing, corporate wellness programmes, workplace trends, and industry statistics.'),
     ],
   },
@@ -324,6 +336,7 @@ export const pages = [
           { h3: 'Luxury Wellness Travel', p: ['Luxury wellness travel brings together premium accommodation, specialised facilities, and personalised experiences.', 'We examine market trends and changing guest expectations while distinguishing service quality and experience from claims of medical or therapeutic effectiveness.'] },
         ],
       },
+      { type: 'lens' },
       latest('Travel & Retreats', 'Read research on wellness tourism, retreat trends, spa industry statistics, and hospitality developments.'),
     ],
   },
@@ -362,9 +375,9 @@ export const pages = [
     sections: [
       { h2: 'Information We Collect', p: ['When you contact us by email, we may collect your name, email address, and the information included in your message.', 'Technical information may also be collected during website visits, including IP addresses, browser and device details, referring pages, and website activity.', "The precise information collected depends on the website's hosting, security, and analytics configuration."] },
       { h2: 'How Information Is Used', p: ['Information may be used to respond to enquiries, review editorial corrections, maintain website operations, investigate technical issues, and meet applicable legal obligations.', 'Where analytics are enabled, usage information may also be processed to assess website performance and readership patterns.'] },
-      { h2: 'Cookies and Analytics', p: ['Our website may use cookies or similar technologies for essential functionality, security, and analytics.', 'Where required by applicable law, appropriate choices will be offered for non-essential technologies.'], pending: 'Identify the actual cookies, analytics providers, and available consent options.' },
+      { h2: 'Cookies and Analytics', p: ['Our website may use cookies or similar technologies for essential functionality, security, and analytics.', 'Where required by applicable law, appropriate choices will be offered for non-essential technologies.'] },
       { h2: 'Third-Party Services', p: ['Website hosting, email, security, and analytics providers may process information necessary to provide their services.', 'External websites linked from our articles operate under their own privacy policies.'] },
-      { h2: 'Data Retention and Security', p: ['We aim to retain personal information only for as long as necessary for the purpose for which it was collected or as required by applicable law.', 'Reasonable safeguards should be maintained to protect information against unauthorised access, disclosure, alteration, or loss.'], pending: 'Confirm actual retention periods and security practices.' },
+      { h2: 'Data Retention and Security', p: ['We aim to retain personal information only for as long as necessary for the purpose for which it was collected or as required by applicable law.', 'Reasonable safeguards should be maintained to protect information against unauthorised access, disclosure, alteration, or loss.'] },
       { h2: 'Your Privacy Rights', p: ['Depending on applicable law, you may be entitled to request access to, correction of, or deletion of certain personal information.', 'Requests can be submitted through our contact email. Identity verification may be required.'] },
       { h2: "Children's Privacy", p: ['Wellness Signal is a general informational publication and is not specifically directed at children.', 'If you believe personal information about a child has been collected inappropriately, please contact us.'] },
       { h2: 'Policy Updates', p: ['This Privacy Policy may be updated when website operations, service providers, or legal requirements change.', 'The latest version will be published on this page with its revision date.'] },
