@@ -1,7 +1,7 @@
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
 import {
-  categoryIcons, categoryLens, economy, evidenceLadder, icon, readingSteps, separations, sprig, standardIcons,
+  categoryIcons, categoryLens, economy, partnerRules, evidenceLadder, icon, readingSteps, separations, sprig, standardIcons,
 } from '../content/features.mjs';
 
 const site = JSON.parse(await readFile('data/site.json', 'utf8'));
@@ -91,6 +91,7 @@ const footer = `<footer class="site-footer">
         <li><a href="/about/#editorial-standards">Editorial Standards</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/partner-with-us/">Partner With Us</a></li>
         <li><a href="/terms/">Terms and Conditions</a></li>
       </ul>
     </div>
@@ -224,6 +225,17 @@ const renderSection = (page, section, index) => {
   if (section.type === 'chart') return chartBlock();
   if (section.type === 'ladder') return ladderBlock();
   if (section.type === 'lens') return lensBlock(page);
+  if (section.type === 'partnerTable') return `<section class="section tone-cream">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Our standards</span><h2>What We Publish</h2><p>Partner content sits alongside our editorial coverage, so it has to meet the same bar.</p></div>
+    <div class="table-wrap reveal">
+      <table class="lens-table partner-table">
+        <thead><tr><th scope="col">We accept</th><th scope="col">We decline</th></tr></thead>
+        <tbody>${partnerRules.accept.map((a, i) => `<tr><td>${icon('check', 18)}<span>${esc(a)}</span></td><td><span class="x" aria-hidden="true">&times;</span><span>${esc(partnerRules.decline[i])}</span></td></tr>`).join('')}</tbody>
+      </table>
+    </div>
+  </div>
+</section>`;
 
   const tone = section.tone || 'cream';
   const level = section.headingLevel === 2 ? 'h2' : 'h3';

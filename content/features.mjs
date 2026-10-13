@@ -47,6 +47,21 @@ export const evidenceLadder = [
   { h: 'Systematic reviews and meta-analyses', p: 'Structured syntheses of all relevant studies on a question. The most reliable summary of what the evidence shows, when the underlying studies are sound.' },
 ];
 
+export const partnerRules = {
+  accept: [
+    'Original, evidence-based analysis',
+    'Claims supported by credible, cited sources',
+    'Sponsored articles labelled as sponsored',
+    'Disclosed commercial relationships',
+  ],
+  decline: [
+    'Medical claims without supporting evidence',
+    'Undisclosed paid links or placements',
+    'Promotional copy presented as editorial',
+    'Previously published or AI-spun content',
+  ],
+};
+
 export const standardIcons = {
   'Source Quality': 'source',
   'Research Context': 'flask',
@@ -56,6 +71,9 @@ export const standardIcons = {
   'Editorial Enquiries': 'message',
   'Corrections and Updates': 'check',
   'Research and Contributions': 'source',
+  'Guest Contributions': 'message',
+  'Sponsored Content': 'sparkle',
+  'Research Partnerships': 'chart',
 };
 
 // "What gets cited" versus "what we check", drawn from each category page's copy.
