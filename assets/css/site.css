@@ -334,7 +334,8 @@ table { width: 100%; border-collapse: collapse; }
 .pull > span { position: absolute; left: -6px; top: -38px; font: 500 110px/1 var(--serif); color: var(--ws-sage); font-style: normal; }
 .intro-body p { color: var(--ws-muted); font-size: 18px; }
 .intro-body p:first-child::first-letter { float: left; font: 500 64px/.86 var(--serif); color: var(--ws-forest); padding: 6px 10px 0 0; }
-.home .facts-band + .intro { padding-top: clamp(72px, 8vw, 120px); background: transparent; }
+.home .facts-band + .intro { margin-top: -56px; padding-top: clamp(120px, 12vw, 170px); }
+@media (max-width: 720px) { .home .facts-band + .intro { margin-top: 0; padding-top: 64px; } }
 @media (max-width: 880px) { .intro-grid { grid-template-columns: 1fr; } }
 
 /* ---------- Bento coverage grid ---------- */
@@ -381,3 +382,25 @@ table { width: 100%; border-collapse: collapse; }
   .bento .cat:nth-child(1) .cat-body { margin: 0; background: none; backdrop-filter: none; padding: 42px 26px 28px; }
 }
 .intro.tone-white + .section.tone-white { padding-top: 0; }
+
+/* ---------- Image-background sections ---------- */
+.has-bg { isolation: isolate; padding: clamp(96px, 12vw, 168px) 0; }
+.section-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.section-bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 2.4s var(--ease); }
+.js .section-bg.reveal { opacity: 1; transform: none; }
+.section-bg.in img { transform: scale(1); }
+.section-bg::after { content: ''; position: absolute; inset: 0; }
+.bg-dark .section-bg::after { background: linear-gradient(90deg, rgba(18, 63, 47, .94) 0%, rgba(18, 63, 47, .78) 48%, rgba(18, 63, 47, .3) 100%); }
+.bg-light .section-bg::after { background: linear-gradient(90deg, rgba(248, 245, 239, .97) 0%, rgba(248, 245, 239, .88) 42%, rgba(248, 245, 239, .15) 100%); }
+.bg-panel { max-width: 640px; }
+.bg-panel .section-head { margin-bottom: 28px; }
+.bg-dark, .bg-dark p { color: rgba(248, 245, 239, .88); }
+.bg-dark h2 { color: var(--ws-cream); }
+.bg-dark .btn { background: var(--ws-cream); color: var(--ws-forest); }
+.bg-light .section-head p { color: var(--ws-charcoal); }
+.has-bg .empty { background: rgba(255, 255, 255, .62); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-color: rgba(167, 195, 174, .9); }
+.bg-light + .site-footer, main > .section:last-child.bg-light { border-bottom: 0; }
+@media (max-width: 760px) {
+  .bg-dark .section-bg::after { background: rgba(18, 63, 47, .86); }
+  .bg-light .section-bg::after { background: rgba(248, 245, 239, .9); }
+}
