@@ -1,7 +1,9 @@
 {
   "name": "Wellness Signal",
   "url": "https://wellsignal.org",
-  "description": "Wellness market intelligence and evidence-led consumer health coverage.",
+  "description": "Research-backed insights into wellness trends, fitness, sleep, longevity, beauty, workplace wellbeing, and wellness travel.",
   "locale": "en-US",
-  "launch_status": "ready"
+  "launch_status": "ready",
+  "editorial_email": null,
+  "privacy_email": null
 }
