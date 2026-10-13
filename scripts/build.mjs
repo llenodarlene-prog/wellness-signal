@@ -163,7 +163,7 @@ const separationsBlock = () => `<div class="table-wrap reveal">
   </table>
 </div>`;
 
-const ladderBlock = () => `<section class="section tone-cream" id="evidence-ladder">
+const ladderBlock = () => `<section class="section tone-white" id="evidence-ladder">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">How we weigh evidence</span>
@@ -256,6 +256,12 @@ const renderSection = (page, section, index) => {
       </div>
       ${section.steps ? stepsBlock() : ''}
     </div></section>`;
+  }
+  if (section.bg) {
+    return `<section class="section has-bg bg-${section.bgStyle || 'dark'}"${id}>
+      <div class="section-bg reveal">${picture(section.bg, { sizes: '100vw', alt: '' })}</div>
+      <div class="wrap"><div class="bg-panel">${head}${body}${cta}</div></div>
+    </section>`;
   }
   const band = section.image ? `<figure class="media-band reveal">${picture(section.image, { sizes: '100vw' })}</figure>` : '';
   const deco = tone === 'forest' ? sprig : '';

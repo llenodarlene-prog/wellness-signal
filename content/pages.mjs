@@ -11,7 +11,8 @@ export const categories = [
   { slug: 'travel-retreats', name: 'Travel & Retreats', image: 'retreat-pool-terrace', summary: 'Wellness tourism, spa destinations, retreats, hospitality trends, and the experiences influencing wellness travel.' },
 ];
 
-const latest = (name, text) => ({
+const latest = (name, text, bg) => ({
+  bg, bgStyle: 'light',
   h2: `Latest ${name} Articles`,
   p: [text],
   empty: true,
@@ -71,7 +72,7 @@ export const pages = [
           'Stay informed about the latest research, market developments, and consumer trends across the wellness industry.',
           'Browse our newest articles covering fitness, sleep, recovery, beauty, workplace wellbeing, and travel.',
         ],
-        empty: true,
+        empty: true, bg: 'retreat-pool-terrace', bgStyle: 'light',
         cta: { label: 'View All Articles', href: '#coverage' },
       },
     ],
@@ -92,7 +93,7 @@ export const pages = [
     },
     sections: [
       {
-        h2: 'Our Mission', tone: 'white',
+        h2: 'Our Mission', tone: 'cream', image: 'desk-sea-view',
         p: [
           'Our mission is to make wellness research and industry information accessible, accurate, and relevant.',
           'We examine the trends influencing consumer choices, the businesses responding to those trends, and the evidence supporting popular wellness practices.',
@@ -100,7 +101,7 @@ export const pages = [
         ],
       },
       {
-        h2: 'What We Cover',
+        h2: 'What We Cover', tone: 'white',
         p: ['Our editorial coverage spans seven areas:'],
         coverageIcons: true,
         list: [
@@ -114,7 +115,7 @@ export const pages = [
         ],
       },
       {
-        id: 'editorial-standards', h2: 'Our Editorial Standards', tone: 'white',
+        id: 'editorial-standards', h2: 'Our Editorial Standards', tone: 'cream',
         p: [
           'Reliable wellness reporting requires more than repeating statistics or summarising a study.',
           'We assess information based on its source, methodology, relevance, and limitations.',
@@ -129,7 +130,7 @@ export const pages = [
       },
       { type: 'ladder' },
       {
-        h2: 'Who We Write For',
+        h2: 'Who We Write For', bg: 'retreat-pool-terrace', bgStyle: 'dark',
         p: [
           'Wellness Signal serves readers interested in the research and trends influencing modern wellness.',
           'Our content is relevant to consumers, industry professionals, researchers, marketers, business owners, and anyone following developments across the wellness sector.',
@@ -145,7 +146,7 @@ export const pages = [
         ],
       },
       {
-        h2: 'Editorial Independence',
+        h2: 'Editorial Independence', bg: 'nutrition-table', bgStyle: 'dark',
         p: [
           'Our editorial focus is on accuracy, relevance, and useful information.',
           'We do not treat advertising claims, popularity, or commercial success as evidence of effectiveness.',
@@ -153,7 +154,7 @@ export const pages = [
         ],
       },
       {
-        h2: 'Contact Wellness Signal', tone: 'forest',
+        h2: 'Contact Wellness Signal', bg: 'bedroom-sunset', bgStyle: 'light',
         p: ['Have a research source to share, a correction to suggest, or a question about our coverage?', 'We welcome relevant editorial enquiries.'],
         cta: { label: 'Contact Us', href: '/contact/' },
       },
@@ -173,7 +174,7 @@ export const pages = [
     },
     sections: [
       {
-        tone: 'white', image: 'breakfast-bowl',
+        tone: 'white',
         cards: [
           { h3: 'Consumer Wellness Trends', p: ['Wellness habits vary by age, income, location, and personal priorities.', 'We examine how consumers approach wellness products, nutrition, self-care services, and daily routines. Our coverage considers survey findings, purchasing patterns, and the factors influencing demand.'] },
           { h3: 'Wellness Industry Statistics', p: ['Industry estimates can differ considerably depending on which products and services are included.', 'We review market data, spending reports, and forecasts while examining the definitions and research methods behind reported figures.', 'Our coverage distinguishes measured market activity from projections about future growth.'] },
@@ -183,7 +184,7 @@ export const pages = [
         headingLevel: 2,
       },
       { type: 'lens' },
-      latest('Wellness', 'Read research and insights covering wellness statistics, consumer behaviour, nutrition trends, and industry developments.'),
+      latest('Wellness', 'Read research and insights covering wellness statistics, consumer behaviour, nutrition trends, and industry developments.', 'breakfast-bowl'),
     ],
   },
   {
@@ -200,7 +201,7 @@ export const pages = [
     },
     sections: [
       {
-        tone: 'white', image: 'pilates-studio', headingLevel: 2,
+        tone: 'white', headingLevel: 2,
         cards: [
           { h3: 'Exercise Participation and Fitness Habits', p: ['Exercise participation varies across age groups, locations, and activities.', 'We examine physical activity surveys, participation statistics, and changes in consumer habits, distinguishing gym memberships from actual exercise frequency.'] },
           { h3: 'Gyms and Boutique Fitness Studios', p: ['The fitness industry includes large gym operators, independent facilities, Pilates studios, yoga businesses, and specialised training spaces.', 'Our coverage examines membership trends, business models, pricing, and the factors influencing how consumers choose fitness services.'] },
@@ -209,7 +210,7 @@ export const pages = [
         ],
       },
       { type: 'lens' },
-      latest('Fitness', 'Browse fitness statistics, exercise research, gym industry developments, and technology trends.'),
+      latest('Fitness', 'Browse fitness statistics, exercise research, gym industry developments, and technology trends.', 'pilates-studio'),
     ],
   },
   {
@@ -226,7 +227,7 @@ export const pages = [
     },
     sections: [
       {
-        tone: 'white', image: 'bedroom-sunset', headingLevel: 2,
+        tone: 'white', headingLevel: 2,
         cards: [
           { h3: 'Sleep Habits and Research', p: ['Sleep duration, quality, and consistency are measured in different ways across studies and population surveys.', 'We examine sleep statistics, research findings, and changes in consumer habits while distinguishing self-reported experiences from clinical or device-based measurements.'] },
           { h3: 'Meditation and Mindfulness', p: ['Meditation and mindfulness practices are used in personal routines, workplaces, and structured wellbeing programmes.', 'Our coverage examines participation trends, scientific research, and the reported outcomes of different approaches, with attention to the limitations of available studies.'] },
@@ -235,7 +236,7 @@ export const pages = [
         ],
       },
       { type: 'lens' },
-      latest('Mind & Sleep', 'Read coverage of sleep research, meditation, mindfulness, stress statistics, and related industry developments.'),
+      latest('Mind & Sleep', 'Read coverage of sleep research, meditation, mindfulness, stress statistics, and related industry developments.', 'bedroom-sunset'),
     ],
   },
   {
@@ -252,7 +253,7 @@ export const pages = [
     },
     sections: [
       {
-        tone: 'white', image: 'recovery-bench', headingLevel: 2,
+        tone: 'white', headingLevel: 2,
         cards: [
           { h3: 'Healthy Aging and Longevity', p: ['Longevity research includes questions about lifespan, age-related health, physical function, and quality of life.', 'We examine studies, demographic data, and emerging approaches, distinguishing established findings from experimental interventions and early-stage research.'] },
           { h3: 'Recovery Practices', p: ['Saunas, cold plunges, massage, and other recovery services are promoted for a variety of purposes.', 'Our coverage looks at the available evidence, including how benefits are measured, which populations have been studied, and where findings remain limited.'] },
@@ -261,7 +262,7 @@ export const pages = [
         ],
       },
       { type: 'lens' },
-      latest('Longevity & Recovery', 'Browse research on healthy aging, recovery methods, wellness technologies, and industry statistics.'),
+      latest('Longevity & Recovery', 'Browse research on healthy aging, recovery methods, wellness technologies, and industry statistics.', 'recovery-bench'),
     ],
   },
   {
@@ -278,7 +279,7 @@ export const pages = [
     },
     sections: [
       {
-        tone: 'white', image: 'skincare-vanity', headingLevel: 2,
+        tone: 'white', headingLevel: 2,
         cards: [
           { h3: 'Skincare and Consumer Trends', p: ['Skincare purchasing decisions are influenced by ingredients, product claims, price, personal preferences, and social media.', 'We examine consumer surveys, category growth, and research behind popular skincare approaches.'] },
           { h3: 'Beauty Technology', p: ['At-home devices, digital skin analysis, and technology-assisted treatments are introducing new products and services.', 'Our coverage explores product capabilities, market adoption, and available evidence concerning their performance.'] },
@@ -287,7 +288,7 @@ export const pages = [
         ],
       },
       { type: 'lens' },
-      latest('Beauty & Aesthetics', 'Read articles covering skincare research, aesthetic services, beauty technology, and market developments.'),
+      latest('Beauty & Aesthetics', 'Read articles covering skincare research, aesthetic services, beauty technology, and market developments.', 'skincare-vanity'),
     ],
   },
   {
@@ -314,7 +315,7 @@ export const pages = [
         ],
       },
       { type: 'lens' },
-      latest('Work & Wellness', 'Browse research on employee wellbeing, corporate wellness programmes, workplace trends, and industry statistics.'),
+      latest('Work & Wellness', 'Browse research on employee wellbeing, corporate wellness programmes, workplace trends, and industry statistics.', 'desk-sea-view'),
     ],
   },
   {
@@ -340,7 +341,7 @@ export const pages = [
         ],
       },
       { type: 'lens' },
-      latest('Travel & Retreats', 'Read research on wellness tourism, retreat trends, spa industry statistics, and hospitality developments.'),
+      latest('Travel & Retreats', 'Read research on wellness tourism, retreat trends, spa industry statistics, and hospitality developments.', 'sage-leaf'),
     ],
   },
   {
@@ -364,7 +365,7 @@ export const pages = [
         ],
       },
       {
-        h2: 'Get in Touch', tone: 'forest',
+        h2: 'Get in Touch', bg: 'desk-sea-view', bgStyle: 'light',
         p: ['{{editorial_email_line}}', 'Please include a clear subject line and relevant details so we can review your enquiry.'],
       },
     ],
