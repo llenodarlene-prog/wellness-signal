@@ -39,7 +39,6 @@ h2 { font-size: clamp(32px, 4vw, 46px); }
 h3 { font-size: clamp(23px, 2.4vw, 29px); font-weight: 600; line-height: 1.16; }
 p { margin: 0 0 1em; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; font: 500 13px/1.4 var(--sans); text-transform: uppercase; letter-spacing: .13em; color: var(--ws-terracotta-text); margin-bottom: 20px; }
-.eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
 .lead p:first-child { font-size: clamp(18px, 1.9vw, 21px); color: var(--ws-charcoal); }
 .lead p { color: var(--ws-muted); }
 
