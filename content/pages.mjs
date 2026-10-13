@@ -26,6 +26,8 @@ export const pages = [
       h1: 'Wellness Research Beyond the Headlines',
       eyebrow: 'Health Insights for Healthier Tomorrow.',
       image: 'desk-sea-view',
+      deck: 'Research, data, and industry developments across seven areas of wellness, read at the source.',
+      secondary: { label: 'How We Work', href: '/about/#editorial-standards' },
       p: [
         'Wellness is more than a personal routine. It is shaping consumer habits, new technologies, business decisions, and the way people approach everyday health.',
         'At Wellness Signal, we examine the research, statistics, and industry developments behind these changes. From fitness and sleep to longevity and wellness travel, our coverage connects scientific findings with real consumer trends.',
@@ -80,6 +82,7 @@ export const pages = [
     description: "Discover Wellness Signal's mission, editorial approach, and commitment to reliable research across health and wellness industries.",
     hero: {
       h1: 'About Wellness Signal', image: 'sage-leaf',
+      deck: 'An independent editorial publication covering wellness research, consumer behaviour, and industry developments.',
       p: [
         'Wellness continues to influence how people live, work, exercise, travel, and spend. New products enter the market, consumer priorities shift, and scientific research introduces fresh perspectives on familiar practices.',
         'Keeping up with these developments can be challenging, particularly when commercial claims and scientific evidence are presented as though they carry the same weight.',

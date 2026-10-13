@@ -236,10 +236,10 @@ const renderSection = (page, section, index) => {
   if (page.legal) return `<section class="section"${id}><div class="wrap narrow">${head}</div></section>`;
 
   let body = '';
-  if (section.categoryCards) body = `<div class="cat-grid">${categories.map(categoryCard).join('')}</div>`;
+  if (section.categoryCards) body = `<div class="cat-grid bento">${categories.map(categoryCard).join('')}</div>`;
   if (section.cards) {
     const numbered = !section.cards.some(card => standardIcons[card.h3]);
-    body += `<div class="cards">${section.cards.map((card, i) => `<div class="card reveal" style="--d:${i % 4}">
+    body += `<div class="cards">${section.cards.map((card, i) => `<div class="card reveal" id="${slugify(card.h3)}" style="--d:${i % 4}">
       ${numbered ? `<span class="card-num">${pad(i + 1)}</span>` : `<span class="icon-badge">${icon(standardIcons[card.h3])}</span>`}
       <${level}>${esc(card.h3)}</${level}>${paragraphs(page, card.p)}</div>`).join('')}</div>`;
   }
@@ -262,24 +262,66 @@ const renderSection = (page, section, index) => {
   return `<section class="section tone-${tone}"${id}>${deco}<div class="wrap">${band}${head}${body}${cta}</div></section>`;
 };
 
+const slugify = text => text.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+// The hero keeps one short line; the remaining intro copy moves into a section below it.
+const heroSplit = page => {
+  const hero = page.hero;
+  if (page.legal) return { deck: null, intro: [] };
+  if (hero.deck) return { deck: hero.deck, intro: hero.p };
+  return { deck: hero.p[0], intro: hero.p.slice(1) };
+};
+
+const evidenceCard = () => `<aside class="evidence-card" aria-label="Our evidence check">
+  <span class="eyebrow">Evidence check</span>
+  <ul>${readingSteps.map((step, i) => `<li style="--d:${i}"><span class="icon-badge">${icon(step.icon, 20)}</span><span><strong>${esc(step.h)}</strong><span>${esc(step.p)}</span></span></li>`).join('')}</ul>
+</aside>`;
+
+const introBlock = page => {
+  const { intro } = heroSplit(page);
+  if (!intro.length) return '';
+  // Short intros read better as one centred statement than as a quote beside a single line.
+  if (intro.join(' ').length < 420) {
+    return `<section class="section intro tone-white">
+  <div class="wrap statement reveal">${sprig}${intro.map((text, i) => `<p${i === intro.length - 1 ? ' class="statement-main"' : ''}>${inline(text)}</p>`).join('')}</div>
+</section>`;
+  }
+  const quote = intro[intro.length - 1];
+  const body = intro.slice(0, -1);
+  return `<section class="section intro tone-white">
+  <div class="wrap intro-grid">
+    <blockquote class="pull reveal"><span aria-hidden="true">&ldquo;</span>${inline(quote)}</blockquote>
+    <div class="intro-body reveal" style="--d:1">${paragraphs(page, body)}</div>
+  </div>
+</section>`;
+};
+
 const heroBlock = page => {
   const hero = page.hero;
+  const { deck } = heroSplit(page);
   const categoryIndex = categories.findIndex(c => c.slug === page.slug);
   const eyebrow = hero.eyebrow
     ? esc(hero.eyebrow)
     : categoryIndex >= 0 ? `${icon(categoryIcons[page.slug], 16)} Coverage &middot; ${pad(categoryIndex + 1)} / ${pad(categories.length)}` : '';
+  const topics = page.category
+    ? (page.sections.find(s => s.cards)?.cards || []).map(card => `<a class="chip" href="#${slugify(card.h3)}">${esc(card.h3)}</a>`).join('')
+    : '';
+  const actions = hero.cta || hero.secondary
+    ? `<div class="hero-actions">${hero.cta ? `<a class="btn" href="${hero.cta.href}">${esc(hero.cta.label)}${icon('arrow', 18)}</a>` : ''}${hero.secondary ? `<a class="btn-ghost" href="${hero.secondary.href}">${esc(hero.secondary.label)}</a>` : ''}</div>`
+    : '';
   const text = `<div class="hero-text">
         ${eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : ''}
         <h1>${esc(hero.h1)}</h1>
         ${page.updated ? `<p class="updated">Last Updated: ${esc(page.updated)}</p>` : ''}
-        <div class="lead">${paragraphs(page, hero.p)}</div>
-        ${hero.cta ? `<a class="btn" href="${hero.cta.href}">${esc(hero.cta.label)}${icon('arrow', 18)}</a>` : ''}
+        <div class="lead">${deck ? `<p>${inline(deck)}</p>` : paragraphs(page, hero.p)}</div>
+        ${actions}
+        ${topics ? `<nav class="topics" aria-label="On this page">${topics}</nav>` : ''}
       </div>`;
 
   if (page.slug === '') {
     return `<section class="hero hero-full">
     <div class="hero-bg">${picture(hero.image, { eager: true, sizes: '100vw' })}</div>
-    <div class="wrap">${text.replace('hero-text', 'hero-text hero-panel')}</div>
+    <div class="wrap hero-full-grid">${text.replace('hero-text', 'hero-text hero-panel')}${evidenceCard()}</div>
   </section>`;
   }
   if (!hero.image) return `<section class="hero no-image">${sprig}<div class="wrap">${text}</div></section>`;
@@ -324,7 +366,9 @@ const renderPage = page => {
 ${header(page)}
 <main id="main">
   ${heroBlock(page)}
-  ${page.sections.map((section, i) => renderSection(page, section, i)).join('\n')}
+  ${page.sections[0]?.type === 'facts' ? renderSection(page, page.sections[0], 0) : ''}
+  ${introBlock(page)}
+  ${page.sections.map((section, i) => (i === 0 && section.type === 'facts' ? '' : renderSection(page, section, i))).join('\n')}
 </main>
 ${footer}
 </body>
