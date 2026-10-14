@@ -302,7 +302,7 @@ const renderSection = (page, section, index) => {
   if (section.bg) {
     return `<section class="section has-bg bg-${section.bgStyle || 'dark'}"${id}>
       <div class="section-bg reveal">${picture(section.bg, { sizes: '100vw', alt: '' })}</div>
-      <div class="wrap"><div class="bg-panel">${head}${body}${cta}</div>${wide ? `<div class="bg-posts">${wide}</div>` : ''}</div>
+      <div class="wrap"><div class="bg-panel${wide ? ' bg-panel-wide' : ''}">${wide ? `<div class="panel-top">${head}${cta}</div>${body}<div class="bg-posts">${wide}</div>` : `${head}${body}${cta}`}</div></div>
     </section>${section.steps ? `<section class="section tone-white steps-band"><div class="wrap">${stepsBlock()}</div></section>` : ''}`;
   }
   const band = section.image ? `<figure class="media-band reveal">${picture(section.image, { sizes: '100vw' })}</figure>` : '';

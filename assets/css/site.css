@@ -553,3 +553,11 @@ table { width: 100%; border-collapse: collapse; }
 .post-excerpt { font-size: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .bg-posts { margin-top: 28px; }
 .bg-posts .post-card { box-shadow: 0 30px 60px -36px rgba(18, 63, 47, .55); }
+
+/* Latest sections: one wide panel holding the heading and the cards */
+.bg-panel-wide { max-width: none; }
+.panel-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 40px; }
+.panel-top .section-head { max-width: 640px; margin-bottom: 0; }
+.panel-top .btn { margin-top: 0; }
+.bg-panel-wide .bg-posts { margin-top: 32px; }
+.bg-panel-wide .post-card { box-shadow: none; }
