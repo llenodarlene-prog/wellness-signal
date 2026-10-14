@@ -588,6 +588,7 @@ table { width: 100%; border-collapse: collapse; }
 .bc-bars .bc-bar:nth-child(2) .bc-fill { transition-delay: .15s; }
 .bc-row:nth-child(2) .bc-fill { transition-delay: .25s; }
 .bc-row:nth-child(3) .bc-fill { transition-delay: .4s; }
+.bc-row:nth-child(4) .bc-fill { transition-delay: .55s; }
 .bc-source { font-size: 13px !important; color: var(--ws-muted); margin: 18px 0 0 !important; }
 @media (max-width: 560px) { .bc-row { grid-template-columns: 1fr; gap: 8px; } }
 @media (prefers-reduced-motion: reduce) { .bc-fill { transform: none; } .bc-val { opacity: 1; } }
