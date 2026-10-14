@@ -22,7 +22,7 @@ for (const { slug } of manifest.pages) {
   if (!page.includes(`<link rel="canonical" href="${canonical}${slug}">`)) throw new Error(`${file}: canonical mismatch`);
   if ((page.match(/<h1[\s>]/g) || []).length !== 1) throw new Error(`${file}: expected exactly one h1`);
   if (/\[(Confirmed|Before publication|Confirm actual)/.test(page)) throw new Error(`${file}: unresolved copy placeholder`);
-  for (const [, asset] of page.matchAll(/(?:src|href)="(\/assets\/[^"]+)"/g)) {
+  for (const [, asset] of page.matchAll(/(?:src|href)="(\/assets\/[^"?]+)(?:\?[^"]*)?"/g)) {
     await access(`dist${asset}`).catch(() => { throw new Error(`${file}: missing asset ${asset}`); });
   }
   for (const [, link] of page.matchAll(/href="(\/[a-z-]*\/?)(?:#[^"]*)?"/g)) {
