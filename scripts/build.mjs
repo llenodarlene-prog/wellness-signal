@@ -281,11 +281,12 @@ const renderSection = (page, section, index) => {
   }
   if (section.coverageIcons) body += coverageIconsBlock();
   else if (section.list) body += `<ul class="ticks">${section.list.map(item => `<li>${inline(item)}</li>`).join('')}</ul>`;
+  // Latest-article listings sit full width below the panel, three per row.
+  let wide = '';
   if (section.empty) {
     const list = page.category ? posts.filter(post => post.category === page.slug) : posts;
-    body += list.length
-      ? postGrid(list.slice(0, 3))
-      : `<div class="empty reveal">${sprig}<p>New articles will appear here as they are published.</p></div>`;
+    if (list.length) wide = postGrid(list.slice(0, 3));
+    else body += `<div class="empty reveal">${sprig}<p>New articles will appear here as they are published.</p></div>`;
   }
   if (section.separations) body += separationsBlock();
 
@@ -301,12 +302,12 @@ const renderSection = (page, section, index) => {
   if (section.bg) {
     return `<section class="section has-bg bg-${section.bgStyle || 'dark'}"${id}>
       <div class="section-bg reveal">${picture(section.bg, { sizes: '100vw', alt: '' })}</div>
-      <div class="wrap"><div class="bg-panel">${head}${body}${cta}</div></div>
+      <div class="wrap"><div class="bg-panel">${head}${body}${cta}</div>${wide ? `<div class="bg-posts">${wide}</div>` : ''}</div>
     </section>${section.steps ? `<section class="section tone-white steps-band"><div class="wrap">${stepsBlock()}</div></section>` : ''}`;
   }
   const band = section.image ? `<figure class="media-band reveal">${picture(section.image, { sizes: '100vw' })}</figure>` : '';
   const deco = tone === 'forest' ? sprig : '';
-  return `<section class="section tone-${tone}"${id}>${deco}<div class="wrap">${band}${head}${body}${cta}</div></section>`;
+  return `<section class="section tone-${tone}"${id}>${deco}<div class="wrap">${band}${head}${body}${wide}${cta}</div></section>`;
 };
 
 const slugify = text => text.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
