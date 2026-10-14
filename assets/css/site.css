@@ -561,3 +561,6 @@ table { width: 100%; border-collapse: collapse; }
 .panel-top .btn { margin-top: 0; }
 .bg-panel-wide .bg-posts { margin-top: 32px; }
 .bg-panel-wide .post-card { box-shadow: none; }
+/* Latest panels: button sits under the intro, not off to the right */
+.panel-top { display: block; }
+.panel-top .section-head { margin-bottom: 20px; }
