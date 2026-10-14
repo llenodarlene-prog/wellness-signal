@@ -44,7 +44,7 @@ export const pages = [
         categoryCards: true,
       },
       {
-        h2: 'Research That Goes Beyond the Numbers', tone: 'white', image: 'data-laptop',
+        h2: 'Research That Goes Beyond the Numbers', bg: 'data-laptop', bgStyle: 'dark',
         p: [
           'Statistics tell part of the story. The source, methodology, and context reveal what those figures actually represent.',
           'Our research-focused articles examine industry estimates, consumer surveys, participation data, and scientific findings. We look at how figures are collected, where comparisons can be misleading, and what the available evidence supports.',
@@ -93,7 +93,7 @@ export const pages = [
     },
     sections: [
       {
-        h2: 'Our Mission', tone: 'cream', image: 'research-reports',
+        h2: 'Our Mission', bg: 'research-reports', bgStyle: 'light',
         p: [
           'Our mission is to make wellness research and industry information accessible, accurate, and relevant.',
           'We examine the trends influencing consumer choices, the businesses responding to those trends, and the evidence supporting popular wellness practices.',

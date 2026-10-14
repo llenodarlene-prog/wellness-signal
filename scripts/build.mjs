@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
 import {
@@ -10,6 +11,10 @@ const production = environment === 'production';
 const robots = production ? 'index,follow' : 'noindex,nofollow,noarchive';
 const canonical = site.url.replace(/\/$/, '');
 const year = new Date().getUTCFullYear();
+const assetVersion = createHash('sha256')
+  .update(await readFile('assets/css/site.css'))
+  .update(await readFile('assets/js/site.js'))
+  .digest('hex').slice(0, 10);
 
 const esc = value => String(value)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -99,7 +104,7 @@ const footer = `<footer class="site-footer">
   </div>
 </footer>
 <button class="to-top" type="button" aria-label="Back to top">${icon('arrow', 18)}</button>
-<script src="/assets/js/site.js" defer></script>`;
+<script src="/assets/js/site.js?v=${assetVersion}" defer></script>`;
 
 // ---------- Feature blocks ----------
 
@@ -273,7 +278,7 @@ const renderSection = (page, section, index) => {
     return `<section class="section has-bg bg-${section.bgStyle || 'dark'}"${id}>
       <div class="section-bg reveal">${picture(section.bg, { sizes: '100vw', alt: '' })}</div>
       <div class="wrap"><div class="bg-panel">${head}${body}${cta}</div></div>
-    </section>`;
+    </section>${section.steps ? `<section class="section tone-white steps-band"><div class="wrap">${stepsBlock()}</div></section>` : ''}`;
   }
   const band = section.image ? `<figure class="media-band reveal">${picture(section.image, { sizes: '100vw' })}</figure>` : '';
   const deco = tone === 'forest' ? sprig : '';
@@ -377,7 +382,7 @@ const renderPage = page => {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/site.css?v=${assetVersion}">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body class="${page.legal ? 'legal' : ''}${page.slug === '' ? ' home' : ''}">
@@ -407,7 +412,7 @@ if (production && pending.length) {
   throw new Error(`Production build blocked; confirm these details first:\n- ${[...new Set(pending)].join('\n- ')}`);
 }
 
-await writeFile('dist/404.html', `<!doctype html><html lang="${site.locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | ${esc(site.name)}</title><link rel="stylesheet" href="/assets/css/site.css"></head><body><main class="hero no-image"><div class="wrap"><div class="hero-text"><h1>Page Not Found</h1><p>The page you were looking for has moved or no longer exists.</p><a class="btn" href="/">Back to Wellness Signal</a></div></div></main></body></html>`);
+await writeFile('dist/404.html', `<!doctype html><html lang="${site.locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | ${esc(site.name)}</title><link rel="stylesheet" href="/assets/css/site.css?v=${assetVersion}"></head><body><main class="hero no-image"><div class="wrap"><div class="hero-text"><h1>Page Not Found</h1><p>The page you were looking for has moved or no longer exists.</p><a class="btn" href="/">Back to Wellness Signal</a></div></div></main></body></html>`);
 await writeFile('dist/robots.txt', production
   ? `User-agent: *\nAllow: /\nSitemap: ${canonical}/sitemap.xml\n`
   : 'User-agent: *\nDisallow: /\n'
