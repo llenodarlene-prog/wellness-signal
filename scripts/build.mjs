@@ -38,7 +38,22 @@ const paragraph = (page, text) => {
   if (text.includes('{{site_link}}')) return `<p>${inline(text.replace('{{site_link}}', '')).trim()} <a href="${canonical}/">${canonical}/</a></p>`;
   return `<p>${inline(text)}</p>`;
 };
-const paragraphs = (page, list = []) => list.map(text => paragraph(page, text)).join('\n');
+// Fold a one-sentence paragraph into its neighbour so short sections read as
+// one paragraph. Placeholders and bold label lines (contact blocks) stay separate.
+const sentenceCount = text => (text.match(/[.!?](\s|$)/g) || []).length;
+const keepSeparate = text => text.includes('{{') || text.startsWith('**');
+const mergeShort = (list = []) => list.reduce((out, text) => {
+  const prev = out[out.length - 1];
+  if (prev !== undefined && !keepSeparate(prev) && !keepSeparate(text)
+    && (sentenceCount(prev) === 1 || sentenceCount(text) === 1)
+    && prev.length + text.length <= 380) {
+    out[out.length - 1] = `${prev} ${text}`;
+  } else {
+    out.push(text);
+  }
+  return out;
+}, []);
+const paragraphs = (page, list = []) => mergeShort(list).map(text => paragraph(page, text)).join('\n');
 
 const alts = {
   'desk-sea-view': 'Sunlit marble desk with a notebook, tea, and laptop overlooking the sea',
@@ -306,7 +321,7 @@ const introBlock = page => {
   // Short intros read better as one centred statement than as a quote beside a single line.
   if (intro.join(' ').length < 420) {
     return `<section class="section intro tone-white">
-  <div class="wrap statement reveal">${sprig}${intro.map((text, i) => `<p${i === intro.length - 1 ? ' class="statement-main"' : ''}>${inline(text)}</p>`).join('')}</div>
+  <div class="wrap statement reveal">${sprig}<p class="statement-main">${inline(intro.join(' '))}</p></div>
 </section>`;
   }
   const quote = intro[intro.length - 1];

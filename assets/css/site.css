@@ -452,3 +452,5 @@ table { width: 100%; border-collapse: collapse; }
   .bg-dark .section-bg::after { background: rgba(18, 63, 47, .5); }
   .bg-light .section-bg::after { background: rgba(248, 245, 239, .3); }
 }
+
+.statement .statement-main { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.38; max-width: 860px; margin-inline: auto; }
