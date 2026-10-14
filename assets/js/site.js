@@ -86,3 +86,30 @@
     });
   }
 })();
+
+// Article table of contents: highlight the section in view
+(() => {
+  const links = [...document.querySelectorAll('.toc a')];
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  const byId = new Map(links.map(link => [link.getAttribute('href').slice(1), link]));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      links.forEach(link => link.classList.remove('active'));
+      byId.get(entry.target.id)?.classList.add('active');
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  byId.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+})();
+
+// Articles index: filter by category
+(() => {
+  const grid = document.querySelector('[data-filterable]');
+  const buttons = document.querySelectorAll('[data-filter]');
+  if (!grid || !buttons.length) return;
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const value = button.dataset.filter;
+    buttons.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+    grid.querySelectorAll('.post-card').forEach(card => { card.hidden = value !== 'all' && card.dataset.category !== value; });
+  }));
+})();
