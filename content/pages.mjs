@@ -44,7 +44,7 @@ export const pages = [
         categoryCards: true,
       },
       {
-        h2: 'Research That Goes Beyond the Numbers', tone: 'white', image: 'breakfast-bowl',
+        h2: 'Research That Goes Beyond the Numbers', tone: 'white', image: 'data-laptop',
         p: [
           'Statistics tell part of the story. The source, methodology, and context reveal what those figures actually represent.',
           'Our research-focused articles examine industry estimates, consumer surveys, participation data, and scientific findings. We look at how figures are collected, where comparisons can be misleading, and what the available evidence supports.',
@@ -93,7 +93,7 @@ export const pages = [
     },
     sections: [
       {
-        h2: 'Our Mission', tone: 'cream', image: 'desk-sea-view',
+        h2: 'Our Mission', tone: 'cream', image: 'research-reports',
         p: [
           'Our mission is to make wellness research and industry information accessible, accurate, and relevant.',
           'We examine the trends influencing consumer choices, the businesses responding to those trends, and the evidence supporting popular wellness practices.',
@@ -146,7 +146,7 @@ export const pages = [
         ],
       },
       {
-        h2: 'Editorial Independence', bg: 'nutrition-table', bgStyle: 'dark',
+        h2: 'Editorial Independence', bg: 'desk-laptop-brighter', bgStyle: 'dark',
         p: [
           'Our editorial focus is on accuracy, relevance, and useful information.',
           'We do not treat advertising claims, popularity, or commercial success as evidence of effectiveness.',
@@ -341,7 +341,7 @@ export const pages = [
         ],
       },
       { type: 'lens' },
-      latest('Travel & Retreats', 'Read research on wellness tourism, retreat trends, spa industry statistics, and hospitality developments.', 'sage-leaf'),
+      latest('Travel & Retreats', 'Read research on wellness tourism, retreat trends, spa industry statistics, and hospitality developments.', 'bedroom-sunset'),
     ],
   },
   {
@@ -367,6 +367,44 @@ export const pages = [
       {
         h2: 'Get in Touch', bg: 'desk-sea-view', bgStyle: 'light',
         p: ['{{editorial_email_line}}', 'Please include a clear subject line and relevant details so we can review your enquiry.'],
+      },
+    ],
+  },
+  {
+    slug: 'partner-with-us', footerOnly: 'Partner With Us',
+    title: 'Partner With Wellness Signal | Guest Posts & Sponsored Content',
+    description: 'Guest contributions, sponsored content, and research partnerships with Wellness Signal, published under clear editorial and disclosure standards.',
+    hero: {
+      h1: 'Partner With Wellness Signal', image: 'desk-laptop-brighter',
+      deck: 'Guest contributions, sponsored content, and research partnerships for organisations working across the wellness industry.',
+      cta: { label: 'Send a Proposal', href: 'mailto:wellnesssignal@gmail.com?subject=Partnership%20enquiry' },
+      p: [
+        'Wellness Signal reaches readers who follow wellness research, consumer behaviour, and industry developments.',
+        'We work with contributors, brands, and organisations whose expertise or data adds something useful to that coverage. Every partnership follows the same editorial standards as the rest of the publication.',
+      ],
+    },
+    sections: [
+      {
+        h2: 'Ways to Work With Us', tone: 'white', headingLevel: 3,
+        cards: [
+          { h3: 'Guest Contributions', p: ['Original articles from researchers, practitioners, and industry professionals.', 'Pieces should offer evidence-based analysis within one of our seven coverage areas and cite their sources.'] },
+          { h3: 'Sponsored Content', p: ['Paid articles produced with or for a brand or organisation.', 'Sponsored pieces are clearly labelled, reviewed by our editors, and held to the same accuracy standards as editorial content.'] },
+          { h3: 'Research Partnerships', p: ['Datasets, surveys, and industry reports that can inform our coverage.', 'We assess methodology and scope before referencing any partner research.'] },
+        ],
+      },
+      { type: 'partnerTable' },
+      {
+        h2: 'How It Works', tone: 'white', headingLevel: 3,
+        cards: [
+          { h3: 'Send a Proposal', p: ['Share a short outline, the topic area, your credentials, and the sources you plan to use.'] },
+          { h3: 'Editorial Review', p: ['We assess relevance, originality, and evidence. Submitting a proposal does not guarantee publication.'] },
+          { h3: 'Editing and Fact-Checking', p: ['Accepted pieces are edited for accuracy, clarity, and house style. Claims are checked against their sources.'] },
+          { h3: 'Publication With Disclosure', p: ['Published pieces carry a clear byline, and any commercial relationship is disclosed on the page.'] },
+        ],
+      },
+      {
+        h2: 'Start a Conversation', bg: 'research-reports', bgStyle: 'light',
+        p: ['Tell us about your organisation, the partnership you have in mind, and the readers you want to reach.', '{{editorial_email_line}}'],
       },
     ],
   },
