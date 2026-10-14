@@ -3,6 +3,7 @@ import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
 import { inline as mdInline, renderBlock } from './lib/markdown.mjs';
 import { loadPosts } from './lib/posts.mjs';
+import { charts } from '../content/charts.mjs';
 import {
   categoryIcons, categoryLens, economy, partnerRules, evidenceLadder, icon, readingSteps, separations, sprig, standardIcons,
 } from '../content/features.mjs';
@@ -526,7 +527,7 @@ const renderPost = post => {
     if (/^Key Takeaways$/i.test(section.title)) return takeawaysBlock(section);
     if (section.title === post.faqTitle) return faqBlock(post, section);
     if (/^Sources$/i.test(section.title)) return sourcesBlock(section);
-    return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(renderBlock).join('\n')}</section>`;
+    return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(block => renderBlock(block, charts)).join('\n')}</section>`;
   }).join('\n');
 
   return `${docHead({ title: post.seo_title || post.title, description: post.description, url, image: post.image, type: 'article', jsonLd, preload: post.image, extra })}
@@ -549,7 +550,7 @@ ${header({ slug: post.category })}
       <ol>${toc.map(section => `<li><a href="#${section.id}">${esc(section.title)}</a></li>`).join('')}</ol>
     </aside>
     <article class="prose">
-      <div class="post-intro">${post.intro.map(renderBlock).join('\n')}</div>
+      <div class="post-intro">${post.intro.map(block => renderBlock(block, charts)).join('\n')}</div>
       ${body}
     </article>
   </div>

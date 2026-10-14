@@ -98,6 +98,8 @@ Product relevance depends on consumer needs and credible evidence, not simply a 
 
 The following figures illustrate how spending is distributed across the two demographic groups highlighted in McKinsey's US analysis.
 
+{{chart:generation-share}}
+
 | Consumer group | Share of adult population | Share of wellness spending |
 | --- | --- | --- |
 | Gen Z and millennials | 36% | More than 41% |
@@ -154,6 +156,8 @@ For detailed sector-level figures, readers can consult the Global Wellness Insti
 ### Global Wellness Market Forecast Through 2029
 
 The Global Wellness Institute projects the worldwide wellness economy will reach approximately $9.8 trillion by 2029. Its 2025 report forecasts average annual growth of 7.6% over the following five years.
+
+{{chart:wellness-economy-forecast}}
 
 This projection represents expected future activity rather than guaranteed market revenue. Economic conditions, changes in consumer spending, industry investment, and other factors can influence how closely actual results follow the forecast.
 

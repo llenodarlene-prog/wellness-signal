@@ -88,7 +88,34 @@ export const toBlocks = markdown => {
   return blocks;
 };
 
-export const renderBlock = block => {
+const fmt = (chart, row, key) => {
+  const value = row[key];
+  const prefix = row.prefix?.[key] || '';
+  return `${prefix}${chart.currency || ''}${Number.isInteger(value) ? value : value.toFixed(1)}${chart.unit || ''}`;
+};
+
+// Animated horizontal bar chart; bars grow when the figure scrolls into view.
+export const renderChart = (chart, id) => {
+  if (!chart) throw new Error(`Unknown chart "${id}"`);
+  const multi = chart.series.length > 1;
+  return `<figure class="bar-chart reveal" data-bars>
+  <figcaption>${esc(chart.title)}</figcaption>
+  ${multi ? `<div class="bc-legend">${chart.series.map((s, i) => `<span><i class="bc-key s${i}"></i>${esc(s.label)}</span>`).join('')}</div>` : ''}
+  <div class="bc-rows">
+    ${chart.rows.map(row => `<div class="bc-row">
+      <span class="bc-label">${esc(row.label)}</span>
+      <span class="bc-bars">${chart.series.map((s, i) => `<span class="bc-bar s${i}${row.projected ? ' projected' : ''}" style="--w:${Math.max((row[s.key] / chart.max) * 100, row[s.key] ? 2 : 0)}%" title="${esc(`${s.label}: ${fmt(chart, row, s.key)}`)}"><span class="bc-fill"></span><span class="bc-val">${esc(fmt(chart, row, s.key))}</span></span>`).join('')}</span>
+    </div>`).join('')}
+  </div>
+  <p class="bc-source">Source: ${esc(chart.source)}${chart.note ? ` ${esc(chart.note)}` : ''}</p>
+</figure>`;
+};
+
+export const renderBlock = (block, charts = {}) => {
+  if (block.type === 'p') {
+    const marker = block.text.match(/^\{\{chart:([a-z0-9-]+)\}\}$/);
+    if (marker) return renderChart(charts[marker[1]], marker[1]);
+  }
   switch (block.type) {
     case 'h': return `<h${block.level}>${inline(block.text)}</h${block.level}>`;
     case 'p': {

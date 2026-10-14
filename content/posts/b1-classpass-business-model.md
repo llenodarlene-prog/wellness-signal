@@ -111,6 +111,8 @@ Consider a Pilates studio charging $30 for a direct class reservation. Assume th
 
 *These figures are hypothetical and do not represent an actual ClassPass contract or published average payout.*
 
+{{chart:classpass-place-revenue}}
+
 If the place would have remained empty, the ClassPass booking adds $16 in revenue before any incremental costs. If a direct customer was willing to pay $30 for the same place, the studio may instead have given up $14 in potential revenue.
 
 The difference illustrates why marketplace bookings need to be evaluated against realistic demand, not simply against the assumption that every place would otherwise have remained vacant.
