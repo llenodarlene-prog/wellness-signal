@@ -3,6 +3,7 @@ import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
 import { inline as mdInline, renderBlock } from './lib/markdown.mjs';
 import { loadPosts } from './lib/posts.mjs';
+import { charts } from '../content/charts.mjs';
 import {
   categoryIcons, categoryLens, economy, partnerRules, evidenceLadder, icon, readingSteps, separations, sprig, standardIcons,
 } from '../content/features.mjs';
@@ -281,11 +282,12 @@ const renderSection = (page, section, index) => {
   }
   if (section.coverageIcons) body += coverageIconsBlock();
   else if (section.list) body += `<ul class="ticks">${section.list.map(item => `<li>${inline(item)}</li>`).join('')}</ul>`;
+  // Latest-article listings sit full width below the panel, three per row.
+  let wide = '';
   if (section.empty) {
     const list = page.category ? posts.filter(post => post.category === page.slug) : posts;
-    body += list.length
-      ? postGrid(list.slice(0, 3))
-      : `<div class="empty reveal">${sprig}<p>New articles will appear here as they are published.</p></div>`;
+    if (list.length) wide = postGrid(list.slice(0, 3));
+    else body += `<div class="empty reveal">${sprig}<p>New articles will appear here as they are published.</p></div>`;
   }
   if (section.separations) body += separationsBlock();
 
@@ -301,12 +303,12 @@ const renderSection = (page, section, index) => {
   if (section.bg) {
     return `<section class="section has-bg bg-${section.bgStyle || 'dark'}"${id}>
       <div class="section-bg reveal">${picture(section.bg, { sizes: '100vw', alt: '' })}</div>
-      <div class="wrap"><div class="bg-panel">${head}${body}${cta}</div></div>
+      <div class="wrap"><div class="bg-panel${wide ? ' bg-panel-wide' : ''}">${wide ? `<div class="panel-top">${head}${cta}</div>${body}<div class="bg-posts">${wide}</div>` : `${head}${body}${cta}`}</div></div>
     </section>${section.steps ? `<section class="section tone-white steps-band"><div class="wrap">${stepsBlock()}</div></section>` : ''}`;
   }
   const band = section.image ? `<figure class="media-band reveal">${picture(section.image, { sizes: '100vw' })}</figure>` : '';
   const deco = tone === 'forest' ? sprig : '';
-  return `<section class="section tone-${tone}"${id}>${deco}<div class="wrap">${band}${head}${body}${cta}</div></section>`;
+  return `<section class="section tone-${tone}"${id}>${deco}<div class="wrap">${band}${head}${body}${wide}${cta}</div></section>`;
 };
 
 const slugify = text => text.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -525,7 +527,7 @@ const renderPost = post => {
     if (/^Key Takeaways$/i.test(section.title)) return takeawaysBlock(section);
     if (section.title === post.faqTitle) return faqBlock(post, section);
     if (/^Sources$/i.test(section.title)) return sourcesBlock(section);
-    return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(renderBlock).join('\n')}</section>`;
+    return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(block => renderBlock(block, charts)).join('\n')}</section>`;
   }).join('\n');
 
   return `${docHead({ title: post.seo_title || post.title, description: post.description, url, image: post.image, type: 'article', jsonLd, preload: post.image, extra })}
@@ -548,7 +550,7 @@ ${header({ slug: post.category })}
       <ol>${toc.map(section => `<li><a href="#${section.id}">${esc(section.title)}</a></li>`).join('')}</ol>
     </aside>
     <article class="prose">
-      <div class="post-intro">${post.intro.map(renderBlock).join('\n')}</div>
+      <div class="post-intro">${post.intro.map(block => renderBlock(block, charts)).join('\n')}</div>
       ${body}
     </article>
   </div>

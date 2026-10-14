@@ -29,6 +29,7 @@ Research published by McKinsey and the Global Wellness Institute offers two usef
 - McKinsey's May 2025 research estimates that US consumers spend **more than $500 billion annually** on wellness.
 - Gen Z and millennials account for **36% of US adults but more than 41% of annual wellness spending** in McKinsey's analysis.
 - US consumers aged 58 and older account for **35% of the adult population and 28% of wellness spending**.
+- Wellness real estate and mental wellness were the **fastest-growing sectors**, expanding by **19.5% and 12.4% a year** over the last five years, according to GWI.
 - Global Wellness Institute projections place the wellness economy at approximately **$9.8 trillion by 2029**, although this remains a forecast rather than recorded spending.
 
 ## Wellness Statistics at a Glance
@@ -98,6 +99,8 @@ Product relevance depends on consumer needs and credible evidence, not simply a 
 
 The following figures illustrate how spending is distributed across the two demographic groups highlighted in McKinsey's US analysis.
 
+{{chart:generation-share}}
+
 | Consumer group | Share of adult population | Share of wellness spending |
 | --- | --- | --- |
 | Gen Z and millennials | 36% | More than 41% |
@@ -143,6 +146,20 @@ The Global Wellness Institute estimates that the global wellness economy reached
 
 The report tracks 11 sectors, providing a broader measure of wellness-related economic activity than consumer surveys focused on selected products and services. These sectors include personal care and beauty, physical activity, wellness tourism, wellness real estate, and other categories.
 
+For scale, GWI compares the $6.8 trillion wellness economy with the $1.8 trillion pharmaceutical industry and with $11.2 trillion in total global health expenditure, including consumer and government spending. Because these markets are defined differently, the comparison shows relative size rather than overlapping or competing spending.
+
+{{chart:wellness-economy-scale}}
+
+### Growth Across the Wellness Economy
+
+GWI reports average annual growth of 6.2% for the wellness economy over the last five years, followed by a 7.9% increase from 2023 to 2024. Its outlook projects a 7.6% annual growth rate through 2029.
+
+{{chart:wellness-growth-rates}}
+
+Growth has not been even across sectors. GWI identifies wellness real estate as the fastest-growing sector over the past five years, at 19.5% a year, followed by mental wellness at 12.4% a year. Workplace wellness was the exception, with global spending declining between 2023 and 2024.
+
+{{chart:wellness-fastest-sectors}}
+
 ### How the Global Wellness Institute Measures the Market
 
 The institute organises the wellness economy into 11 distinct sectors rather than treating wellness as one uniform consumer market. This approach captures industries whose products and services contribute to wellness-related activities, including sectors not usually included in consumer shopping surveys.
@@ -154,6 +171,8 @@ For detailed sector-level figures, readers can consult the Global Wellness Insti
 ### Global Wellness Market Forecast Through 2029
 
 The Global Wellness Institute projects the worldwide wellness economy will reach approximately $9.8 trillion by 2029. Its 2025 report forecasts average annual growth of 7.6% over the following five years.
+
+{{chart:wellness-economy-forecast}}
 
 This projection represents expected future activity rather than guaranteed market revenue. Economic conditions, changes in consumer spending, industry investment, and other factors can influence how closely actual results follow the forecast.
 
@@ -204,5 +223,6 @@ The strongest conclusions come from using each source for the question it was de
 ## Sources
 
 - **Global Wellness Institute.** *2025 Global Wellness Economy Monitor.* November 19, 2025. [globalwellnessinstitute.org](https://globalwellnessinstitute.org/industry-research/2025-global-wellness-economy-monitor/)
+- **Global Wellness Institute.** *Wellness Market Hits Record $6.8 Trillion, Will Reach Nearly $10 Trillion by 2029.* November 25, 2025. [globalwellnessinstitute.org](https://globalwellnessinstitute.org/global-wellness-institute-blog/2025/11/25/wellness-market-hits-record-6-8-trillion-will-reach-nearly-10-trillion-by-2029/)
 - **Global Wellness Institute.** *Wellness Economy Data Series.* [globalwellnessinstitute.org](https://globalwellnessinstitute.org/industry-research/the-global-wellness-economy/)
 - **McKinsey & Company.** *The $2 Trillion Global Wellness Market Gets a Millennial and Gen Z Glow-Up.* May 29, 2025. [mckinsey.com](https://www.mckinsey.com/industries/consumer-packaged-goods/our-insights/future-of-wellness-trends)
