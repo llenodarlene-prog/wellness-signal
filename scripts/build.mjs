@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
+import { inline as mdInline, renderBlock } from './lib/markdown.mjs';
+import { loadPosts } from './lib/posts.mjs';
 import {
   categoryIcons, categoryLens, economy, partnerRules, evidenceLadder, icon, readingSteps, separations, sprig, standardIcons,
 } from '../content/features.mjs';
@@ -11,6 +13,8 @@ const production = environment === 'production';
 const robots = production ? 'index,follow' : 'noindex,nofollow,noarchive';
 const canonical = site.url.replace(/\/$/, '');
 const year = new Date().getUTCFullYear();
+const buildDate = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
+const posts = await loadPosts(buildDate);
 const assetVersion = createHash('sha256')
   .update(await readFile('assets/css/site.css'))
   .update(await readFile('assets/js/site.js'))
@@ -139,11 +143,11 @@ const chartBlock = () => {
   <div class="wrap split chart-split">
     <div class="reveal">
       <span class="eyebrow">Data in context</span>
-      <h2>A Measurement and a Forecast Are Not the Same Number</h2>
-      <p>The wellness economy is often quoted as a single figure. In practice, the latest measured value and a five-year projection come from different methods and carry different levels of certainty.</p>
-      <p>We report them side by side and label each one, so readers can see what has been recorded and what is still an estimate.</p>
+      <h2>An Estimate and a Forecast Are Not the Same Number</h2>
+      <p>The wellness economy is often quoted as a single figure. In practice, the latest annual estimate and a five-year projection come from different methods and carry different levels of certainty.</p>
+      <p>We report them side by side and label each one, so readers can see which figure describes past activity and which is still a forecast.</p>
       <div class="toggle" role="group" aria-label="Chart view">
-        <button type="button" class="chip" data-chart-view="measured" aria-pressed="false">Measured only</button>
+        <button type="button" class="chip" data-chart-view="measured" aria-pressed="false">Latest estimate only</button>
         <button type="button" class="chip" data-chart-view="all" aria-pressed="true">Include projection</button>
       </div>
     </div>
@@ -161,8 +165,8 @@ const chartBlock = () => {
           </button>`).join('')}
         </div>
       </div>
-      <div class="legend"><span><i class="key measured"></i>Measured</span><span><i class="key projected"></i>Projection</span></div>
-      <p class="source">Source: <a href="${economy.sourceUrl}" rel="noopener" target="_blank">${esc(economy.source)}</a>. The 2028 value is a forecast.</p>
+      <div class="legend"><span><i class="key measured"></i>Annual estimate</span><span><i class="key projected"></i>Projection</span></div>
+      <p class="source">Source: <a href="${economy.sourceUrl}" rel="noopener" target="_blank">${esc(economy.source)}</a>. The ${economy.bars[1].label} value is a forecast.</p>
     </figure>
   </div>
 </section>`;
@@ -277,7 +281,12 @@ const renderSection = (page, section, index) => {
   }
   if (section.coverageIcons) body += coverageIconsBlock();
   else if (section.list) body += `<ul class="ticks">${section.list.map(item => `<li>${inline(item)}</li>`).join('')}</ul>`;
-  if (section.empty) body += `<div class="empty reveal">${sprig}<p>New articles will appear here as they are published.</p></div>`;
+  if (section.empty) {
+    const list = page.category ? posts.filter(post => post.category === page.slug) : posts;
+    body += list.length
+      ? postGrid(list.slice(0, 3))
+      : `<div class="empty reveal">${sprig}<p>New articles will appear here as they are published.</p></div>`;
+  }
   if (section.separations) body += separationsBlock();
 
   if (section.image && !section.cards && !section.categoryCards) {
@@ -371,35 +380,53 @@ const heroBlock = page => {
   </section>`;
 };
 
-const renderPage = page => {
-  const url = `${canonical}${path(page.slug)}`;
-  const ogImage = `${canonical}/assets/images/${page.hero.image || 'desk-sea-view'}.webp`;
-  return `<!doctype html>
+const docHead = ({ title, description, url, image, type = 'website', jsonLd = [], preload, extra = '' }) => `<!doctype html>
 <html lang="${site.locale}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>${esc(page.title)}</title>
-  <meta name="description" content="${esc(page.description)}">
+  <title>${esc(title)}</title>
+  <meta name="description" content="${esc(description)}">
   <meta name="robots" content="${robots}">
   <link rel="canonical" href="${url}">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="${type}">
   <meta property="og:site_name" content="${esc(site.name)}">
-  <meta property="og:title" content="${esc(page.title)}">
-  <meta property="og:description" content="${esc(page.description)}">
+  <meta property="og:title" content="${esc(title)}">
+  <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${ogImage}">
+  <meta property="og:image" content="${canonical}/assets/images/${image}.webp">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#1F6B4F">
+  ${extra}
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/mark-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/mark-192.png">
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  ${preload ? `<link rel="preload" as="image" type="image/webp" href="/assets/images/${preload}.webp" imagesrcset="/assets/images/${preload}-800.webp 800w, /assets/images/${preload}.webp 1672w" imagesizes="(max-width: 860px) 100vw, 50vw" fetchpriority="high">` : ''}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="/assets/css/site.css?v=${assetVersion}">
+  ${jsonLd.map(data => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`).join('\n  ')}
   <script>document.documentElement.classList.add('js')</script>
-</head>
+</head>`;
+
+const organization = {
+  '@type': 'Organization',
+  '@id': `${canonical}/#organization`,
+  name: site.name,
+  url: `${canonical}/`,
+  logo: { '@type': 'ImageObject', url: `${canonical}/assets/brand/mark-512.png`, width: 512, height: 512 },
+  email: site.editorial_email || undefined,
+};
+
+const renderPage = page => {
+  const url = `${canonical}${path(page.slug)}`;
+  const jsonLd = page.slug === ''
+    ? [{ '@context': 'https://schema.org', '@graph': [organization, { '@type': 'WebSite', '@id': `${canonical}/#website`, url: `${canonical}/`, name: site.name, publisher: { '@id': `${canonical}/#organization` } }] }]
+    : [];
+  return `${docHead({ title: page.title, description: page.description, url, image: page.hero.image || 'desk-sea-view', jsonLd, preload: page.hero.image })}
 <body class="${page.legal ? 'legal' : ''}${page.slug === '' ? ' home' : ''}">
 ${header(page)}
 <main id="main">
@@ -407,6 +434,159 @@ ${header(page)}
   ${page.sections[0]?.type === 'facts' ? renderSection(page, page.sections[0], 0) : ''}
   ${introBlock(page)}
   ${page.sections.map((section, i) => (i === 0 && section.type === 'facts' ? '' : renderSection(page, section, i))).join('\n')}
+</main>
+${footer}
+</body>
+</html>
+`;
+};
+
+// ---------- Articles ----------
+
+const categoryName = slug => categories.find(c => c.slug === slug)?.name || slug;
+const longDate = iso => new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+const postCard = (post, i = 0) => `<a class="post-card reveal" href="${post.url}" style="--d:${i % 3}">
+  <span class="post-media">${picture(post.image, { sizes: '(max-width: 640px) 100vw, 400px', alt: '' })}</span>
+  <span class="post-body">
+    <span class="post-meta">${icon(categoryIcons[post.category], 15)} ${esc(categoryName(post.category))} &middot; ${esc(post.type || 'Article')} &middot; ${post.readingMinutes} min read</span>
+    <h3>${esc(post.title)}</h3>
+    <span class="post-excerpt">${esc(post.description)}</span>
+    <span class="more">Read ${post.type === 'Blog' ? 'blog' : 'article'} ${icon('arrow', 16)}</span>
+  </span>
+</a>`;
+const postGrid = list => `<div class="post-grid">${list.map(postCard).join('')}</div>`;
+
+const takeawaysBlock = section => {
+  const list = section.blocks.find(block => block.type === 'ul' || block.type === 'ol');
+  return `<section class="takeaways" id="${section.id}" aria-labelledby="${section.id}-h">
+    <h2 id="${section.id}-h">${esc(section.title)}</h2>
+    <ul>${(list?.items || []).map(item => `<li>${icon('check', 18)}<span>${mdInline(item)}</span></li>`).join('')}</ul>
+  </section>`;
+};
+
+const faqBlock = (post, section) => `<section class="faq" id="${section.id}">
+  <h2>${esc(section.title)}</h2>
+  ${post.faqs.map((faq, i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(faq.q)}<span class="faq-icon" aria-hidden="true"></span></summary><div class="faq-a">${faq.a.map(renderBlock).join('')}</div></details>`).join('')}
+</section>`;
+
+const sourcesBlock = section => `<section class="sources" id="${section.id}">
+  <h2>${esc(section.title)}</h2>
+  ${section.blocks.map(block => (block.type === 'ul' ? `<ol>${block.items.map(item => `<li>${mdInline(item)}</li>`).join('')}</ol>` : renderBlock(block))).join('')}
+</section>`;
+
+const renderPost = post => {
+  const url = `${canonical}${post.url}`;
+  const category = categories.find(c => c.slug === post.category);
+  const related = posts.filter(other => other !== post).slice(0, 3);
+  const toc = post.sections.filter(section => !/^Sources$/i.test(section.title));
+  const imageUrl = `${canonical}/assets/images/${post.image}.webp`;
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': post.type === 'Blog' ? 'BlogPosting' : 'Article',
+      headline: post.title,
+      description: post.description,
+      image: [imageUrl],
+      datePublished: post.published,
+      dateModified: post.updated,
+      mainEntityOfPage: url,
+      articleSection: categoryName(post.category),
+      keywords: post.keywords,
+      author: { '@type': 'Organization', name: site.name, url: `${canonical}/` },
+      publisher: organization,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${canonical}/` },
+        { '@type': 'ListItem', position: 2, name: categoryName(post.category), item: `${canonical}/${post.category}/` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: url },
+      ],
+    },
+  ];
+  if (post.faqs.length) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: post.faqs.map(faq => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: { '@type': 'Answer', text: faq.a.map(block => block.text || '').join(' ') },
+      })),
+    });
+  }
+  const extra = `<meta property="article:published_time" content="${post.published}">
+  <meta property="article:modified_time" content="${post.updated}">
+  <meta property="article:section" content="${esc(categoryName(post.category))}">`;
+
+  const body = post.sections.map(section => {
+    if (/^Key Takeaways$/i.test(section.title)) return takeawaysBlock(section);
+    if (section.title === post.faqTitle) return faqBlock(post, section);
+    if (/^Sources$/i.test(section.title)) return sourcesBlock(section);
+    return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(renderBlock).join('\n')}</section>`;
+  }).join('\n');
+
+  return `${docHead({ title: post.seo_title || post.title, description: post.description, url, image: post.image, type: 'article', jsonLd, preload: post.image, extra })}
+<body class="post-page">
+${header({ slug: post.category })}
+<main id="main">
+  <header class="post-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/${post.category}/">${esc(categoryName(post.category))}</a><span aria-hidden="true">/</span><span aria-current="page">${esc(post.type || 'Article')}</span></nav>
+      <span class="eyebrow">${icon(categoryIcons[post.category], 16)} ${esc(categoryName(post.category))} &middot; ${esc(post.type || 'Article')}</span>
+      <h1>${esc(post.title)}</h1>
+      <p class="post-deck">${esc(post.description)}</p>
+      <p class="post-byline"><span>By ${esc(site.name)} Editorial</span><span><time datetime="${post.published}">${longDate(post.published)}</time></span><span>${post.readingMinutes} min read</span></p>
+    </div>
+    <figure class="wrap post-figure">${picture(post.image, { eager: true, sizes: '(max-width: 1240px) 100vw, 1200px', alt: post.image_alt || '' })}</figure>
+  </header>
+  <div class="wrap post-layout">
+    <aside class="toc" aria-label="On this page">
+      <p class="toc-title">On this page</p>
+      <ol>${toc.map(section => `<li><a href="#${section.id}">${esc(section.title)}</a></li>`).join('')}</ol>
+    </aside>
+    <article class="prose">
+      <div class="post-intro">${post.intro.map(renderBlock).join('\n')}</div>
+      ${body}
+    </article>
+  </div>
+  ${related.length ? `<section class="section tone-white related"><div class="wrap"><div class="section-head"><span class="eyebrow">Keep reading</span><h2>More From Wellness Signal</h2></div>${postGrid(related)}</div></section>` : ''}
+  <section class="section has-bg bg-light">
+    <div class="section-bg">${picture(category?.image || 'desk-sea-view', { sizes: '100vw', alt: '' })}</div>
+    <div class="wrap"><div class="bg-panel"><div class="section-head"><h2>More ${esc(categoryName(post.category))} Coverage</h2><p>${esc(category?.summary || '')}</p></div><p><a class="btn" href="/${post.category}/">Explore ${esc(categoryName(post.category))}${icon('arrow', 18)}</a></p></div></div>
+  </section>
+</main>
+${footer}
+</body>
+</html>
+`;
+};
+
+const articlesPage = {
+  slug: 'articles',
+  title: 'Wellness Articles, Research & Analysis | Wellness Signal',
+  description: 'Browse Wellness Signal articles and analysis on wellness statistics, fitness, sleep, longevity, beauty, workplace wellbeing, and wellness travel.',
+};
+const renderArticlesIndex = () => {
+  const url = `${canonical}/articles/`;
+  const filters = categories.filter(c => posts.some(p => p.category === c.slug));
+  return `${docHead({ title: articlesPage.title, description: articlesPage.description, url, image: posts[0]?.image || 'desk-sea-view' })}
+<body>
+${header({ slug: 'articles' })}
+<main id="main">
+  <section class="hero no-image articles-hero">${sprig}
+    <div class="wrap"><div class="hero-text">
+      <span class="eyebrow">Latest research</span>
+      <h1>Articles and Analysis</h1>
+      <div class="lead"><p>Research, statistics, and industry analysis across seven areas of wellness, with every figure traced to its source.</p></div>
+      ${filters.length > 1 ? `<div class="topics" role="group" aria-label="Filter by category"><button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>${filters.map(c => `<button type="button" class="chip" data-filter="${c.slug}" aria-pressed="false">${esc(c.name)}</button>`).join('')}</div>` : ''}
+    </div></div>
+  </section>
+  <section class="section tone-white"><div class="wrap">
+    ${posts.length ? `<div class="post-grid" data-filterable>${posts.map((post, i) => postCard(post, i).replace('class="post-card reveal"', `class="post-card reveal" data-category="${post.category}"`)).join('')}</div>` : `<div class="empty">${sprig}<p>New articles will appear here as they are published.</p></div>`}
+  </div></section>
 </main>
 ${footer}
 </body>
@@ -423,6 +603,13 @@ for (const page of pages) {
   await writeFile(`${dir}/index.html`, renderPage(page));
 }
 
+for (const post of posts) {
+  await mkdir(`dist${post.url}`, { recursive: true });
+  await writeFile(`dist${post.url}index.html`, renderPost(post));
+}
+await mkdir('dist/articles', { recursive: true });
+await writeFile('dist/articles/index.html', renderArticlesIndex());
+
 if (production && pending.length) {
   throw new Error(`Production build blocked; confirm these details first:\n- ${[...new Set(pending)].join('\n- ')}`);
 }
@@ -433,15 +620,19 @@ await writeFile('dist/robots.txt', production
   : 'User-agent: *\nDisallow: /\n'
 );
 await writeFile('dist/sitemap.xml', production
-  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}</urlset>`
+  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url>${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
   : '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>'
 );
 await writeFile('dist/build-manifest.json', JSON.stringify({
   environment,
   indexable: production,
   pending: [...new Set(pending)],
-  pages: pages.map(page => ({ slug: path(page.slug), draft: false })),
+  pages: [
+    ...pages.map(page => ({ slug: path(page.slug), draft: false })),
+    { slug: '/articles/', draft: false },
+    ...posts.map(post => ({ slug: post.url, draft: false, published: post.published })),
+  ],
 }, null, 2));
 
-console.log(`Built Wellness Signal (${environment}; indexable=${production}; ${pages.length} pages)`);
+console.log(`Built Wellness Signal (${environment}; indexable=${production}; ${pages.length} pages, ${posts.length} posts)`);
 if (pending.length) console.log(`Pending details (block production): ${new Set(pending).size}`);

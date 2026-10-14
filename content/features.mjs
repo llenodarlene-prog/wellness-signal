@@ -12,16 +12,16 @@ export const categoryIcons = {
 };
 
 export const economy = {
-  source: 'Global Wellness Institute, 2024 Global Wellness Economy Monitor',
-  sourceUrl: 'https://globalwellnessinstitute.org/industry-research/2024-global-wellness-economy-monitor',
+  source: 'Global Wellness Institute, 2025 Global Wellness Economy Monitor',
+  sourceUrl: 'https://globalwellnessinstitute.org/industry-research/2025-global-wellness-economy-monitor/',
   bars: [
-    { label: '2023', value: 6.3, kind: 'measured', note: 'Measured market size' },
-    { label: '2028', value: 9.0, kind: 'projected', note: 'Projection ("nearly $9.0 trillion")' },
+    { label: '2024', value: 6.8, kind: 'measured', note: 'Estimated market size' },
+    { label: '2029', value: 9.8, kind: 'projected', note: 'Projection ("nearly $9.8 trillion")' },
   ],
   facts: [
-    { value: '$6.3T', label: 'Global wellness economy, 2023' },
-    { value: '6%', label: 'Average annual growth since 2019' },
-    { value: '11', label: 'Sectors in the GWI definition' },
+    { value: '$6.8T', label: 'Global wellness economy, 2024' },
+    { value: '7.9%', label: 'Growth from 2023 to 2024' },
+    { value: '6.12%', label: 'Share of global GDP, 2024' },
   ],
 };
 
