@@ -598,6 +598,8 @@ ${footer}
 
 await mkdir('dist', { recursive: true });
 await cp('assets', 'dist/assets', { recursive: true });
+// Server config (.htaccess) and other root files.
+await cp('static', 'dist', { recursive: true });
 
 for (const page of pages) {
   const dir = page.slug ? `dist/${page.slug}` : 'dist';
