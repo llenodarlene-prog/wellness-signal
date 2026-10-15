@@ -2,7 +2,91 @@
 // the cited source in the post; hypothetical figures must say so in `note`.
 const GWI_NOV_2025 = 'Global Wellness Institute, "Wellness Market Hits Record $6.8 Trillion", November 25, 2025.';
 
+const CDC_2024 = 'CDC, NCHS Data Brief 555 (National Health Interview Survey 2024).';
+const GWI_2025 = 'Global Wellness Institute, 2025 Global Wellness Economy Monitor.';
+
 export const charts = {
+  'cdc-aerobic-by-age': {
+    decimals: 1,
+    title: 'US adults meeting aerobic activity guidelines in leisure time, 2024',
+    unit: '%', max: 60,
+    series: [{ key: 'value', label: 'Share of adults' }],
+    rows: [
+      { label: '18–34', value: 54.0 }, { label: '35–49', value: 49.8 },
+      { label: '50–64', value: 44.6 }, { label: '65 and older', value: 38.4 },
+      { label: 'All adults', value: 47.2 },
+    ],
+    source: CDC_2024,
+  },
+  'cdc-aerobic-by-sex': {
+    decimals: 1,
+    title: 'Meeting aerobic activity guidelines by sex, 2024',
+    unit: '%', max: 60,
+    series: [{ key: 'value', label: 'Share of adults' }],
+    rows: [{ label: 'Men', value: 52.3 }, { label: 'Women', value: 42.4 }],
+    source: CDC_2024,
+  },
+  'hfa-member-activities': {
+    decimals: 1,
+    title: 'Share of US fitness facility members using each activity, 2024',
+    unit: '%', max: 50,
+    series: [{ key: 'value', label: 'Share of members' }],
+    rows: [
+      { label: 'Treadmill', value: 43.4 }, { label: 'Dumbbells or free weights', value: 32.1 },
+      { label: 'Yoga', value: 21.8 }, { label: 'Pilates', value: 8.1 },
+    ],
+    source: 'Health & Fitness Association, 2025 consumer data release.',
+    note: 'Members can use several activities, so shares do not add to 100%.',
+  },
+  'mindbody-acquisition-fee': {
+    title: 'Mindbody marketplace fee on a qualifying first purchase',
+    unit: '', currency: '$', max: 200,
+    series: [{ key: 'purchase', label: 'First purchase' }, { key: 'fee', label: 'Acquisition fee' }],
+    rows: [
+      { label: '$50 first purchase', purchase: 50, fee: 10 },
+      { label: '$100 first purchase', purchase: 100, fee: 20 },
+      { label: '$200 first purchase', purchase: 200, fee: 30 },
+    ],
+    source: 'Mindbody published US pricing: 20% of the first purchase, capped at $30.',
+    note: 'Hypothetical purchase amounts; other charges excluded.',
+  },
+  'gwi-sector-sizes': {
+    decimals: 1,
+    title: 'Wellness economy sectors in 2024, US$ billions',
+    unit: 'B', currency: '$', max: 1400,
+    series: [{ key: 'value', label: 'Market size' }],
+    rows: [
+      { label: 'Personal care and beauty', value: 1350.0 },
+      { label: 'Healthy eating, nutrition and weight loss', value: 1148.0 },
+      { label: 'Physical activity', value: 1143.9 },
+      { label: 'Wellness tourism', value: 893.9 },
+      { label: 'Public health, prevention and personal medicine', value: 675.9 },
+      { label: 'Traditional and complementary medicine', value: 605.6 },
+      { label: 'Wellness real estate', value: 548.4 },
+      { label: 'Mental wellness', value: 268.3 },
+      { label: 'Spas', value: 157.4 },
+      { label: 'Thermal and mineral springs', value: 71.7 },
+      { label: 'Workplace wellness', value: 53.3 },
+    ],
+    source: GWI_2025,
+    note: 'Sector estimates may overlap and should not be summed.',
+  },
+  'gwi-sector-growth': {
+    decimals: 1,
+    title: 'Average annual growth by sector: 2019–2024 vs projected 2024–2029',
+    unit: '%', max: 20,
+    series: [{ key: 'past', label: '2019–2024' }, { key: 'future', label: '2024–2029 (projected)' }],
+    rows: [
+      { label: 'Wellness real estate', past: 19.5, future: 15.2 },
+      { label: 'Mental wellness', past: 12.4, future: 10.1 },
+      { label: 'Public health and prevention', past: 8.6, future: 4.7 },
+      { label: 'Wellness tourism', past: 6.4, future: 9.1 },
+      { label: 'Physical activity', past: 4.6, future: 5.1 },
+      { label: 'Workplace wellness', past: 0.7, future: 2.2 },
+    ],
+    source: GWI_2025,
+    note: 'Future rates are GWI projections.',
+  },
   'wellness-economy-scale': {
     title: 'Wellness economy vs related global markets, US$ trillions',
     unit: 'T',
@@ -110,5 +194,90 @@ export const charts = {
     ],
     source: 'Illustrative example from this article.',
     note: 'Hypothetical figures; not an actual ClassPass contract or published average payout.',
+  },
+  'peloton-revenue-mix': {
+    decimals: 1,
+    title: 'Peloton revenue by segment, fiscal 2026, US$ millions',
+    unit: 'M', currency: '$', max: 1800,
+    series: [{ key: 'value', label: 'Revenue' }],
+    rows: [
+      { label: 'Subscriptions', value: 1675.6 },
+      { label: 'Connected Fitness Products', value: 770.4 },
+    ],
+    source: 'Peloton fiscal 2026 Form 10-K (year ended June 30, 2026).',
+    note: 'Total revenue $2,446.0 million; subscriptions 68.5%.',
+  },
+  'peloton-gross-margin': {
+    decimals: 1,
+    title: 'Peloton gross margin by segment, fiscal 2026',
+    unit: '%', max: 100,
+    series: [{ key: 'value', label: 'Gross margin' }],
+    rows: [
+      { label: 'Subscriptions', value: 71.4 },
+      { label: 'Connected Fitness Products', value: 11.7 },
+    ],
+    source: 'Peloton fiscal 2026 Form 10-K.',
+    note: 'Gross margin before operating expenses; not net profit.',
+  },
+  'corporate-wellness-estimates': {
+    decimals: 1,
+    title: 'Corporate wellness market estimates, US$ billions',
+    unit: 'B', currency: '$', max: 120,
+    series: [{ key: 'base', label: 'Base estimate' }, { key: 'forecast', label: 'Forecast' }],
+    rows: [
+      { label: 'Grand View Research (2025 to 2033)', base: 55.1, forecast: 70.1 },
+      { label: 'Fortune Business Insights (2025 to 2034)', base: 68.41, forecast: 118.21 },
+    ],
+    source: 'Grand View Research and Fortune Business Insights corporate wellness market summaries.',
+    note: 'Different scopes and horizons; GWI separately sizes workplace wellness at $53.3B (2024).',
+  },
+  'whoop-plan-prices': {
+    title: 'WHOOP annual US membership list prices',
+    unit: '', currency: '$', max: 400,
+    series: [{ key: 'value', label: 'Annual price' }],
+    rows: [
+      { label: 'One (WHOOP 5.0)', value: 199 },
+      { label: 'Peak (WHOOP 5.0)', value: 239 },
+      { label: 'Life (WHOOP MG)', value: 359 },
+    ],
+    source: 'WHOOP published US membership plans.',
+    note: 'List prices; promotions, taxes and regional pricing excluded.',
+  },
+  'whoop-five-year-cost': {
+    title: 'Five years of WHOOP membership at unchanged list prices',
+    unit: '', currency: '$', max: 1800,
+    series: [{ key: 'value', label: 'Five-year total' }],
+    rows: [
+      { label: 'One', value: 995 },
+      { label: 'Peak', value: 1195 },
+      { label: 'Life', value: 1795 },
+    ],
+    source: 'Calculated from WHOOP published US annual prices.',
+    note: 'Illustrative; not a guarantee of future prices.',
+  },
+  'kff-wellness-offers': {
+    title: 'Firms offering wellness programmes in 2025, by firm size',
+    unit: '%', max: 100,
+    series: [{ key: 'small', label: 'Smaller firms (10 to 199 workers)' }, { key: 'large', label: 'Larger firms (200+ workers)' }],
+    rows: [
+      { label: 'At least one specified programme', small: 56, large: 83 },
+      { label: 'Health risk assessments', small: 35, large: 53 },
+      { label: 'Biometric screening', small: 22, large: 43 },
+    ],
+    source: 'KFF, 2025 Employer Health Benefits Survey.',
+    note: 'Among firms offering health benefits.',
+  },
+  'oura-five-year-cost': {
+    decimals: 2,
+    title: 'Illustrative five-year Oura cost, US$',
+    unit: '', currency: '$', max: 800,
+    series: [{ key: 'value', label: 'Cost' }],
+    rows: [
+      { label: 'Ring purchase', value: 399 },
+      { label: 'Five annual memberships', value: 349.95 },
+      { label: 'Combined', value: 748.95 },
+    ],
+    source: 'Oura published US prices: Ring 5 from $399; membership $69.99 a year.',
+    note: 'Before taxes, discounts and replacements.',
   },
 };
