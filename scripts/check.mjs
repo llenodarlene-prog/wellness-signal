@@ -1,6 +1,6 @@
 import { access, readFile } from 'node:fs/promises';
 
-for (const file of ['dist/index.html', 'dist/robots.txt', 'dist/sitemap.xml', 'dist/build-manifest.json', 'dist/assets/css/site.css']) {
+for (const file of ['dist/index.html', 'dist/robots.txt', 'dist/sitemap.xml', 'dist/build-manifest.json', 'dist/assets/css/site.css', 'dist/.htaccess']) {
   await access(file);
 }
 
