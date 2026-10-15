@@ -8,8 +8,8 @@ primary_keyword: classpass business model
 keywords: classpass business model, how ClassPass makes money, ClassPass revenue model, ClassPass studio partners, ClassPass partner payouts, ClassPass credits
 category: fitness
 slug: classpass-business-model-studio-partners
-image: reformer-class-studio
-image_alt: An instructor guides three people through a reformer Pilates class in a bright studio overlooking a city
+image: studio-front-desk
+image_alt: Two customers check in at a fitness studio front desk while a yoga class runs in the background
 published: 2026-10-14
 draft: false
 ---
@@ -53,7 +53,7 @@ The marketplace allows ClassPass to offer services across many locations without
 
 For partners, joining the marketplace provides access to an existing audience of potential customers. However, exposure and bookings do not automatically translate into profitable growth, particularly when reservation payouts differ from direct prices.
 
-The platform therefore needs to balance demand from members with the financial interests of participating businesses. Its credit pricing and inventory tools are designed to support that balance.
+The platform therefore needs to balance demand from members with the financial interests of participating businesses. Its credit pricing and inventory tools are designed to support that balance. Many of the same studios also run their schedules and payments on management software such as [Mindbody](/fitness/mindbody-business-model/), which uses a different fee model.
 
 ## How Does ClassPass Make Money?
 

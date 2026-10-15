@@ -91,7 +91,9 @@ export const toBlocks = markdown => {
 const fmt = (chart, row, key) => {
   const value = row[key];
   const prefix = row.prefix?.[key] || '';
-  return `${prefix}${chart.currency || ''}${Number.isInteger(value) ? value : value.toFixed(1)}${chart.unit || ''}`;
+  const digits = chart.decimals ?? (Number.isInteger(value) ? 0 : 1);
+  const number = value.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  return `${prefix}${chart.currency || ''}${number}${chart.unit || ''}`;
 };
 
 // Animated horizontal bar chart; bars grow when the figure scrolls into view.
