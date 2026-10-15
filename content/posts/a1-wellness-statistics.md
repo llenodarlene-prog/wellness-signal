@@ -8,8 +8,8 @@ primary_keyword: wellness statistics
 keywords: wellness statistics, wellness spending statistics, consumer wellness trends, wellness industry statistics, wellness market research
 category: wellness
 slug: wellness-statistics-participation-spending
-image: wellness-stretch-terrace
-image_alt: Fruit bowl, infused water, and skincare on a stone bench while a person stretches on a mat in a sunlit studio
+image: wellness-essentials-table
+image_alt: A smoothie bowl, water bottle, skincare, a smartwatch, and a rolled yoga mat on a sunlit marble counter
 published: 2026-10-14
 draft: false
 ---
