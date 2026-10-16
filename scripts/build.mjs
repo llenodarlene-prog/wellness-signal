@@ -483,35 +483,58 @@ const renderPost = post => {
   const related = posts.filter(other => other !== post).slice(0, 3);
   const toc = post.sections.filter(section => !/^Sources$/i.test(section.title));
   const imageUrl = `${canonical}/assets/images/${post.image}.webp`;
-  const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': post.type === 'Blog' ? 'BlogPosting' : 'Article',
-      headline: post.title,
-      description: post.description,
-      image: [imageUrl],
-      datePublished: post.published,
-      dateModified: post.updated,
-      mainEntityOfPage: url,
-      articleSection: categoryName(post.category),
-      keywords: post.keywords,
-      author: { '@type': 'Organization', name: site.name, url: `${canonical}/` },
-      publisher: organization,
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: `${canonical}/` },
-        { '@type': 'ListItem', position: 2, name: categoryName(post.category), item: `${canonical}/${post.category}/` },
-        { '@type': 'ListItem', position: 3, name: post.title, item: url },
-      ],
-    },
-  ];
+  const websiteId = `${canonical}/#website`;
+  const pageId = `${url}#webpage`;
+  const articleId = `${url}#article`;
+  const breadcrumbId = `${url}#breadcrumb`;
+  const website = {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    url: `${canonical}/`,
+    name: site.name,
+    publisher: { '@id': organization['@id'] },
+    inLanguage: site.locale,
+  };
+  const webpage = {
+    '@type': 'WebPage',
+    '@id': pageId,
+    url,
+    name: post.title,
+    description: post.description,
+    isPartOf: { '@id': websiteId },
+    breadcrumb: { '@id': breadcrumbId },
+    mainEntity: { '@id': articleId },
+    inLanguage: site.locale,
+  };
+  const article = {
+    '@type': post.type === 'Blog' ? 'BlogPosting' : 'Article',
+    '@id': articleId,
+    headline: post.title,
+    description: post.description,
+    image: [imageUrl],
+    datePublished: post.published,
+    dateModified: post.updated,
+    mainEntityOfPage: { '@id': pageId },
+    articleSection: categoryName(post.category),
+    keywords: post.keywords,
+    author: { '@id': organization['@id'] },
+    publisher: { '@id': organization['@id'] },
+    inLanguage: site.locale,
+  };
+  const breadcrumb = {
+    '@type': 'BreadcrumbList',
+    '@id': breadcrumbId,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${canonical}/` },
+      { '@type': 'ListItem', position: 2, name: categoryName(post.category), item: `${canonical}/${post.category}/` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url },
+    ],
+  };
+  const graph = [organization, website, webpage, article, breadcrumb];
   if (post.faqs.length) {
-    jsonLd.push({
-      '@context': 'https://schema.org',
+    graph.push({
       '@type': 'FAQPage',
+      '@id': `${url}#faq`,
       mainEntity: post.faqs.map(faq => ({
         '@type': 'Question',
         name: faq.q,
@@ -519,6 +542,7 @@ const renderPost = post => {
       })),
     });
   }
+  const jsonLd = [{ '@context': 'https://schema.org', '@graph': graph }];
   const extra = `<meta property="article:published_time" content="${post.published}">
   <meta property="article:modified_time" content="${post.updated}">
   <meta property="article:section" content="${esc(categoryName(post.category))}">`;
