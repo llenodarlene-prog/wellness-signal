@@ -166,7 +166,7 @@ The institute organises the wellness economy into 11 distinct sectors rather tha
 
 Market size therefore depends partly on the definition used. A figure that includes wellness real estate will be significantly different from one focused on personal fitness, sleep, and nutrition purchases.
 
-For detailed sector-level figures, readers can consult the Global Wellness Institute's Global Wellness Economy Monitor. Its methodology provides essential context when comparing market estimates from different publishers.
+For detailed sector-level figures, see our [global wellness industry statistics by sector](/wellness/global-wellness-industry-statistics-by-sector/), or consult the Global Wellness Institute's Global Wellness Economy Monitor. Its methodology provides essential context when comparing market estimates from different publishers.
 
 ### Global Wellness Market Forecast Through 2029
 
