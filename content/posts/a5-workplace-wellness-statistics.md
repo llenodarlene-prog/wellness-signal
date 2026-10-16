@@ -8,8 +8,8 @@ primary_keyword: workplace wellness statistics
 keywords: workplace wellness statistics, employer wellness programs, wellness program participation, kff wellness
 category: wellness
 slug: workplace-wellness-statistics-access-participation
-image: desk-laptop-brighter
-image_alt: A bright home office desk with a laptop beside a window
+image: workplace-health-check
+image_alt: A nurse checks an employee's blood pressure in an office wellness room
 published: 2026-10-18
 draft: false
 ---
