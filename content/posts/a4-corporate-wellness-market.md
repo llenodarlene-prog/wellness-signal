@@ -8,8 +8,8 @@ primary_keyword: corporate wellness market size
 keywords: corporate wellness market, corporate wellness market size, workplace wellness industry, employee wellness spending
 category: wellness
 slug: corporate-wellness-market-size-employer-spending
-image: workplace-lounge
-image_alt: A calm office lounge with soft seating and plants for employee breaks
+image: office-group-stretch
+image_alt: Colleagues doing a group side stretch together in a bright open-plan office
 published: 2026-10-17
 draft: false
 ---

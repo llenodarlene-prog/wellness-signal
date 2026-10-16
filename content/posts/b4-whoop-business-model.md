@@ -8,8 +8,8 @@ primary_keyword: whoop business model
 keywords: whoop business model, whoop membership, whoop pricing, wearable subscription
 category: fitness
 slug: whoop-business-model-device-access
-image: recovery-bench
-image_alt: A quiet recovery space with a wooden bench and towels after training
+image: fitness-wristband
+image_alt: A runner resting on a bench wearing a screenless fitness wristband
 published: 2026-10-17
 draft: false
 ---

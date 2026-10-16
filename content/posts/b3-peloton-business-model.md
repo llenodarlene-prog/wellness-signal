@@ -8,8 +8,8 @@ primary_keyword: peloton business model
 keywords: peloton business model, peloton revenue, peloton subscriptions, connected fitness
 category: fitness
 slug: peloton-business-model-hardware-memberships
-image: fitness-all-ages
-image_alt: People of different ages exercising together in a bright fitness studio
+image: connected-bike-home
+image_alt: A connected exercise bike with a screen in a bright home studio overlooking the water
 published: 2026-10-16
 draft: false
 ---

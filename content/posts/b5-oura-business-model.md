@@ -8,8 +8,8 @@ primary_keyword: oura business model
 keywords: oura business model, oura membership, oura ring cost, smart ring subscription
 category: wellness
 slug: oura-business-model-ring-membership
-image: bedroom-sunset
-image_alt: A calm bedroom at sunset prepared for sleep
+image: smart-ring-sunset
+image_alt: A woman wearing a smart ring beside a phone showing sleep data at sunset
 published: 2026-10-18
 draft: false
 ---
