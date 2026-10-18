@@ -24,4 +24,10 @@ DirectoryIndex index.html
   </FilesMatch>
 </IfModule>
 
+# Posts moved into their topic silo keep their links and rankings.
+<IfModule mod_alias.c>
+  Redirect 301 /wellness/corporate-wellness-market-size-employer-spending/ /work-wellness/corporate-wellness-market-size-employer-spending/
+  Redirect 301 /wellness/workplace-wellness-statistics-access-participation/ /work-wellness/workplace-wellness-statistics-access-participation/
+</IfModule>
+
 ErrorDocument 404 /404.html
