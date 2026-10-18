@@ -6,11 +6,13 @@ seo_title: Workplace Wellness Statistics on Access and Participation
 description: Review employer wellness programme availability, screening benefits, participation and measured outcomes.
 primary_keyword: workplace wellness statistics
 keywords: workplace wellness statistics, employer wellness programs, wellness program participation, kff wellness
-category: wellness
+category: work-wellness
 slug: workplace-wellness-statistics-access-participation
 image: workplace-health-check
 image_alt: A nurse checks an employee's blood pressure in an office wellness room
 published: 2026-10-18
+role: hub
+updated: 2026-10-18
 draft: false
 ---
 
@@ -42,7 +44,7 @@ KFF's published comparison applies to firms offering health benefits. Its smalle
 
 ### Why Employer Size Changes Access
 
-Larger firms more frequently offer the programmes assessed by KFF, but that finding does not show how frequently employees use the benefits. Cost, administration and employee needs can influence what employers provide.
+Larger firms more frequently offer the programmes assessed by KFF, but that finding does not show how frequently employees use the benefits. Spending on these services is sized separately in our [corporate wellness market](/work-wellness/corporate-wellness-market-size-employer-spending/) comparison. Cost, administration and employee needs can influence what employers provide.
 
 ## Historical CDC Worksite Data
 

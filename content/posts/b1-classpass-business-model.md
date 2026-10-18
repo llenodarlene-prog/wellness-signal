@@ -11,6 +11,8 @@ slug: classpass-business-model-studio-partners
 image: studio-front-desk
 image_alt: Two customers check in at a fitness studio front desk while a yoga class runs in the background
 published: 2026-10-14
+role: supporting
+updated: 2026-10-18
 draft: false
 ---
 
@@ -230,7 +232,7 @@ Businesses should treat customer acquisition as a measurable opportunity rather 
 
 ## What ClassPass Means for Members
 
-For consumers, the main attraction is being able to access different fitness and wellness providers through one membership. This can be particularly useful for people who enjoy variety or do not want a long-term membership at one studio.
+For consumers, the main attraction is being able to access different fitness and wellness providers through one membership. Our [fitness statistics by activity and age](/fitness/fitness-statistics-by-activity-and-age/) show how many Americans already hold a gym membership. This can be particularly useful for people who enjoy variety or do not want a long-term membership at one studio.
 
 However, the credit model makes pricing less predictable than a fixed-price membership for a single venue. The value depends on the member's preferred services, booking times, and the number of credits required.
 

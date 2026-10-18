@@ -11,6 +11,8 @@ slug: fitness-statistics-by-activity-and-age
 image: fitness-all-ages
 image_alt: Adults of different ages cycling, lifting weights, and stretching in a bright gym, and an older couple walking by the water
 published: 2026-10-15
+role: hub
+updated: 2026-10-18
 draft: false
 ---
 
@@ -63,9 +65,9 @@ These activity shares refer to fitness facility members, not all Americans. One 
 
 ## Gym Membership and Nonmember Exercise
 
-HFA estimated 77 million US fitness facility members in 2024, equal to 24.9% of Americans aged six and older. The wider customer population, including nonmembers accessing facilities through other arrangements, was reported at nearly 96 million.
+HFA estimated 77 million US fitness facility members in 2024, equal to 24.9% of Americans aged six and older. The wider customer population, including nonmembers accessing facilities through other arrangements, was reported at nearly 96 million. Booking marketplaces are one such arrangement, covered in our [ClassPass business model](/fitness/classpass-business-model-studio-partners/) analysis, while many studios run on the software examined in our [Mindbody business model](/fitness/mindbody-business-model/) breakdown.
 
-A person can meet aerobic guidelines through walking, cycling or running without ever visiting a gym. Conversely, membership alone does not establish exercise frequency or whether a member meets recommended activity levels.
+A person can meet aerobic guidelines through walking, cycling or running without ever visiting a gym. Home equipment and wearables serve that group in different ways, as our [Peloton business model](/fitness/peloton-business-model-hardware-memberships/) and [WHOOP business model](/fitness/whoop-business-model-device-access/) analyses show. Conversely, membership alone does not establish exercise frequency or whether a member meets recommended activity levels.
 
 ## Participation Beyond Gyms
 
