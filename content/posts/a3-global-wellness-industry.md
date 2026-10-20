@@ -70,7 +70,7 @@ A market can expand because consumers adopt a product, prices rise or investment
 
 ## Travel and Workplace Wellness
 
-Wellness tourism reached approximately $893.9 billion in 2024, making it one of the largest sectors. [Workplace wellness](/work-wellness/workplace-wellness-statistics-access-participation/), by contrast, was valued at $53.3 billion, with comparatively slow historical growth in GWI's framework.
+[Wellness tourism](/travel-retreats/wellness-retreats-in-the-us/) reached approximately $893.9 billion in 2024, making it one of the largest sectors. [Workplace wellness](/work-wellness/workplace-wellness-statistics-access-participation/), by contrast, was valued at $53.3 billion, with comparatively slow historical growth in GWI's framework.
 
 ### Why Definitions Change the Comparison
 
