@@ -83,7 +83,7 @@ Long-term sauna research has sometimes associated frequent use with favourable c
 
 ### What Randomised Trials Show
 
-A systematic review and meta-analysis published in 2025 examined 20 randomised controlled trials of passive-heating interventions lasting at least one week. It found no significant pooled effect for most evaluated measures, including several vascular, metabolic and inflammatory outcomes.
+A systematic review and meta-analysis published in 2025 examined 20 randomised controlled trials of passive-heating interventions lasting at least one week. It found no significant pooled effect for most evaluated measures, although whole-body heating produced a modest reduction in systolic blood pressure of about 4 mmHg. Outcomes without a significant effect included several vascular, metabolic and inflammatory outcomes.
 
 The review examined more than one kind of passive heating, so it cannot establish that saunas and steam rooms have identical effects. It does, however, challenge the idea that strong and consistent clinical benefits have already been demonstrated across heat therapies. Our review of [peptide research](/longevity-recovery/peptide-research-clinical-evidence-2026/) applies the same evidence standard to another popular longevity category.
 
@@ -127,7 +127,7 @@ If a condition is aggravated by heat, consult an appropriate clinician rather th
 
 Both saunas and steam rooms produce substantial heat exposure, making dehydration, dizziness and overheating important practical risks. Harvard Health advises keeping sauna sessions short, avoiding alcohol, cooling down gradually and leaving promptly if someone feels unwell.
 
-Cleveland Clinic recommends particular caution for people with recent cardiovascular events, certain heart or blood-pressure conditions, pregnancy, some neurological conditions and relevant medication use. A clinician can advise whether heat exposure is appropriate for an individual medical history.
+Cleveland Clinic advises avoiding saunas after a recent heart attack or stroke, and recommends checking with a healthcare provider first for certain heart or blood-pressure conditions, pregnancy, some neurological conditions and relevant medication use. A clinician can advise whether heat exposure is appropriate for an individual medical history.
 
 ### A Conservative Safety Checklist
 
@@ -201,7 +201,7 @@ For gyms and wellness operators, safe facilities, transparent operating informat
 
 - [Cleveland Clinic: Sauna Benefits](https://health.clevelandclinic.org/sauna-benefits): conventional and infrared temperature ranges, steam distinction, weight-loss claims and cautions.
 - [Harvard Health: Saunas and Your Health](https://www.health.harvard.edu/healthy-aging-and-longevity/saunas-and-your-health): physiological responses and general precautions; archived clinical article.
-- [2025 systematic review of randomised passive-heating trials, PubMed](https://pubmed.ncbi.nlm.nih.gov/41049507/): long-term cardiometabolic outcomes and limitations.
+- [2025 systematic review of randomised passive-heating trials, PubMed](https://pubmed.ncbi.nlm.nih.gov/41049507/): cardiometabolic outcomes in trials lasting 2 to 15 weeks, and limitations.
 - [2026 narrative review of bathing and sauna practices, PubMed](https://pubmed.ncbi.nlm.nih.gov/41899724/): observational associations, mechanisms and evidence gaps.
 - [SaunaSpots: Sauna vs Steam Room](https://saunaspots.org/guides/sauna-vs-steam-room/): operational comparison used only for general temperature/humidity context, not as clinical proof.
 

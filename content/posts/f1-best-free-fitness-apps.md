@@ -101,7 +101,7 @@ It is a stronger fit for someone following a repeatable training programme than 
 
 Boostcamp states that the main programme library, workout tracker, basic personal-record information, rest timers and manual custom-programme creation are available without payment. Its Pro offering adds deeper analytics, selected exclusive coach programmes and additional personalised tools.
 
-The company displays different library totals on different pages as its catalogue changes, so a precise total should not be central to choosing the app. More important is whether an appropriate programme is free and whether the tracking functions needed for that programme stay available over time.
+Boostcamp's October 2026 programme page lists more than 14,000 programmes, including over 130 by coaches, but a library total should not be central to choosing the app. More important is whether an appropriate programme is free and whether the tracking functions needed for that programme stay available over time.
 
 **Best fit:** Gym users who want a structured lifting programme and a capable free log.
 
