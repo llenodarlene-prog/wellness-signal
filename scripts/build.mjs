@@ -16,6 +16,9 @@ const canonical = site.url.replace(/\/$/, '');
 const year = new Date().getUTCFullYear();
 const buildDate = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
 const posts = await loadPosts(buildDate);
+// Links to scheduled posts render as plain text until the post goes live.
+const scheduledUrls = new Set((await loadPosts('9999-12-31')).map(p => p.url).filter(url => !posts.some(p => p.url === url)));
+const unlinkScheduled = html => html.replace(/<a href="(\/[^"]*)">([\s\S]*?)<\/a>/g, (link, href, text) => (scheduledUrls.has(href) ? text : link));
 const assetVersion = createHash('sha256')
   .update(await readFile('assets/css/site.css'))
   .update(await readFile('assets/js/site.js'))
@@ -617,8 +620,8 @@ ${header({ slug: post.category })}
       <ol>${toc.map(section => `<li><a href="#${section.id}">${esc(section.title)}</a></li>`).join('')}</ol>
     </aside>
     <article class="prose">
-      <div class="post-intro">${post.intro.map(block => renderBlock(block, charts)).join('\n')}</div>
-      ${body}
+      <div class="post-intro">${unlinkScheduled(post.intro.map(block => renderBlock(block, charts)).join('\n'))}</div>
+      ${unlinkScheduled(body)}
     </article>
   </div>
   ${related.length ? `<section class="section tone-white related"><div class="wrap"><div class="section-head"><span class="eyebrow">Keep reading</span><h2>More From Wellness Signal</h2></div>${postGrid(related)}</div></section>` : ''}
