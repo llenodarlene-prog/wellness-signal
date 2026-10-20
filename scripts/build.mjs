@@ -419,6 +419,7 @@ const docHead = ({ title, description, url, image, type = 'website', jsonLd = []
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${canonical}/assets/images/${image}.webp">
   <meta name="theme-color" content="#1F6B4F">
+  <meta name='impact-site-verification' value='a1f2c282-b0f5-44f1-861f-af5420f81cdd'>
   ${extra}
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/mark-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/mark-192.png">
