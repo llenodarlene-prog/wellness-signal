@@ -117,7 +117,7 @@ The property provides opportunities for guests who want an active day involving 
 
 ### Included Activities Versus Spa Treatments
 
-The operator distinguishes access to spa facilities from paid individual treatments, and offers seasonal packages with additional allowances. Compare offers by the actual experiences included, not simply by whether the marketing page uses the term all-inclusive.
+The operator distinguishes access to spa facilities from paid individual treatments, and its inclusions page lists gratuities as part of the stay. Compare offers by the actual experiences included, not simply by whether the marketing page uses the term all-inclusive.
 
 Official provider: [Lake Austin Spa Resort](https://www.lakeaustin.com/resort/whats-included/).
 
@@ -131,7 +131,7 @@ A hiking-focused visit in autumn is a different experience from a winter stay ce
 
 ### Compare Package Credits Carefully
 
-The property's published standard Miraval package describes a $175 nightly resort credit, while other offers have different structures. A credit may cover eligible extras but does not convert a paid treatment into a universally included amenity, so guests should check how it can be redeemed.
+The property's published standard Miraval package describes a $175 nightly resort credit per person, while other offers have different structures. A credit may cover eligible extras but does not convert a paid treatment into a universally included amenity, so guests should check how it can be redeemed.
 
 Official provider: [Miraval Berkshires packages](https://www.miravalresorts.com/berkshires/stay-with-us/packages).
 
@@ -239,7 +239,7 @@ The most practical comparison is the current programme schedule and full price f
 ## Sources and Verification
 
 - [Canyon Ranch Tucson](https://www.canyonranch.com/tucson/) and [Canyon Ranch stay formats](https://www.canyonranch.com/wellness-programs/health-retreats/).
-- [Miraval resort packages](https://www.miravalresorts.com/berkshires/stay-with-us/packages) and [Miraval Austin](https://www.miravalresorts.com/austin/stay-with-us/packages).
+- [Miraval resort packages](https://www.miravalresorts.com/berkshires/stay-with-us/packages) and [Miraval Arizona packages](https://www.miravalresorts.com/arizona/stay-with-us/packages).
 - [Golden Door](https://goldendoor.com/).
 - [The Ranch](https://www.theranchlife.com/).
 - [Lake Austin Spa Resort inclusions](https://www.lakeaustin.com/resort/whats-included/).

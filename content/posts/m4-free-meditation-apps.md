@@ -104,13 +104,13 @@ Plum Village offers a recognisable contemplative tradition rather than a neutral
 
 ### Mobile and Web Access
 
-The provider offers mobile access and a web catalogue with guided recordings and introductory practices. The app's descriptions identify mobile features such as playlists and offline listening, although users should verify compatibility and availability for their device.
+The provider offers mobile access and a web catalogue with guided recordings and introductory practices. Check the current app for features such as playlists and offline listening, as users should verify compatibility and availability for their device.
 
 Official provider: [Plum Village App](https://plumvillage.app/about-the-plum-village-app/).
 
 ## 5. Insight Timer: A Large Free Library With a Paid Membership
 
-Insight Timer combines a large library of guided practices, talks, sleep content and timers with an optional MemberPlus subscription. Its current help materials describe extensive free access, while paid plans unlock additional courses, selected premium recordings, offline listening and other conveniences.
+Insight Timer combines a large library of guided practices, talks, sleep content and timers with an optional MemberPlus subscription. Its current help materials describe extensive free access with advertising, while paid plans remove ads and unlock additional courses, selected premium recordings, offline listening and other conveniences.
 
 ### What Can Be Used Without Paying
 
@@ -136,7 +136,7 @@ The structure also sets the app apart from entertainment-style meditation librar
 
 ### Accessibility and Clinical Boundaries
 
-The VA states that the app is free and publicly available, and its Android listing indicates no add-on purchases. It also cautions that the app does not replace needed care for PTSD or other mental health conditions, a distinction readers should keep in mind when comparing wellness resources.
+The VA states that the app is free and publicly available. It also cautions that the app does not replace needed care for PTSD or other mental health conditions, a distinction readers should keep in mind when comparing wellness resources.
 
 Official provider: [VA Mindfulness Coach](https://mobile.va.gov/app/mindfulness-coach).
 

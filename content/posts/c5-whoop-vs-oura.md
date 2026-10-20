@@ -26,7 +26,7 @@ That difference changes the total cost, the features available after cancellatio
 - **WHOOP One costs $199 per year** in the US and includes a WHOOP 5.0 device; Peak costs $239 and Life costs $359 annually.
 - **Oura Ring 5 starts at $399** in the US. Oura Membership costs **$5.99 monthly or $69.99 annually** after an included first month for new members.
 - WHOOP emphasises strain, training, recovery, and sleep in a screen-free wearable. Oura places a compact ring and overnight-to-daytime health trends at the centre of its experience.
-- WHOOP reports **14+ days of battery life** for its latest 5.0/MG devices; Oura lists up to approximately **one week** for Ring 5, with actual results varying by use.
+- WHOOP reports **14+ days of battery life** for its latest 5.0/MG devices; Oura lists **up to 6 to 9 days** for Ring 5, depending on ring size and use.
 - After WHOOP membership ends, the device no longer collects, uploads, or analyses new biometric information. Oura retains three daily summary scores and limited app functions without a paid membership.
 - Neither device should be treated as a substitute for medical evaluation. WHOOP's blood-pressure estimates are explicitly a wellness feature rather than a diagnostic blood-pressure monitor.
 
@@ -40,7 +40,7 @@ The comparison begins with current US purchasing arrangements. WHOOP bundles har
 | US entry pricing | WHOOP One: $199/year, device included | Ring 5: from $399 upfront |
 | Other plans | Peak $239/year; Life $359/year | Membership $5.99/month or $69.99/year |
 | Main focus | Training strain, recovery and sleep | Sleep, readiness, activity and broader personal trends |
-| Latest device battery claim | 14+ days for 5.0/MG | Approximately one week for Ring 5 |
+| Latest device battery claim | 14+ days for 5.0/MG | Up to 6 to 9 days for Ring 5 |
 | Hardware with subscription | Included in membership | Purchased separately |
 | After membership ends | No new biometric collection or analysis | Three daily scores and limited app functions |
 | Medical considerations | Selected ECG functions on Life/MG; blood-pressure insights are not diagnostic | Wellness metrics are not medical diagnoses |
