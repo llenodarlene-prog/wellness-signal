@@ -64,7 +64,7 @@ A 2019 JAMA trial included 32,974 employees across 160 worksites. Researchers fo
 
 ## Measuring Programme Performance
 
-Employers can distinguish eligible employees, first-time users, ongoing participants and measurable outcomes. A programme's purpose should determine the appropriate success metric rather than relying exclusively on enrolment totals.
+Employers can distinguish eligible employees, first-time users, ongoing participants and measurable outcomes. A programme's purpose should determine the appropriate success metric rather than relying exclusively on enrolment totals. Small employers choosing a platform can compare options in our guide to [employee wellness software](/work-wellness/employee-wellness-software-small-teams/) for small teams.
 
 ## FAQs
 

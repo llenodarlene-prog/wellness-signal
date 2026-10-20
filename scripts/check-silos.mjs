@@ -9,6 +9,7 @@ import { toBlocks } from './lib/markdown.mjs';
 const today = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
 const posts = await loadPosts(today);
 const byUrl = new Map(posts.map(post => [post.url, post]));
+const scheduled = new Set((await loadPosts('9999-12-31')).map(post => post.url).filter(url => !byUrl.has(url)));
 const pageUrls = new Set([...pages.map(page => (page.slug ? `/${page.slug}/` : '/')), '/articles/']);
 const images = new Set((await readdir('assets/images')).map(name => name.replace(/\.webp$/, '')));
 const failures = [];
@@ -17,9 +18,19 @@ const fail = (post, message) => failures.push(`${post.url}: ${message}`);
 // Body text without the Sources list, so source links are not counted as internal.
 const bodyOf = post => post.body.split(/\n## Sources\b/)[0];
 const links = post => [...bodyOf(post).matchAll(/\]\(([^)\s]+)\)/g)].map(m => m[1]);
-const internal = post => [...new Set(links(post).filter(href => href.startsWith('/')).map(href => href.split('#')[0]))];
+// Links to scheduled posts are hidden by the build until their date, so they do not count yet.
+const internal = post => [...new Set(links(post).filter(href => href.startsWith('/')).map(href => href.split('#')[0]))].filter(href => !scheduled.has(href));
 
 const inbound = new Map(posts.map(post => [post.url, new Set()]));
+// A post that opens a new silo cannot have inbound links on day one. Within its
+// first 7 days, links from posts already scheduled in that window also count.
+const all = await loadPosts('9999-12-31');
+const addDays = (iso, n) => new Date(Date.parse(`${iso}T00:00:00Z`) + n * 864e5).toISOString().slice(0, 10);
+for (const post of posts) {
+  for (const later of all.filter(p => !byUrl.has(p.url) && p.published <= addDays(post.published, 7))) {
+    if ([...later.body.split(/\n## Sources\b/)[0].matchAll(/\]\((\/[^)\s#]*)/g)].some(m => m[1] === post.url)) inbound.get(post.url).add(later.url);
+  }
+}
 for (const post of posts) {
   for (const href of internal(post)) {
     if (byUrl.has(href)) { if (href !== post.url) inbound.get(href).add(post.url); }

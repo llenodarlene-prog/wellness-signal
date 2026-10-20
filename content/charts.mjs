@@ -280,4 +280,18 @@ export const charts = {
     source: 'Oura published US prices: Ring 5 from $399; membership $69.99 a year.',
     note: 'Before taxes, discounts and replacements.',
   },
+  'glans-ha-adverse-events': {
+    decimals: 2,
+    title: 'Reported adverse events after glans HA injection (598 patients)',
+    unit: '%', max: 20,
+    series: [{ key: 'value', label: 'Share of patients' }],
+    rows: [
+      { label: 'Any reported adverse event', value: 15.22 },
+      { label: 'Pain', value: 7.69 },
+      { label: 'Bullae or nodules', value: 4.18 },
+      { label: 'Ecchymosis (bruising)', value: 3.34 },
+    ],
+    source: 'Culha et al., Journal of Sexual Medicine, 2024 (PMID 39121933).',
+    note: 'Among studies reporting side effects; not an individual risk estimate.',
+  },
 };
