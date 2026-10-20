@@ -118,7 +118,7 @@ The number shown in the calculator is useful as a snapshot, not a universal rate
 
 The small-business page advertises guided content for stress, sleep, mindfulness and related skills, along with an administration portal. It also states that clinical Headspace Care and EAP services are separate packages, so those services should not be represented as included in the Core price.
 
-A team whose main objective is a formal employee mental healthcare benefit may need a broader procurement process. A content subscription can support access to educational resources, but it should not be substituted for appropriate clinical services where those are needed.
+A team whose main objective is a formal employee mental healthcare benefit may need a broader procurement process. A content subscription can support access to educational resources, but it should not be substituted for appropriate clinical services where those are needed. Individuals can also find no-cost options in our comparison of [free meditation apps](/mind-sleep/free-meditation-apps-compared/).
 
 [Review Headspace Core for Small Businesses](https://organizations.headspace.com/small-business).
 

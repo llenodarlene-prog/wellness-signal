@@ -40,7 +40,7 @@ Peptides are molecules made of amino acids joined by peptide bonds. In medicine,
 
 Regulated peptide medicines are evaluated for particular indications, populations, dosages, and risks. FDA product-specific guidance published in July 2026 includes named peptide products such as glucagon, liraglutide, semaglutide, teriparatide, and pegcetacoplan, showing the breadth of established drug applications.
 
-Experimental wellness compounds may have laboratory or animal data without adequately controlled human trials. Claims about faster recovery, anti-aging effects, or improved performance therefore require direct human evidence rather than comparisons with approved drugs.
+Experimental wellness compounds may have laboratory or animal data without adequately controlled human trials. Claims about faster recovery, anti-aging effects, or improved performance therefore require direct human evidence rather than comparisons with approved drugs. The same test applies to heat therapy, as our [sauna vs steam room](/longevity-recovery/sauna-vs-steam-room-benefits-differences/) comparison shows.
 
 ## 1. Metabolic and GLP-1 Research
 
@@ -110,7 +110,7 @@ The FDA's July 2026 compounding advisory materials included MOTS-c-related subst
 
 ### Measuring Longevity Requires Stronger Outcomes
 
-Markers associated with metabolism or cellular stress may be scientifically interesting, but they do not show that people live longer or maintain function better. Human longevity claims require appropriate populations, clinical endpoints, and suitable follow-up.
+Markers associated with metabolism or cellular stress may be scientifically interesting, but they do not show that people live longer or maintain function better. Wearable recovery and readiness scores, compared in our [WHOOP vs Oura](/longevity-recovery/whoop-vs-oura/) guide, have the same limitation. Human longevity claims require appropriate populations, clinical endpoints, and suitable follow-up.
 
 Research articles should also distinguish healthspan from lifespan. The first concerns functioning and health during life, while the second concerns survival, and a finding about one cannot automatically establish the other.
 

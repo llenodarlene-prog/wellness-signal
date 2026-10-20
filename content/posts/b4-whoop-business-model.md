@@ -65,7 +65,7 @@ Some membership arrangements billed monthly can still involve a longer commitmen
 
 ## WHOOP Compared With Hardware-First Wearables
 
-With a hardware-first device, the consumer may purchase equipment outright and optionally add software services. Our [Oura business model](/wellness/oura-business-model-ring-membership/) analysis covers a ring sold separately from its membership. WHOOP combines these into a membership relationship, changing both the initial payment and continued access conditions.
+With a hardware-first device, the consumer may purchase equipment outright and optionally add software services. Our [Oura business model](/wellness/oura-business-model-ring-membership/) analysis covers a ring sold separately from its membership. Costs over three years are set side by side in our [WHOOP vs Oura](/longevity-recovery/whoop-vs-oura/) comparison. WHOOP combines these into a membership relationship, changing both the initial payment and continued access conditions.
 
 ## FAQs
 

@@ -294,4 +294,19 @@ export const charts = {
     source: 'Culha et al., Journal of Sexual Medicine, 2024 (PMID 39121933).',
     note: 'Among studies reporting side effects; not an individual risk estimate.',
   },
+  'whoop-oura-three-year': {
+    decimals: 2,
+    title: 'Three-year cost at standard US prices, US$',
+    unit: '', currency: '$', max: 1100,
+    series: [{ key: 'value', label: 'Three-year total' }],
+    rows: [
+      { label: 'WHOOP One', value: 597 },
+      { label: 'WHOOP Peak', value: 717 },
+      { label: 'WHOOP Life', value: 1077 },
+      { label: 'Oura Ring 5 + membership', value: 608.97 },
+      { label: 'Oura Ring 4 + membership', value: 558.97 },
+    ],
+    source: 'Calculated from WHOOP and Oura official US prices, checked October 19, 2026.',
+    note: 'Three paid years; taxes, discounts and replacements excluded.',
+  },
 };

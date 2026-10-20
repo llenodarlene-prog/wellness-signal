@@ -68,7 +68,7 @@ Oura sells through its own channels and authorised retailers. Replacement or upg
 
 ## Oura Compared With WHOOP
 
-Oura generally separates the ring purchase from ongoing paid software access, while [WHOOP](/fitness/whoop-business-model-device-access/) bundles device access within its membership model. The difference becomes especially relevant when customers compare cancellation consequences and long-term costs.
+Oura generally separates the ring purchase from ongoing paid software access, while [WHOOP](/fitness/whoop-business-model-device-access/) bundles device access within its membership model. The difference becomes especially relevant when customers compare cancellation consequences and long-term costs. Our [WHOOP vs Oura](/longevity-recovery/whoop-vs-oura/) comparison sets out those costs over three years.
 
 ## FAQs
 
