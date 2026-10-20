@@ -11,6 +11,8 @@ slug: whoop-business-model-device-access
 image: fitness-wristband
 image_alt: A runner resting on a bench wearing a screenless fitness wristband
 published: 2026-10-17
+role: supporting
+updated: 2026-10-18
 draft: false
 ---
 
@@ -18,7 +20,7 @@ draft: false
 
 WHOOP positions its wearable tracker as part of a membership rather than a conventional stand-alone device purchase. Customers pay for access to hardware and supported biometric analysis, with the service tied to recurring subscription terms.
 
-This makes the WHOOP business model different from a company selling a smartwatch that retains extensive functionality after purchase. The long-term cost and the consequences of cancellation are central to the purchasing decision.
+This makes the WHOOP business model different from a company selling a smartwatch that retains extensive functionality after purchase. The long-term cost and the consequences of cancellation are central to the purchasing decision. Wearables sit alongside gyms in the wider picture of how Americans exercise, set out in our [fitness statistics by activity and age](/fitness/fitness-statistics-by-activity-and-age/).
 
 ## Key Takeaways
 
@@ -45,7 +47,7 @@ Higher tiers provide additional supported features and associated hardware capab
 
 ## How WHOOP Generates Recurring Revenue
 
-Members pay for defined subscription periods, creating potential continuing revenue so long as they renew. WHOOP also bears the costs of supplying hardware and delivering software, support and updates.
+Members pay for defined subscription periods, creating potential continuing revenue so long as they renew. Connected equipment uses a similar logic, as our [Peloton business model](/fitness/peloton-business-model-hardware-memberships/) analysis shows. WHOOP also bears the costs of supplying hardware and delivering software, support and updates.
 
 ### Long-Term Cost of Membership
 
@@ -63,7 +65,7 @@ Some membership arrangements billed monthly can still involve a longer commitmen
 
 ## WHOOP Compared With Hardware-First Wearables
 
-With a hardware-first device, the consumer may purchase equipment outright and optionally add software services. WHOOP combines these into a membership relationship, changing both the initial payment and continued access conditions.
+With a hardware-first device, the consumer may purchase equipment outright and optionally add software services. Our [Oura business model](/wellness/oura-business-model-ring-membership/) analysis covers a ring sold separately from its membership. WHOOP combines these into a membership relationship, changing both the initial payment and continued access conditions.
 
 ## FAQs
 

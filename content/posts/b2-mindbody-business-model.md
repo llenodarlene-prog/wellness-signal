@@ -11,12 +11,14 @@ slug: mindbody-business-model
 image: studio-checkout-tablet
 image_alt: A studio receptionist helps a client pay at a tablet on a wooden front desk, with a class in progress behind
 published: 2026-10-15
+role: supporting
+updated: 2026-10-18
 draft: false
 ---
 
 # The Mindbody Business Model Beyond Booking Software
 
-A fitness studio needs to schedule classes, manage memberships, process payments and communicate with customers. Mindbody combines many of those operations in one platform, which gives the company a business model extending beyond simple booking software.
+A fitness studio needs to schedule classes, manage memberships, process payments and communicate with customers. Mindbody combines many of those operations in one platform, which gives the Mindbody business model a reach beyond simple booking software.
 
 Mindbody charges for access to management software and offers additional services involving transactions, marketing and customer discovery. Those fee categories need to be separated when assessing the total cost for a studio.
 
@@ -64,7 +66,7 @@ A fee tied to an actual first purchase can be attractive compared with promotion
 
 ## Marketing and Customer Retention
 
-Higher software tiers offer capabilities for automated communications, reporting and lead management. These features may reduce administrative work, but their value depends on whether the business uses them effectively.
+Higher software tiers offer capabilities for automated communications, reporting and lead management. These features may reduce administrative work, but their value depends on whether the business uses them effectively. Retention matters because, as our [fitness statistics](/fitness/fitness-statistics-by-activity-and-age/) show, gym membership and regular exercise are not the same thing.
 
 ## Comparing Mindbody and ClassPass
 

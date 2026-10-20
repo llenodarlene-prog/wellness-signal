@@ -11,6 +11,8 @@ slug: global-wellness-industry-statistics-by-sector
 image: wellness-sectors-collage
 image_alt: Collage of a nutrition bowl, skincare, a person doing yoga by the sea, a spa pool, and a person meditating
 published: 2026-10-16
+role: supporting
+updated: 2026-10-18
 draft: false
 ---
 
@@ -18,7 +20,7 @@ draft: false
 
 The estimated [$6.8 trillion global wellness economy](/wellness/wellness-statistics-participation-spending/) contains industries with widely different growth rates and customer behaviour. Beauty, nutrition, physical activity, travel and wellness real estate contribute to the same overall framework but should not be treated as one uniform market.
 
-The Global Wellness Institute's 2025 Global Wellness Economy Monitor provides the most useful common basis for comparing the sectors. Its estimates cover 2024 market values, historical changes and forecasts through 2029.
+The Global Wellness Institute's 2025 Global Wellness Economy Monitor provides the most useful common basis for global wellness industry statistics by sector. Its estimates cover 2024 market values, historical changes and forecasts through 2029.
 
 ## Key Takeaways
 
@@ -68,11 +70,11 @@ A market can expand because consumers adopt a product, prices rise or investment
 
 ## Travel and Workplace Wellness
 
-Wellness tourism reached approximately $893.9 billion in 2024, making it one of the largest sectors. Workplace wellness, by contrast, was valued at $53.3 billion, with comparatively slow historical growth in GWI's framework.
+Wellness tourism reached approximately $893.9 billion in 2024, making it one of the largest sectors. [Workplace wellness](/work-wellness/workplace-wellness-statistics-access-participation/), by contrast, was valued at $53.3 billion, with comparatively slow historical growth in GWI's framework.
 
 ### Why Definitions Change the Comparison
 
-Commercial corporate wellness reports sometimes publish higher market sizes because their classifications differ. They should be presented as separate estimates rather than substituted for GWI's workplace wellness figure.
+Commercial [corporate wellness market](/work-wellness/corporate-wellness-market-size-employer-spending/) reports sometimes publish higher market sizes because their classifications differ. They should be presented as separate estimates rather than substituted for GWI's workplace wellness figure.
 
 ## Forecast Through 2029
 
@@ -99,4 +101,5 @@ Sector statistics reveal a more complex wellness economy than one headline figur
 ## Sources
 
 - [GWI, 2025 Global Wellness Economy Monitor](https://globalwellnessinstitute.org/industry-research/2025-global-wellness-economy-monitor/)
+- [GWI, Statistics and Facts](https://globalwellnessinstitute.org/press-room/statistics-and-facts/)
 - [GWI, Global Wellness Economy](https://globalwellnessinstitute.org/industry-research/the-global-wellness-economy/)

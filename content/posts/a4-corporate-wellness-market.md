@@ -6,17 +6,19 @@ seo_title: Corporate Wellness Market Size and Employer Spending
 description: Compare corporate wellness market estimates, employer spending and the difference between revenue and programme outcomes.
 primary_keyword: corporate wellness market size
 keywords: corporate wellness market, corporate wellness market size, workplace wellness industry, employee wellness spending
-category: wellness
+category: work-wellness
 slug: corporate-wellness-market-size-employer-spending
 image: office-group-stretch
 image_alt: Colleagues doing a group side stretch together in a bright open-plan office
 published: 2026-10-17
+role: supporting
+updated: 2026-10-18
 draft: false
 ---
 
 # Corporate Wellness Market Size: Comparing the Estimates
 
-Corporate wellness providers sell programmes involving screening, coaching, fitness access and related wellbeing services. Estimates of the industry's size vary considerably because publishers do not necessarily include the same services or apply the same forecasting assumptions.
+Corporate wellness providers sell programmes involving screening, coaching, fitness access and related wellbeing services. Corporate wellness market size estimates vary considerably because publishers do not necessarily include the same services or apply the same forecasting assumptions.
 
 Grand View Research estimated the global corporate wellness market at $55.1 billion for 2025, while Fortune Business Insights estimated $68.41 billion. The $13.31 billion difference is large enough to affect how readers interpret market growth.
 
@@ -42,7 +44,7 @@ The reports are research estimates, not an audited global ledger of employer pur
 
 ### Why Definitions Change Market Size
 
-Corporate wellness can encompass screenings, coaching, digital services, fitness access and other programmes. Including or excluding specific provider revenue will change a market estimate, and the publicly available summaries do not fully reconcile all differences between research methods.
+Corporate wellness can encompass screenings, coaching, digital services, fitness access and other programmes. GWI's narrower workplace wellness figure sits within its [global wellness industry statistics by sector](/wellness/global-wellness-industry-statistics-by-sector/). Including or excluding specific provider revenue will change a market estimate, and the publicly available summaries do not fully reconcile all differences between research methods.
 
 ## Corporate Wellness by Region
 
@@ -62,7 +64,7 @@ A 2019 JAMA randomised workplace wellness trial covering 32,974 employees found 
 
 ## Evaluating Employer Wellness Spending
 
-Employers should distinguish their programme budget, eligible population, actual participation and measurable outcomes. A programme can be popular yet fail to improve the financial metric used to justify it.
+Employers should distinguish their programme budget, eligible population, actual participation and measurable outcomes. Our [workplace wellness statistics](/work-wellness/workplace-wellness-statistics-access-participation/) separate programme availability from participation in the same way. A programme can be popular yet fail to improve the financial metric used to justify it.
 
 ## FAQs
 

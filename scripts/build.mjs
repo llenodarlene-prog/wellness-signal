@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
-import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
-import { inline as mdInline, renderBlock } from './lib/markdown.mjs';
+import { inline as mdInline, plain, renderBlock } from './lib/markdown.mjs';
 import { loadPosts } from './lib/posts.mjs';
 import { charts } from '../content/charts.mjs';
 import {
@@ -20,6 +20,19 @@ const assetVersion = createHash('sha256')
   .update(await readFile('assets/css/site.css'))
   .update(await readFile('assets/js/site.js'))
   .digest('hex').slice(0, 10);
+
+// Width and height of each WebP image, read from its file header.
+const imageSize = {};
+for (const name of (await readdir('assets/images')).filter(n => n.endsWith('.webp'))) {
+  const b = await readFile(`assets/images/${name}`);
+  const kind = b.toString('ascii', 12, 16);
+  let size;
+  if (kind === 'VP8X') size = [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+  else if (kind === 'VP8 ') size = [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+  else if (kind === 'VP8L') { const v = b.readUInt32LE(21); size = [(v & 0x3fff) + 1, ((v >> 14) & 0x3fff) + 1]; }
+  if (size) imageSize[name.replace(/\.webp$/, '')] = size;
+}
+const dims = name => imageSize[name] || [1600, 900];
 
 const esc = value => String(value)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -397,10 +410,16 @@ const docHead = ({ title, description, url, image, type = 'website', jsonLd = []
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${canonical}/assets/images/${image}.webp">
-  <meta property="og:image:width" content="1672">
-  <meta property="og:image:height" content="941">
+  <meta property="og:image:width" content="${dims(image)[0]}">
+  <meta property="og:image:height" content="${dims(image)[1]}">
+  <meta property="og:image:alt" content="${esc(alts[image] || title)}">
+  <meta property="og:locale" content="${site.locale.replace('-', '_')}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:description" content="${esc(description)}">
+  <meta name="twitter:image" content="${canonical}/assets/images/${image}.webp">
   <meta name="theme-color" content="#1F6B4F">
+  <meta name='impact-site-verification' value='a1f2c282-b0f5-44f1-861f-af5420f81cdd'>
   ${extra}
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/mark-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/mark-192.png">
@@ -421,13 +440,48 @@ const organization = {
   url: `${canonical}/`,
   logo: { '@type': 'ImageObject', url: `${canonical}/assets/brand/mark-512.png`, width: 512, height: 512 },
   email: site.editorial_email || undefined,
+  slogan: site.tagline,
+  description: site.description,
+};
+const websiteId = `${canonical}/#website`;
+const website = {
+  '@type': 'WebSite',
+  '@id': websiteId,
+  url: `${canonical}/`,
+  name: site.name,
+  description: site.description,
+  publisher: { '@id': organization['@id'] },
+  inLanguage: site.locale,
+};
+const crumbs = (url, trail) => ({
+  '@type': 'BreadcrumbList',
+  '@id': `${url}#breadcrumb`,
+  itemListElement: [{ name: 'Home', item: `${canonical}/` }, ...trail]
+    .map((step, i) => ({ '@type': 'ListItem', position: i + 1, ...step })),
+});
+// Topic hubs: each category page is a CollectionPage whose hasPart lists its live posts.
+const hubId = slug => `${canonical}/${slug}/#collection`;
+const pageGraph = page => {
+  const url = `${canonical}${path(page.slug)}`;
+  const id = `${url}#webpage`;
+  if (page.slug === '') {
+    return [organization, website, { '@type': 'WebPage', '@id': id, url, name: page.title, description: page.description, isPartOf: { '@id': websiteId }, about: { '@id': organization['@id'] }, inLanguage: site.locale }];
+  }
+  const breadcrumb = crumbs(url, [{ name: page.nav || page.footerOnly || page.hero?.title || page.title, item: url }]);
+  if (page.category) {
+    const live = posts.filter(post => post.category === page.slug);
+    return [organization, website, breadcrumb, {
+      '@type': 'CollectionPage', '@id': hubId(page.slug), url, name: page.title, description: page.description,
+      isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
+      ...(live.length ? { hasPart: live.map(post => ({ '@id': `${canonical}${post.url}#article` })) } : {}),
+    }];
+  }
+  return [organization, website, breadcrumb, { '@type': 'WebPage', '@id': id, url, name: page.title, description: page.description, isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale }];
 };
 
 const renderPage = page => {
   const url = `${canonical}${path(page.slug)}`;
-  const jsonLd = page.slug === ''
-    ? [{ '@context': 'https://schema.org', '@graph': [organization, { '@type': 'WebSite', '@id': `${canonical}/#website`, url: `${canonical}/`, name: site.name, publisher: { '@id': `${canonical}/#organization` } }] }]
-    : [];
+  const jsonLd = [{ '@context': 'https://schema.org', '@graph': pageGraph(page) }];
   return `${docHead({ title: page.title, description: page.description, url, image: page.hero.image || 'desk-sea-view', jsonLd, preload: page.hero.image })}
 <body class="${page.legal ? 'legal' : ''}${page.slug === '' ? ' home' : ''}">
 ${header(page)}
@@ -480,45 +534,58 @@ const sourcesBlock = section => `<section class="sources" id="${section.id}">
 const renderPost = post => {
   const url = `${canonical}${post.url}`;
   const category = categories.find(c => c.slug === post.category);
-  const related = posts.filter(other => other !== post).slice(0, 3);
+  const others = posts.filter(other => other !== post);
+  const related = [...others.filter(o => o.category === post.category), ...others.filter(o => o.category !== post.category)].slice(0, 3);
   const toc = post.sections.filter(section => !/^Sources$/i.test(section.title));
   const imageUrl = `${canonical}/assets/images/${post.image}.webp`;
-  const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': post.type === 'Blog' ? 'BlogPosting' : 'Article',
-      headline: post.title,
-      description: post.description,
-      image: [imageUrl],
-      datePublished: post.published,
-      dateModified: post.updated,
-      mainEntityOfPage: url,
-      articleSection: categoryName(post.category),
-      keywords: post.keywords,
-      author: { '@type': 'Organization', name: site.name, url: `${canonical}/` },
-      publisher: organization,
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: `${canonical}/` },
-        { '@type': 'ListItem', position: 2, name: categoryName(post.category), item: `${canonical}/${post.category}/` },
-        { '@type': 'ListItem', position: 3, name: post.title, item: url },
-      ],
-    },
-  ];
+  const pageId = `${url}#webpage`;
+  const articleId = `${url}#article`;
+  const webpage = {
+    '@type': 'WebPage',
+    '@id': pageId,
+    url,
+    name: post.title,
+    description: post.description,
+    isPartOf: { '@id': websiteId },
+    breadcrumb: { '@id': `${url}#breadcrumb` },
+    mainEntity: { '@id': articleId },
+    primaryImageOfPage: { '@type': 'ImageObject', url: imageUrl, width: dims(post.image)[0], height: dims(post.image)[1] },
+    inLanguage: site.locale,
+  };
+  const article = {
+    '@type': post.type === 'Blog' ? 'BlogPosting' : 'Article',
+    '@id': articleId,
+    headline: post.title,
+    description: post.description,
+    image: [imageUrl],
+    datePublished: post.published,
+    dateModified: post.updated,
+    mainEntityOfPage: { '@id': pageId },
+    isPartOf: { '@id': hubId(post.category) },
+    wordCount: post.words,
+    articleSection: categoryName(post.category),
+    keywords: post.keywords,
+    author: { '@id': organization['@id'] },
+    publisher: { '@id': organization['@id'] },
+    inLanguage: site.locale,
+  };
+  const breadcrumb = crumbs(url, [
+    { name: categoryName(post.category), item: `${canonical}/${post.category}/` },
+    { name: post.title, item: url },
+  ]);
+  const graph = [organization, website, webpage, article, breadcrumb];
   if (post.faqs.length) {
-    jsonLd.push({
-      '@context': 'https://schema.org',
+    graph.push({
       '@type': 'FAQPage',
+      '@id': `${url}#faq`,
       mainEntity: post.faqs.map(faq => ({
         '@type': 'Question',
         name: faq.q,
-        acceptedAnswer: { '@type': 'Answer', text: faq.a.map(block => block.text || '').join(' ') },
+        acceptedAnswer: { '@type': 'Answer', text: plain(faq.a.map(block => block.text || '').join(' ')) },
       })),
     });
   }
+  const jsonLd = [{ '@context': 'https://schema.org', '@graph': graph }];
   const extra = `<meta property="article:published_time" content="${post.published}">
   <meta property="article:modified_time" content="${post.updated}">
   <meta property="article:section" content="${esc(categoryName(post.category))}">`;
@@ -574,7 +641,13 @@ const articlesPage = {
 const renderArticlesIndex = () => {
   const url = `${canonical}/articles/`;
   const filters = categories.filter(c => posts.some(p => p.category === c.slug));
-  return `${docHead({ title: articlesPage.title, description: articlesPage.description, url, image: posts[0]?.image || 'desk-sea-view' })}
+  const breadcrumb = crumbs(url, [{ name: 'Articles', item: url }]);
+  const jsonLd = [{ '@context': 'https://schema.org', '@graph': [organization, website, breadcrumb, {
+    '@type': 'CollectionPage', '@id': `${url}#collection`, url, name: articlesPage.title, description: articlesPage.description,
+    isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
+    ...(posts.length ? { hasPart: posts.map(post => ({ '@id': `${canonical}${post.url}#article` })) } : {}),
+  }] }];
+  return `${docHead({ title: articlesPage.title, description: articlesPage.description, url, image: posts[0]?.image || 'desk-sea-view', jsonLd })}
 <body>
 ${header({ slug: 'articles' })}
 <main id="main">
@@ -618,7 +691,7 @@ if (production && pending.length) {
   throw new Error(`Production build blocked; confirm these details first:\n- ${[...new Set(pending)].join('\n- ')}`);
 }
 
-await writeFile('dist/404.html', `<!doctype html><html lang="${site.locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | ${esc(site.name)}</title><link rel="stylesheet" href="/assets/css/site.css?v=${assetVersion}"></head><body><main class="hero no-image"><div class="wrap"><div class="hero-text"><h1>Page Not Found</h1><p>The page you were looking for has moved or no longer exists.</p><a class="btn" href="/">Back to Wellness Signal</a></div></div></main></body></html>`);
+await writeFile('dist/404.html', `<!doctype html><html lang="${site.locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Page Not Found | ${esc(site.name)}</title><script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Page Not Found', isPartOf: { '@id': websiteId } })}</script><link rel="stylesheet" href="/assets/css/site.css?v=${assetVersion}"></head><body><main class="hero no-image"><div class="wrap"><div class="hero-text"><h1>Page Not Found</h1><p>The page you were looking for has moved or no longer exists.</p><a class="btn" href="/">Back to Wellness Signal</a></div></div></main></body></html>`);
 await writeFile('dist/robots.txt', production
   ? `User-agent: *\nAllow: /\nSitemap: ${canonical}/sitemap.xml\n`
   : 'User-agent: *\nDisallow: /\n'
@@ -627,6 +700,20 @@ await writeFile('dist/sitemap.xml', production
   ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url>${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
   : '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>'
 );
+// llms.txt: live posts grouped by silo, from the same set as the sitemap.
+const silo = slug => posts.filter(post => post.category === slug)
+  .sort((a, b) => (a.role === 'hub' ? -1 : b.role === 'hub' ? 1 : a.title.localeCompare(b.title)));
+await writeFile('dist/llms.txt', production
+  ? [`# ${site.name}`, '', `> ${site.description}`, '',
+    `${site.name} publishes sourced research and analysis on the business and evidence behind wellness. Every statistic links to its primary source.`, '',
+    '## Site', '', `- [About](${canonical}/about/): Who we are and our editorial standards`, `- [All articles](${canonical}/articles/): Every published article and blog`, `- [Contact](${canonical}/contact/): Editorial contact`, '',
+    ...categories.filter(c => posts.some(p => p.category === c.slug)).flatMap(c => [
+      `## ${c.name}`, '', `- [${c.name} hub](${canonical}/${c.slug}/): ${c.summary}`,
+      ...silo(c.slug).map(post => `- [${post.title}](${canonical}${post.url}): ${plain(post.description)}`), '',
+    ]),
+  ].join('\n')
+  : `# ${site.name}\n\n> Staging preview. Not for indexing.\n`);
+
 await writeFile('dist/build-manifest.json', JSON.stringify({
   environment,
   indexable: production,

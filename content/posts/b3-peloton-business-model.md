@@ -11,6 +11,8 @@ slug: peloton-business-model-hardware-memberships
 image: connected-bike-home
 image_alt: A connected exercise bike with a screen in a bright home studio overlooking the water
 published: 2026-10-16
+role: supporting
+updated: 2026-10-18
 draft: false
 ---
 
@@ -46,7 +48,7 @@ Connected products can bring customers onto a platform where digital content and
 
 ### Subscriptions Extend the Relationship
 
-Members may continue paying for supported content and services long after the original equipment purchase. Retention therefore influences recurring revenue and the potential value of the original customer acquisition.
+Members may continue paying for supported content and services long after the original equipment purchase. Our [fitness statistics by activity and age](/fitness/fitness-statistics-by-activity-and-age/) show how much exercise happens outside gyms, where home equipment competes. Retention therefore influences recurring revenue and the potential value of the original customer acquisition.
 
 ## Why Margins Differ
 
@@ -62,7 +64,7 @@ Sales and marketing, administration and research costs still need to be covered.
 
 Peloton's total fiscal 2026 revenue declined from fiscal 2025 even as subscription revenue remained comparatively stable. This illustrates how a sizeable recurring-revenue business can coexist with pressure on equipment sales.
 
-The company must keep customers engaged, develop services and maintain demand for its products. Subscription revenue alone does not guarantee ongoing growth.
+The company must keep customers engaged, develop services and maintain demand for its products. Subscription revenue alone does not guarantee ongoing growth. Wearables face a similar test, as the membership-only [WHOOP business model](/fitness/whoop-business-model-device-access/) shows.
 
 ## FAQs
 
@@ -85,4 +87,5 @@ Peloton combines connected equipment with a continuing service relationship, and
 ## Sources
 
 - [Peloton Investor Relations](https://investor.onepeloton.com/)
+- [SEC EDGAR, Peloton Interactive 10-K Filings](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1639825&type=10-K)
 - [Peloton, Fiscal 2026 Form 10-K](https://www.sec.gov/Archives/edgar/data/1639825/000163982526000038/pton-20260630.htm)

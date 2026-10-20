@@ -11,6 +11,8 @@ slug: wellness-statistics-participation-spending
 image: wellness-essentials-table
 image_alt: A smoothie bowl, water bottle, skincare, a smartwatch, and a rolled yoga mat on a sunlit marble counter
 published: 2026-10-14
+role: hub
+updated: 2026-10-18
 draft: false
 ---
 
@@ -63,7 +65,7 @@ Wellness purchases include both physical products and services. A consumer might
 
 McKinsey's six dimensions help organise these purchasing patterns, although individual products and services may serve more than one purpose. The categories also show why consumer wellness spending cannot be represented by gym memberships or supplement sales alone.
 
-For businesses, this distinction affects how markets are assessed. A company selling sleep technology serves different consumer needs from a boutique fitness studio, even though both operate within the wider wellness sector.
+For businesses, this distinction affects how markets are assessed. A company selling [sleep technology](/wellness/oura-business-model-ring-membership/) serves different consumer needs from a boutique fitness studio, even though both operate within the wider wellness sector.
 
 ### Spending Does Not Measure Actual Participation
 
@@ -156,7 +158,7 @@ GWI reports average annual growth of 6.2% for the wellness economy over the last
 
 {{chart:wellness-growth-rates}}
 
-Growth has not been even across sectors. GWI identifies wellness real estate as the fastest-growing sector over the past five years, at 19.5% a year, followed by mental wellness at 12.4% a year. Workplace wellness was the exception, with global spending declining between 2023 and 2024.
+Growth has not been even across sectors. GWI identifies wellness real estate as the fastest-growing sector over the past five years, at 19.5% a year, followed by mental wellness at 12.4% a year. [Workplace wellness](/work-wellness/workplace-wellness-statistics-access-participation/) was the exception, with global spending declining between 2023 and 2024.
 
 {{chart:wellness-fastest-sectors}}
 
