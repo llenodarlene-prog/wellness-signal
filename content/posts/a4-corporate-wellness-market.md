@@ -56,7 +56,7 @@ A regional revenue total can change through higher prices, greater use of servic
 
 ## Common Corporate Wellness Services
 
-Health risk assessments, biometric screening, fitness services and stress-related programmes are frequently included in commercial reports. Their objectives differ, and a market estimate combining them should not be treated as evidence of equal clinical value.
+Health risk assessments, biometric screening, fitness services and stress-related programmes are frequently included in commercial reports. Small teams buying these services can compare vendors in our guide to [employee wellness software](/work-wellness/employee-wellness-software-small-teams/). Their objectives differ, and a market estimate combining them should not be treated as evidence of equal clinical value.
 
 ### Evidence on Programme Outcomes
 
