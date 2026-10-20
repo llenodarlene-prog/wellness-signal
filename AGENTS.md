@@ -9,7 +9,7 @@
 - Do not commit credentials, SSH keys, tokens, or private source exports.
 - Do not mark `launch_status` ready until the site, content, legal pages, and production configuration have been reviewed.
 
-## Final QA and Fact-Check for Incoming Drafts
+## Final QA and Fact-Check for Incoming Drafts (see docs/SEO-AEO-GEO-SOP.md, Step 3)
 
 The editor researches and fact-checks every draft before sending it. The agent
 still runs one final QA layer on every draft before it is scheduled; nothing is
