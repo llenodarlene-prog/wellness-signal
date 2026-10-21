@@ -592,3 +592,12 @@ table { width: 100%; border-collapse: collapse; }
 .bc-source { font-size: 13px !important; color: var(--ws-muted); margin: 18px 0 0 !important; }
 @media (max-width: 560px) { .bc-row { grid-template-columns: 1fr; gap: 8px; } }
 @media (prefers-reduced-motion: reduce) { .bc-fill { transform: none; } .bc-val { opacity: 1; } }
+
+/* Author profile */
+.author-page { padding-top: clamp(40px, 6vw, 80px); }
+.author-grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 680px); gap: clamp(32px, 5vw, 72px); align-items: start; justify-content: center; }
+.author-photo img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }
+.author-text h1 { margin: 8px 0 20px; }
+.author-text p { margin-bottom: 1em; }
+.post-byline a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 860px) { .author-grid { grid-template-columns: 1fr; } .author-photo { max-width: 280px; } }

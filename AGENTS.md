@@ -31,3 +31,11 @@ scheduled until this pass is complete and reported.
 7. **Report:** tell the editor what was confirmed, what was fixed, and what
    could not be verified, before asking them to merge. Contradicted claims are
    fixed or removed; unverifiable claims are flagged for the editor to decide.
+
+## Editorial QA SOP
+
+Every draft is also reviewed against `docs/EDITORIAL-QA-SOP.md` (direct
+answers, title promise, verified evidence, added value, no invented
+information, natural internal links without wrappers such as "our guide
+explains", keyword counts, US English). Fix failures before scheduling. The
+editor does not need the QA summary unless something is HOLD or unverifiable.
