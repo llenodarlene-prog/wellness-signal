@@ -9,6 +9,7 @@ import {
 } from '../content/features.mjs';
 
 const site = JSON.parse(await readFile('data/site.json', 'utf8'));
+const authors = JSON.parse(await readFile('data/authors.json', 'utf8'));
 const environment = process.env.BUILD_ENV || 'local';
 const production = environment === 'production';
 const robots = production ? 'index,follow' : 'noindex,nofollow,noarchive';
@@ -456,6 +457,19 @@ const website = {
   publisher: { '@id': organization['@id'] },
   inLanguage: site.locale,
 };
+// Named authors: posts use front matter `author` (default darlene-aberin).
+const authorSlug = post => (authors[post.author] ? post.author : 'darlene-aberin');
+const authorUrl = slug => `/authors/${slug}/`;
+const personId = slug => `${canonical}${authorUrl(slug)}#person`;
+const person = slug => {
+  const a = authors[slug];
+  return {
+    '@type': 'Person', '@id': personId(slug), name: a.name, url: `${canonical}${authorUrl(slug)}`,
+    jobTitle: a.jobTitle, description: a.short, image: `${canonical}/assets/images/${a.image}.webp`,
+    hasCredential: { '@type': 'EducationalOccupationalCredential', credentialCategory: a.credential },
+    knowsAbout: a.knowsAbout, worksFor: { '@id': organization['@id'] },
+  };
+};
 const crumbs = (url, trail) => ({
   '@type': 'BreadcrumbList',
   '@id': `${url}#breadcrumb`,
@@ -568,7 +582,7 @@ const renderPost = post => {
     wordCount: post.words,
     articleSection: categoryName(post.category),
     keywords: post.keywords,
-    author: { '@id': organization['@id'] },
+    author: { '@id': personId(authorSlug(post)) },
     publisher: { '@id': organization['@id'] },
     inLanguage: site.locale,
   };
@@ -576,7 +590,7 @@ const renderPost = post => {
     { name: categoryName(post.category), item: `${canonical}/${post.category}/` },
     { name: post.title, item: url },
   ]);
-  const graph = [organization, website, webpage, article, breadcrumb];
+  const graph = [organization, website, webpage, article, breadcrumb, person(authorSlug(post))];
   if (post.faqs.length) {
     graph.push({
       '@type': 'FAQPage',
@@ -610,7 +624,7 @@ ${header({ slug: post.category })}
       <span class="eyebrow">${icon(categoryIcons[post.category], 16)} ${esc(categoryName(post.category))} &middot; ${esc(post.type || 'Article')}</span>
       <h1>${esc(post.title)}</h1>
       <p class="post-deck">${esc(post.description)}</p>
-      <p class="post-byline"><span>By ${esc(site.name)} Editorial</span><span><time datetime="${post.published}">${longDate(post.published)}</time></span><span>${post.readingMinutes} min read</span></p>
+      <p class="post-byline"><span>By <a href="${authorUrl(authorSlug(post))}">${esc(authors[authorSlug(post)].name)}</a>, ${esc(authors[authorSlug(post)].credential)}</span><span><time datetime="${post.published}">${longDate(post.published)}</time></span><span>${post.readingMinutes} min read</span></p>
     </div>
     <figure class="wrap post-figure">${picture(post.image, { eager: true, sizes: '(max-width: 1240px) 100vw, 1200px', alt: post.image_alt || '' })}</figure>
   </header>
@@ -629,6 +643,39 @@ ${header({ slug: post.category })}
     <div class="section-bg">${picture(category?.image || 'desk-sea-view', { sizes: '100vw', alt: '' })}</div>
     <div class="wrap"><div class="bg-panel"><div class="section-head"><h2>More ${esc(categoryName(post.category))} Coverage</h2><p>${esc(category?.summary || '')}</p></div><p><a class="btn" href="/${post.category}/">Explore ${esc(categoryName(post.category))}${icon('arrow', 18)}</a></p></div></div>
   </section>
+</main>
+${footer}
+</body>
+</html>
+`;
+};
+
+const renderAuthor = slug => {
+  const a = authors[slug];
+  const url = `${canonical}${authorUrl(slug)}`;
+  const title = `${a.name}, ${a.credential} | ${site.name}`;
+  const description = `${a.name} is a ${a.credential.toLowerCase()} and wellness writer at ${site.name}, covering research, consumer behavior and wellness businesses.`;
+  const breadcrumb = crumbs(url, [{ name: 'About', item: `${canonical}/about/` }, { name: a.name, item: url }]);
+  const own = posts.filter(post => authorSlug(post) === slug);
+  const jsonLd = [{ '@context': 'https://schema.org', '@graph': [organization, website, breadcrumb, person(slug), {
+    '@type': 'ProfilePage', '@id': `${url}#webpage`, url, name: title, description, mainEntity: { '@id': personId(slug) },
+    isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
+  }] }];
+  return `${docHead({ title, description, url, image: a.image, type: 'profile', jsonLd })}
+<body>
+${header({ slug: 'about' })}
+<main id="main">
+  <section class="section tone-white author-page"><div class="wrap author-grid">
+    <figure class="author-photo"><img src="/assets/images/${a.image}.webp" width="800" height="800" alt="Portrait of ${esc(a.name)}" fetchpriority="high"></figure>
+    <div class="author-text">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/about/">About</a><span aria-hidden="true">/</span><span aria-current="page">${esc(a.name)}</span></nav>
+      <span class="eyebrow">${esc(a.credential)} &middot; ${esc(a.jobTitle)}</span>
+      <h1>${esc(a.name)}</h1>
+      ${a.bio.map(p => `<p>${esc(p)}</p>`).join('\n      ')}
+      <p>For writing opportunities or editorial collaborations, contact <a href="mailto:${a.email}">${a.email}</a>.</p>
+    </div>
+  </div></section>
+  ${own.length ? `<section class="section tone-cream"><div class="wrap"><div class="section-head"><span class="eyebrow">Latest coverage</span><h2>Articles by ${esc(a.name)}</h2></div>${postGrid(own.slice(0, 6))}</div></section>` : ''}
 </main>
 ${footer}
 </body>
@@ -689,6 +736,10 @@ for (const post of posts) {
 }
 await mkdir('dist/articles', { recursive: true });
 await writeFile('dist/articles/index.html', renderArticlesIndex());
+for (const slug of Object.keys(authors)) {
+  await mkdir(`dist${authorUrl(slug)}`, { recursive: true });
+  await writeFile(`dist${authorUrl(slug)}index.html`, renderAuthor(slug));
+}
 
 if (production && pending.length) {
   throw new Error(`Production build blocked; confirm these details first:\n- ${[...new Set(pending)].join('\n- ')}`);
@@ -700,7 +751,7 @@ await writeFile('dist/robots.txt', production
   : 'User-agent: *\nDisallow: /\n'
 );
 await writeFile('dist/sitemap.xml', production
-  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url>${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
+  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
   : '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>'
 );
 // llms.txt: live posts grouped by silo, from the same set as the sitemap.
@@ -724,6 +775,7 @@ await writeFile('dist/build-manifest.json', JSON.stringify({
   pages: [
     ...pages.map(page => ({ slug: path(page.slug), draft: false })),
     { slug: '/articles/', draft: false },
+    ...Object.keys(authors).map(slug => ({ slug: authorUrl(slug), draft: false })),
     ...posts.map(post => ({ slug: post.url, draft: false, published: post.published })),
   ],
 }, null, 2));
