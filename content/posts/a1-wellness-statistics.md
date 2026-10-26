@@ -196,23 +196,23 @@ A useful market assessment often requires more than one dataset. Consumer survey
 
 ## FAQs About Wellness Statistics
 
-### How much is the global wellness industry worth?
+### How Much Is the Global Wellness Industry Worth?
 
 The Global Wellness Institute estimates that the global wellness economy was worth $6.8 trillion in 2024, based on research published in November 2025. Its definition covers 11 sectors, including wellness tourism, physical activity, personal care, and wellness real estate. This figure should not be confused with narrower consumer wellness market estimates.
 
-### Which generation spends the most on wellness?
+### Which Generation Spends the Most on Wellness?
 
 McKinsey's 2025 research found that Gen Z and millennials generated more than 41% of annual US wellness spending despite representing approximately 36% of the adult population. This demonstrates their significant contribution to the market, but it does not establish that every younger consumer spends more than every older consumer.
 
-### What is the difference between wellness spending and participation?
+### What Is the Difference Between Wellness Spending and Participation?
 
 Wellness spending measures expenditure on products and services, while participation measures engagement in activities or practices. A consumer may exercise regularly without spending money, while another may purchase services they rarely use. The two measurements should be examined separately when evaluating consumer behaviour.
 
-### Is the wellness industry expected to keep growing?
+### Is the Wellness Industry Expected to Keep Growing?
 
 The Global Wellness Institute projects that the wellness economy will reach approximately $9.8 trillion by 2029, based on its 2025 outlook. This forecast indicates expected growth across the sectors it tracks, but actual results may differ because of economic conditions, consumer demand, and changes in industry performance.
 
-### Do higher wellness spending figures mean people are healthier?
+### Do Higher Wellness Spending Figures Mean People Are Healthier?
 
 Not necessarily. Spending figures show economic activity, but they do not directly measure improvements in health. Establishing health benefits requires research into specific outcomes, interventions, and populations. Increased spending may reflect higher prices, greater product adoption, or changing consumer preferences rather than improved wellbeing.
 

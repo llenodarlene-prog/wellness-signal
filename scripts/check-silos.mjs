@@ -59,7 +59,8 @@ const unique = (post, kind, value) => {
 for (const post of posts) {
   if (!['hub', 'supporting', 'bridge'].includes(post.role)) fail(post, `unknown role "${post.role}"`);
   if (inbound.get(post.url).size < 2) fail(post, `needs 2 body links from other posts, has ${inbound.get(post.url).size}`);
-  const count = internal(post).length;
+  // Planned links to scheduled posts count toward the total; they go live on their date.
+  const count = [...new Set(links(post).filter(href => href.startsWith('/')).map(href => href.split('#')[0]))].length;
   if (post.role !== 'hub' && (count < 2 || count > 4)) fail(post, `spokes need 2 to 3 internal body links, has ${count}`);
 
   unique(post, 'title', post.title);
@@ -85,6 +86,18 @@ for (const post of posts) {
   for (const block of blocks.filter(b => b.type === 'h')) {
     if (block.level > level + 1) fail(post, `heading "${block.text}" skips from H${level} to H${block.level}`);
     level = block.level;
+  }
+  // Headings use title case: every word starts with a capital except short minor words.
+  const minor = new Set(['a', 'an', 'the', 'and', 'but', 'or', 'nor', 'for', 'so', 'yet', 'as', 'at', 'by', 'in', 'of', 'off', 'on', 'per', 'to', 'up', 'via', 'vs', 'vs.']);
+  for (const block of blocks.filter(b => b.type === 'h')) {
+    const words = block.text.split(/\s+/).filter(Boolean);
+    words.forEach((word, i) => {
+      const bare = word.replace(/^[\u201c\u2018"'(\[]+/, '');
+      const first = i === 0 || /[:]$/.test(words[i - 1] || '') || /^\d+[.)]$/.test(words[i - 1] || '');
+      if (!/^[a-z]/.test(bare)) return;
+      if (!first && i !== words.length - 1 && minor.has(bare.replace(/[?:.,!]+$/, ''))) return;
+      fail(post, `heading "${block.text}" is not in title case ("${word}")`);
+    });
   }
   if (post.faqs.length < 3) fail(post, `needs at least 3 FAQs, has ${post.faqs.length}`);
   const external = new Set(links(post).filter(href => /^https?:\/\//.test(href)));

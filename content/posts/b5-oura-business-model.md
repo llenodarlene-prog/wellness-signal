@@ -72,15 +72,15 @@ Oura generally separates the ring purchase from ongoing paid software access, wh
 
 ## FAQs
 
-### How does Oura make money?
+### How Does Oura Make Money?
 
 Oura earns revenue through sales of smart ring hardware and separate recurring memberships for detailed software features. Public product pricing establishes those mechanisms, but the company does not disclose enough audited figures to calculate the precise revenue split or margins.
 
-### Can Oura be used without a membership?
+### Can Oura Be Used Without a Membership?
 
 Oura describes limited summary and basic app functions after membership expires, while detailed metrics and personalised insights remain restricted. Customers should check the latest support information for their specific ring generation and feature requirements.
 
-### What does Oura cost over several years?
+### What Does Oura Cost Over Several Years?
 
 At an illustrative $399 purchase price and unchanged $69.99 annual membership, five paid years total $748.95 before taxes, promotions and any hardware replacement. Customers with different billing terms or device selections will have different totals.
 

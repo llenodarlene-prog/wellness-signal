@@ -234,7 +234,7 @@ Businesses should treat customer acquisition as a measurable opportunity rather 
 
 For consumers, the main attraction is being able to access different fitness and wellness providers through one membership. Our [fitness statistics by activity and age](/fitness/fitness-statistics-by-activity-and-age/) show how many Americans already hold a gym membership. This can be particularly useful for people who enjoy variety or do not want a long-term membership at one studio.
 
-However, the credit model makes pricing less predictable than a fixed-price membership for a single venue. The value depends on the member's preferred services, booking times, and the number of credits required.
+However, the credit model makes pricing less predictable than a fixed-price membership for a single venue. The value depends on the member's preferred services, booking times, and the number of credits required, which is why some members compare [ClassPass alternatives](/fitness/classpass-alternatives/).
 
 ### Membership Value Depends on Booking Habits
 
@@ -261,27 +261,27 @@ These details provide a more realistic assessment of membership value than compa
 
 ## FAQs About the ClassPass Business Model
 
-### How does ClassPass make money?
+### How Does ClassPass Make Money?
 
 ClassPass earns revenue primarily through its membership-based marketplace, where customers pay for access to credits used for fitness and wellness reservations. The company also offers corporate wellness programmes through employers. Its exact profitability and the revenue contribution of individual activities cannot be established from publicly available membership information alone.
 
-### Do studios get paid when someone books through ClassPass?
+### Do Studios Get Paid When Someone Books Through ClassPass?
 
 Yes. ClassPass compensates participating businesses for qualifying reservations according to their partner agreements. Its March 2026 documentation describes a confidential minimum rate that provides a payout floor for eligible bookings. The amount received by a studio does not necessarily equal the cash value associated with the member's credits.
 
-### Is ClassPass profitable for fitness studios?
+### Is ClassPass Profitable for Fitness Studios?
 
 ClassPass may be profitable when it brings additional customers into places that would otherwise remain empty. However, the result depends on partner payouts, incremental operating costs, and whether marketplace bookings replace higher-paying direct reservations. Studios need to evaluate their own financial data rather than assume increased attendance automatically improves profitability.
 
-### Why do ClassPass credits change?
+### Why Do ClassPass Credits Change?
 
 ClassPass uses demand-based credit requirements that can change according to class popularity, location, booking patterns, availability, and timing. This allows the platform to offer different credit prices across services and time slots. Members should review the credits required before reserving rather than expecting every class to maintain a fixed amount.
 
-### What is the difference between SmartSpot and SmartRate?
+### What Is the Difference Between SmartSpot and SmartRate?
 
 SmartSpot adjusts how many places are offered through ClassPass based on booking demand and expected availability. SmartRate adjusts the credits required for reservations using demand-related information. Both tools aim to improve the performance of unused inventory, but they manage different parts of the booking process.
 
-### Is ClassPass cheaper than booking directly with a studio?
+### Is ClassPass Cheaper Than Booking Directly With a Studio?
 
 ClassPass can be less expensive for certain reservations, particularly when members use lower-credit services during quieter periods. However, it is not necessarily cheaper for regular visits to one studio. The comparison depends on subscription costs, credit requirements, availability, and the direct packages offered by the provider.
 
