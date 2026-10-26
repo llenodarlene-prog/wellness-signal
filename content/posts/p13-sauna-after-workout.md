@@ -95,7 +95,7 @@ Different studies combine saunas, hot-water immersion, exercise types and exposu
 |---|---|---|---|
 | Ahokas and colleagues, 2025 | 14 trials, 194 participants | Acute recovery findings were mixed | Heterogeneous methods; low-to-moderate evidence quality |
 | Solomon and Laye, 2025 | Systematic review/meta-analysis of post-exercise passive heat | Endurance and heat-acclimation effects remain uncertain | Different heat protocols and outcomes |
-| Ahokas and colleagues, 2025 infrared sauna trial | 40 female team-sport athletes, six-week intervention | Investigated performance and hypertrophy under a defined training protocol | Small, specific population; not a general treatment recommendation |
+| Ahokas and colleagues, 2025 infrared sauna trial | 40 female team-sport athletes, six-week intervention | No significant effect on hypertrophy gains; may support longer-term power production | Small, specific population; not a general treatment recommendation |
 
 The systematic review identified four acute studies with no performance effect, four with beneficial effects and one with an adverse effect. Those are counts of study findings, not a pooled estimate of how likely a benefit is for an individual.
 
@@ -186,8 +186,8 @@ People who enjoy sauna bathing can view it as an optional part of their routine 
 This article prioritises systematic reviews, controlled trials and public-health guidance. It does not use manufacturer claims as evidence of clinical effectiveness, and it does not represent independent testing of any sauna equipment.
 
 1. Ahokas EK et al. (2025). [Effects of Post-Exercise Heat Exposure on Acute Recovery and Training-Induced Performance Adaptations: A Systematic Review](https://pmc.ncbi.nlm.nih.gov/articles/PMC12488549/). *Sports Medicine - Open.*
-2. Solomon TPJ, Laye MJ. (2025). [The Effect of Post-Exercise Heat Exposure on Endurance Exercise Performance: A Systematic Review and Meta-analysis](https://pmc.ncbi.nlm.nih.gov/articles/PMC11702104/).
-3. Ahokas EK et al. (2025). [Effects of Repeated Post-Exercise Infrared Sauna on Neuromuscular Performance and Muscle Hypertrophy](https://pmc.ncbi.nlm.nih.gov/articles/PMC11913669/).
+2. Solomon TPJ, Laye MJ. (2025). [The Effect of Post-Exercise Heat Exposure (Passive Heat Acclimation) on Endurance Exercise Performance: A Systematic Review and Meta-analysis](https://pmc.ncbi.nlm.nih.gov/articles/PMC11702104/).
+3. Ahokas EK et al. (2025). [Effects of Repeated Use of Post-Exercise Infrared Sauna on Neuromuscular Performance and Muscle Hypertrophy](https://pmc.ncbi.nlm.nih.gov/articles/PMC11913669/). *Frontiers in Sports and Active Living.*
 4. Cleveland Clinic. [Sauna Benefits and Safety Considerations](https://health.clevelandclinic.org/sauna-benefits).
 5. CDC. [Heat and Athletes](https://www.cdc.gov/heat-health/risk-factors/heat-and-athletes.html).
 

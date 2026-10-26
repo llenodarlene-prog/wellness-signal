@@ -26,7 +26,7 @@ The infrared sauna vs traditional sauna decision is therefore about more than wh
 - Mayo Clinic describes infrared saunas as generally operating at lower air temperatures than traditional saunas. This difference does not establish that infrared treatments deliver superior health outcomes.
 - Long-term observational studies linking sauna use with lower cardiovascular mortality largely concern Finnish-style sauna bathing, not consumer infrared blankets or every type of infrared cabin.
 - Installation can vary substantially: a specific Almost Heaven four-person electric barrel sauna requires a 240-volt, 30-amp hardwired heater circuit, while electrical needs differ by infrared model.
-- Manufacturer examples show wide price variation. HigherDOSE listed a $699 infrared blanket and an $8,999 full-spectrum cabin, while Almost Heaven listed a four-person Pinnacle barrel sauna at $6,060 during the research check.
+- Manufacturer examples show wide price variation. HigherDOSE listed a $699 infrared blanket and a full-spectrum cabin from $7,999 (two-person; $8,999 for three-person), while Almost Heaven listed a four-person Pinnacle barrel sauna at $6,060 during the research check.
 - Neither type should be presented as an established detoxification, disease-treatment, or permanent fat-loss intervention. People with relevant health conditions should discuss heat exposure with an appropriate clinician.
 
 ## Infrared Sauna vs Traditional Sauna at a Glance
@@ -135,15 +135,15 @@ The following manufacturer listings were checked during the October 2026 researc
 | Manufacturer and example | Format | Published US price checked | Installation detail |
 |---|---|---:|---|
 | HigherDOSE Infrared Sauna Blanket | Portable infrared blanket | $699 | Follow blanket-specific power and cleaning instructions |
-| HigherDOSE Full Spectrum Infrared Sauna | Full cabin | $8,999 | Confirm site preparation and electrical requirements |
+| HigherDOSE Full Spectrum Infrared Sauna | Full cabin | $7,999 (2-person) to $8,999 (3-person) | Confirm site preparation and electrical requirements |
 | Almost Heaven Pinnacle | Four-person traditional barrel sauna | $6,060 promotional listing | 6 kW heater, 240 V, 30 A, hardwired |
-| Almost Heaven Shenandoah | Traditional barrel with changing room | $10,650 | 8/9 kW options; 240 V, 40/45 A |
+| Almost Heaven Shenandoah | Traditional barrel with changing room | $10,650 | 8 to 10.5 kW electric or wood-burning options; 8/9 kW heaters need 240 V, 40/45 A hardwired |
 
 These examples should not be converted into a claim that infrared saunas are cheaper overall. A premium infrared cabin may cost more than a traditional model, while a blanket is not a substitute for a four-person sauna room.
 
 ### HigherDOSE and the Portable Infrared Category
 
-[HigherDOSE's infrared sauna collection](https://higherdose.com/collections/infrared-sauna-collection) includes a $699 blanket and an $8,999 full-spectrum cabin in the reviewed US listings. The brand promotes several wellness benefits, but these promotional claims do not establish superior health outcomes.
+[HigherDOSE's infrared sauna collection](https://higherdose.com/collections/infrared-sauna-collection) includes a $699 blanket and full-spectrum cabins from $7,999 (two-person) to $8,999 (three-person) in the reviewed US listings. The brand promotes several wellness benefits, but these promotional claims do not establish superior health outcomes.
 
 The blanket may appeal to people with limited space, although comfort, heat distribution, cleaning, and accessibility differ from a walk-in sauna.
 
@@ -232,7 +232,7 @@ Choose based on verified product requirements, the environment available, person
 ## Sources and Research Notes
 
 1. [Mayo Clinic, *Do Infrared Saunas Have Any Health Benefits?*](https://www.mayoclinic.org/healthy-lifestyle/consumer-health/expert-answers/infrared-sauna/faq-20057954), September 2024. Heating differences and limits of health research.
-2. [Laukkanen et al., *Sauna Bathing and Cardiovascular Mortality in Men and Women*](https://pmc.ncbi.nlm.nih.gov/articles/PMC6262976/), prospective cohort study. Observational association, not causal proof.
+2. [Laukkanen et al., *Sauna Bathing Is Associated With Reduced Cardiovascular Mortality and Improves Risk Prediction in Men and Women*, BMC Medicine, 2018](https://pmc.ncbi.nlm.nih.gov/articles/PMC6262976/), prospective cohort study. Observational association, not causal proof.
 3. [Review of Passive Heat Therapies](https://pmc.ncbi.nlm.nih.gov/articles/PMC10989710/), review of human studies through November 2023. Differentiates interventions and study designs.
 4. [Global Wellness Institute, *2025 Global Wellness Economy Monitor*](https://globalwellnessinstitute.org/industry-research/2025-global-wellness-economy-monitor/). Market context, not direct equipment-sales evidence.
 5. [HigherDOSE, Infrared Sauna Collection](https://higherdose.com/collections/infrared-sauna-collection). Manufacturer product pricing and positioning; prices checked October 2026.

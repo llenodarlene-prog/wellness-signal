@@ -118,11 +118,11 @@ Back-pain claims require particular care because people with different diagnoses
 
 A 2026 systematic review and meta-analysis included 35 randomised controlled trials and 2,132 participants with low-back pain. It reported improvements in several pain and function measures for Pilates and yoga compared with selected control conditions, although estimates varied and the included studies were heterogeneous.
 
-Another 2025 network meta-analysis of 32 trials found especially favourable short-term results for Pilates in its comparisons. These are findings within specific study designs, not proof that Pilates is superior for every individual or every form of back pain.
+A network meta-analysis of 32 trials, published in 2026, found especially favourable short-term results for Pilates compared with usual care, while yoga did not differ significantly from control at follow-up. These are findings within specific study designs, not proof that Pilates is superior for every individual or every form of back pain.
 
 ### Why Guidelines Still Require Individual Assessment
 
-The US National Center for Complementary and Integrative Health describes yoga's low-back-pain benefits as generally modest and notes uncertainty when comparing yoga with other exercise. Cochrane's evidence summaries likewise distinguish certainty levels and follow-up periods.
+The US National Center for Complementary and Integrative Health describes the evidence for yoga and low-back pain as showing a slight benefit, and notes it is unclear whether yoga differs from other exercise. Cochrane's evidence summaries likewise distinguish certainty levels and follow-up periods.
 
 People with persistent pain, neurologic symptoms, recent injury, or complex medical histories should seek appropriate assessment. An instructor-led class should not substitute for diagnosis or individual clinical care.
 
@@ -172,7 +172,7 @@ Reformer classes may feel unfamiliar even to active people because the machine c
 
 Gentle or beginner Hatha classes can be accessible starting points, while vigorous or heated formats may add physical demands. NCCIH advises beginners to avoid pushing into extreme positions and to seek qualified instruction.
 
-People with glaucoma, balance concerns, pregnancy, or certain other conditions may need specific modifications. The class description and instructor discussion should guide the decision.
+People with balance concerns, pregnancy, or certain other conditions may need specific modifications. The class description and instructor discussion should guide the decision.
 
 ## 9. Participation and Market Data
 
@@ -188,7 +188,7 @@ These are survey estimates with particular definitions and reference periods. Th
 
 The Health & Fitness Association's 2026 report, covering 2025, describes yoga as the most widely practised tracked activity among fitness facility members, with 17.7 million participants. It reports Pilates participation growth of 28.1% between 2021 and 2025 within its tracking series.
 
-HFA also reported a record 81 million US fitness facility members in 2025, or 26.1% of the population aged six and older. That is contextual facility-market information, not a count of Pilates or yoga customers across every setting.
+HFA also reported a record 81 million US fitness facility members in 2025, with membership penetration of 26.1%. That is contextual facility-market information, not a count of Pilates or yoga customers across every setting.
 
 ## 10. Class Prices and Value for Money
 

@@ -146,7 +146,7 @@ Independent studios with simpler requirements may be better served by a platform
 
 The Health & Fitness Association reported that **81 million Americans held a [fitness-facility membership](/fitness/fitness-statistics-by-activity-and-age/) in 2025**, up 5.2% from 2024. More than 100 million people used a facility when non-members were included.
 
-The same research found that members made nearly **7 billion visits** to fitness facilities in 2025. In the second quarter of 2026, boutique studios led the major facility segments with **2.5% year-over-year growth in visits per location**.
+The same research found that members made an estimated **7 billion visits** to fitness facilities in 2025. In the second quarter of 2026, boutique studios led the major facility segments with **2.5% year-over-year growth in visits per location**.
 
 These figures do not prove that a particular software platform creates growth. They do show that operators are managing more active consumers across memberships, classes, payments, and different access models.
 

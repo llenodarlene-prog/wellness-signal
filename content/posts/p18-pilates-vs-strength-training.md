@@ -85,7 +85,7 @@ Narrative findings suggested improvements in some strength and endurance measure
 
 Resistance training is specifically designed to improve force production through progressive loading. That makes it the more direct choice when maximal strength or muscle hypertrophy is the primary goal.
 
-Pilates may still contribute to muscular endurance, core strength, and functional control, especially for people who enjoy the method enough to train consistently.
+Pilates may still contribute to muscular endurance, core strength, and functional control, especially for people who enjoy the method enough to train consistently. Evidence in older adults is weaker still: a 2024 review concluded that Pilates could not yet be recommended specifically to improve strength in that group.
 
 ## 4. Bone Health Is a Major Difference
 
@@ -127,7 +127,7 @@ Strength training can be comparatively inexpensive through a standard gym member
 
 The Health & Fitness Association reported that [US fitness-facility membership](/fitness/fitness-statistics-by-activity-and-age/) reached **81 million in 2025**, with more than 100 million total facility users when non-members were included.
 
-Pilates was among the fastest-growing activities. HFA reported a **28.1% increase in Pilates participation among fitness-facility members from 2021 to 2025**.
+Pilates participation grew quickly. HFA reported a **28.1% increase in Pilates participation among fitness-facility members from 2021 to 2025**.
 
 ### Strength Training Remains Central to Facility Use
 
@@ -149,11 +149,11 @@ For example, someone might complete two or three resistance sessions and one Pil
 
 ## Market Data: Why Both Formats Are Growing
 
-The US fitness facility market reached record participation in 2025. HFA reported 81 million members, 26.1% membership penetration, and nearly 7 billion facility visits.
+The US fitness facility market reached record participation in 2025. HFA reported 81 million members, 26.1% membership penetration, and an estimated 7 billion facility visits.
 
 Pilates participation increased 28.1% between 2021 and 2025, while strength and functional training continued gaining importance across gym usage. These trends indicate that consumers are not choosing only one format.
 
-Hybrid training can also appear within [fitness apps for women](/fitness/fitness-apps-for-women/) and boutique studios. Platforms such as EvolveYou and Ladder now offer programmes blending Pilates and strength, illustrating how commercial fitness products increasingly combine training categories.
+Hybrid training can also appear within [fitness apps for women](/fitness/fitness-apps-for-women/) and boutique studios.
 
 ## How to Choose Between Pilates and Strength Training
 
