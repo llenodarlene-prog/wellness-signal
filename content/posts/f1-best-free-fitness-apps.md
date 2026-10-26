@@ -133,7 +133,7 @@ Someone who wants a basic record of runs or rides may not need those extras. A m
 
 **Best fit:** Outdoor exercisers motivated by recording activities and connecting with a community.
 
-## 7. adidas Running: Best for Free Outdoor Activity Basics
+## 7. Adidas Running: Best for Free Outdoor Activity Basics
 
 [adidas Running](https://www.adidas.com/us/running-app) supports tracking of runs, walks, hikes and other supported activities. The company's official app page describes GPS tracking, activity statistics, challenges and community functions alongside coaching and training-plan features.
 
@@ -176,23 +176,23 @@ A workout app can also present estimated calories, recovery indicators or traini
 
 ## FAQs
 
-### Are there fitness apps that stay free without a trial?
+### Are There Fitness Apps That Stay Free Without a Trial?
 
 Yes. Nike describes Nike Training Club and Nike Run Club as free, while FitOn states that its workout library remains free. Other apps, such as Boostcamp and Hevy, offer useful ongoing free versions with different limits or optional upgrades. Always confirm the current terms in your country.
 
-### Which free fitness app is best for beginners at home?
+### Which Free Fitness App Is Best for Beginners at Home?
 
 Nike Training Club and FitOn are reasonable starting points because both offer guided workout videos rather than requiring users to build their own sessions. Beginners should select appropriate intensity, check whether equipment is needed, and progress at a manageable pace instead of choosing solely by the number of available classes.
 
-### Can I track weightlifting workouts for free?
+### Can I Track Weightlifting Workouts for Free?
 
 Yes. Boostcamp provides free programme and workout tracking features, while Hevy offers a free gym log with limits on routine creation, custom exercises and accessible statistics history. Someone following a stable training split may find these limits acceptable, but advanced analysis can require payment.
 
-### Is a free fitness app as useful as a paid one?
+### Is a Free Fitness App as Useful as a Paid One?
 
 It depends on the function required. Free apps can provide guided workouts, recording and simple programmes, while paid plans may add personalised coaching, unlimited customisation, offline content or deeper analytics. Paying more does not by itself establish better health outcomes or more consistent training.
 
-### Do free fitness apps sell my workout data?
+### Do Free Fitness Apps Sell My Workout Data?
 
 There is no single rule that applies to every provider. Business models, advertising practices, third-party integrations and privacy settings differ, so review each app's current privacy policy and account controls. Avoid assuming that a free app sells data or that a paid subscription guarantees better privacy.
 

@@ -70,19 +70,19 @@ Higher software tiers offer capabilities for automated communications, reporting
 
 ## Comparing Mindbody and ClassPass
 
-Mindbody can be a studio's underlying management system, while [ClassPass](/fitness/classpass-business-model-studio-partners/) operates a member-credit marketplace for reserving participating services. Their commercial relationships overlap but should not be treated as interchangeable.
+Mindbody can be a studio's underlying management system, while [ClassPass](/fitness/classpass-business-model-studio-partners/) operates a member-credit marketplace for reserving participating services. Their commercial relationships overlap but should not be treated as interchangeable. Studios weighing a switch can compare [Mindbody alternatives](/fitness/mindbody-alternatives/).
 
 ## FAQs
 
-### How does Mindbody make money?
+### How Does Mindbody Make Money?
 
 Mindbody charges for business-management software and offers payments, customer acquisition and other services that can create additional fees. The company is privately held, so published pricing does not establish how much revenue each channel actually contributes.
 
-### Does Mindbody take a percentage of every booking?
+### Does Mindbody Take a Percentage of Every Booking?
 
 Its published US marketplace policy describes a 20% fee, capped at $30, on qualifying first purchases from new customers. That is not a blanket commission on all reservations, although separate payment-processing charges may still apply.
 
-### What should studios compare before selecting Mindbody?
+### What Should Studios Compare Before Selecting Mindbody?
 
 Studios should assess the base plan, required features, processing rates, marketplace fees and migration needs. A cheaper subscription can become more expensive if the business depends heavily on paid extras or higher transaction charges.
 

@@ -64,19 +64,19 @@ A 2019 JAMA trial included 32,974 employees across 160 worksites. Researchers fo
 
 ## Measuring Programme Performance
 
-Employers can distinguish eligible employees, first-time users, ongoing participants and measurable outcomes. A programme's purpose should determine the appropriate success metric rather than relying exclusively on enrolment totals. Small employers choosing a platform can compare options in our guide to [employee wellness software](/work-wellness/employee-wellness-software-small-teams/) for small teams.
+Employers can distinguish eligible employees, first-time users, ongoing participants and measurable outcomes. A programme's purpose should determine the appropriate success metric rather than relying exclusively on enrolment totals. Small employers can start with low-cost [employee wellness challenges](/work-wellness/employee-wellness-challenges-small-teams/) before comparing [employee wellness software](/work-wellness/employee-wellness-software-small-teams/) for small teams.
 
 ## FAQs
 
-### What percentage of employers offer wellness programmes?
+### What Percentage of Employers Offer Wellness Programmes?
 
 KFF reported 83% of larger and 56% of smaller firms offered at least one specified programme in 2025, among firms offering health benefits. These figures should not be described as percentages of every US company.
 
-### Does programme availability mean employees participate?
+### Does Programme Availability Mean Employees Participate?
 
 No. Availability indicates that a service is offered, while participation requires evidence that eligible workers actually use it. Survey figures about employer benefits cannot be converted into employee attendance percentages without separate engagement data.
 
-### Do workplace wellness programmes reduce employer costs?
+### Do Workplace Wellness Programmes Reduce Employer Costs?
 
 Not necessarily. The result depends on programme design, population and evaluation methods. A large randomised trial found no statistically significant healthcare-spending improvements after 18 months, despite changes in selected reported behaviours.
 

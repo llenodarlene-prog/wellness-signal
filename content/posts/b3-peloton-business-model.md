@@ -68,15 +68,15 @@ The company must keep customers engaged, develop services and maintain demand fo
 
 ## FAQs
 
-### How does Peloton make money?
+### How Does Peloton Make Money?
 
 Peloton earns revenue from connected fitness products and paid subscriptions. Its fiscal 2026 filing reported approximately $1.676 billion in subscription revenue and $770.4 million in equipment revenue, making memberships the larger reported segment.
 
-### What share of Peloton revenue comes from subscriptions?
+### What Share of Peloton Revenue Comes From Subscriptions?
 
 Subscriptions represented approximately 68.5% of fiscal 2026 revenue. This is a revenue share, not a measure of profit, and it reflects the reporting period ending June 30, 2026 rather than a permanent proportion.
 
-### Are subscriptions more profitable than hardware?
+### Are Subscriptions More Profitable Than Hardware?
 
 Peloton reported much higher subscription gross margins than hardware gross margins in fiscal 2026. However, company-wide operating expenses still affect final profitability, so segment gross margins cannot be presented as net profit.
 
