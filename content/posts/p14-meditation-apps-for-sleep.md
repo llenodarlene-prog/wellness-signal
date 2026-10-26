@@ -24,7 +24,7 @@ This comparison examines eight meditation apps for sleep using information publi
 
 - Medito offers sleep meditation, stories and ambient audio without subscriptions, advertisements or account requirements.
 - Insight Timer provides a large free meditation and sleep library, while MemberPlus adds options such as downloads and premium content.
-- Calm confirmed in September 2026 that its free catalogue includes more than 230 meditations and eight free sleep sessions.
+- Calm's help centre (updated October 2026) says its free catalogue includes more than 230 meditations and eight free sleep sessions.
 - Headspace offers Sleepcasts, wind-down exercises and Nighttime SOS, but its complete library requires a trial or subscription.
 - BetterSleep changed to a premium subscription model in 2025; new users now receive a free trial rather than a permanent full free tier.
 - Research on digital mindfulness interventions suggests possible sleep benefits, but the results do not establish that each commercial app treats clinical insomnia.
@@ -74,7 +74,7 @@ For that reason, the free content count should not be the only selection factor.
 
 ## 3. Calm: Sleep Stories and a Verified Free Selection
 
-[Calm](https://www.calm.com/) combines guided meditation with Sleep Stories, ambient audio and music. Its September 2026 help-centre update specifically identifies more than 230 free meditation sessions and eight free sleep sessions, a larger offering than older articles sometimes describe.
+[Calm](https://www.calm.com/) combines guided meditation with Sleep Stories, ambient audio and music. Its help centre, updated in October 2026, specifically identifies more than 230 free meditation sessions and eight free sleep sessions, a larger offering than older articles sometimes describe.
 
 Premium expands the available Sleep Stories and broader content catalogue. Calm distinguishes locked material within the application, allowing listeners to identify which sessions require payment.
 
@@ -98,7 +98,7 @@ These features make Headspace different from a library-first product such as Ins
 
 ## 5. BetterSleep: SleepTales, Meditation and Custom Audio
 
-[BetterSleep](https://www.bettersleep.com/) focuses strongly on sleep audio, offering guided meditations, SleepTales, soundscapes and a multi-sound mixer. Its official support page lists hundreds of sounds and more than 250 meditation or hypnosis tracks.
+[BetterSleep](https://www.bettersleep.com/) focuses strongly on sleep audio, offering guided meditations, SleepTales, soundscapes and a multi-sound mixer. Its library page advertises more than 500 bedtime stories, guided meditations, hypnosis tracks and other audio.
 
 A June 2026 support update clarifies that BetterSleep stopped operating as a freemium product in 2025. New users can trial the app, but an active subscription is needed for continued access to the full library.
 
@@ -148,7 +148,7 @@ University affiliation signals the source of the educational material, not super
 
 Research supports examining mindfulness as a possible contributor to improved sleep, but results vary by intervention and population. It does not follow that every meditation app delivers the same outcomes or qualifies as a treatment for diagnosed insomnia.
 
-A systematic review of standalone digital mindfulness interventions published in *npj Digital Medicine* included 18 articles, with 4,870 participants represented across 13 trials. Study designs, clinical populations and measured sleep outcomes differed, so its conclusions should not be used as a product-by-product ranking.
+A systematic review of standalone digital mindfulness interventions published in *npj Digital Medicine* included 18 randomised controlled trials, with 4,870 participants in the sleep analyses, and rated the evidence as very low certainty. Study designs, clinical populations and measured sleep outcomes differed, so its conclusions should not be used as a product-by-product ranking.
 
 A separate 2025 review of mobile cognitive behavioural therapy for insomnia included 16 studies involving 2,146 participants. Mobile CBT-I is a specific intervention, not the same as general guided meditation or bedtime storytelling.
 
@@ -179,7 +179,7 @@ Medito states that its sleep stories, meditations and breathing exercises are fr
 
 ### Is Calm Free for Sleep Meditation?
 
-Yes, Calm's September 2026 support information lists eight free sleep sessions and more than 230 free meditations. The full Sleep Stories catalogue and other Premium content require a paid subscription, so availability should be checked inside the app.
+Yes, Calm's October 2026 support information lists eight free sleep sessions and more than 230 free meditations. The full Sleep Stories catalogue and other Premium content require a paid subscription, so availability should be checked inside the app.
 
 ### Does Headspace Include Sleep Stories Without a Subscription?
 
@@ -210,7 +210,7 @@ App features and access policies were checked against official provider pages. T
 1. [Medito Foundation: Official App and Free-Access Policy](https://meditofoundation.org/medito-app/).
 2. [Insight Timer: Free Features](https://help.insighttimer.com/support/solutions/articles/67000664765-what-free-features-does-insight-timer-offer-).
 3. [Insight Timer: Offline Access](https://help.insighttimer.com/support/solutions/articles/67000664574-how-do-i-download-content-for-offline-use-).
-4. [Calm: Free Content, updated September 2026](https://support.calm.com/hc/en-us/articles/360044707294-What-Free-Content-is-Available-on-the-Calm-App).
+4. [Calm: Free Content, updated October 2026](https://support.calm.com/hc/en-us/articles/360044707294-What-Free-Content-is-Available-on-the-Calm-App).
 5. [Headspace: Sleep Features](https://help.headspace.com/hc/en-us/articles/360009450353-What-is-Sleep-by-Headspace).
 6. [Headspace: What's Included for Free](https://help.headspace.com/hc/en-us/articles/115008192928-What-s-included-for-free).
 7. [BetterSleep: Free Versus Premium Policy, June 2026](https://www.bettersleep.com/support/en/articles/15602562-is-bettersleep-free).

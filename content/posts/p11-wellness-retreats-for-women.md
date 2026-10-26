@@ -39,11 +39,11 @@ The list is not a ranking of medical effectiveness or hospitality quality. No st
 
 | Programme and organiser | US location | Published dates | Main focus | Published cost information |
 |---|---|---|---|---|
-| Golden Door Women's Week | San Marcos, California | Various weeks in 2026–2027 | Spa, movement, mindfulness | Confirm current package rate |
+| Golden Door Women's Week | San Marcos, California | Late-2026 weeks; 2027 dates to be announced | Spa, movement, mindfulness | Confirm current package rate |
 | Canyon Ranch M/Power | Lenox, Massachusetts | February 8–11, 2027 | Perimenopause and menopause | From $1,950/person/night, before tax |
 | Kripalu Self-Led Woman | Stockbridge, Massachusetts | November 1–6, 2026 | Reflection and leadership | $495 tuition plus lodging |
 | Omega Rewilding Women | Rhinebeck, New York | June 27–July 2, 2027 | Writing, reflection, self-discovery | $595 standard tuition plus applicable stay costs |
-| Seven Springs Nourish | Maryville, Tennessee | April 29–May 2, 2027 | Yoga and nature retreat | From $995, described as all-inclusive |
+| Seven Springs Nourish | Maryville, Tennessee | April 29–May 2, 2027 | Yoga and nature retreat | From $995 (shared yurt), described as all-inclusive |
 | Colorado Chautauqua Women's Retreat | Boulder, Colorado | April 15–18, 2027 | Guided activities and mountain setting | $1,849 all-inclusive advertised |
 | Powers Yoga Sedona Women's Retreat | Sedona, Arizona | Multiple dates in 2027 | Yoga, meditation, excursions | Confirm date-specific quote |
 | Thrive Women's Winter Wellness Retreat | Bristol, Rhode Island | January 10–13, 2027 | Women aged 50+, lifestyle programming | Confirm package rate |
@@ -57,7 +57,7 @@ Golden Door in San Marcos offers designated women's weeks in a residential retre
 
 ### Programme Structure and Who It Suits
 
-The operator describes a blend of fitness, spa experiences, and mindfulness across its women's weeks. Published 2026 options include the October 25–31 Classic Women's Week and November 15–21 Art of Presence programme, while the 2027 calendar also contains women-specific weeks.
+The operator describes a blend of fitness, spa experiences, and mindfulness across its women's weeks. Upcoming 2026 options include the November 15–21 Art of Presence women's week; 2027 dates had not been published when this article was checked.
 
 This is best suited to readers seeking an immersive resort format with a clearly designated women's programme. Prospective guests should request a current itemised quote and confirm the included services, activity modifications, and cancellation conditions before booking.
 
@@ -105,7 +105,7 @@ Seven Springs advertises its Nourish Retreat for April 29–May 2, 2027, in Mary
 
 ### What the Starting Price Covers
 
-The organiser lists pricing **from $995**, describing the package as all-inclusive and specifying three nights in a yurt, farm-to-table meals, and workshops. It also advertises 30 Yoga Alliance Continuing Education Provider credits, which are relevant to eligible practitioners but not every traveller.
+The organiser lists pricing **from $995**, describing the package as all-inclusive and specifying three nights in a shared yurt at that rate, farm-to-table meals, and workshops. It also advertises 30 Yoga Alliance (YACEP) continuing education credits, which are relevant to eligible practitioners but not every traveller.
 
 The relatively specific package description makes it easier to compare with retreats that quote tuition alone. Readers should still confirm sleeping arrangements, travel costs, accessibility, refund terms, and whether optional extras apply.
 
@@ -161,7 +161,7 @@ Readers should select a dated event first, then verify lodging and tuition charg
 
 ## What the Women's Retreat Market Data Shows
 
-The Global Wellness Institute estimated **$893.9 billion in worldwide wellness tourism spending during 2024**, with **1.239 billion wellness-related trips** under its broad methodology. The figure includes domestic and international trips for which wellness was either a primary or secondary travel motivation.
+The Global Wellness Institute estimated **$893.9 billion in worldwide wellness tourism spending during 2024**. The figure includes domestic and international trips for which wellness was either a primary or secondary travel motivation.
 
 Those totals do **not** measure the women-only retreat market and cannot be used to infer how many women book organised retreats. They provide broader tourism context only, while the nine offerings above illustrate different programme structures rather than a representative market sample.
 

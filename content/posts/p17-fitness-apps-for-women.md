@@ -25,11 +25,11 @@ The category is commercially significant. Grand View Research estimates the glob
 ## Key Takeaways
 
 - Sweat and EvolveYou are explicitly designed for women, while Alive also centres female trainers and programmes.
-- Sweat currently lists more than **70 programmes**, thousands of workouts, and published US pricing of **$24.99 monthly or $134.99 annually**.
+- Sweat currently lists more than **60 programmes**, more than 13,000 workouts, and published US pricing of **$24.99 monthly or $134.99 annually**.
 - EvolveYou publishes US pricing of **$22.99 monthly or $119.99 annually** and offers more than 1,500 workouts and 20 programmes on its annual plan.
 - Alive costs **$14.99 monthly or $119.99 annually** after a seven-day trial.
 - Ladder is built around progressive strength programming and costs **$29.99 monthly or $179.99 annually**.
-- Nike Training Club remains free and provides more than 200 workouts across strength, yoga, mobility, and cardio.
+- Nike Training Club remains free and provides more than 185 free workouts across strength, yoga, mobility, and cardio.
 - Apple Fitness+ costs **$9.99 monthly or $79.99 annually** in the US, while Peloton App One costs **$12.99 monthly**.
 - App pricing does not indicate programme quality. Training style, progression, coaching, equipment requirements, and adherence matter more than the number of workouts in a library.
 
@@ -57,7 +57,7 @@ Not every app in this article is marketed only to women. We included several gen
 
 ## 1. Sweat
 
-Sweat is one of the most established fitness apps built specifically for women. The company says the platform has more than **70 programmes**, thousands of workouts, and more than 31 million downloads.
+Sweat is one of the most established fitness apps built specifically for women. The company says the platform has more than **60 programmes** and more than 13,000 workouts.
 
 Training styles include strength, HIIT, Pilates, yoga, barre, low-impact workouts, pregnancy, and post-pregnancy programmes. This makes Sweat suitable for users who want a broad training library rather than one narrowly defined method.
 
@@ -75,7 +75,7 @@ Sweat is strongest for women who want a large choice of structured programmes ac
 
 EvolveYou describes itself as a strength training and wellbeing app made by women for women. It was co-founded in 2019 by trainer Krissy Cela and offers training at home, in the gym, or with limited equipment.
 
-The platform currently advertises more than **1,500 workouts**, 20+ programmes on its annual plan, and approximately 1,000 recipes. Training includes conventional strength work, Pilates, hybrid programmes, and structured progression.
+The platform currently advertises more than **1,500 workouts**, 20+ structured programmes on both monthly and annual plans, and about 1,000 recipes. Training includes conventional strength work, Pilates, hybrid programmes, and structured progression.
 
 ### EvolveYou Pricing
 
@@ -85,7 +85,7 @@ EvolveYou says its structured plans use weekly blocks and periodised progression
 
 ### Best Fit
 
-EvolveYou is a strong option for women who want progressive strength training combined with Pilates or wellness content. Its annual plan offers broader programme access than its monthly plan, so users should compare features before choosing billing frequency.
+EvolveYou is a strong option for women who want progressive strength training combined with Pilates or wellness content. Both billing options unlock the full programme library, although the free trial applies to the annual plan.
 
 ## 3. Alive by Whitney Simmons
 
@@ -111,7 +111,7 @@ The app includes in-ear coaching, video demonstrations, weight and rep tracking,
 
 ### Ladder Pricing
 
-Ladder Pro costs **$29.99 per month** or **$179.99 annually**, equivalent to approximately $14.99 per month when paid yearly. New users can try all training teams for seven days without providing payment information until the trial ends.
+Ladder Pro costs **$29.99 per month** or **$179.99 annually**, billed upfront and advertised as $14.99 per month (about $15.00 when divided by 12). New users can try all training teams for seven days without providing payment information until the trial ends.
 
 This makes Ladder one of the more expensive apps in the comparison, but its model is closer to ongoing programming and coaching than a simple workout library.
 
@@ -137,7 +137,7 @@ Peloton works well for people who enjoy instructor-led classes and variety. It i
 
 ## 6. Apple Fitness+
 
-Apple Fitness+ is a general fitness subscription built into Apple's ecosystem. It offers 12 workout types including Strength, HIIT, Yoga, Pilates, Cycling, Treadmill, Dance, and Meditation.
+Apple Fitness+ is a general fitness subscription built into Apple's ecosystem. It offers 12 workout types, such as Strength, HIIT, Yoga, Pilates, Cycling and Dance, plus Meditation.
 
 Sessions run from five to 45 minutes, and users can access custom plans and personalised recommendations. Supported devices can also display real-time heart-rate and activity metrics.
 
@@ -153,7 +153,7 @@ Apple Fitness+ is suitable for people who want guided classes across many format
 
 ## 7. Nike Training Club
 
-Nike Training Club provides guided workouts, training programmes, and wellness content without a paid subscription. Nike states that the app includes more than **200 free workouts** across strength, endurance, yoga, mobility, HIIT, and bodyweight training.
+Nike Training Club provides guided workouts, training programmes, and wellness content without a paid subscription. Nike states that the app includes more than **185 free workouts** across strength, endurance, yoga, mobility, HIIT, and bodyweight training.
 
 Workout duration ranges from approximately five to 50 minutes. Some sessions require no equipment, while others are designed for gym environments.
 

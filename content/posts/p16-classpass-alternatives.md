@@ -27,7 +27,7 @@ The best ClassPass alternative therefore depends on why someone uses ClassPass i
 - ClassPass uses variable credits rather than one fixed cash price for each booking.
 - Wellhub and One Pass Select can offer large multi-provider networks, but access generally depends on employer or health-plan eligibility.
 - Active&Fit Direct is also eligibility-based, while Active&Fit Now is available to US adults without an employer sponsor.
-- Active&Fit Now currently advertises a **$32 monthly standard gym option plus a $32 enrolment fee**, with premium studios priced separately.
+- Active&Fit Now currently advertises a **$32 monthly standard gym option plus a $29 enrolment fee**, with premium studios priced separately.
 - Apple Fitness+ costs **$9.99 per month or $79.99 annually in the US**, but it is digital-only rather than a studio-booking marketplace.
 - Nike Training Club provides free guided workouts, while FitOn offers free workouts with paid PRO features.
 - The US fitness market increasingly includes non-traditional access. The Health & Fitness Association reported that more than **100 million Americans** used a fitness facility in 2025 when non-members were included.
@@ -70,7 +70,7 @@ Wellhub is primarily a B2B employee benefit rather than a direct consumer member
 
 The platform includes gyms, studios, and wellness apps, which makes it one of the closer conceptual alternatives to ClassPass. However, the employer-funded structure changes both eligibility and pricing.
 
-Wellhub's current US corporate plans show employer pricing from as low as $1 per employee per month for its Entry package, with employees then choosing from available membership plans. Those corporate prices are not equivalent to an individual consumer subscription.
+Wellhub's corporate pricing is set with employers, and employees then choose from the membership plans their employer makes available. Those corporate prices are not equivalent to an individual consumer subscription.
 
 ## 2. One Pass Select
 
@@ -80,7 +80,7 @@ UnitedHealthcare states that the programme has no long-term contracts or annual 
 
 ### Pricing and Network Access
 
-A published member flyer shows tiers ranging from a digital-only option through Classic, Standard, Premium, and Elite. Historical published pricing lists monthly rates from $10 for digital access to $144 for Elite, although members should verify current pricing through their eligible plan.
+A published member flyer shows tiers ranging from a digital-only option through Classic, Standard, Premium, and Elite. Pricing depends on the tier and the sponsoring plan, so members should check current rates through their eligible plan.
 
 One Pass Select works best as a ClassPass alternative for people who receive access through an employer or eligible UnitedHealthcare arrangement. It is not a generally available consumer subscription for everyone.
 
@@ -100,7 +100,7 @@ The main limitation is eligibility. Users must access the programme through a sp
 
 Active&Fit Now is the public version of the Active&Fit model. It is available to US residents aged 18 and older without requiring an employer or health-plan sponsor.
 
-The programme currently advertises access to **8,600+ gyms** for **$32 per month**, plus a $32 programme enrolment fee and applicable taxes. It also lists more than 2,800 premium exercise studios with discounts at many locations.
+The programme currently advertises access to **8,800+ gyms** for **$32 per month**, plus a $29 enrolment fee (waived with code JUSTMOVE through December 31, 2026) and applicable taxes. It also lists more than 3,500 premium exercise studios with discounts at many locations.
 
 ### A Stronger Public Alternative for Gym Users
 
@@ -124,7 +124,7 @@ The subscription can be shared with up to five family members. That can make the
 
 Nike Training Club offers guided workouts without a paid fitness subscription. Nike describes the app as providing free training guidance across strength, HIIT, yoga, bodyweight, and other formats.
 
-Nike also states that its training apps provide access to more than **180 free workouts** for members. The app focuses on digital training rather than local studio reservations.
+Nike also states that its training apps provide access to more than **185 free workouts** for members. The app focuses on digital training rather than local studio reservations.
 
 ### Best for Users Who Mainly Need Programming
 
@@ -218,7 +218,7 @@ A direct membership is often more predictable for people who repeatedly attend o
 - [Wellhub Partner Network Data](https://wellhub.com/en-us/blog/press-releases/wellhub-is-driving-a-new-era-of-fitness/)
 - [One Pass Select / UnitedHealthcare](https://www.uhc.com/employer/products-solutions/wellness-programs-and-services/fitness-and-well-being)
 - [Active&Fit Direct](https://www.activeandfitdirect.com/About)
-- [Active&Fit Now](https://www.activeandfitnow.com/About)
+- [Active&Fit Now](https://www.activeandfitnow.com/)
 - [Apple Fitness+](https://www.apple.com/apple-fitness-plus/)
 - [Nike Training Club](https://www.nike.com/ntc-app)
 - [FitOn](https://fitonapp.com/)
