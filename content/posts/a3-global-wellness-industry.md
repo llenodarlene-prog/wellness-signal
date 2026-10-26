@@ -82,15 +82,15 @@ GWI projected a global wellness economy approaching $9.8 trillion by 2029, imply
 
 ## FAQs
 
-### Which wellness sector was largest in 2024?
+### Which Wellness Sector Was Largest in 2024?
 
 GWI estimated personal care and beauty at approximately $1.35 trillion, the largest of its 11 sectors. That total covers a broad range of products and services and should not be interpreted solely as skincare or medical aesthetics revenue.
 
-### Which wellness sector was growing fastest?
+### Which Wellness Sector Was Growing Fastest?
 
 Wellness real estate recorded estimated average annual growth of 19.5% from 2019 to 2024. This is a historical economic measure, not a prediction of returns on individual developments or proof of the health benefits of every building feature.
 
-### Is the $9.8 trillion forecast guaranteed?
+### Is the $9.8 Trillion Forecast Guaranteed?
 
 No. GWI's 2029 estimate reflects a forecast based on assumptions about future economic activity. Actual market results may be affected by consumer demand, prices and economic conditions and should not be presented as realised spending.
 

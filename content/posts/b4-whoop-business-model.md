@@ -69,15 +69,15 @@ With a hardware-first device, the consumer may purchase equipment outright and o
 
 ## FAQs
 
-### How does WHOOP make money?
+### How Does WHOOP Make Money?
 
 WHOOP principally sells recurring access to a wearable tracking service that includes eligible hardware and software features. Membership pricing is public, but the privately held company does not provide complete audited figures showing profit per member or precise revenue by plan.
 
-### Can a WHOOP device work without membership?
+### Can a WHOOP Device Work Without Membership?
 
 According to WHOOP's cancellation support materials, biometric collection, uploading and analysis stop after the subscription expires. Consumers should review current terms before purchase because continued functionality is substantially different from a stand-alone fitness watch.
 
-### How much does WHOOP cost over five years?
+### How Much Does WHOOP Cost Over Five Years?
 
 Using unchanged published US annual rates, five years cost $995 for One, $1,195 for Peak or $1,795 for Life. Real spending may differ due to promotions, taxes, upgrades, regional pricing or changes to future plans.
 

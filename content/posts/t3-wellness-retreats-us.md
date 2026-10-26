@@ -32,7 +32,7 @@ For travellers researching wellness retreats in the US, the useful questions are
 
 ## How These Wellness Retreats Were Selected
 
-The list prioritises US-based destinations with published information about overnight retreats, regular wellness programming or retreat-centre experiences. It intentionally includes several operating models so readers can compare a personalised resort stay against a scheduled yoga, meditation or fitness programme.
+The list prioritises US-based destinations with published information about overnight retreats, regular wellness programming or retreat-centre experiences. It intentionally includes several operating models so readers can compare a personalised resort stay against a scheduled yoga, meditation or fitness programme. Programmes designed specifically for women are compared separately in [wellness retreats for women](/travel-retreats/wellness-retreats-for-women-us/).
 
 This is an editorial comparison based on publicly available descriptions, not a ranking from personal visits, mystery shopping or clinical testing. Properties are included for distinct programme types, while inclusion rules, dates and prices should be rechecked directly with the operator before payment.
 
@@ -210,23 +210,23 @@ The links in this article go directly to operator websites and are **not affilia
 
 ## FAQs About Wellness Retreats in the US
 
-### What is included at an all-inclusive wellness retreat?
+### What Is Included at an All-Inclusive Wellness Retreat?
 
 Inclusions depend on the operator and package. Many properties include accommodations, meals and scheduled group activities, but private treatments, diagnostic services, speciality workshops and airport transfers can have additional charges. Check the exact written package rather than relying on the term all-inclusive.
 
-### How long should a wellness retreat be?
+### How Long Should a Wellness Retreat Be?
 
 A weekend may be enough to experience classes and a change of setting, while a longer stay allows more time for a structured programme. The appropriate duration depends on travel time, physical demands, budget, course prerequisites and the activities you hope to attend.
 
-### Are US wellness retreats only for experienced fitness enthusiasts?
+### Are US Wellness Retreats Only for Experienced Fitness Enthusiasts?
 
 No. Some retreats emphasise strenuous hiking or intensive exercise, but others centre on meditation, gentle movement, learning and spa experiences. Readers should confirm activity levels, accessibility provisions and any health requirements rather than assuming every advertised wellness retreat is suitable for all participants.
 
-### Are wellness retreats medically proven to improve health?
+### Are Wellness Retreats Medically Proven to Improve Health?
 
 A particular retreat's advertised outcome is not proof of clinical effectiveness. Individual practices such as exercise or mindfulness may have supporting research, but results depend on the intervention and participants. A commercial retreat should not be substituted for professional medical assessment or treatment.
 
-### Can I book a wellness resort through an affiliate travel site?
+### Can I Book a Wellness Resort Through an Affiliate Travel Site?
 
 Sometimes, but the reservation listing may cover accommodations without including the retreat's specialist programme. Before booking through a third party, compare the advertised inclusions with the operator's official package details and confirm cancellations, taxes, credits and treatment eligibility.
 

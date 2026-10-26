@@ -150,27 +150,27 @@ When reading clinical claims, look for who conducted the study, the intervention
 
 ## FAQs
 
-### Is a medical director always required for a medical spa?
+### Is a Medical Director Always Required for a Medical Spa?
 
 Requirements vary by state, the facility's ownership and practice structure, the clinicians involved, and the procedures offered. Some rules require particular supervising arrangements, while others grant defined autonomy to certain licensed practitioners. A clinic needs jurisdiction-specific advice rather than assuming every medical spa follows one national model.
 
-### Does a medical director have to be a physician?
+### Does a Medical Director Have to Be a Physician?
 
 The answer depends on local law and how the role is defined for the specific clinical service. Some arrangements require a physician, while authorised advanced practice clinicians may have particular responsibilities elsewhere. The title does not override licensing, scope-of-practice, prescribing, or delegation requirements.
 
-### Can a medical director supervise a clinic remotely?
+### Can a Medical Director Supervise a Clinic Remotely?
 
 Remote oversight may be permissible for certain activities under some jurisdictional rules, but it should not be assumed to satisfy every required examination, availability, or supervision obligation. The relevant state and professional regulations determine when in-person clinical involvement is necessary and how telehealth may be used.
 
-### What is the difference between a medical director and a clinic manager?
+### What Is the Difference Between a Medical Director and a Clinic Manager?
 
 A clinic manager generally coordinates administrative operations, such as staffing, scheduling, supplies, and customer service. A medical director or other responsible licensed provider addresses clinical governance within their authorised scope, including medical protocols or supervision where required. The roles can cooperate but are not interchangeable.
 
-### Does appointing a medical director make an experimental treatment safe?
+### Does Appointing a Medical Director Make an Experimental Treatment Safe?
 
 No. Appropriate oversight supports clinical accountability but does not replace evidence that a product is safe and effective for the intended use. Experimental compounds still require relevant clinical investigation, appropriate regulatory status, informed consent, and qualified assessment before any medical application.
 
-### What records should a medically supervised wellness clinic maintain?
+### What Records Should a Medically Supervised Wellness Clinic Maintain?
 
 The precise records depend on the service and jurisdiction, but relevant documentation may include patient assessment, informed consent, treatment details, medication or device information, follow-up, and adverse events. Recordkeeping policies must comply with applicable privacy, professional, and retention requirements rather than a generic national checklist.
 

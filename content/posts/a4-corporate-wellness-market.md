@@ -68,15 +68,15 @@ Employers should distinguish their programme budget, eligible population, actual
 
 ## FAQs
 
-### How big was the corporate wellness market in 2025?
+### How Big Was the Corporate Wellness Market in 2025?
 
 Grand View Research estimated $55.1 billion and Fortune Business Insights estimated $68.41 billion for 2025. Both are research model outputs with potentially different scopes, so neither should be described as a universally agreed worldwide total.
 
-### Why do forecasts differ so much?
+### Why Do Forecasts Differ so Much?
 
 Publishers can use different service definitions, growth assumptions, regions and time horizons. Because the underlying data and models differ, the resulting forecasts cannot be compared as though they were two independent measurements of the same future fact.
 
-### Does spending more on wellness reduce healthcare costs?
+### Does Spending More on Wellness Reduce Healthcare Costs?
 
 Not automatically. Effectiveness depends on programme design, participant needs, implementation and appropriate outcome measurement. Randomised research has not consistently supported sweeping claims that employer wellness spending necessarily produces lower healthcare bills.
 
