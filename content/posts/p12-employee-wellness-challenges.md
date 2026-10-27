@@ -37,7 +37,7 @@ The intended outcome must be clear. A four-week walking challenge may show how m
 
 ### What Workplace Research Shows
 
-KFF reports that among businesses offering health benefits, 56% of firms with 10–199 workers and 83% of firms with at least 200 workers offered one or more selected wellness programmes in 2025. These [workplace wellness statistics](/work-wellness/workplace-wellness-statistics-access-participation/) describe employer availability, not the proportion of workers who used the services.
+KFF reports that among businesses offering health benefits, 56% of firms with 10–199 workers and 83% of firms with at least 200 workers offered one or more selected wellness programmes in 2025. These [workplace wellness statistics](/work-wellness/workplace-wellness-statistics-access-participation/) describe employer availability, not the proportion of workers who used the services. KFF's 2026 survey, published in October 2026, did not repeat its wellness programme questions, so the 2025 figures remain its latest.
 
 A 2019 randomised trial involving 32,974 employees found improvements in selected self-reported health behaviours after 18 months. It did not find statistically significant differences in clinical measures, healthcare expenditures, or employment outcomes, and a later three-year follow-up reported similar limitations.
 

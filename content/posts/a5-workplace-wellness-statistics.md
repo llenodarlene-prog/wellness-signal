@@ -12,7 +12,7 @@ image: workplace-health-check
 image_alt: A nurse checks an employee's blood pressure in an office wellness room
 published: 2026-10-18
 role: hub
-updated: 2026-10-18
+updated: 2026-10-27
 draft: false
 ---
 
@@ -32,7 +32,7 @@ KFF's 2025 employer survey and the CDC's earlier worksite survey provide relevan
 
 ## Employer Wellness Availability in 2025
 
-KFF's published comparison applies to firms offering health benefits. Its smaller group includes firms with 10–199 workers, while larger firms have 200 or more workers.
+KFF's published comparison applies to firms offering health benefits. KFF's 2026 survey, published in October 2026, did not repeat its wellness programme questions, so the 2025 figures remain its latest. Its smaller group includes firms with 10–199 workers, while larger firms have 200 or more workers.
 
 | Measure | Smaller firms | Larger firms |
 |---|---:|---:|
@@ -87,5 +87,6 @@ Workplace wellness research is clearest when availability, engagement and measur
 ## Sources
 
 - [KFF, 2025 Employer Health Benefits Survey](https://www.kff.org/health-costs/2025-employer-health-benefits-survey/)
+- [KFF, 2026 Employer Health Benefits Survey](https://www.kff.org/health-costs/2026-employer-health-benefits-survey/)
 - [CDC, Workplace Health in America Survey](https://www.cdc.gov/workplace-health-promotion/media/pdfs/2024/06/2017-Workplace-Health-in-America-Summary-Report-FINAL-updated-508.pdf)
 - [JAMA, Workplace Wellness Randomized Trial](https://jamanetwork.com/journals/jama/fullarticle/2730614)
