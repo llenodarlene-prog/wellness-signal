@@ -134,6 +134,7 @@ const footer = `<footer class="site-footer">
       <h2>Publication</h2>
       <ul>
         <li><a href="/about/">About Us</a></li>
+        <li><a href="/tools/">Calculators and Tools</a></li>
         <li><a href="/about/#editorial-standards">Editorial Standards</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy-policy/">Privacy Policy</a></li>
@@ -692,7 +693,7 @@ ${footer}
 const tools = await loadTools();
 const renderTool = tool => {
   const url = `${canonical}${tool.url}`;
-  const breadcrumb = crumbs(url, [{ name: tool.title, item: url }]);
+  const breadcrumb = crumbs(url, [{ name: 'Tools', item: `${canonical}/tools/` }, { name: tool.title, item: url }]);
   const graph = [organization, website, breadcrumb, {
     '@type': 'WebPage', '@id': `${url}#webpage`, url, name: tool.seo_title, description: tool.description,
     dateModified: tool.updated, isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
@@ -719,7 +720,7 @@ ${header({ slug: tool.category || '' })}
 <main id="main">
   <header class="post-hero">
     <div class="wrap">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">${esc(tool.title)}</span></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/tools/">Tools</a><span aria-hidden="true">/</span><span aria-current="page">${esc(tool.title)}</span></nav>
       <span class="eyebrow">Free calculator</span>
       <h1>${esc(tool.title)}</h1>
       <p class="post-deck">${esc(tool.description)}</p>
@@ -732,6 +733,49 @@ ${header({ slug: tool.category || '' })}
       ${unlinkScheduled(body)}
     </article>
   </div>
+</main>
+${footer}
+</body>
+</html>
+`;
+};
+
+// Tools index: standalone calculator pages plus calculators embedded in live articles.
+const toolsPage = {
+  title: 'Free Wellness Cost Calculators and Tools | Wellness Signal',
+  description: 'Free wellness cost calculators for Pilates classes, ClassPass credits, wearables, saunas, retreats, fitness apps and workplace wellness programs.',
+};
+const toolEntries = () => [
+  ...tools.map(tool => ({ title: tool.title, url: tool.url, summary: tool.description, where: 'Standalone calculator' })),
+  ...Object.entries(calculators).filter(([id]) => !tools.some(tool => tool.calc === id)).flatMap(([id, calc]) => {
+    const hosts = posts.filter(post => post.body.includes(`{{calc:${id}}}`));
+    return hosts.length ? [{ title: calc.title, url: `${hosts[0].url}#${id}-title`, summary: calc.intro, where: hosts.map(post => post.title) }] : [];
+  }),
+];
+const renderToolsIndex = () => {
+  const url = `${canonical}/tools/`;
+  const entries = toolEntries();
+  const breadcrumb = crumbs(url, [{ name: 'Tools', item: url }]);
+  const jsonLd = [{ '@context': 'https://schema.org', '@graph': [organization, website, breadcrumb, {
+    '@type': 'CollectionPage', '@id': `${url}#collection`, url, name: toolsPage.title, description: toolsPage.description,
+    isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
+    mainEntity: { '@type': 'ItemList', itemListElement: entries.map((entry, i) => ({ '@type': 'ListItem', position: i + 1, name: entry.title, url: `${canonical}${entry.url}` })) },
+  }] }];
+  return `${docHead({ title: toolsPage.title, description: toolsPage.description, url, image: 'desk-sea-view', jsonLd })}
+<body>
+${header({ slug: 'tools' })}
+<main id="main">
+  <section class="hero no-image articles-hero">${sprig}
+    <div class="wrap"><div class="hero-text">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Tools</span></nav>
+      <span class="eyebrow">Free calculators</span>
+      <h1>Wellness Calculators and Tools</h1>
+      <div class="lead"><p>Estimate what classes, memberships, devices, saunas, retreats and apps really cost. Every calculator runs in your browser, needs no login and does not store what you enter.</p></div>
+    </div></div>
+  </section>
+  <section class="section tone-white"><div class="wrap">
+    <ul class="tool-list">${entries.map(entry => `<li><a class="tool-card" href="${entry.url}"><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p><span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span><span class="more">Open calculator ${icon('arrow', 16)}</span></a></li>`).join('')}</ul>
+  </div></section>
 </main>
 ${footer}
 </body>
@@ -794,6 +838,8 @@ for (const tool of tools) {
   await mkdir(`dist${tool.url}`, { recursive: true });
   await writeFile(`dist${tool.url}index.html`, withCalcScript(renderTool(tool)));
 }
+await mkdir('dist/tools', { recursive: true });
+await writeFile('dist/tools/index.html', renderToolsIndex());
 await mkdir('dist/articles', { recursive: true });
 await writeFile('dist/articles/index.html', renderArticlesIndex());
 for (const slug of Object.keys(authors)) {
@@ -811,7 +857,7 @@ await writeFile('dist/robots.txt', production
   : 'User-agent: *\nDisallow: /\n'
 );
 await writeFile('dist/sitemap.xml', production
-  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
+  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url><url><loc>${canonical}/tools/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
   : '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>'
 );
 // llms.txt: live posts grouped by silo, from the same set as the sitemap.
@@ -821,7 +867,7 @@ await writeFile('dist/llms.txt', production
   ? [`# ${site.name}`, '', `> ${site.description}`, '',
     `${site.name} publishes sourced research and analysis on the business and evidence behind wellness. Every statistic links to its primary source.`, '',
     '## Site', '', `- [About](${canonical}/about/): Who we are and our editorial standards`, `- [All articles](${canonical}/articles/): Every published article and blog`, `- [Contact](${canonical}/contact/): Editorial contact`, '',
-    ...(tools.length ? ['## Calculators', '', ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
+    ...(tools.length ? ['## Calculators', '', `- [All calculators](${canonical}/tools/): Free wellness cost calculators`, ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
     ...categories.filter(c => posts.some(p => p.category === c.slug)).flatMap(c => [
       `## ${c.name}`, '', `- [${c.name} hub](${canonical}/${c.slug}/): ${c.summary}`,
       ...silo(c.slug).map(post => `- [${post.title}](${canonical}${post.url}): ${plain(post.description)}`), '',
@@ -836,6 +882,7 @@ await writeFile('dist/build-manifest.json', JSON.stringify({
   pages: [
     ...pages.map(page => ({ slug: path(page.slug), draft: false })),
     { slug: '/articles/', draft: false },
+    { slug: '/tools/', draft: false },
     ...Object.keys(authors).map(slug => ({ slug: authorUrl(slug), draft: false })),
     ...tools.map(tool => ({ slug: tool.url, draft: false })),
     ...posts.map(post => ({ slug: post.url, draft: false, published: post.published })),
