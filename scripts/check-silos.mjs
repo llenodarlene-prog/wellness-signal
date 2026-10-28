@@ -5,12 +5,15 @@ import { readdir } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
 import { loadPosts } from './lib/posts.mjs';
 import { toBlocks } from './lib/markdown.mjs';
+import { loadTools } from './lib/tools.mjs';
 
 const today = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
 const posts = await loadPosts(today);
 const byUrl = new Map(posts.map(post => [post.url, post]));
 const scheduled = new Set((await loadPosts('9999-12-31')).map(post => post.url).filter(url => !byUrl.has(url)));
-const pageUrls = new Set([...pages.map(page => (page.slug ? `/${page.slug}/` : '/')), '/articles/']);
+// Calculator pages are utilities, so links to them do not count toward silo link totals.
+const toolUrls = new Set((await loadTools()).map(tool => tool.url));
+const pageUrls = new Set([...pages.map(page => (page.slug ? `/${page.slug}/` : '/')), '/articles/', ...toolUrls]);
 const images = new Set((await readdir('assets/images')).map(name => name.replace(/\.webp$/, '')));
 const failures = [];
 const fail = (post, message) => failures.push(`${post.url}: ${message}`);
@@ -60,7 +63,7 @@ for (const post of posts) {
   if (!['hub', 'supporting', 'bridge'].includes(post.role)) fail(post, `unknown role "${post.role}"`);
   if (inbound.get(post.url).size < 2) fail(post, `needs 2 body links from other posts, has ${inbound.get(post.url).size}`);
   // Planned links to scheduled posts count toward the total; they go live on their date.
-  const count = [...new Set(links(post).filter(href => href.startsWith('/')).map(href => href.split('#')[0]))].length;
+  const count = [...new Set(links(post).filter(href => href.startsWith('/')).map(href => href.split('#')[0]))].filter(href => !toolUrls.has(href)).length;
   if (post.role !== 'hub' && (count < 2 || count > 4)) fail(post, `spokes need 2 to 3 internal body links, has ${count}`);
 
   unique(post, 'title', post.title);

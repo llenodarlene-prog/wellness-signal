@@ -180,6 +180,8 @@ KFF's 2025 survey found that **23% of smaller firms** offering the selected well
 
 Low-pressure recognition may be appropriate, but employers should avoid rewards tied to sensitive health disclosures or compulsory achievement. Laws and benefit-plan rules can apply to wellness programme incentives, so any financial design needs appropriate HR and legal review.
 
+{{calc:wellness-cost-participant}}
+
 ## A Four-Week Pilot for a 20–40-Person Team
 
 A small employer can start with one optional activity and a simple participation method rather than purchasing software immediately. The purpose of the pilot is to identify whether the idea is accessible and attractive enough to repeat.

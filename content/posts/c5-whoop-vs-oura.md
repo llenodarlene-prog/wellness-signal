@@ -91,6 +91,8 @@ Oura owners may purchase an updated ring later, creating another hardware expens
 
 WHOOP includes eligible hardware with membership, but upgrade access depends on plan, commitment and upgrade rules. Neither model guarantees that every future device will be included without conditions or extra charges.
 
+{{calc:whoop-oura-cost}}
+
 ## Sleep and Recovery Tracking
 
 Both products provide sleep-related measurements and recovery-oriented analysis. Neither score shows that a recovery habit such as a [sauna or steam room](/longevity-recovery/sauna-vs-steam-room-benefits-differences/) session has worked. Their interfaces and scoring systems differ, so the best fit depends on how the information will be used rather than which dashboard displays the most numbers.

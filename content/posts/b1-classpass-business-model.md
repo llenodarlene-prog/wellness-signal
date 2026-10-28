@@ -240,7 +240,7 @@ However, the credit model makes pricing less predictable than a fixed-price memb
 
 A person who attends several types of classes may benefit from a membership that combines access to different providers. Someone attending the same studio several times each week may find that a direct package provides better pricing or reservation access.
 
-For this reason, comparing ClassPass with a studio membership requires looking beyond the headline subscription price. Consumers need to consider the effective cost of the activities they actually book.
+For this reason, comparing ClassPass with a studio membership requires looking beyond the headline subscription price. Consumers need to consider the effective cost of the activities they actually book. A [ClassPass cost calculator](/classpass-cost-calculator/) converts a plan into cost per credit and cost per class.
 
 Credit requirements can also change based on demand and availability. A plan that covers several sessions one month may cover fewer if the member begins booking more expensive time slots.
 

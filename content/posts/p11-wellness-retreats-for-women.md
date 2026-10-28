@@ -180,6 +180,8 @@ A practical comparison should cover the same cost categories for every programme
 
 Resort-based programmes open to all guests are compared in our guide to [wellness retreats in the US](/travel-retreats/wellness-retreats-in-the-us/).
 
+{{calc:retreat-budget}}
+
 ## FAQs
 
 ### Are Women's Wellness Retreats Always Women-Only?

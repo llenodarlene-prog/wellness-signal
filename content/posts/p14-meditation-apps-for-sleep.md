@@ -171,6 +171,8 @@ The most useful app is often the one whose content and access rules match a pers
 
 Apps also differ in whether they require an account and how much device interaction is needed at bedtime. A simple routine may be preferable to extensive browsing if the purpose is to wind down.
 
+{{calc:app-subscription}}
+
 ## FAQs
 
 ### Which Meditation App for Sleep Is Completely Free?
