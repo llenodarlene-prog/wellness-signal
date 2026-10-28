@@ -1,3 +1,4 @@
+import { renderCalculator } from './calculators.mjs';
 // Small Markdown renderer for editorial posts: headings, paragraphs, emphasis,
 // links, ordered/unordered lists, pipe tables, and blockquotes. It returns
 // structured blocks so the post template can style sections (Key Takeaways,
@@ -113,10 +114,12 @@ export const renderChart = (chart, id) => {
 </figure>`;
 };
 
-export const renderBlock = (block, charts = {}) => {
+export const renderBlock = (block, charts = {}, calcs = {}) => {
   if (block.type === 'p') {
     const marker = block.text.match(/^\{\{chart:([a-z0-9-]+)\}\}$/);
     if (marker) return renderChart(charts[marker[1]], marker[1]);
+    const calc = block.text.match(/^\{\{calc:([a-z0-9-]+)\}\}$/);
+    if (calc) return renderCalculator(calcs[calc[1]], calc[1]);
   }
   switch (block.type) {
     case 'h': return `<h${block.level}>${inline(block.text)}</h${block.level}>`;
