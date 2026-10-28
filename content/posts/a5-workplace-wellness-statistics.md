@@ -66,6 +66,8 @@ A 2019 JAMA trial included 32,974 employees across 160 worksites. Researchers fo
 
 Employers can distinguish eligible employees, first-time users, ongoing participants and measurable outcomes. A programme's purpose should determine the appropriate success metric rather than relying exclusively on enrolment totals. Small employers can start with low-cost [employee wellness challenges](/work-wellness/employee-wellness-challenges-small-teams/) before comparing [employee wellness software](/work-wellness/employee-wellness-software-small-teams/) for small teams.
 
+{{calc:wellness-cost-participant}}
+
 ## FAQs
 
 ### What Percentage of Employers Offer Wellness Programmes?

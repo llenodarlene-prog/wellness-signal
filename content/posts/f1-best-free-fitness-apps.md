@@ -174,6 +174,8 @@ Activity apps can process workout history, location data and potentially sensiti
 
 A workout app can also present estimated calories, recovery indicators or training recommendations without those measurements being clinically validated. Treat such features as exercise tools rather than diagnostic advice, and seek qualified support when managing an injury or medical condition.
 
+{{calc:app-subscription}}
+
 ## FAQs
 
 ### Are There Fitness Apps That Stay Free Without a Trial?

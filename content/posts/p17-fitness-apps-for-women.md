@@ -222,6 +222,8 @@ The best app depends on how someone prefers to train. Before subscribing, compar
 
 A large workout library can look impressive but still be difficult to use consistently. A smaller programme that matches someone's schedule and goals may be more valuable.
 
+{{calc:app-subscription}}
+
 ## FAQs
 
 ### What Is the Best Fitness App for Women?

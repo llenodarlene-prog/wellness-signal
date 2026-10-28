@@ -55,7 +55,7 @@ The CDC reported 52.3% of men and 42.4% of women met aerobic guidelines during l
 
 ## Exercise Types Within Fitness Facilities
 
-The Health & Fitness Association reported treadmill use among 43.4% of facility members in 2024, followed by dumbbells or free weights at 32.1%, the equipment at the centre of [Pilates vs strength training](/fitness/pilates-vs-strength-training/). Yoga participation reached 21.8%, while Pilates was 8.1%; how the two practices differ is compared in [Pilates vs yoga](/fitness/pilates-vs-yoga/).
+The Health & Fitness Association reported treadmill use among 43.4% of facility members in 2024, followed by dumbbells or free weights at 32.1%, the equipment at the centre of [Pilates vs strength training](/fitness/pilates-vs-strength-training/). Yoga participation reached 21.8%, while Pilates was 8.1%; how the two practices differ is compared in [Pilates vs yoga](/fitness/pilates-vs-yoga/). For members budgeting for studio classes, the [Pilates class cost calculator](/pilates-class-cost-calculator/) compares drop-ins, packages and memberships.
 
 {{chart:hfa-member-activities}}
 
@@ -65,7 +65,7 @@ These activity shares refer to fitness facility members, not all Americans. One 
 
 ## Gym Membership and Nonmember Exercise
 
-HFA estimated 77 million US fitness facility members in 2024, equal to 24.9% of Americans aged six and older. The wider customer population, including nonmembers accessing facilities through other arrangements, was reported at nearly 96 million. Booking marketplaces are one such arrangement, covered in our [ClassPass business model](/fitness/classpass-business-model-studio-partners/) analysis, while many studios run on the software examined in our [Mindbody business model](/fitness/mindbody-business-model/) breakdown, with options compared in [ClassPass alternatives](/fitness/classpass-alternatives/) and [Mindbody alternatives](/fitness/mindbody-alternatives/).
+HFA estimated 77 million US fitness facility members in 2024, equal to 24.9% of Americans aged six and older. The wider customer population, including nonmembers accessing facilities through other arrangements, was reported at nearly 96 million. Booking marketplaces are one such arrangement, covered in our [ClassPass business model](/fitness/classpass-business-model-studio-partners/) analysis, while many studios run on the software examined in our [Mindbody business model](/fitness/mindbody-business-model/) breakdown, with options compared in [ClassPass alternatives](/fitness/classpass-alternatives/) and [Mindbody alternatives](/fitness/mindbody-alternatives/). Marketplace users can check their [ClassPass cost](/classpass-cost-calculator/) per credit and per class.
 
 A person can meet aerobic guidelines through walking, cycling or running without ever visiting a gym. Home equipment and wearables serve that group in different ways, as our [Peloton business model](/fitness/peloton-business-model-hardware-memberships/) and [WHOOP business model](/fitness/whoop-business-model-device-access/) analyses show. Free apps are another route, compared in our guides to [free fitness apps](/fitness/best-free-fitness-apps/) and [fitness apps for women](/fitness/fitness-apps-for-women/). Conversely, membership alone does not establish exercise frequency or whether a member meets recommended activity levels.
 

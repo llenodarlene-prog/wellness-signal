@@ -119,7 +119,7 @@ Strength training can range from bodyweight programmes at home to full commercia
 
 ### Studio Pilates Can Be More Expensive
 
-Reformer classes often operate with fewer participants because each person needs a machine. That can increase per-class prices compared with large group classes or basic gym access.
+Reformer classes often operate with fewer participants because each person needs a machine. That can increase per-class prices compared with large group classes or basic gym access. You can estimate your monthly and annual [Pilates class cost](/pilates-class-cost-calculator/) from your studio's published prices.
 
 Strength training can be comparatively inexpensive through a standard gym membership, but personal coaching can increase the cost substantially.
 

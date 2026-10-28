@@ -202,7 +202,7 @@ This provides a business explanation for pricing differences, but not proof that
 
 ### How to Compare Membership and Drop-In Costs
 
-A class package may reduce the cost per session but create expiry or cancellation restrictions. Drop-in bookings offer flexibility, while recurring memberships can work better for consistent attendance.
+A class package may reduce the cost per session but create expiry or cancellation restrictions. Drop-in bookings offer flexibility, while recurring memberships can work better for consistent attendance. A [Pilates class cost calculator](/pilates-class-cost-calculator/) shows which option costs less at your own attendance level.
 
 Before paying, compare intro offers, normal class rates, booked-session limits, waitlists, and missed-class policies. An attractive advertised rate may apply only to a first visit or a minimum commitment.
 
