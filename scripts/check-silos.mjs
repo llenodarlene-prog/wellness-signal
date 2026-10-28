@@ -13,7 +13,7 @@ const byUrl = new Map(posts.map(post => [post.url, post]));
 const scheduled = new Set((await loadPosts('9999-12-31')).map(post => post.url).filter(url => !byUrl.has(url)));
 // Calculator pages are utilities, so links to them do not count toward silo link totals.
 const toolUrls = new Set((await loadTools()).map(tool => tool.url));
-const pageUrls = new Set([...pages.map(page => (page.slug ? `/${page.slug}/` : '/')), '/articles/', ...toolUrls]);
+const pageUrls = new Set([...pages.map(page => (page.slug ? `/${page.slug}/` : '/')), '/articles/', '/tools/', ...toolUrls]);
 const images = new Set((await readdir('assets/images')).map(name => name.replace(/\.webp$/, '')));
 const failures = [];
 const fail = (post, message) => failures.push(`${post.url}: ${message}`);
