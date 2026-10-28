@@ -180,6 +180,8 @@ Not every free meditation app requires the same data, payment details or ongoing
 6. **Privacy controls:** Read the publisher's data policy, especially for sensitive personal reflections or usage records.
 7. **Platform support:** Confirm the service is currently available for the intended iOS or Android version.
 
+{{calc:app-subscription}}
+
 ## Editorial Links, Affiliates and Disclosure
 
 The links above are regular editorial links to providers and do not include affiliate tracking codes. Any future affiliate partnership will be disclosed near the beginning of the article and will not influence the criteria or order of recommendations.

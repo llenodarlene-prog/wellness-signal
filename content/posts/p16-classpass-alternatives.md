@@ -43,7 +43,7 @@ The list intentionally includes both in-person and digital alternatives. They ar
 
 ClassPass members buy credits and use those credits for eligible classes, gym visits, and wellness services. The credits required for a booking can change based on location, time, popularity, equipment, promotions, and other factors.
 
-That variable pricing is a defining feature of the [ClassPass business model](/fitness/classpass-business-model-studio-partners/). It gives users flexibility across providers, but it can make the effective cost of a particular class harder to predict than a fixed gym membership.
+That variable pricing is a defining feature of the [ClassPass business model](/fitness/classpass-business-model-studio-partners/). It gives users flexibility across providers, but it can make the effective cost of a particular class harder to predict than a fixed gym membership. Before switching, estimate your current [ClassPass cost](/classpass-cost-calculator/) per class so each alternative has a fair baseline.
 
 ## ClassPass Alternatives at a Glance
 

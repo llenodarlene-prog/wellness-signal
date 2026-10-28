@@ -103,7 +103,7 @@
 
     'wellness-cost-participant': v => {
       const errors = {};
-      if (!(v.programme >= 0) || v.programme === null) errors.programme = 'Enter the programme cost.';
+      if (!(v.programme >= 0) || v.programme === null) errors.programme = 'Enter the program cost.';
       if (!(v.eligible > 0)) errors.eligible = 'Enter eligible employees above zero.';
       if (!(v.participants >= 0) || v.participants === null) errors.participants = 'Enter participants.';
       else if (v.participants > v.eligible) errors.participants = 'Participants cannot exceed eligible employees.';
@@ -112,7 +112,7 @@
       if (Object.keys(errors).length) return { errors };
       const total = v.programme + (v.implementation || 0);
       return { rows: [
-        ['Total programme cost', money(total), true],
+        ['Total program cost', money(total), true],
         ['Cost per eligible employee', money(total / v.eligible)],
         ['Cost per participant', v.participants ? money(total / v.participants) : 'No participants'],
         ['Cost per completion', v.completed ? money(total / v.completed) : 'No completions'],
@@ -124,9 +124,9 @@
     'retreat-budget': (v, form) => {
       const mode = form.elements.accMode.value;
       const errors = {};
-      if (!(v.programme >= 0) || v.programme === null) errors.programme = 'Enter the programme fee.';
+      if (!(v.programme >= 0) || v.programme === null) errors.programme = 'Enter the program fee.';
       if (!(v.nights >= 0) || v.nights === null) errors.nights = 'Enter the number of nights.';
-      if (!(v.travellers >= 1)) errors.travellers = 'Enter at least one traveller.';
+      if (!(v.travellers >= 1)) errors.travellers = 'Enter at least one traveler.';
       if (mode === 'nightly' && !(v.nightly >= 0 && v.nightly !== null)) errors.nightly = 'Enter the nightly rate.';
       if (mode === 'package' && !(v.accPackage >= 0 && v.accPackage !== null)) errors.accPackage = 'Enter the package price.';
       if (Object.keys(errors).length) return { errors };
@@ -135,12 +135,12 @@
       const extras = (v.meals || 0) + (v.treatments || 0) + (v.other || 0);
       const total = v.programme + acc + travel + extras;
       return { rows: [
-        ['Programme fee', money(v.programme)],
+        ['Program fee', money(v.programme)],
         ['Accommodation', mode === 'included' ? 'Included' : money(acc)],
         ['Travel', money(travel)],
         ['Extras', money(extras)],
         ['Total trip cost', money(total), true],
-        ['Cost per traveller', money(total / v.travellers)],
+        ['Cost per traveler', money(total / v.travellers)],
         ['Cost per day', money(total / (v.nights + 1))],
       ] };
     },

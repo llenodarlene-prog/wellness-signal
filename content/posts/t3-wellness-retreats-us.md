@@ -204,6 +204,8 @@ Before paying, compare the full cost of a realistic itinerary that includes the 
 5. **Cancellation and refund conditions:** Request the policy that applies to your selected dates and package.
 6. **Actual travel costs:** Calculate flights, transfers and any required arrival-day accommodation alongside the retreat fee.
 
+{{calc:retreat-budget}}
+
 ## Our Links and Disclosure
 
 The links in this article go directly to operator websites and are **not affiliate links**. If we add a booking partner link in future, it will be clearly disclosed. A third-party hotel reservation may not include a retreat's paid workshops or treatments, so check what a listing covers before booking.

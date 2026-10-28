@@ -2,8 +2,11 @@ import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
 import { inline as mdInline, plain, renderBlock } from './lib/markdown.mjs';
+import { renderCalculator } from './lib/calculators.mjs';
 import { loadPosts } from './lib/posts.mjs';
 import { charts } from '../content/charts.mjs';
+import { calculators } from '../content/calculators.mjs';
+import { loadTools } from './lib/tools.mjs';
 import {
   categoryIcons, categoryLens, economy, partnerRules, evidenceLadder, icon, readingSteps, separations, sprig, standardIcons,
 } from '../content/features.mjs';
@@ -23,6 +26,7 @@ const unlinkScheduled = html => html.replace(/<a href="(\/[^"]*)">([\s\S]*?)<\/a
 const assetVersion = createHash('sha256')
   .update(await readFile('assets/css/site.css'))
   .update(await readFile('assets/js/site.js'))
+  .update(await readFile('assets/js/calculators.js'))
   .digest('hex').slice(0, 10);
 
 // Width and height of each WebP image, read from its file header.
@@ -142,6 +146,8 @@ const footer = `<footer class="site-footer">
 </footer>
 <button class="to-top" type="button" aria-label="Back to top">${icon('arrow', 18)}</button>
 <script src="/assets/js/site.js?v=${assetVersion}" defer></script>`;
+// Pages with a calculator load its script; others do not.
+const withCalcScript = html => (html.includes('data-calc=') ? html.replace('</body>', `<script src="/assets/js/calculators.js?v=${assetVersion}" defer></script>\n</body>`) : html);
 
 // ---------- Feature blocks ----------
 
@@ -611,7 +617,7 @@ const renderPost = post => {
     if (/^Key Takeaways$/i.test(section.title)) return takeawaysBlock(section);
     if (section.title === post.faqTitle) return faqBlock(post, section);
     if (/^Sources$/i.test(section.title)) return sourcesBlock(section);
-    return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(block => renderBlock(block, charts)).join('\n')}</section>`;
+    return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(block => renderBlock(block, charts, calculators)).join('\n')}</section>`;
   }).join('\n');
 
   return `${docHead({ title: post.seo_title || post.title, description: post.description, url, image: post.image, type: 'article', jsonLd, preload: post.image, extra })}
@@ -634,7 +640,7 @@ ${header({ slug: post.category })}
       <ol>${toc.map(section => `<li><a href="#${section.id}">${esc(section.title)}</a></li>`).join('')}</ol>
     </aside>
     <article class="prose">
-      <div class="post-intro">${unlinkScheduled(post.intro.map(block => renderBlock(block, charts)).join('\n'))}</div>
+      <div class="post-intro">${unlinkScheduled(post.intro.map(block => renderBlock(block, charts, calculators)).join('\n'))}</div>
       ${unlinkScheduled(body)}
     </article>
   </div>
@@ -676,6 +682,56 @@ ${header({ slug: 'about' })}
     </div>
   </div></section>
   ${own.length ? `<section class="section tone-cream"><div class="wrap"><div class="section-head"><span class="eyebrow">Latest coverage</span><h2>Articles by ${esc(a.name)}</h2></div>${postGrid(own.slice(0, 6))}</div></section>` : ''}
+</main>
+${footer}
+</body>
+</html>
+`;
+};
+
+const tools = await loadTools();
+const renderTool = tool => {
+  const url = `${canonical}${tool.url}`;
+  const breadcrumb = crumbs(url, [{ name: tool.title, item: url }]);
+  const graph = [organization, website, breadcrumb, {
+    '@type': 'WebPage', '@id': `${url}#webpage`, url, name: tool.seo_title, description: tool.description,
+    dateModified: tool.updated, isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
+    mainEntity: { '@id': `${url}#app` },
+  }, {
+    '@type': 'WebApplication', '@id': `${url}#app`, name: tool.title, url, description: tool.description,
+    applicationCategory: 'FinanceApplication', operatingSystem: 'Any', browserRequirements: 'Requires JavaScript',
+    isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, publisher: { '@id': organization['@id'] },
+  }];
+  if (tool.faqs.length) {
+    graph.push({
+      '@type': 'FAQPage', '@id': `${url}#faq`,
+      mainEntity: tool.faqs.map(faq => ({ '@type': 'Question', name: faq.q, acceptedAnswer: { '@type': 'Answer', text: plain(faq.a.map(block => block.text || '').join(' ')) } })),
+    });
+  }
+  const body = tool.sections.map(section => {
+    if (section.title === tool.faqTitle) return faqBlock(tool, section);
+    if (/^Sources$/i.test(section.title)) return sourcesBlock(section);
+    return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(block => renderBlock(block, charts, calculators)).join('\n')}</section>`;
+  }).join('\n');
+  return `${docHead({ title: tool.seo_title, description: tool.description, url, image: tool.image || 'desk-sea-view', jsonLd: [{ '@context': 'https://schema.org', '@graph': graph }] })}
+<body class="post-page tool-page">
+${header({ slug: tool.category || '' })}
+<main id="main">
+  <header class="post-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">${esc(tool.title)}</span></nav>
+      <span class="eyebrow">Free calculator</span>
+      <h1>${esc(tool.title)}</h1>
+      <p class="post-deck">${esc(tool.description)}</p>
+    </div>
+  </header>
+  <div class="wrap tool-layout">
+    ${renderCalculator(calculators[tool.calc], tool.calc)}
+    <article class="prose">
+      <div class="post-intro">${unlinkScheduled(tool.intro.map(block => renderBlock(block, charts, calculators)).join('\n'))}</div>
+      ${unlinkScheduled(body)}
+    </article>
+  </div>
 </main>
 ${footer}
 </body>
@@ -732,7 +788,11 @@ for (const page of pages) {
 
 for (const post of posts) {
   await mkdir(`dist${post.url}`, { recursive: true });
-  await writeFile(`dist${post.url}index.html`, renderPost(post));
+  await writeFile(`dist${post.url}index.html`, withCalcScript(renderPost(post)));
+}
+for (const tool of tools) {
+  await mkdir(`dist${tool.url}`, { recursive: true });
+  await writeFile(`dist${tool.url}index.html`, withCalcScript(renderTool(tool)));
 }
 await mkdir('dist/articles', { recursive: true });
 await writeFile('dist/articles/index.html', renderArticlesIndex());
@@ -751,7 +811,7 @@ await writeFile('dist/robots.txt', production
   : 'User-agent: *\nDisallow: /\n'
 );
 await writeFile('dist/sitemap.xml', production
-  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
+  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
   : '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>'
 );
 // llms.txt: live posts grouped by silo, from the same set as the sitemap.
@@ -761,6 +821,7 @@ await writeFile('dist/llms.txt', production
   ? [`# ${site.name}`, '', `> ${site.description}`, '',
     `${site.name} publishes sourced research and analysis on the business and evidence behind wellness. Every statistic links to its primary source.`, '',
     '## Site', '', `- [About](${canonical}/about/): Who we are and our editorial standards`, `- [All articles](${canonical}/articles/): Every published article and blog`, `- [Contact](${canonical}/contact/): Editorial contact`, '',
+    ...(tools.length ? ['## Calculators', '', ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
     ...categories.filter(c => posts.some(p => p.category === c.slug)).flatMap(c => [
       `## ${c.name}`, '', `- [${c.name} hub](${canonical}/${c.slug}/): ${c.summary}`,
       ...silo(c.slug).map(post => `- [${post.title}](${canonical}${post.url}): ${plain(post.description)}`), '',
@@ -776,6 +837,7 @@ await writeFile('dist/build-manifest.json', JSON.stringify({
     ...pages.map(page => ({ slug: path(page.slug), draft: false })),
     { slug: '/articles/', draft: false },
     ...Object.keys(authors).map(slug => ({ slug: authorUrl(slug), draft: false })),
+    ...tools.map(tool => ({ slug: tool.url, draft: false })),
     ...posts.map(post => ({ slug: post.url, draft: false, published: post.published })),
   ],
 }, null, 2));

@@ -169,6 +169,8 @@ Traditional cabins may require dedicated electrical circuits, appropriate floori
 
 Neither technology has a universal installation price. A meaningful comparison requires actual quotes and confirmation that the property can accommodate the selected equipment.
 
+{{calc:sauna-electricity}}
+
 ## 8. Maintenance, Cleaning and Expected Ownership
 
 Home sauna maintenance is influenced by materials and use frequency. Wooden benches and surfaces require care, while blankets have liners, controllers, and contact surfaces that need cleaning according to the manufacturer.
