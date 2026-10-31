@@ -113,3 +113,35 @@
     grid.querySelectorAll('.post-card, .tool-list > li').forEach(card => { card.hidden = value !== 'all' && card.dataset.category !== value; });
   }));
 })();
+
+// FAQ hubs: search and topic chips. Answers stay in the HTML; this only hides cards.
+(() => {
+  const box = document.getElementById('faq-q');
+  const chips = document.querySelectorAll('[data-faq-filter]');
+  if (!box && !chips.length) return;
+  const groups = [...document.querySelectorAll('.faq-group')];
+  const none = document.querySelector('.faq-none');
+  let topic = 'all';
+  const apply = () => {
+    const q = (box?.value || '').trim().toLowerCase();
+    let shown = 0;
+    groups.forEach(g => {
+      const inTopic = topic === 'all' || g.dataset.group === topic;
+      let visible = 0;
+      g.querySelectorAll('.faq-item').forEach(item => {
+        const hit = inTopic && (!q || item.textContent.toLowerCase().includes(q));
+        item.hidden = !hit;
+        if (hit) visible += 1;
+      });
+      g.hidden = !visible;
+      shown += visible;
+    });
+    if (none) none.hidden = shown > 0;
+  };
+  box?.addEventListener('input', apply);
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    topic = chip.dataset.faqFilter;
+    chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+    apply();
+  }));
+})();
