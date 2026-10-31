@@ -29,7 +29,7 @@
       const best = options.reduce((a, b) => (b[1] < a[1] ? b : a));
       rows.push(['Lowest estimated cost', `${best[0]} (${money(best[1])} a month)`, true]);
       if (v.memPrice && v.dropIn > 0) rows.push(['Membership break-even', `${num(v.memPrice / v.dropIn, 1)} drop-in classes a month`]);
-      return { rows };
+      return { rows, bars: { title: 'Monthly cost by payment option', items: options, best: best[0] } };
     },
 
     'classpass-cost': v => {
@@ -54,7 +54,8 @@
         rows.push(['Compared with direct booking', diff >= 0 ? `${money(diff)} less per class on ClassPass` : `${money(-diff)} more per class on ClassPass`]);
         rows.push(['Break-even credits per class', num(v.direct / perCredit, 1)]);
       }
-      return { rows, note: 'Extra credits are counted at their own price in total spend, not in the cost per credit.' };
+      const bars = v.direct ? { title: 'Cost per class', items: [['ClassPass', classCost], ['Direct drop-in', v.direct]] } : null;
+      return { rows, bars, note: 'Extra credits are counted at their own price in total spend, not in the cost per credit.' };
     },
 
     'whoop-oura-cost': (v, form) => {
@@ -74,7 +75,7 @@
       rows.push([`Your ${num(years, 0)}-year total`, `Oura ${money(o)} · WHOOP ${money(w)}`, true]);
       rows.push(['Difference', d === 0 ? 'The same' : `${d > 0 ? 'Oura' : 'WHOOP'} costs ${money(Math.abs(d))} more`]);
       if (w > 0) rows.push(['Percentage difference', `${pct(Math.abs(d) / w * 100)} ${d >= 0 ? 'more' : 'less'} for Oura than WHOOP`]);
-      return { rows };
+      return { rows, bars: { title: `Total cost over ${num(years, 0)} ${years === 1 ? 'year' : 'years'}`, items: [['Oura', o], ['WHOOP', w]] } };
     },
 
     'sauna-electricity': v => {
@@ -98,7 +99,7 @@
         const d = annual.Traditional - annual.Infrared;
         rows.push(['Annual difference', d === 0 ? 'The same' : `${d > 0 ? 'Traditional' : 'Infrared'} costs ${money(Math.abs(d))} more a year`]);
       }
-      return { rows };
+      return { rows, bars: { title: 'Estimated electricity cost per year', items: Object.entries(annual) } };
     },
 
     'wellness-cost-participant': v => {
@@ -118,7 +119,7 @@
         ['Cost per completion', v.completed ? money(total / v.completed) : 'No completions'],
         ['Participation rate', pct(v.participants / v.eligible * 100)],
         ['Completion rate', v.participants ? pct(v.completed / v.participants * 100) : 'n/a'],
-      ] };
+      ], bars: { title: 'Participation funnel', unit: 'count', items: [['Eligible', v.eligible], ['Participated', v.participants], ['Completed', v.completed]] } };
     },
 
     'retreat-budget': (v, form) => {
@@ -142,7 +143,7 @@
         ['Total trip cost', money(total), true],
         ['Cost per traveler', money(total / v.travellers)],
         ['Cost per day', money(total / (v.nights + 1))],
-      ] };
+      ], bars: { title: 'Where the budget goes', items: [['Program', v.programme], ['Accommodation', acc], ['Travel', travel], ['Extras', extras]].filter(([, n]) => n > 0) } };
     },
 
     'app-subscription': v => {
@@ -163,8 +164,44 @@
       if (yearMonthly > 0) rows.push(['Savings percentage', pct(saving / yearMonthly * 100)]);
       rows.push([`${num(v.years, 0)}-year totals`, `Monthly ${money(yearMonthly * v.years + fee)} · Annual ${money(v.annual * v.years + fee)}`]);
       rows.push([`${num(v.years, 0)}-year difference`, money(Math.abs(saving * v.years))]);
-      return { rows, note: v.trialDays ? `A ${num(v.trialDays, 0)}-day free trial delays your first charge but is not deducted here.` : '' };
+      return { rows, bars: { title: `Total over ${num(v.years, 0)} ${v.years === 1 ? 'year' : 'years'}`, items: [['Monthly billing', yearMonthly * v.years + fee], ['Annual plan', v.annual * v.years + fee]] }, note: v.trialDays ? `A ${num(v.trialDays, 0)}-day free trial delays your first charge but is not deducted here.` : '' };
     },
+  };
+
+  const ICONS = [
+    [/lowest/i, 'trophy'], [/break-even/i, 'scale'], [/difference|compared/i, 'arrows-diff'], [/percent|rate$/i, 'percentage'],
+    [/saving/i, 'discount'], [/credit/i, 'coins'], [/per class/i, 'ticket'], [/kwh|session/i, 'bolt'], [/travel/i, 'plane'],
+    [/accommodation/i, 'home'], [/extras/i, 'sparkles'], [/per day/i, 'calendar'], [/per (participant|traveler|eligible|completion)/i, 'user'],
+    [/total/i, 'wallet'], [/year|annual/i, 'calendar-week'], [/month/i, 'calendar'], [/fee/i, 'receipt'],
+  ];
+  const icon = (name, cls = 'ti') => `<svg class="${cls}" aria-hidden="true" focusable="false"><use href="#ti-${name}"></use></svg>`;
+  const iconFor = label => (ICONS.find(([re]) => re.test(label)) || [0, 'chart-bar'])[1];
+  const fmtBar = (unit, n) => (unit === 'count' ? num(n, 0) : money(n));
+
+  const renderBars = bars => {
+    if (!bars || bars.items.length < 2) return '';
+    const max = Math.max(...bars.items.map(([, n]) => n), 0) || 1;
+    const low = Math.min(...bars.items.map(([, n]) => n));
+    return `<figure class="calc-bars"><figcaption>${icon('chart-bar')} ${bars.title}</figcaption>${bars.items.map(([label, n]) => {
+      const top = bars.unit !== 'count' && n === low && bars.items.length > 1;
+      return `<div class="calc-bar${top ? ' is-best' : ''}"><span class="calc-bar-label">${label}${top ? ` ${icon('trophy')}` : ''}</span><span class="calc-bar-track"><span class="calc-bar-fill" style="--w:${Math.max(n / max * 100, n ? 3 : 0)}%"></span></span><span class="calc-bar-val">${fmtBar(bars.unit, n)}</span></div>`;
+    }).join('')}</figure>`;
+  };
+
+  // Count-up animation for the headline figure; skipped for reduced motion.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const countUp = el => {
+    const text = el.textContent;
+    const m = text.match(/^\$([\d,]+\.\d{2})$/);
+    if (!m || reduce) return;
+    const target = Number(m[1].replace(/,/g, ''));
+    const start = performance.now();
+    const step = t => {
+      const k = Math.min((t - start) / 600, 1);
+      el.textContent = money(target * (1 - (1 - k) ** 3));
+      if (k < 1) requestAnimationFrame(step); else el.textContent = text;
+    };
+    requestAnimationFrame(step);
   };
 
   const read = form => {
@@ -192,7 +229,18 @@
       root.dataset.copy = '';
       return;
     }
-    out.innerHTML = `<dl>${result.rows.map(([k, val, em]) => `<div${em ? ' class="em"' : ''}><dt>${k}</dt><dd>${val}</dd></div>`).join('')}</dl>${result.note ? `<p class="calc-note">${result.note}</p>` : ''}`;
+    const hero = result.rows.find(r => r[2]) || result.rows[0];
+    const rest = result.rows.filter(r => r !== hero);
+    const changed = root.dataset.copy !== result.rows.map(([k, val]) => `${k}: ${val}`).join('\n');
+    out.innerHTML = `<div class="calc-hero">${icon(iconFor(hero[0]), 'ti calc-hero-icon')}<div><span class="calc-hero-label">${hero[0]}</span><span class="calc-hero-val">${hero[1]}</span></div></div>
+      ${renderBars(result.bars)}
+      <dl class="calc-tiles">${rest.map(([k, val]) => `<div class="calc-tile">${icon(iconFor(k))}<dt>${k}</dt><dd>${val}</dd></div>`).join('')}</dl>${result.note ? `<p class="calc-note">${icon('info-circle')} ${result.note}</p>` : ''}`;
+    if (changed) {
+      countUp(out.querySelector('.calc-hero-val'));
+      requestAnimationFrame(() => out.querySelectorAll('.calc-bar-fill').forEach(b => b.classList.add('is-in')));
+    } else {
+      out.querySelectorAll('.calc-bar-fill').forEach(b => b.classList.add('is-in'));
+    }
     root.dataset.copy = result.rows.map(([k, val]) => `${k}: ${val}`).join('\n');
   };
 
@@ -201,6 +249,16 @@
     form.addEventListener('submit', e => { e.preventDefault(); run(root); });
     form.addEventListener('reset', () => setTimeout(() => run(root), 0));
     form.addEventListener('change', () => run(root));
+    // Live updates while typing or dragging; sliders and number boxes stay in sync.
+    let timer;
+    form.addEventListener('input', e => {
+      const t = e.target;
+      if (t.classList.contains('calc-range')) form.elements[t.dataset.for].value = t.value;
+      else if (t.name) { const r = form.querySelector(`.calc-range[data-for="${t.name}"]`); if (r && t.value !== '') r.value = t.value; }
+      clearTimeout(timer);
+      timer = setTimeout(() => run(root), 150);
+    });
+    form.addEventListener('reset', () => setTimeout(() => form.querySelectorAll('.calc-range').forEach(r => { r.value = form.elements[r.dataset.for].value || r.min; }), 0));
     root.querySelector('[data-copy]').addEventListener('click', async () => {
       const status = root.querySelector('.calc-status');
       try {
