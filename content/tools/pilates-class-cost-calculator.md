@@ -7,6 +7,7 @@ calc: pilates-cost
 category: fitness
 image: reformer-vs-yoga
 updated: 2026-10-28
+related_tools: classpass-cost-calculator, one-rep-max-calculator, heart-rate-zone-calculator
 ---
 
 Pilates class cost depends on three things you control: how often you attend, how you pay, and which extras you add. This calculator turns your studio's published prices into a monthly cost, an annual cost and a cost per class for each payment option.

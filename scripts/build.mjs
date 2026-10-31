@@ -137,7 +137,7 @@ const footer = `<footer class="site-footer">
       <h2>Publication</h2>
       <ul>
         <li><a href="/about/">About Us</a></li>
-        <li><a href="/tools/">Calculators and Tools</a></li>
+        <li><a href="/calculators/">Calculators and Tools</a></li>
         <li><a href="/about/#editorial-standards">Editorial Standards</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy-policy/">Privacy Policy</a></li>
@@ -151,7 +151,14 @@ const footer = `<footer class="site-footer">
 <button class="to-top" type="button" aria-label="Back to top">${icon('arrow', 18)}</button>
 <script src="/assets/js/site.js?v=${assetVersion}" defer></script>`;
 // Pages with a calculator load its script; others do not.
-const withSprite = html => html.replace(/<body([^>]*)>/, `<body$1>\n${sprite}`);
+// Each page gets only the icons it references, plus those the calculator script draws.
+const jsIcons = new Set([...(await readFile('assets/js/calculators.js', 'utf8')).matchAll(/'([a-z0-9-]+)'/g)].map(m => m[1]));
+const pageSprite = html => {
+  const used = new Set([...html.matchAll(/#ti-([a-z0-9-]+)/g)].map(m => m[1]));
+  if (html.includes('data-calc=')) jsIcons.forEach(name => used.add(name));
+  return sprite.replace(/<symbol id="ti-([a-z0-9-]+)"[\s\S]*?<\/symbol>/g, (sym, name) => (used.has(name) ? sym : ''));
+};
+const withSprite = html => html.replace(/<body([^>]*)>/, (tag) => `${tag}\n${pageSprite(html)}`);
 const withCalcScript = html => (html.includes('data-calc=') ? withSprite(html).replace('</body>', `<script src="/assets/js/calculators.js?v=${assetVersion}" defer></script>\n</body>`) : html);
 
 // ---------- Feature blocks ----------
@@ -697,14 +704,14 @@ ${footer}
 const tools = await loadTools();
 const renderTool = tool => {
   const url = `${canonical}${tool.url}`;
-  const breadcrumb = crumbs(url, [{ name: 'Tools', item: `${canonical}/tools/` }, { name: tool.title, item: url }]);
+  const breadcrumb = crumbs(url, [{ name: 'Calculators', item: `${canonical}/calculators/` }, { name: tool.title, item: url }]);
   const graph = [organization, website, breadcrumb, {
     '@type': 'WebPage', '@id': `${url}#webpage`, url, name: tool.seo_title, description: tool.description,
     dateModified: tool.updated, isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
     mainEntity: { '@id': `${url}#app` },
   }, {
     '@type': 'WebApplication', '@id': `${url}#app`, name: tool.title, url, description: tool.description,
-    applicationCategory: 'FinanceApplication', operatingSystem: 'Any', browserRequirements: 'Requires JavaScript',
+    applicationCategory: tool.app_category || 'HealthApplication', operatingSystem: 'Any', browserRequirements: 'Requires JavaScript',
     isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, publisher: { '@id': organization['@id'] },
   }];
   if (tool.faqs.length) {
@@ -724,10 +731,10 @@ ${header({ slug: tool.category || '' })}
 <main id="main">
   <header class="post-hero">
     <div class="wrap">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/tools/">Tools</a><span aria-hidden="true">/</span><span aria-current="page">${esc(tool.title)}</span></nav>
-      <span class="eyebrow">Free calculator</span>
-      <h1>${esc(tool.title)}</h1>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/calculators/">Calculators</a><span aria-hidden="true">/</span><span aria-current="page">${esc(tool.title)}</span></nav>
+      <div class="tool-hero-title"><span class="tool-icon">${ti(calculators[tool.calc].icon)}</span><h1>${esc(tool.title)}</h1></div>
       <p class="post-deck">${esc(tool.description)}</p>
+      <ul class="tool-trust"><li>${ti('book')} Formula explained</li><li>${ti('lock')} No signup required</li><li>${ti('refresh')} Instant calculation</li><li>${ti('shield-check')} Nothing you enter is stored</li></ul>
     </div>
   </header>
   <div class="wrap tool-layout">
@@ -737,6 +744,7 @@ ${header({ slug: tool.category || '' })}
       ${unlinkScheduled(body)}
     </article>
   </div>
+  ${relatedTools(tool)}
 </main>
 ${footer}
 </body>
@@ -744,22 +752,35 @@ ${footer}
 `;
 };
 
-// Tools index: standalone calculator pages plus calculators embedded in live articles.
+// Related calculators listed in front matter (related_tools: slug, slug), then the hub.
+const relatedTools = tool => {
+  const picks = String(tool.related_tools || '').split(',').map(x => x.trim()).filter(Boolean)
+    .map(slug => tools.find(t => t.slug === slug)).filter(Boolean).slice(0, 3);
+  const cat = categories.find(c => c.slug === tool.category);
+  return `<section class="section tone-white tool-related"><div class="wrap">
+    <div class="section-head"><span class="eyebrow">Keep exploring</span><h2>Related Calculators</h2></div>
+    ${picks.length ? `<ul class="tool-list">${picks.map(t => toolCard({ title: t.title, url: t.url, summary: t.description, icon: calculators[t.calc].icon, category: t.category })).join('')}</ul>` : ''}
+    <p class="calc-filter"><a class="calc-link" href="/calculators/">${ti('calculator')} All calculators</a>${cat ? `<a class="calc-link" href="/${cat.slug}/">${ti('arrow-right')} ${esc(cat.name)} articles</a>` : ''}</p>
+  </div></section>`;
+};
+const toolCard = entry => `<li data-category="${esc(entry.category || '')}"><a class="tool-card" href="${entry.url}"><span class="tool-icon">${ti(entry.icon)}</span><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p>${entry.where ? `<span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span>` : `<span class="tool-where">${esc(categoryName(entry.category))}</span>`}<span class="more">Open calculator ${icon('arrow', 16)}</span></a></li>`;
+
+// Calculators hub: standalone calculator pages plus calculators embedded in live articles.
 const toolsPage = {
-  title: 'Free Wellness Cost Calculators and Tools | Wellness Signal',
-  description: 'Free wellness cost calculators for Pilates classes, ClassPass credits, wearables, saunas, retreats, fitness apps and workplace wellness programs.',
+  title: 'Wellness Calculators & Interactive Tools | Wellness Signal',
+  description: 'Free wellness calculators for walking, steps, running pace, strength, heart rate, sleep, water and the real cost of classes, apps, devices and retreats.',
 };
 const toolEntries = () => [
-  ...tools.map(tool => ({ title: tool.title, url: tool.url, summary: tool.description, where: 'Standalone calculator', icon: calculators[tool.calc].icon })),
+  ...tools.map(tool => ({ title: tool.title, url: tool.url, summary: tool.description, icon: calculators[tool.calc].icon, category: tool.category })),
   ...Object.entries(calculators).filter(([id]) => !tools.some(tool => tool.calc === id)).flatMap(([id, calc]) => {
     const hosts = posts.filter(post => post.body.includes(`{{calc:${id}}}`));
-    return hosts.length ? [{ title: calc.title, url: `${hosts[0].url}#${id}-title`, summary: calc.intro, where: hosts.map(post => post.title), icon: calc.icon }] : [];
+    return hosts.length ? [{ title: calc.title, url: `${hosts[0].url}#${id}-title`, summary: calc.intro, where: hosts.map(post => post.title), icon: calc.icon, category: hosts[0].category }] : [];
   }),
 ];
 const renderToolsIndex = () => {
-  const url = `${canonical}/tools/`;
+  const url = `${canonical}/calculators/`;
   const entries = toolEntries();
-  const breadcrumb = crumbs(url, [{ name: 'Tools', item: url }]);
+  const breadcrumb = crumbs(url, [{ name: 'Calculators', item: url }]);
   const jsonLd = [{ '@context': 'https://schema.org', '@graph': [organization, website, breadcrumb, {
     '@type': 'CollectionPage', '@id': `${url}#collection`, url, name: toolsPage.title, description: toolsPage.description,
     isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
@@ -767,18 +788,19 @@ const renderToolsIndex = () => {
   }] }];
   return `${docHead({ title: toolsPage.title, description: toolsPage.description, url, image: 'desk-sea-view', jsonLd })}
 <body>
-${header({ slug: 'tools' })}
+${header({ slug: 'calculators' })}
 <main id="main">
   <section class="hero no-image articles-hero">${sprig}
     <div class="wrap"><div class="hero-text">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Tools</span></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Calculators</span></nav>
       <span class="eyebrow">Free calculators</span>
-      <h1>Wellness Calculators and Tools</h1>
-      <div class="lead"><p>Estimate what classes, memberships, devices, saunas, retreats and apps really cost. Every calculator runs in your browser, needs no login and does not store what you enter.</p></div>
+      <h1>Wellness Calculators &amp; Interactive Tools</h1>
+      <div class="lead"><p>Estimate distance, calories, pace, strength, heart rate zones, sleep and the real cost of classes, apps, devices and retreats. Every calculator shows its formula, runs in your browser and stores nothing you enter.</p></div>
+      ${(() => { const used = categories.filter(c => entries.some(e => e.category === c.slug)); return used.length > 1 ? `<div class="topics" role="group" aria-label="Filter by category"><button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>${used.map(c => `<button type="button" class="chip" data-filter="${c.slug}" aria-pressed="false">${esc(c.name)}</button>`).join('')}</div>` : ''; })()}
     </div></div>
   </section>
   <section class="section tone-white"><div class="wrap">
-    <ul class="tool-list">${entries.map(entry => `<li><a class="tool-card" href="${entry.url}"><span class="tool-icon">${ti(entry.icon)}</span><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p><span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span><span class="more">Open calculator ${icon('arrow', 16)}</span></a></li>`).join('')}</ul>
+    <ul class="tool-list" data-filterable>${entries.map(toolCard).join('')}</ul>
   </div></section>
 </main>
 ${footer}
@@ -842,8 +864,8 @@ for (const tool of tools) {
   await mkdir(`dist${tool.url}`, { recursive: true });
   await writeFile(`dist${tool.url}index.html`, withCalcScript(renderTool(tool)));
 }
-await mkdir('dist/tools', { recursive: true });
-await writeFile('dist/tools/index.html', withSprite(renderToolsIndex()));
+await mkdir('dist/calculators', { recursive: true });
+await writeFile('dist/calculators/index.html', withSprite(renderToolsIndex()));
 await mkdir('dist/articles', { recursive: true });
 await writeFile('dist/articles/index.html', renderArticlesIndex());
 for (const slug of Object.keys(authors)) {
@@ -861,7 +883,7 @@ await writeFile('dist/robots.txt', production
   : 'User-agent: *\nDisallow: /\n'
 );
 await writeFile('dist/sitemap.xml', production
-  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url><url><loc>${canonical}/tools/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
+  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url><url><loc>${canonical}/calculators/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
   : '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>'
 );
 // llms.txt: live posts grouped by silo, from the same set as the sitemap.
@@ -871,7 +893,7 @@ await writeFile('dist/llms.txt', production
   ? [`# ${site.name}`, '', `> ${site.description}`, '',
     `${site.name} publishes sourced research and analysis on the business and evidence behind wellness. Every statistic links to its primary source.`, '',
     '## Site', '', `- [About](${canonical}/about/): Who we are and our editorial standards`, `- [All articles](${canonical}/articles/): Every published article and blog`, `- [Contact](${canonical}/contact/): Editorial contact`, '',
-    ...(tools.length ? ['## Calculators', '', `- [All calculators](${canonical}/tools/): Free wellness cost calculators`, ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
+    ...(tools.length ? ['## Calculators', '', `- [All calculators](${canonical}/calculators/): Free wellness calculators and interactive tools`, ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
     ...categories.filter(c => posts.some(p => p.category === c.slug)).flatMap(c => [
       `## ${c.name}`, '', `- [${c.name} hub](${canonical}/${c.slug}/): ${c.summary}`,
       ...silo(c.slug).map(post => `- [${post.title}](${canonical}${post.url}): ${plain(post.description)}`), '',
@@ -886,7 +908,7 @@ await writeFile('dist/build-manifest.json', JSON.stringify({
   pages: [
     ...pages.map(page => ({ slug: path(page.slug), draft: false })),
     { slug: '/articles/', draft: false },
-    { slug: '/tools/', draft: false },
+    { slug: '/calculators/', draft: false },
     ...Object.keys(authors).map(slug => ({ slug: authorUrl(slug), draft: false })),
     ...tools.map(tool => ({ slug: tool.url, draft: false })),
     ...posts.map(post => ({ slug: post.url, draft: false, published: post.published })),

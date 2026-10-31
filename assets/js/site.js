@@ -110,6 +110,6 @@
   buttons.forEach(button => button.addEventListener('click', () => {
     const value = button.dataset.filter;
     buttons.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
-    grid.querySelectorAll('.post-card').forEach(card => { card.hidden = value !== 'all' && card.dataset.category !== value; });
+    grid.querySelectorAll('.post-card, .tool-list > li').forEach(card => { card.hidden = value !== 'all' && card.dataset.category !== value; });
   }));
 })();
