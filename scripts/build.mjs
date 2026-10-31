@@ -8,6 +8,7 @@ import { loadPosts } from './lib/posts.mjs';
 import { charts } from '../content/charts.mjs';
 import { calculators } from '../content/calculators.mjs';
 import { loadTools } from './lib/tools.mjs';
+import { loadFaqs } from './lib/faqs.mjs';
 import {
   categoryIcons, categoryLens, economy, partnerRules, evidenceLadder, icon, readingSteps, separations, sprig, standardIcons,
 } from '../content/features.mjs';
@@ -138,6 +139,7 @@ const footer = `<footer class="site-footer">
       <ul>
         <li><a href="/about/">About Us</a></li>
         <li><a href="/calculators/">Calculators and Tools</a></li>
+        <li><a href="/faq/">Wellness FAQ</a></li>
         <li><a href="/about/#editorial-standards">Editorial Standards</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy-policy/">Privacy Policy</a></li>
@@ -765,6 +767,77 @@ const relatedTools = tool => {
 };
 const toolCard = entry => `<li data-category="${esc(entry.category || '')}"><a class="tool-card" href="${entry.url}"><span class="tool-icon">${ti(entry.icon)}</span><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p>${entry.where ? `<span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span>` : `<span class="tool-where">${esc(categoryName(entry.category))}</span>`}<span class="more">Open calculator ${icon('arrow', 16)}</span></a></li>`;
 
+// ---------- FAQ hubs ----------
+const faqs = await loadFaqs();
+const faqGroupIcon = title => ({ 'mind-sleep': 'moon-stars', fitness: 'run', wellness: 'droplet', 'longevity-recovery': 'flame', 'beauty-aesthetics': 'sun', 'work-wellness': 'desk', 'travel-retreats': 'plane' })[categories.find(c => c.name === title)?.slug] || 'message-question';
+
+// Flow diagram: how a question leads to an answer, an article, a tool and a source.
+const illustrations = {
+  'faq-map': () => `<figure class="faq-map" aria-label="How Wellness Signal answers a question">
+    <ol>${[['help-circle', 'Your question', 'Asked the way people search'], ['bulb', 'Short answer', 'The direct answer comes first'], ['book', 'Full article', 'Context, tables and caveats'], ['calculator', 'Calculator', 'Your own numbers, worked out'], ['shield-check', 'Source', 'CDC, NIH, PubMed and others']].map(([ic, t, d]) => `<li>${ti(ic)}<strong>${t}</strong><span>${d}</span></li>`).join('')}</ol>
+    <figcaption>Every answer on this page follows the same path, so you can stop at the depth you need.</figcaption>
+  </figure>`,
+};
+const faqBlocks = blocks => blocks.map(block => {
+  const m = block.type === 'p' && block.text.match(/^\{\{illustration:([a-z0-9-]+)\}\}$/);
+  return m ? illustrations[m[1]]() : renderBlock(block, charts, calculators);
+}).join('\n');
+
+const renderFaq = page => {
+  const url = `${canonical}${page.url}`;
+  const trail = [{ name: 'FAQ', item: `${canonical}/faq/` }];
+  if (page.depth) trail.push({ name: page.title, item: url });
+  const breadcrumb = crumbs(url, trail);
+  const qa = page.sections.flatMap(section => section.questions);
+  const graph = [organization, website, breadcrumb, {
+    '@type': 'WebPage', '@id': `${url}#webpage`, url, name: page.seo_title, description: page.description,
+    dateModified: page.updated, isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
+  }];
+  if (qa.length) {
+    graph.push({
+      '@type': 'FAQPage', '@id': `${url}#faq`,
+      mainEntity: qa.map(q => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: plain(q.a.map(b => b.text || (b.items || []).join(' ')).join(' ')) } })),
+    });
+  }
+  const groups = page.sections.filter(section => section.questions.length);
+  const body = page.sections.map(section => {
+    if (/^Sources$/i.test(section.title)) return sourcesBlock({ ...section, blocks: section.lead });
+    if (!section.questions.length) return `<section class="faq-plain" id="${section.id}"><h2>${esc(section.title)}</h2>${faqBlocks(section.lead)}</section>`;
+    return `<section class="faq-group" id="${section.id}" data-group="${section.id}">
+      <div class="faq-group-head"><span class="tool-icon">${ti(faqGroupIcon(section.title))}</span><div><h2>${esc(section.title)}</h2>${faqBlocks(section.lead)}</div></div>
+      ${section.questions.map(q => `<article class="faq-item" id="${q.id}"><h3>${ti('help-circle')}<span>${esc(q.q)}</span></h3><div class="faq-answer">${faqBlocks(q.a)}</div></article>`).join('\n')}
+    </section>`;
+  }).join('\n');
+  return `${docHead({ title: page.seo_title, description: page.description, url, image: page.image || 'desk-sea-view', jsonLd: [{ '@context': 'https://schema.org', '@graph': graph }] })}
+<body class="post-page faq-page">
+${header({ slug: 'faq' })}
+<main id="main">
+  <header class="post-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span>${page.depth ? `<a href="/faq/">FAQ</a><span aria-hidden="true">/</span><span aria-current="page">${esc(page.title)}</span>` : '<span aria-current="page">FAQ</span>'}</nav>
+      <div class="tool-hero-title"><span class="tool-icon">${ti(page.icon || 'help-circle')}</span><h1>${esc(page.h1 || page.title)}</h1></div>
+      <ul class="tool-trust"><li>${ti('bulb')} Answer first</li><li>${ti('book')} ${qa.length} questions, all sourced</li><li>${ti('refresh')} Updated <time datetime="${page.updated}">${longDate(page.updated)}</time></li></ul>
+    </div>
+  </header>
+  <div class="wrap tool-layout faq-layout">
+    <article class="prose">
+      <div class="post-intro">${unlinkScheduled(faqBlocks(page.intro))}</div>
+      ${groups.length > 1 ? `<div class="faq-tools" role="search">
+        <label class="faq-search" for="faq-q">${ti('search')}<span class="visually-hidden">Search questions</span><input id="faq-q" type="search" placeholder="Search questions, e.g. sleep or sauna" autocomplete="off"></label>
+        <div class="topics" role="group" aria-label="Filter by topic"><button type="button" class="chip" data-faq-filter="all" aria-pressed="true">All</button>${groups.map(g => `<button type="button" class="chip" data-faq-filter="${g.id}" aria-pressed="false">${esc(g.title)}</button>`).join('')}</div>
+        <p class="faq-none" hidden>${ti('alert-circle')} No questions match that search. Try a broader word.</p>
+      </div>` : ''}
+      ${unlinkScheduled(body)}
+    </article>
+  </div>
+  ${relatedTools(page)}
+</main>
+${footer}
+</body>
+</html>
+`;
+};
+
 // Calculators hub: standalone calculator pages plus calculators embedded in live articles.
 const toolsPage = {
   title: 'Wellness Calculators & Interactive Tools | Wellness Signal',
@@ -864,6 +937,10 @@ for (const tool of tools) {
   await mkdir(`dist${tool.url}`, { recursive: true });
   await writeFile(`dist${tool.url}index.html`, withCalcScript(renderTool(tool)));
 }
+for (const page of faqs) {
+  await mkdir(`dist${page.url}`, { recursive: true });
+  await writeFile(`dist${page.url}index.html`, withSprite(renderFaq(page)));
+}
 await mkdir('dist/calculators', { recursive: true });
 await writeFile('dist/calculators/index.html', withSprite(renderToolsIndex()));
 await mkdir('dist/articles', { recursive: true });
@@ -883,7 +960,7 @@ await writeFile('dist/robots.txt', production
   : 'User-agent: *\nDisallow: /\n'
 );
 await writeFile('dist/sitemap.xml', production
-  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url><url><loc>${canonical}/calculators/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
+  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url><url><loc>${canonical}/calculators/</loc></url>${faqs.map(f => `<url><loc>${canonical}${f.url}</loc><lastmod>${f.updated}</lastmod></url>`).join('')}${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
   : '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>'
 );
 // llms.txt: live posts grouped by silo, from the same set as the sitemap.
@@ -893,7 +970,7 @@ await writeFile('dist/llms.txt', production
   ? [`# ${site.name}`, '', `> ${site.description}`, '',
     `${site.name} publishes sourced research and analysis on the business and evidence behind wellness. Every statistic links to its primary source.`, '',
     '## Site', '', `- [About](${canonical}/about/): Who we are and our editorial standards`, `- [All articles](${canonical}/articles/): Every published article and blog`, `- [Contact](${canonical}/contact/): Editorial contact`, '',
-    ...(tools.length ? ['## Calculators', '', `- [All calculators](${canonical}/calculators/): Free wellness calculators and interactive tools`, ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
+    ...(tools.length ? ['## Calculators', '', `- [All calculators](${canonical}/calculators/): Free wellness calculators and interactive tools`, ...faqs.map(f => `- [${f.title}](${canonical}${f.url}): ${plain(f.description)}`), ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
     ...categories.filter(c => posts.some(p => p.category === c.slug)).flatMap(c => [
       `## ${c.name}`, '', `- [${c.name} hub](${canonical}/${c.slug}/): ${c.summary}`,
       ...silo(c.slug).map(post => `- [${post.title}](${canonical}${post.url}): ${plain(post.description)}`), '',
@@ -909,6 +986,7 @@ await writeFile('dist/build-manifest.json', JSON.stringify({
     ...pages.map(page => ({ slug: path(page.slug), draft: false })),
     { slug: '/articles/', draft: false },
     { slug: '/calculators/', draft: false },
+    ...faqs.map(f => ({ slug: f.url, draft: false })),
     ...Object.keys(authors).map(slug => ({ slug: authorUrl(slug), draft: false })),
     ...tools.map(tool => ({ slug: tool.url, draft: false })),
     ...posts.map(post => ({ slug: post.url, draft: false, published: post.published })),
