@@ -3,6 +3,7 @@ import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
 import { inline as mdInline, plain, renderBlock } from './lib/markdown.mjs';
 import { renderCalculator } from './lib/calculators.mjs';
+import { tablerSprite, ti } from './lib/icons.mjs';
 import { loadPosts } from './lib/posts.mjs';
 import { charts } from '../content/charts.mjs';
 import { calculators } from '../content/calculators.mjs';
@@ -23,10 +24,12 @@ const posts = await loadPosts(buildDate);
 // Links to scheduled posts render as plain text until the post goes live.
 const scheduledUrls = new Set((await loadPosts('9999-12-31')).map(p => p.url).filter(url => !posts.some(p => p.url === url)));
 const unlinkScheduled = html => html.replace(/<a href="(\/[^"]*)">([\s\S]*?)<\/a>/g, (link, href, text) => (scheduledUrls.has(href) ? text : link));
+const sprite = await tablerSprite();
 const assetVersion = createHash('sha256')
   .update(await readFile('assets/css/site.css'))
   .update(await readFile('assets/js/site.js'))
   .update(await readFile('assets/js/calculators.js'))
+  .update(sprite)
   .digest('hex').slice(0, 10);
 
 // Width and height of each WebP image, read from its file header.
@@ -148,7 +151,8 @@ const footer = `<footer class="site-footer">
 <button class="to-top" type="button" aria-label="Back to top">${icon('arrow', 18)}</button>
 <script src="/assets/js/site.js?v=${assetVersion}" defer></script>`;
 // Pages with a calculator load its script; others do not.
-const withCalcScript = html => (html.includes('data-calc=') ? html.replace('</body>', `<script src="/assets/js/calculators.js?v=${assetVersion}" defer></script>\n</body>`) : html);
+const withSprite = html => html.replace(/<body([^>]*)>/, `<body$1>\n${sprite}`);
+const withCalcScript = html => (html.includes('data-calc=') ? withSprite(html).replace('</body>', `<script src="/assets/js/calculators.js?v=${assetVersion}" defer></script>\n</body>`) : html);
 
 // ---------- Feature blocks ----------
 
@@ -746,10 +750,10 @@ const toolsPage = {
   description: 'Free wellness cost calculators for Pilates classes, ClassPass credits, wearables, saunas, retreats, fitness apps and workplace wellness programs.',
 };
 const toolEntries = () => [
-  ...tools.map(tool => ({ title: tool.title, url: tool.url, summary: tool.description, where: 'Standalone calculator' })),
+  ...tools.map(tool => ({ title: tool.title, url: tool.url, summary: tool.description, where: 'Standalone calculator', icon: calculators[tool.calc].icon })),
   ...Object.entries(calculators).filter(([id]) => !tools.some(tool => tool.calc === id)).flatMap(([id, calc]) => {
     const hosts = posts.filter(post => post.body.includes(`{{calc:${id}}}`));
-    return hosts.length ? [{ title: calc.title, url: `${hosts[0].url}#${id}-title`, summary: calc.intro, where: hosts.map(post => post.title) }] : [];
+    return hosts.length ? [{ title: calc.title, url: `${hosts[0].url}#${id}-title`, summary: calc.intro, where: hosts.map(post => post.title), icon: calc.icon }] : [];
   }),
 ];
 const renderToolsIndex = () => {
@@ -774,7 +778,7 @@ ${header({ slug: 'tools' })}
     </div></div>
   </section>
   <section class="section tone-white"><div class="wrap">
-    <ul class="tool-list">${entries.map(entry => `<li><a class="tool-card" href="${entry.url}"><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p><span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span><span class="more">Open calculator ${icon('arrow', 16)}</span></a></li>`).join('')}</ul>
+    <ul class="tool-list">${entries.map(entry => `<li><a class="tool-card" href="${entry.url}"><span class="tool-icon">${ti(entry.icon)}</span><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p><span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span><span class="more">Open calculator ${icon('arrow', 16)}</span></a></li>`).join('')}</ul>
   </div></section>
 </main>
 ${footer}
@@ -839,7 +843,7 @@ for (const tool of tools) {
   await writeFile(`dist${tool.url}index.html`, withCalcScript(renderTool(tool)));
 }
 await mkdir('dist/tools', { recursive: true });
-await writeFile('dist/tools/index.html', renderToolsIndex());
+await writeFile('dist/tools/index.html', withSprite(renderToolsIndex()));
 await mkdir('dist/articles', { recursive: true });
 await writeFile('dist/articles/index.html', renderArticlesIndex());
 for (const slug of Object.keys(authors)) {
