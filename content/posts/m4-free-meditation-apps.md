@@ -50,6 +50,8 @@ Some services are maintained by nonprofit organisations and supported by donatio
 
 ## 1. Medito: Permanently Free Guided Meditation and Sleep Content
 
+![Medito Foundation homepage stating the app has no paywalls and no ads](shot-medito-website "Screenshot: Medito Foundation homepage, captured November 2026.")
+
 Medito is developed by a nonprofit foundation that describes the entire meditation app as free, without advertising, paywalls or subscriptions. Its official pages list guided meditations, beginner programmes, daily sessions, breathing exercises, sleep stories and meditation timers.
 
 ### What Remains Free
@@ -65,6 +67,8 @@ Medito does not emphasise social communities and thousands of independently uplo
 Official app: [Medito Foundation](https://meditofoundation.org/free-meditation-app/).
 
 ## 2. Healthy Minds Program: Structured Mindfulness Education Without a Subscription
+
+![Healthy Minds Program App Store listing showing guided meditation and lesson screens](shot-healthy-minds-app-store "Screenshot: Healthy Minds Program listing on the Apple App Store, captured November 2026.")
 
 Healthy Minds Program is presented by Healthy Minds Innovations as a donation-supported public offering. The organisation's documentation distinguishes the free public subscription from institutional access arrangements, making the individual programme an alternative to commercial subscription-first apps.
 
@@ -82,6 +86,8 @@ Official provider: [Healthy Minds Innovations](https://hminnovations.org/).
 
 ## 3. UCLA Mindful: A Free Academic Mindfulness Resource
 
+![UCLA Health page for downloading the free UCLA Mindful app for iOS and Android](shot-ucla-mindful-app-page "Screenshot: UCLA Mindful app page on UCLA Health, captured November 2026.")
+
 UCLA Mindful offers a free mobile app for iOS and Android with guided meditations, breathing practices, a timer, introductory videos and recordings. UCLA Health describes the app's meditation resources as free to download and use without subscriptions or hidden fees.
 
 ### Who Will Find the Resource Useful
@@ -96,6 +102,8 @@ Official app: [UCLA Mindful](https://www.uclahealth.org/uclamindful/ucla-mindful
 
 ## 4. Plum Village: Free Mindfulness With a Defined Teaching Tradition
 
+![Plum Village app website showing guided meditation screens on two phones](shot-plum-village-app-website "Screenshot: Plum Village app website, captured November 2026.")
+
 The Plum Village app offers free guided meditation and mindfulness teachings associated with Thich Nhat Hanh and the Plum Village monastic community. The available topics include walking meditation, deep relaxation, silent practice, short introductory sessions and recordings for different life contexts.
 
 ### Its Teaching Perspective Is Part of the Choice
@@ -109,6 +117,8 @@ The provider offers mobile access and a web catalogue with guided recordings and
 Official provider: [Plum Village App](https://plumvillage.app/about-the-plum-village-app/).
 
 ## 5. Insight Timer: A Large Free Library With a Paid Membership
+
+![Insight Timer homepage with options for sleep, stress, meditation and spirituality](shot-insight-timer-website "Screenshot: Insight Timer homepage, captured November 2026.")
 
 Insight Timer combines a large library of guided practices, talks, sleep content and timers with an optional MemberPlus subscription. Its current help materials describe extensive free access with advertising, while paid plans remove ads and unlock additional courses, selected premium recordings, offline listening and other conveniences.
 
@@ -126,6 +136,8 @@ Official provider: [Insight Timer](https://insighttimer.com/) and [MemberPlus in
 
 ## 6. Mindfulness Coach: Free Public Mindfulness Training From the VA
 
+![VA Mobile page for the Mindfulness Coach app with iOS and Android download buttons](shot-mindfulness-coach-va-page "Screenshot: Mindfulness Coach page on VA Mobile, captured November 2026.")
+
 Mindfulness Coach is a free public mobile app developed by the US Department of Veterans Affairs' National Center for PTSD. Although it was designed with veterans and service members in mind, the VA explicitly states that the app is available to others interested in developing mindfulness skills.
 
 ### Guided Exercises and Self-Study Tools
@@ -141,6 +153,8 @@ The VA states that the app is free and publicly available. It also cautions that
 Official provider: [VA Mindfulness Coach](https://mobile.va.gov/app/mindfulness-coach).
 
 ## 7. 1 Giant Mind: A Free Step-by-Step Meditation Course
+
+![1 Giant Mind homepage describing its mission to teach the world to meditate](shot-1-giant-mind-website "Screenshot: 1 Giant Mind homepage, captured November 2026.")
 
 1 Giant Mind offers a free Learn Meditation app organised around a twelve-step introductory programme. Its official website describes additional practice tools such as session reminders, a journal and a thirty-day challenge.
 

@@ -79,6 +79,13 @@ export const toBlocks = markdown => {
       blocks.push({ type: 'quote', text: quote.join(' ') });
       continue;
     }
+    // Image line: ![alt text](image-name "Caption"), one per paragraph.
+    const img = line.trim().match(/^!\[([^\]]*)\]\(([a-z0-9-]+)(?:\s+"([^"]*)")?\)$/);
+    if (img) {
+      blocks.push({ type: 'img', alt: img[1], src: img[2], caption: img[3] || '' });
+      i += 1;
+      continue;
+    }
     const para = [];
     while (i < lines.length && lines[i].trim() && !/^(#{1,4}\s|\s*\||\s*[-*]\s|\s*\d+\.\s|>)/.test(lines[i])) {
       para.push(lines[i].replace(/\\$/, '').trim());
@@ -114,7 +121,12 @@ export const renderChart = (chart, id) => {
 </figure>`;
 };
 
+// Images need build-time sizes, so the build registers how to render them.
+let imageRenderer = () => '';
+export const setImageRenderer = fn => { imageRenderer = fn; };
+
 export const renderBlock = (block, charts = {}, calcs = {}) => {
+  if (block.type === 'img') return imageRenderer(block);
   if (block.type === 'p') {
     const marker = block.text.match(/^\{\{chart:([a-z0-9-]+)\}\}$/);
     if (marker) return renderChart(charts[marker[1]], marker[1]);

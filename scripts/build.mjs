@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
-import { inline as mdInline, plain, renderBlock } from './lib/markdown.mjs';
+import { inline as mdInline, plain, renderBlock, setImageRenderer } from './lib/markdown.mjs';
 import { renderCalculator } from './lib/calculators.mjs';
 import { tablerSprite, ti } from './lib/icons.mjs';
 import { loadPosts } from './lib/posts.mjs';
@@ -103,6 +103,13 @@ const alts = {
 };
 const picture = (name, { eager = false, sizes = '(max-width: 860px) 100vw, 50vw', alt = alts[name] || '' } = {}) =>
   `<img src="/assets/images/${name}.webp" srcset="/assets/images/${name}-800.webp 800w, /assets/images/${name}.webp 1672w" sizes="${sizes}" width="1672" height="941" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+
+// Inline article images (product screenshots): figure with caption and credit.
+setImageRenderer(({ alt, src, caption }) => {
+  if (!imageSize[src]) throw new Error(`Missing image assets/images/${src}.webp`);
+  const [w, h] = dims(src);
+  return `<figure class="post-shot"><img src="/assets/images/${src}.webp" srcset="/assets/images/${src}-800.webp 800w, /assets/images/${src}.webp ${w}w" sizes="(max-width: 860px) 100vw, 760px" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">${caption ? `<figcaption>${mdInline(caption)}</figcaption>` : ''}</figure>`;
+});
 
 const navItems = [
   ...categories.map(category => ({ href: path(category.slug), label: category.name })),
