@@ -818,3 +818,32 @@ table { width: 100%; border-collapse: collapse; }
 .post-shot { margin: 22px 0 26px; }
 .post-shot img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--ws-sage-soft); box-shadow: 0 18px 40px -30px rgba(18, 63, 47, .55); background: var(--ws-white); }
 .post-shot figcaption { margin-top: 8px; font-size: 14px; color: var(--ws-muted); }
+
+/* FAQ illustrations: sleep hours scale and night of cycles */
+.sleep-ladder, .sleep-night { margin: 26px 0; padding: 20px; border-radius: var(--radius); background: var(--ws-white); border: 1px solid var(--ws-sage-soft); box-shadow: var(--shadow); }
+.sl-bar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+.sl-zone + .sl-zone { margin-left: 4px; }
+.sl-zone { grid-column: calc(var(--a) + 1) / calc(var(--b) + 1); display: flex; flex-direction: column; gap: 2px; padding: 12px; border-radius: 12px; min-width: 0; }
+.sl-zone strong { font: 600 15px/1.2 var(--sans); }
+.sl-zone small { font-size: 13px; line-height: 1.35; }
+.z-short { background: #F3DED6; color: #6A2E1E; }
+.z-ok { background: var(--ws-forest); color: var(--ws-cream); }
+.z-long { background: var(--ws-sage-soft); color: var(--ws-forest-ink); }
+.sl-ticks { position: relative; height: 18px; margin-top: 6px; font-size: 12.5px; color: var(--ws-muted); }
+.sl-ticks span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.sl-ticks span:first-child { transform: none; }
+.sl-ticks span:last-child { transform: translateX(-100%); }
+.sl-zone strong { color: inherit; }
+.sleep-ladder figcaption, .sleep-night figcaption { margin-top: 12px; font-size: 14px; color: var(--ws-muted); }
+.sn-cycles { display: grid; gap: 8px; }
+.sn-cycle { display: grid; grid-template-columns: 72px 1fr; gap: 10px; align-items: center; }
+.sn-label { font-size: 13.5px; color: var(--ws-muted); }
+.sn-track { display: flex; height: 22px; border-radius: 999px; overflow: hidden; background: var(--ws-sage-soft); }
+.sn-seg { width: var(--w); }
+.s-light { background: #B5CFBB; }
+.s-deep { background: var(--ws-forest-ink); }
+.s-rem { background: #C97B63; }
+.sn-key { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; font-size: 14px; }
+.sn-key i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+@media (max-width: 560px) { .sl-bar { grid-template-columns: 1fr; } .sl-zone { grid-column: auto; } .sl-ticks { display: none; } }
+.faq-group-head > div { flex: 1; min-width: 0; }

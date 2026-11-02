@@ -772,7 +772,7 @@ const relatedTools = tool => {
     <p class="calc-filter"><a class="calc-link" href="/calculators/">${ti('calculator')} All calculators</a>${cat ? `<a class="calc-link" href="/${cat.slug}/">${ti('arrow-right')} ${esc(cat.name)} articles</a>` : ''}</p>
   </div></section>`;
 };
-const toolCard = entry => `<li data-category="${esc(entry.category || '')}"><a class="tool-card" href="${entry.url}"><span class="tool-icon">${ti(entry.icon)}</span><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p>${entry.where ? `<span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span>` : `<span class="tool-where">${esc(categoryName(entry.category))}</span>`}<span class="more">Open calculator ${icon('arrow', 16)}</span></a></li>`;
+const toolCard = entry => `<li data-category="${esc(entry.category || '')}"><a class="tool-card" href="${entry.url}"><span class="tool-icon">${ti(entry.icon)}</span><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p>${entry.where ? `<span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span>` : `<span class="tool-where">${esc(categoryName(entry.category))}</span>`}<span class="more">${entry.cta || 'Open calculator'} ${icon('arrow', 16)}</span></a></li>`;
 
 // ---------- FAQ hubs ----------
 const faqs = await loadFaqs();
@@ -785,6 +785,20 @@ const illustrations = {
     <figcaption>Every answer on this page follows the same path, so you can stop at the depth you need.</figcaption>
   </figure>`,
 };
+illustrations['sleep-ladder'] = () => `<figure class="sleep-ladder" aria-label="Adult sleep hours: under 7 is short, 7 to 9 is recommended, over 9 may suit some people">
+    <div class="sl-bar"><span class="sl-zone z-short" style="--a:0;--b:3"><strong>Under 7 h</strong><small>Short for most adults</small></span><span class="sl-zone z-ok" style="--a:3;--b:5"><strong>7 to 9 h</strong><small>Recommended for adults</small></span><span class="sl-zone z-long" style="--a:5;--b:7"><strong>Over 9 h</strong><small>May suit some people</small></span></div>
+    <div class="sl-ticks">${[4, 5, 6, 7, 8, 9, 10, 11].map(h => `<span style="left:${(h - 4) / 7 * 100}%">${h} h</span>`).join('')}</div>
+    <figcaption>Adult guidance from the AASM, SRS and NHLBI. Teens and children need more; see the table below.</figcaption>
+  </figure>`;
+illustrations['sleep-stages'] = () => {
+  // Simplified pattern: deep sleep front-loaded, REM growing toward morning.
+  const cycles = [[40, 45, 15], [45, 35, 20], [55, 20, 25], [60, 8, 32], [55, 0, 45]];
+  return `<figure class="sleep-night" aria-label="Simplified night of five sleep cycles: deep sleep is longest early in the night, REM sleep grows toward morning">
+    <div class="sn-cycles">${cycles.map(([l, d, r], i) => `<div class="sn-cycle"><span class="sn-label">Cycle ${i + 1}</span><span class="sn-track"><span class="sn-seg s-light" style="--w:${l}%"></span>${d ? `<span class="sn-seg s-deep" style="--w:${d}%"></span>` : ''}<span class="sn-seg s-rem" style="--w:${r}%"></span></span></div>`).join('')}</div>
+    <div class="sn-key"><span><i class="s-light"></i>Light (stages 1 and 2)</span><span><i class="s-deep"></i>Deep (stage 3)</span><span><i class="s-rem"></i>REM</span></div>
+    <figcaption>Simplified illustration, not measured data. Each cycle lasts about 80 to 100 minutes (NHLBI).</figcaption>
+  </figure>`;
+};
 const faqBlocks = blocks => blocks.map(block => {
   const m = block.type === 'p' && block.text.match(/^\{\{illustration:([a-z0-9-]+)\}\}$/);
   return m ? illustrations[m[1]]() : renderBlock(block, charts, calculators);
@@ -792,7 +806,9 @@ const faqBlocks = blocks => blocks.map(block => {
 
 const renderFaq = page => {
   const url = `${canonical}${page.url}`;
+  const cat = categories.find(c => c.slug === page.category);
   const trail = [{ name: 'FAQ', item: `${canonical}/faq/` }];
+  if (page.depth && cat) trail.push({ name: cat.name, item: `${canonical}/${cat.slug}/` });
   if (page.depth) trail.push({ name: page.title, item: url });
   const breadcrumb = crumbs(url, trail);
   const qa = page.sections.flatMap(section => section.questions);
@@ -806,12 +822,14 @@ const renderFaq = page => {
       mainEntity: qa.map(q => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: plain(q.a.map(b => b.text || (b.items || []).join(' ')).join(' ')) } })),
     });
   }
+  // Optional per-section icons: group_icons: Section Title=icon | Other Title=icon
+  const groupIcons = Object.fromEntries(String(page.group_icons || '').split('|').map(x => x.split('=').map(y => y.trim())).filter(x => x.length === 2));
   const groups = page.sections.filter(section => section.questions.length);
   const body = page.sections.map(section => {
     if (/^Sources$/i.test(section.title)) return sourcesBlock({ ...section, blocks: section.lead });
     if (!section.questions.length) return `<section class="faq-plain" id="${section.id}"><h2>${esc(section.title)}</h2>${faqBlocks(section.lead)}</section>`;
     return `<section class="faq-group" id="${section.id}" data-group="${section.id}">
-      <div class="faq-group-head"><span class="tool-icon">${ti(faqGroupIcon(section.title))}</span><div><h2>${esc(section.title)}</h2>${faqBlocks(section.lead)}</div></div>
+      <div class="faq-group-head"><span class="tool-icon">${ti(groupIcons[section.title] || faqGroupIcon(section.title))}</span><div><h2>${esc(section.title)}</h2>${faqBlocks(section.lead)}</div></div>
       ${section.questions.map(q => `<article class="faq-item" id="${q.id}"><h3>${ti('help-circle')}<span>${esc(q.q)}</span></h3><div class="faq-answer">${faqBlocks(q.a)}</div></article>`).join('\n')}
     </section>`;
   }).join('\n');
@@ -821,7 +839,7 @@ ${header({ slug: 'faq' })}
 <main id="main">
   <header class="post-hero">
     <div class="wrap">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span>${page.depth ? `<a href="/faq/">FAQ</a><span aria-hidden="true">/</span><span aria-current="page">${esc(page.title)}</span>` : '<span aria-current="page">FAQ</span>'}</nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span>${page.depth ? `<a href="/faq/">FAQ</a><span aria-hidden="true">/</span>${cat ? `<a href="/${cat.slug}/">${esc(cat.name)}</a><span aria-hidden="true">/</span>` : ''}<span aria-current="page">${esc(page.title)}</span>` : '<span aria-current="page">FAQ</span>'}</nav>
       <div class="tool-hero-title"><span class="tool-icon">${ti(page.icon || 'help-circle')}</span><h1>${esc(page.h1 || page.title)}</h1></div>
       <ul class="tool-trust"><li>${ti('bulb')} Answer first</li><li>${ti('book')} ${qa.length} questions, all sourced</li><li>${ti('refresh')} Updated <time datetime="${page.updated}">${longDate(page.updated)}</time></li></ul>
     </div>
@@ -837,12 +855,24 @@ ${header({ slug: 'faq' })}
       ${unlinkScheduled(body)}
     </article>
   </div>
+  ${relatedFaqs(page)}
   ${relatedTools(page)}
 </main>
 ${footer}
 </body>
 </html>
 `;
+};
+
+// Other FAQ hubs in the same category, then the main FAQ page.
+const relatedFaqs = page => {
+  const others = faqs.filter(f => f !== page && f.depth && (!page.depth || f.category === page.category));
+  if (!others.length) return '';
+  return `<section class="section tone-cream tool-related"><div class="wrap">
+    <div class="section-head"><span class="eyebrow">More questions</span><h2>${page.depth ? 'Related FAQ Hubs' : 'Topic FAQ Hubs'}</h2></div>
+    <ul class="tool-list">${others.map(f => toolCard({ title: f.title, url: f.url, summary: f.description, icon: f.icon || 'help-circle', category: f.category, cta: 'Read the answers' })).join('')}</ul>
+    ${page.depth ? `<p class="calc-filter"><a class="calc-link" href="/faq/">${ti('help-circle')} All FAQs</a></p>` : ''}
+  </div></section>`;
 };
 
 // Calculators hub: standalone calculator pages plus calculators embedded in live articles.
