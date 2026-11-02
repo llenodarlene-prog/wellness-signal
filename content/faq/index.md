@@ -24,7 +24,7 @@ You can read top to bottom, but most people come with one question. Here's the q
 
 ## Mind & Sleep
 
-Sleep questions are the ones we hear most. These answers draw on the CDC, the National Institutes of Health and two sleep medicine societies.
+Sleep questions are the ones we hear most. These answers draw on the CDC, the National Institutes of Health and two sleep medicine societies. For more depth, see the [sleep duration FAQ](/faq/mind-sleep/sleep-duration/) and the [sleep stages FAQ](/faq/mind-sleep/sleep-stages/).
 
 ### How much sleep do adults need?
 
