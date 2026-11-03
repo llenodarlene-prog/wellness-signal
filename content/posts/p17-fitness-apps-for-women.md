@@ -165,7 +165,7 @@ Apple Fitness+ is suitable for people who want guided classes across many format
 
 ## 7. Nike Training Club
 
-![Nike Training Club App Store listing showing workout screens, ratings and the free price label](shot-nike-training-club-app-store "Screenshot: Nike Training Club listing on the Apple App Store, captured November 2026.")
+![Nike Training Club app screens showing the Workouts tab with new workouts and the Expert Tips tab with nutrition tips](shot-nike-training-club-app-screens "Nike Training Club app screens. Image: Nike, November 2026.")
 
 Nike Training Club provides guided workouts, training programmes, and wellness content without a paid subscription. Nike states that the app includes more than **185 free workouts** across strength, endurance, yoga, mobility, HIIT, and bodyweight training.
 

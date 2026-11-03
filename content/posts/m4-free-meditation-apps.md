@@ -68,7 +68,7 @@ Official app: [Medito Foundation](https://meditofoundation.org/free-meditation-a
 
 ## 2. Healthy Minds Program: Structured Mindfulness Education Without a Subscription
 
-![Healthy Minds Program App Store listing showing guided meditation and lesson screens](shot-healthy-minds-app-store "Screenshot: Healthy Minds Program listing on the Apple App Store, captured November 2026.")
+![Humin website introducing its wellbeing tools, including the free Healthy Minds Program app, shown on phone, tablet and laptop](shot-healthy-minds-humin-website "Screenshot: Humin website, home of the Healthy Minds Program app, captured November 2026.")
 
 Healthy Minds Program is presented by Healthy Minds Innovations as a donation-supported public offering. The organisation's documentation distinguishes the free public subscription from institutional access arrangements, making the individual programme an alternative to commercial subscription-first apps.
 
