@@ -32,6 +32,8 @@ Mindbody charges for access to management software and offers additional service
 
 ## The Core Software Subscription
 
+![Mindbody business software homepage with a demo button](shot-mindbody-business-page "Screenshot: Mindbody business software page, captured November 2026.")
+
 Mindbody supports scheduling, customer records, memberships and reporting. Its published US options include Starter, Accelerate, Ultimate and custom enterprise arrangements, with features increasing across tiers.
 
 ### Why Location-Based Pricing Is Significant

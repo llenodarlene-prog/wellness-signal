@@ -31,6 +31,8 @@ This makes the WHOOP business model different from a company selling a smartwatc
 
 ## Subscription Tiers
 
+![WHOOP App Store listing showing sleep, recovery and strain screens](shot-whoop-app-store "Screenshot: WHOOP listing on the Apple App Store, captured November 2026.")
+
 | Plan | Annual US list price | Hardware |
 |---|---:|---|
 | One | $199 | WHOOP 5.0 |

@@ -32,6 +32,8 @@ This combination defines the Oura business model, producing a potential hardware
 
 ## The Hardware Plus Membership Model
 
+![Oura homepage showing the smart ring on a hand](shot-oura-website "Screenshot: Oura homepage, captured November 2026.")
+
 The ring collects physiological signals while Oura's software converts supported measurements into app-based metrics. Initial hardware revenue depends on device sales and channel pricing, while recurring membership depends on customers continuing to pay.
 
 ### Why the Two Transactions Differ

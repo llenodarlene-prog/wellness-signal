@@ -38,6 +38,8 @@ We did not rank platforms by affiliate availability. A platform is included beca
 
 ## Mindbody as the Baseline
 
+![Mindbody business software homepage with a demo button](shot-mindbody-business-page "Screenshot: Mindbody business software page, captured November 2026.")
+
 Mindbody currently advertises pricing from **$79 per month per location**, the entry point of its [subscription and payments business model](/fitness/mindbody-business-model/). Its Starter plan includes business management tools, integrated payments, booking widgets, a business website, a Mindbody app listing, and basic reporting.
 
 Higher tiers add analytics, resource management, marketing, lead-management tools, and other features. Mindbody also states that its consumer app reaches more than **3 million monthly shoppers**, which is an important difference from software products focused mainly on back-office operations.
@@ -60,6 +62,8 @@ Mindbody says listing in its marketplace is free, while a **20% fee capped at $3
 
 ## 1. Vagaro
 
+![Vagaro homepage describing software for beauty, wellness and fitness businesses](shot-vagaro-website "Screenshot: Vagaro homepage, captured November 2026.")
+
 Vagaro publishes one of the lowest entry prices among the larger wellness-management platforms. Its current US pricing page lists a promotional rate of **$23.99 per month for the first six months** for one location, with a regular price shown as $30.
 
 The base subscription includes calendars, memberships, packages, reporting, customer records, inventory, invoices, a booking widget, and a marketplace listing. Paid add-ons include a branded app, website builder, payroll, check-in tools, livestreaming, integrations, and data services.
@@ -71,6 +75,8 @@ Vagaro is particularly relevant for businesses combining appointments with class
 Mindbody's strongest advantage remains its large fitness-and-wellness consumer marketplace. A business that depends heavily on marketplace discovery should compare actual new-client volume rather than assuming the lower software fee automatically produces a lower customer-acquisition cost.
 
 ## 2. WellnessLiving
+
+![WellnessLiving homepage describing software for fitness, wellness and beauty businesses](shot-wellnessliving-website "Screenshot: WellnessLiving homepage, captured November 2026.")
 
 WellnessLiving currently publishes Starter pricing at **$69 per month**, with higher plans adding broader marketing and management features. Its product set includes scheduling, staff tools, client apps, lead management, loyalty features, widgets, check-in tools, and reporting.
 
@@ -84,6 +90,8 @@ Businesses should also compare payment-processing fees and implementation terms.
 
 ## 3. PushPress
 
+![PushPress homepage showing its gym management dashboard on a laptop and phone](shot-pushpress-website "Screenshot: PushPress homepage, captured November 2026.")
+
 PushPress targets gyms and training facilities rather than the broader beauty-and-wellness market. Its current pricing includes a **Free** plan, **Pro at $159 per month**, and **Max at $229 per month**.
 
 The Free plan removes monthly software fees but carries higher published payment-processing rates. PushPress lists credit-card processing at **4.99% + $0.30** on Free, compared with **2.89% + $0.30** on Pro and **2.75% + $0.30** on Max.
@@ -95,6 +103,8 @@ A free software plan is not necessarily the cheapest option for a business with 
 PushPress is a stronger fit for gyms, CrossFit-style facilities, strength studios, and coaching businesses than for spas or appointment-heavy aesthetics businesses. Its plan design reflects that gym-focused operating model.
 
 ## 4. Square Appointments
+
+![Square Appointments page showing a services booking screen on a tablet](shot-square-appointments-page "Screenshot: Square Appointments page, captured November 2026.")
 
 Square Appointments provides scheduling and payment tools within the broader Square ecosystem. Its current US structure includes a **free plan**, a **$49 per location monthly Plus plan**, and a **$149 per location Premium plan**.
 
@@ -108,6 +118,8 @@ Its published pricing makes cost modelling easier. Businesses still need to incl
 
 ## 5. Mariana Tek
 
+![Mariana Tek homepage section on building a fitness community](shot-mariana-tek-website "Screenshot: Mariana Tek homepage, captured November 2026.")
+
 Mariana Tek focuses specifically on boutique fitness and positions its platform for both single-location studios and larger brands. Its public pricing page does not publish dollar amounts and instead uses demo-led packages.
 
 Every plan includes core functions such as multi-location management, unlimited class schedules and instructors, membership pricing, CRM, reporting, kiosk check-in, waivers, and transactional email. Higher packages add marketing automation, SMS, gamification, feedback tools, and additional growth services.
@@ -120,6 +132,8 @@ The company says its typical onboarding process lasts **five to eight weeks**. T
 
 ## 6. Zenoti
 
+![Zenoti homepage describing software for salons, spas, medspas and fitness businesses](shot-zenoti-website "Screenshot: Zenoti homepage, captured November 2026.")
+
 Zenoti is designed for beauty, wellness, medspa, fitness, and multi-location businesses. Its current pricing is quote-based, with functionality spanning appointments, payroll, inventory, memberships, payments, marketing, reputation management, and AI-assisted workflows.
 
 The system is more enterprise-oriented than simple studio scheduling software. Zenoti also promotes AI tools for marketing, lead management, customer service, retention, employee scheduling, inventory, and business analysis.
@@ -131,6 +145,8 @@ Zenoti may suit businesses that would otherwise need several separate systems. T
 A small independent studio should compare implementation demands and total contract cost carefully. Enterprise breadth can be valuable, but only when the organisation uses enough of the platform to justify it.
 
 ## 7. ABC Glofox and Enterprise Gym Platforms
+
+![Glofox homepage describing all-in-one software for gyms and studios](shot-glofox-website "Screenshot: Glofox homepage, captured November 2026.")
 
 ABC Glofox is aimed at gyms, studios, and fitness brands that need branded member experiences, payments, scheduling, and multi-location support. Public pricing is generally quote-led, so it is more difficult to compare directly with published entry prices from Vagaro or WellnessLiving.
 
