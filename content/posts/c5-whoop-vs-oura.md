@@ -53,11 +53,15 @@ The largest financial distinction is not the price shown on the first screen. It
 
 ### WHOOP Includes Its Device in an Ongoing Membership
 
+![WHOOP App Store listing showing sleep, recovery and strain screens](shot-whoop-app-store "Screenshot: WHOOP listing on the Apple App Store, captured November 2026.")
+
 WHOOP's US lineup consists of One at $199, Peak at $239, and Life at $359 per year. One and Peak use WHOOP 5.0 hardware, while Life provides WHOOP MG for additional supported heart-related features.
 
 Members receive eligible software, tracking and device access during the subscription period. WHOOP's cancellation documentation states that after the membership ends, new biometric data is no longer collected, uploaded or analysed, although past information remains viewable under its stated rules.
 
 ### Oura Sells the Ring Before Charging for Detailed Features
+
+![Oura homepage showing the smart ring on a hand](shot-oura-website "Screenshot: Oura homepage, captured November 2026.")
 
 Oura lists Ring 5 from $399, depending on finish, and Ring 4 from $349. The standard US membership costs $69.99 annually or $5.99 monthly, with the first month included for new members under current terms.
 

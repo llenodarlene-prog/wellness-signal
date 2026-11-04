@@ -51,7 +51,7 @@ These are service summaries rather than guarantees of permanent pricing. App pro
 
 ## 1. Nike Training Club: Best for Free Guided Workouts
 
-![Nike Training Club App Store listing showing workout screens, ratings and the free price label](shot-nike-training-club-app-store "Screenshot: Nike Training Club listing on the Apple App Store, captured November 2026.")
+![Nike Training Club app screens showing the Workouts tab with new workouts and the Expert Tips tab with nutrition tips](shot-nike-training-club-app-screens "Nike Training Club app screens. Image: Nike, November 2026.")
 
 [Nike Training Club](https://www.nike.com/ntc-app) is well suited to people who want someone to lead a workout rather than enter sets and repetitions into a tracker. Nike provides a library of free sessions spanning strength, yoga, bodyweight training and other formats, alongside multiweek programmes and wellness guidance.
 
@@ -147,7 +147,7 @@ Someone who wants a basic record of runs or rides may not need those extras. A m
 
 ## 7. Adidas Running: Best for Free Outdoor Activity Basics
 
-![adidas Running App Store listing showing run tracking, goals and progress screens](shot-adidas-running-app-store "Screenshot: adidas Running listing on the Apple App Store, captured November 2026.")
+![adidas Running app page on adidas.com showing the activity feed, a run tracking screen and a smartwatch view](shot-adidas-running-website "Screenshot: adidas Running app page on adidas.com, captured November 2026.")
 
 [adidas Running](https://www.adidas.com/us/running-app) supports tracking of runs, walks, hikes and other supported activities. The company's official app page describes GPS tracking, activity statistics, challenges and community functions alongside coaching and training-plan features.
 

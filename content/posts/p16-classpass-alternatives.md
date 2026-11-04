@@ -41,6 +41,8 @@ The list intentionally includes both in-person and digital alternatives. They ar
 
 ## How ClassPass Works as the Baseline
 
+![ClassPass homepage inviting visitors to book gyms, studios and salons with one app](shot-classpass-website "Screenshot: ClassPass homepage, captured November 2026.")
+
 ClassPass members buy credits and use those credits for eligible classes, gym visits, and wellness services. The credits required for a booking can change based on location, time, popularity, equipment, promotions, and other factors.
 
 That variable pricing is a defining feature of the [ClassPass business model](/fitness/classpass-business-model-studio-partners/). It gives users flexibility across providers, but it can make the effective cost of a particular class harder to predict than a fixed gym membership. Before switching, estimate your current [ClassPass cost](/classpass-cost-calculator/) per class so each alternative has a fair baseline.
@@ -60,6 +62,8 @@ That variable pricing is a defining feature of the [ClassPass business model](/f
 
 ## 1. Wellhub
 
+![Wellhub homepage describing wellness plans for employees](shot-wellhub-website "Screenshot: Wellhub homepage, captured November 2026.")
+
 Wellhub is a corporate wellness platform formerly known as Gympass. It connects eligible employees with gyms, studios, and digital wellness providers through employer-sponsored access.
 
 Wellhub reported in 2026 that its network had surpassed **100,000 fitness and wellness partners globally**. The company also said it connected nearly 40,000 corporate clients and more than 5 million employee subscribers at the beginning of the year.
@@ -74,6 +78,8 @@ Wellhub's corporate pricing is set with employers, and employees then choose fro
 
 ## 2. One Pass Select
 
+![One Pass homepage promoting one membership for gyms, studios and digital fitness](shot-one-pass-select-website "Screenshot: One Pass homepage, captured November 2026.")
+
 One Pass Select is a subscription-based fitness and wellbeing programme offered through UnitedHealthcare-related employer arrangements. It provides access to gym networks, digital fitness, and additional benefits through different membership tiers.
 
 UnitedHealthcare states that the programme has no long-term contracts or annual gym registration fees and allows members to change tiers monthly. The company also reports that **66% of employees who enrolled were actively engaged** in its 2024 utilisation data.
@@ -85,6 +91,8 @@ A published member flyer shows tiers ranging from a digital-only option through 
 One Pass Select works best as a ClassPass alternative for people who receive access through an employer or eligible UnitedHealthcare arrangement. It is not a generally available consumer subscription for everyone.
 
 ## 3. Active&Fit Direct
+
+![Active&Fit Direct homepage advertising gym memberships starting at $28 a month](shot-active-fit-direct-website "Screenshot: Active&Fit Direct homepage, captured November 2026.")
 
 Active&Fit Direct is offered through participating employers, health plans, and membership organisations. The programme is operated by American Specialty Health Fitness.
 
@@ -98,6 +106,8 @@ The main limitation is eligibility. Users must access the programme through a sp
 
 ## 4. Active&Fit Now
 
+![Active&Fit Now homepage advertising a $0 enrollment fee offer and $32 monthly gym access](shot-active-fit-now-website "Screenshot: Active&Fit Now homepage, captured November 2026.")
+
 Active&Fit Now is the public version of the Active&Fit model. It is available to US residents aged 18 and older without requiring an employer or health-plan sponsor.
 
 The programme currently advertises access to **8,800+ gyms** for **$32 per month**, plus a $29 enrolment fee (waived with code JUSTMOVE through December 31, 2026) and applicable taxes. It also lists more than 3,500 premium exercise studios with discounts at many locations.
@@ -109,6 +119,8 @@ Active&Fit Now is one of the more practical alternatives for someone whose main 
 However, premium boutique studios are not necessarily included in the base $32 membership. Their pricing can exceed the standard fee, so users looking for Pilates, barre, cycling, or specialist studios should check local availability first.
 
 ## 5. Apple Fitness+
+
+![Apple Fitness+ page showing a group floor workout class](shot-apple-fitness-plus-page "Screenshot: Apple Fitness+ page on Apple.com, captured November 2026.")
 
 Apple Fitness+ replaces in-person studio discovery with a digital fitness subscription. It currently costs **$9.99 per month or $79.99 per year in the United States** after the standard introductory trial.
 
@@ -122,6 +134,8 @@ The subscription can be shared with up to five family members. That can make the
 
 ## 6. Nike Training Club
 
+![Nike Training Club app screens showing the Workouts and Expert Tips tabs](shot-nike-training-club-app-screens "Nike Training Club app screens. Image: Nike, November 2026.")
+
 Nike Training Club offers guided workouts without a paid fitness subscription. Nike describes the app as providing free training guidance across strength, HIIT, yoga, bodyweight, and other formats.
 
 Nike also states that its training apps provide access to more than **185 free workouts** for members. The app focuses on digital training rather than local studio reservations.
@@ -133,6 +147,8 @@ Someone using ClassPass for workout variety rather than social or in-person expe
 The trade-off is obvious: users supply their own training space and equipment. The app cannot replace access to reformer Pilates machines, specialised studios, pools, or full gym facilities.
 
 ## 7. FitOn
+
+![FitOn homepage describing unlimited workouts, meditation and nutrition with a free sign-up button](shot-fiton-website "Screenshot: FitOn homepage, captured November 2026.")
 
 FitOn offers a large library of free digital workouts, including cardio, strength, Pilates, yoga, dance, barre, and meditation. The company says workouts remain free, while its paid PRO subscription adds features such as structured programmes, meal plans, offline downloads, premium music, and certain device integrations.
 

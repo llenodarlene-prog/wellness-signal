@@ -32,6 +32,8 @@ That difference defines the Peloton business model. Equipment purchases can begi
 
 ## Peloton's Revenue Mix
 
+![Peloton homepage showing a runner on a Peloton Tread](shot-peloton-website "Screenshot: Peloton homepage, captured November 2026.")
+
 | Business segment | FY2026 revenue |
 |---|---:|
 | Subscriptions | $1,675.6 million |

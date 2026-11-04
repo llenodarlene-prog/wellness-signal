@@ -37,6 +37,8 @@ ClassPass earns revenue through memberships that provide booking credits, while 
 
 ## How the ClassPass Business Model Works
 
+![ClassPass homepage inviting visitors to book gyms, studios and salons with one app](shot-classpass-website "Screenshot: ClassPass homepage, captured November 2026.")
+
 ClassPass is a membership marketplace connecting customers with participating gyms, fitness studios, spas, salons, and other wellness providers. Members pay for a subscription that includes credits, which they can use to reserve eligible experiences through the platform.
 
 Rather than operating the participating businesses itself, ClassPass provides a booking and distribution channel. Its commercial role involves attracting members, maintaining the marketplace, managing reservations, and compensating partners according to their agreements.

@@ -50,6 +50,8 @@ Pricing and library availability can vary by country and change over time. An ap
 
 ## 1. Medito: A Fully Free Sleep Meditation Library
 
+![Medito Foundation homepage stating the app has no paywalls and no ads](shot-medito-website "Screenshot: Medito Foundation homepage, captured November 2026.")
+
 [Medito](https://meditofoundation.org/medito-app/) is a nonprofit-developed meditation platform offering sleep stories, guided sessions, breathing exercises and ambient sounds. Its official website says there are no advertisements, paywalls, premium memberships or account requirements.
 
 That structure makes Medito relevant to listeners who want a bedtime routine without tracking trial periods or renewal dates. It is also a useful benchmark when comparing [free meditation apps](/mind-sleep/free-meditation-apps-compared/) and deciding whether a competitor's free plan provides sufficient ongoing access.
@@ -61,6 +63,8 @@ Someone who wants to open an app, select a sleep exercise and avoid a recurring 
 Its nonprofit model is not evidence that each session is clinically superior to paid content. Choice of voice, session length and personal preference remain important even when price is removed from the equation.
 
 ## 2. Insight Timer: Free Variety and a Paid Offline Option
+
+![Insight Timer homepage with options for sleep, stress, meditation and spirituality](shot-insight-timer-website "Screenshot: Insight Timer homepage, captured November 2026.")
 
 [Insight Timer](https://insighttimer.com/) offers a broad catalogue covering mindfulness, guided meditation, sleep recordings and soundscapes. The company's March 2026 support information describes more than 300,000 free guided practices and tracks across its platform.
 
@@ -74,6 +78,8 @@ For that reason, the free content count should not be the only selection factor.
 
 ## 3. Calm: Sleep Stories and a Verified Free Selection
 
+![Calm App Store listing showing sleep stories and guided meditation screens](shot-calm-app-store "Screenshot: Calm listing on the Apple App Store, captured November 2026.")
+
 [Calm](https://www.calm.com/) combines guided meditation with Sleep Stories, ambient audio and music. Its help centre, updated in October 2026, specifically identifies more than 230 free meditation sessions and eight free sleep sessions, a larger offering than older articles sometimes describe.
 
 Premium expands the available Sleep Stories and broader content catalogue. Calm distinguishes locked material within the application, allowing listeners to identify which sessions require payment.
@@ -85,6 +91,8 @@ Someone who wants a modest selection of bedtime audio may be able to use Calm wi
 Calm's production style and story format may be a deciding factor for listeners, but aesthetic preference is subjective. We have not conducted sound-quality tests or compared narrator effectiveness in a controlled study.
 
 ## 4. Headspace: Structured Wind-Down and Nighttime SOS
+
+![Headspace sleep page showing sleep meditations, wind-downs and sleep sounds on two phones](shot-headspace-sleep-page "Screenshot: Headspace sleep page, captured November 2026.")
 
 [Headspace](https://www.headspace.com/) provides Sleepcasts, wind-down activities, sleep music, extended sleep radio and Nighttime SOS exercises. Its help centre describes these as separate components intended for bedtime preparation and periods of nighttime waking.
 
@@ -98,6 +106,8 @@ These features make Headspace different from a library-first product such as Ins
 
 ## 5. BetterSleep: SleepTales, Meditation and Custom Audio
 
+![BetterSleep homepage showing its sleep tracking screen on a phone](shot-bettersleep-website "Screenshot: BetterSleep homepage, captured November 2026.")
+
 [BetterSleep](https://www.bettersleep.com/) focuses strongly on sleep audio, offering guided meditations, SleepTales, soundscapes and a multi-sound mixer. Its library page advertises more than 500 bedtime stories, guided meditations, hypnosis tracks and other audio.
 
 A June 2026 support update clarifies that BetterSleep stopped operating as a freemium product in 2025. New users can trial the app, but an active subscription is needed for continued access to the full library.
@@ -109,6 +119,8 @@ BetterSleep documents playback timers, layering of sounds and offline access for
 Those controls may appeal to people who want to create a consistent audio environment. However, readers should assess whether they will regularly use the subscription features rather than relying on the free trial alone.
 
 ## 6. Plum Village: Mindfulness and Deep Relaxation
+
+![Plum Village app website showing guided meditation screens on two phones](shot-plum-village-app-website "Screenshot: Plum Village app website, captured November 2026.")
 
 The [Plum Village app](https://plumvillage.app/) offers free guided meditation and deep-relaxation practices associated with Thich Nhat Hanh's monastic community. Its emphasis is broader mindfulness and contemplative practice rather than a commercial library marketed solely around sleep.
 
@@ -122,6 +134,8 @@ The app is best assessed on whether its teaching style, voice and session pacing
 
 ## 7. Healthy Minds Program: Structured Mindfulness Skills
 
+![Humin website introducing its wellbeing tools, including the free Healthy Minds Program app](shot-healthy-minds-humin-website "Screenshot: Humin website, home of the Healthy Minds Program app, captured November 2026.")
+
 [Healthy Minds Program](https://hminnovations.org/meditation-app) offers free science-informed training in mindfulness and wellbeing skills. It is organised around an educational approach rather than primarily a large collection of entertainment-style bedtime stories.
 
 This makes it relevant for someone who wants to develop a regular meditation practice that might extend into bedtime. The programme should not be represented as an insomnia-treatment app without specific evidence for that indication.
@@ -133,6 +147,8 @@ A large audio library provides choice, but some users prefer progressive instruc
 The important distinction is between a programme's design and its verified clinical outcomes. A scientifically informed curriculum is not identical to a clinical trial proving that its consumer app treats a sleep disorder.
 
 ## 8. UCLA Mindful: University-Provided Guided Practice
+
+![UCLA Health page for downloading the free UCLA Mindful app for iOS and Android](shot-ucla-mindful-app-page "Screenshot: UCLA Mindful app page on UCLA Health, captured November 2026.")
 
 [UCLA Mindful](https://www.uclahealth.org/programs/marc) provides guided mindfulness practices and educational resources associated with UCLA Health. Its material includes short sessions and body-focused exercises suitable for general mindfulness practice.
 
