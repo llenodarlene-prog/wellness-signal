@@ -117,6 +117,19 @@ Rules for every screenshot:
 
 If a usable screenshot can't be obtained, flag it to the editor in the QA report. Do not publish a placeholder or a stand-in image of a different product.
 
+### Image SEO for Every Image
+
+These rules apply to featured images, screenshots and illustrations alike:
+
+- **Alt text describes what is in the image.** Be specific and concrete, in plain US English, under 125 characters.
+- **No "image of" or "picture of".** Screen readers already announce it as an image.
+- **Keywords only when they fit.** Use the topic keyword if it truly describes the image. Never stuff keywords.
+- **Unique alt text.** No two articles share the same description.
+- **Featured images need `image_alt` in front matter.** The build reuses it on article cards, social shares and structured data.
+- **Decorative images keep an empty alt.** Background textures and section backdrops use `alt=""` so screen readers skip them.
+- **Descriptive file names.** Use lowercase words with hyphens, such as `calm-pricing-page`, never `IMG_2041`.
+- **Width, height and lazy loading.** The build adds these automatically; check that new templates keep them.
+
 ## 13. Final QA Status
 
 | Status | Requirement |
