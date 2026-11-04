@@ -64,6 +64,8 @@ The providers below are included because each publishes identifiable small-busin
 
 ## 1. Wellable: A Configurable Wellness Platform
 
+![Wellable homepage describing its employee wellness, rewards and recognition platform](shot-wellable-website "Screenshot: Wellable homepage, captured November 2026.")
+
 Wellable markets subscriptions, wellness challenges, content and additional services to employers of different sizes. Its published subscriptions page lists Essentials at $100 per month for 25 users and Pro at $150 per month for 25 users, with enterprise pricing available by quotation.
 
 Its positioning is broader than a single exercise challenge. Available product areas include challenge tools, educational content, on-demand classes, rewards and other modules, but buyers need to confirm which features are included in the plan selected.
@@ -84,6 +86,8 @@ A buyer should request an exact list of features included at their selected seat
 
 ## 2. YuMuuv: Challenges Priced by Registered Participants
 
+![YuMuuv homepage showing its wellness challenge app on two phones](shot-yumuuv-website "Screenshot: YuMuuv homepage, captured November 2026.")
+
 YuMuuv focuses on corporate wellness challenges that can use activity minutes, steps, sleep and other wellbeing themes. It advertises custom challenge formats and participation-based billing rather than a single published monthly price for every employer.
 
 Its pricing page says organisations select registered users and the planned challenge or platform duration. This makes the model different from billing every employee simply because they work for the company, though the exact quote still depends on the chosen configuration.
@@ -103,6 +107,8 @@ Challenge rankings and activity counts require care because not every participan
 [Review YuMuuv's pricing calculator and programme conditions](https://yumuuv.com/pricing).
 
 ## 3. Headspace Core: Small-Business Mindfulness Access
+
+![Headspace Core small business page showing a team-size price calculator for ten employees at $56.04 each per year](shot-headspace-core-small-business-page "Screenshot: Headspace Core small business page, captured November 2026.")
 
 Headspace Core for Small Businesses is a different type of offering: it gives employees access to meditation, sleep and mindfulness resources. Its small-business purchasing page supports team sizes starting at 10 and uses an annual per-employee pricing calculator.
 
