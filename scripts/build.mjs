@@ -1,13 +1,14 @@
 import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { categories, pages } from '../content/pages.mjs';
-import { inline as mdInline, plain, renderBlock } from './lib/markdown.mjs';
+import { inline as mdInline, plain, renderBlock, setImageRenderer } from './lib/markdown.mjs';
 import { renderCalculator } from './lib/calculators.mjs';
 import { tablerSprite, ti } from './lib/icons.mjs';
 import { loadPosts } from './lib/posts.mjs';
 import { charts } from '../content/charts.mjs';
 import { calculators } from '../content/calculators.mjs';
 import { loadTools } from './lib/tools.mjs';
+import { loadFaqs } from './lib/faqs.mjs';
 import {
   categoryIcons, categoryLens, economy, partnerRules, evidenceLadder, icon, readingSteps, separations, sprig, standardIcons,
 } from '../content/features.mjs';
@@ -103,6 +104,13 @@ const alts = {
 const picture = (name, { eager = false, sizes = '(max-width: 860px) 100vw, 50vw', alt = alts[name] || '' } = {}) =>
   `<img src="/assets/images/${name}.webp" srcset="/assets/images/${name}-800.webp 800w, /assets/images/${name}.webp 1672w" sizes="${sizes}" width="1672" height="941" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
 
+// Inline article images (product screenshots): figure with caption and credit.
+setImageRenderer(({ alt, src, caption }) => {
+  if (!imageSize[src]) throw new Error(`Missing image assets/images/${src}.webp`);
+  const [w, h] = dims(src);
+  return `<figure class="post-shot"><img src="/assets/images/${src}.webp" srcset="/assets/images/${src}-800.webp 800w, /assets/images/${src}.webp ${w}w" sizes="(max-width: 860px) 100vw, 760px" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">${caption ? `<figcaption>${mdInline(caption)}</figcaption>` : ''}</figure>`;
+});
+
 const navItems = [
   ...categories.map(category => ({ href: path(category.slug), label: category.name })),
   { href: '/about/', label: 'About' },
@@ -137,7 +145,8 @@ const footer = `<footer class="site-footer">
       <h2>Publication</h2>
       <ul>
         <li><a href="/about/">About Us</a></li>
-        <li><a href="/tools/">Calculators and Tools</a></li>
+        <li><a href="/calculators/">Calculators and Tools</a></li>
+        <li><a href="/faq/">Wellness FAQ</a></li>
         <li><a href="/about/#editorial-standards">Editorial Standards</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy-policy/">Privacy Policy</a></li>
@@ -151,7 +160,14 @@ const footer = `<footer class="site-footer">
 <button class="to-top" type="button" aria-label="Back to top">${icon('arrow', 18)}</button>
 <script src="/assets/js/site.js?v=${assetVersion}" defer></script>`;
 // Pages with a calculator load its script; others do not.
-const withSprite = html => html.replace(/<body([^>]*)>/, `<body$1>\n${sprite}`);
+// Each page gets only the icons it references, plus those the calculator script draws.
+const jsIcons = new Set([...(await readFile('assets/js/calculators.js', 'utf8')).matchAll(/'([a-z0-9-]+)'/g)].map(m => m[1]));
+const pageSprite = html => {
+  const used = new Set([...html.matchAll(/#ti-([a-z0-9-]+)/g)].map(m => m[1]));
+  if (html.includes('data-calc=')) jsIcons.forEach(name => used.add(name));
+  return sprite.replace(/<symbol id="ti-([a-z0-9-]+)"[\s\S]*?<\/symbol>/g, (sym, name) => (used.has(name) ? sym : ''));
+};
+const withSprite = html => html.replace(/<body([^>]*)>/, (tag) => `${tag}\n${pageSprite(html)}`);
 const withCalcScript = html => (html.includes('data-calc=') ? withSprite(html).replace('</body>', `<script src="/assets/js/calculators.js?v=${assetVersion}" defer></script>\n</body>`) : html);
 
 // ---------- Feature blocks ----------
@@ -697,14 +713,14 @@ ${footer}
 const tools = await loadTools();
 const renderTool = tool => {
   const url = `${canonical}${tool.url}`;
-  const breadcrumb = crumbs(url, [{ name: 'Tools', item: `${canonical}/tools/` }, { name: tool.title, item: url }]);
+  const breadcrumb = crumbs(url, [{ name: 'Calculators', item: `${canonical}/calculators/` }, { name: tool.title, item: url }]);
   const graph = [organization, website, breadcrumb, {
     '@type': 'WebPage', '@id': `${url}#webpage`, url, name: tool.seo_title, description: tool.description,
     dateModified: tool.updated, isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
     mainEntity: { '@id': `${url}#app` },
   }, {
     '@type': 'WebApplication', '@id': `${url}#app`, name: tool.title, url, description: tool.description,
-    applicationCategory: 'FinanceApplication', operatingSystem: 'Any', browserRequirements: 'Requires JavaScript',
+    applicationCategory: tool.app_category || 'HealthApplication', operatingSystem: 'Any', browserRequirements: 'Requires JavaScript',
     isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, publisher: { '@id': organization['@id'] },
   }];
   if (tool.faqs.length) {
@@ -724,10 +740,10 @@ ${header({ slug: tool.category || '' })}
 <main id="main">
   <header class="post-hero">
     <div class="wrap">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/tools/">Tools</a><span aria-hidden="true">/</span><span aria-current="page">${esc(tool.title)}</span></nav>
-      <span class="eyebrow">Free calculator</span>
-      <h1>${esc(tool.title)}</h1>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/calculators/">Calculators</a><span aria-hidden="true">/</span><span aria-current="page">${esc(tool.title)}</span></nav>
+      <div class="tool-hero-title"><span class="tool-icon">${ti(calculators[tool.calc].icon)}</span><h1>${esc(tool.title)}</h1></div>
       <p class="post-deck">${esc(tool.description)}</p>
+      <ul class="tool-trust"><li>${ti('book')} Formula explained</li><li>${ti('lock')} No signup required</li><li>${ti('refresh')} Instant calculation</li><li>${ti('shield-check')} Nothing you enter is stored</li></ul>
     </div>
   </header>
   <div class="wrap tool-layout">
@@ -737,6 +753,7 @@ ${header({ slug: tool.category || '' })}
       ${unlinkScheduled(body)}
     </article>
   </div>
+  ${relatedTools(tool)}
 </main>
 ${footer}
 </body>
@@ -744,22 +761,136 @@ ${footer}
 `;
 };
 
-// Tools index: standalone calculator pages plus calculators embedded in live articles.
+// Related calculators listed in front matter (related_tools: slug, slug), then the hub.
+const relatedTools = tool => {
+  const picks = String(tool.related_tools || '').split(',').map(x => x.trim()).filter(Boolean)
+    .map(slug => tools.find(t => t.slug === slug)).filter(Boolean).slice(0, 3);
+  const cat = categories.find(c => c.slug === tool.category);
+  return `<section class="section tone-white tool-related"><div class="wrap">
+    <div class="section-head"><span class="eyebrow">Keep exploring</span><h2>Related Calculators</h2></div>
+    ${picks.length ? `<ul class="tool-list">${picks.map(t => toolCard({ title: t.title, url: t.url, summary: t.description, icon: calculators[t.calc].icon, category: t.category })).join('')}</ul>` : ''}
+    <p class="calc-filter"><a class="calc-link" href="/calculators/">${ti('calculator')} All calculators</a>${cat ? `<a class="calc-link" href="/${cat.slug}/">${ti('arrow-right')} ${esc(cat.name)} articles</a>` : ''}</p>
+  </div></section>`;
+};
+const toolCard = entry => `<li data-category="${esc(entry.category || '')}"><a class="tool-card" href="${entry.url}"><span class="tool-icon">${ti(entry.icon)}</span><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p>${entry.where ? `<span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span>` : `<span class="tool-where">${esc(categoryName(entry.category))}</span>`}<span class="more">${entry.cta || 'Open calculator'} ${icon('arrow', 16)}</span></a></li>`;
+
+// ---------- FAQ hubs ----------
+const faqs = await loadFaqs();
+const faqGroupIcon = title => ({ 'mind-sleep': 'moon-stars', fitness: 'run', wellness: 'droplet', 'longevity-recovery': 'flame', 'beauty-aesthetics': 'sun', 'work-wellness': 'desk', 'travel-retreats': 'plane' })[categories.find(c => c.name === title)?.slug] || 'message-question';
+
+// Flow diagram: how a question leads to an answer, an article, a tool and a source.
+const illustrations = {
+  'faq-map': () => `<figure class="faq-map" aria-label="How Wellness Signal answers a question">
+    <ol>${[['help-circle', 'Your question', 'Asked the way people search'], ['bulb', 'Short answer', 'The direct answer comes first'], ['book', 'Full article', 'Context, tables and caveats'], ['calculator', 'Calculator', 'Your own numbers, worked out'], ['shield-check', 'Source', 'CDC, NIH, PubMed and others']].map(([ic, t, d]) => `<li>${ti(ic)}<strong>${t}</strong><span>${d}</span></li>`).join('')}</ol>
+    <figcaption>Every answer on this page follows the same path, so you can stop at the depth you need.</figcaption>
+  </figure>`,
+};
+illustrations['sleep-ladder'] = () => `<figure class="sleep-ladder" aria-label="Adult sleep hours: under 7 is short, 7 to 9 is recommended, over 9 may suit some people">
+    <div class="sl-bar"><span class="sl-zone z-short" style="--a:0;--b:3"><strong>Under 7 h</strong><small>Short for most adults</small></span><span class="sl-zone z-ok" style="--a:3;--b:5"><strong>7 to 9 h</strong><small>Recommended for adults</small></span><span class="sl-zone z-long" style="--a:5;--b:7"><strong>Over 9 h</strong><small>May suit some people</small></span></div>
+    <div class="sl-ticks">${[4, 5, 6, 7, 8, 9, 10, 11].map(h => `<span style="left:${(h - 4) / 7 * 100}%">${h} h</span>`).join('')}</div>
+    <figcaption>Adult guidance from the AASM, SRS and NHLBI. Teens and children need more; see the table below.</figcaption>
+  </figure>`;
+illustrations['sleep-stages'] = () => {
+  // Simplified pattern: deep sleep front-loaded, REM growing toward morning.
+  const cycles = [[40, 45, 15], [45, 35, 20], [55, 20, 25], [60, 8, 32], [55, 0, 45]];
+  return `<figure class="sleep-night" aria-label="Simplified night of five sleep cycles: deep sleep is longest early in the night, REM sleep grows toward morning">
+    <div class="sn-cycles">${cycles.map(([l, d, r], i) => `<div class="sn-cycle"><span class="sn-label">Cycle ${i + 1}</span><span class="sn-track"><span class="sn-seg s-light" style="--w:${l}%"></span>${d ? `<span class="sn-seg s-deep" style="--w:${d}%"></span>` : ''}<span class="sn-seg s-rem" style="--w:${r}%"></span></span></div>`).join('')}</div>
+    <div class="sn-key"><span><i class="s-light"></i>Light (stages 1 and 2)</span><span><i class="s-deep"></i>Deep (stage 3)</span><span><i class="s-rem"></i>REM</span></div>
+    <figcaption>Simplified illustration, not measured data. Each cycle lasts about 80 to 100 minutes (NHLBI).</figcaption>
+  </figure>`;
+};
+const faqBlocks = blocks => blocks.map(block => {
+  const m = block.type === 'p' && block.text.match(/^\{\{illustration:([a-z0-9-]+)\}\}$/);
+  return m ? illustrations[m[1]]() : renderBlock(block, charts, calculators);
+}).join('\n');
+
+const renderFaq = page => {
+  const url = `${canonical}${page.url}`;
+  const cat = categories.find(c => c.slug === page.category);
+  const trail = [{ name: 'FAQ', item: `${canonical}/faq/` }];
+  if (page.depth && cat) trail.push({ name: cat.name, item: `${canonical}/${cat.slug}/` });
+  if (page.depth) trail.push({ name: page.title, item: url });
+  const breadcrumb = crumbs(url, trail);
+  const qa = page.sections.flatMap(section => section.questions);
+  const graph = [organization, website, breadcrumb, {
+    '@type': 'WebPage', '@id': `${url}#webpage`, url, name: page.seo_title, description: page.description,
+    dateModified: page.updated, isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
+  }];
+  if (qa.length) {
+    graph.push({
+      '@type': 'FAQPage', '@id': `${url}#faq`,
+      mainEntity: qa.map(q => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: plain(q.a.map(b => b.text || (b.items || []).join(' ')).join(' ')) } })),
+    });
+  }
+  // Optional per-section icons: group_icons: Section Title=icon | Other Title=icon
+  const groupIcons = Object.fromEntries(String(page.group_icons || '').split('|').map(x => x.split('=').map(y => y.trim())).filter(x => x.length === 2));
+  const groups = page.sections.filter(section => section.questions.length);
+  const body = page.sections.map(section => {
+    if (/^Sources$/i.test(section.title)) return sourcesBlock({ ...section, blocks: section.lead });
+    if (!section.questions.length) return `<section class="faq-plain" id="${section.id}"><h2>${esc(section.title)}</h2>${faqBlocks(section.lead)}</section>`;
+    return `<section class="faq-group" id="${section.id}" data-group="${section.id}">
+      <div class="faq-group-head"><span class="tool-icon">${ti(groupIcons[section.title] || faqGroupIcon(section.title))}</span><div><h2>${esc(section.title)}</h2>${faqBlocks(section.lead)}</div></div>
+      ${section.questions.map(q => `<article class="faq-item" id="${q.id}"><h3>${ti('help-circle')}<span>${esc(q.q)}</span></h3><div class="faq-answer">${faqBlocks(q.a)}</div></article>`).join('\n')}
+    </section>`;
+  }).join('\n');
+  return `${docHead({ title: page.seo_title, description: page.description, url, image: page.image || 'desk-sea-view', jsonLd: [{ '@context': 'https://schema.org', '@graph': graph }] })}
+<body class="post-page faq-page">
+${header({ slug: 'faq' })}
+<main id="main">
+  <header class="post-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span>${page.depth ? `<a href="/faq/">FAQ</a><span aria-hidden="true">/</span>${cat ? `<a href="/${cat.slug}/">${esc(cat.name)}</a><span aria-hidden="true">/</span>` : ''}<span aria-current="page">${esc(page.title)}</span>` : '<span aria-current="page">FAQ</span>'}</nav>
+      <div class="tool-hero-title"><span class="tool-icon">${ti(page.icon || 'help-circle')}</span><h1>${esc(page.h1 || page.title)}</h1></div>
+      <ul class="tool-trust"><li>${ti('bulb')} Answer first</li><li>${ti('book')} ${qa.length} questions, all sourced</li><li>${ti('refresh')} Updated <time datetime="${page.updated}">${longDate(page.updated)}</time></li></ul>
+    </div>
+  </header>
+  <div class="wrap tool-layout faq-layout">
+    <article class="prose">
+      <div class="post-intro">${unlinkScheduled(faqBlocks(page.intro))}</div>
+      ${groups.length > 1 ? `<div class="faq-tools" role="search">
+        <label class="faq-search" for="faq-q">${ti('search')}<span class="visually-hidden">Search questions</span><input id="faq-q" type="search" placeholder="Search questions, e.g. sleep or sauna" autocomplete="off"></label>
+        <div class="topics" role="group" aria-label="Filter by topic"><button type="button" class="chip" data-faq-filter="all" aria-pressed="true">All</button>${groups.map(g => `<button type="button" class="chip" data-faq-filter="${g.id}" aria-pressed="false">${esc(g.title)}</button>`).join('')}</div>
+        <p class="faq-none" hidden>${ti('alert-circle')} No questions match that search. Try a broader word.</p>
+      </div>` : ''}
+      ${unlinkScheduled(body)}
+    </article>
+  </div>
+  ${relatedFaqs(page)}
+  ${relatedTools(page)}
+</main>
+${footer}
+</body>
+</html>
+`;
+};
+
+// Other FAQ hubs in the same category, then the main FAQ page.
+const relatedFaqs = page => {
+  const others = faqs.filter(f => f !== page && f.depth && (!page.depth || f.category === page.category));
+  if (!others.length) return '';
+  return `<section class="section tone-cream tool-related"><div class="wrap">
+    <div class="section-head"><span class="eyebrow">More questions</span><h2>${page.depth ? 'Related FAQ Hubs' : 'Topic FAQ Hubs'}</h2></div>
+    <ul class="tool-list">${others.map(f => toolCard({ title: f.title, url: f.url, summary: f.description, icon: f.icon || 'help-circle', category: f.category, cta: 'Read the answers' })).join('')}</ul>
+    ${page.depth ? `<p class="calc-filter"><a class="calc-link" href="/faq/">${ti('help-circle')} All FAQs</a></p>` : ''}
+  </div></section>`;
+};
+
+// Calculators hub: standalone calculator pages plus calculators embedded in live articles.
 const toolsPage = {
-  title: 'Free Wellness Cost Calculators and Tools | Wellness Signal',
-  description: 'Free wellness cost calculators for Pilates classes, ClassPass credits, wearables, saunas, retreats, fitness apps and workplace wellness programs.',
+  title: 'Wellness Calculators & Interactive Tools | Wellness Signal',
+  description: 'Free wellness calculators for walking, steps, running pace, strength, heart rate, sleep, water and the real cost of classes, apps, devices and retreats.',
 };
 const toolEntries = () => [
-  ...tools.map(tool => ({ title: tool.title, url: tool.url, summary: tool.description, where: 'Standalone calculator', icon: calculators[tool.calc].icon })),
+  ...tools.map(tool => ({ title: tool.title, url: tool.url, summary: tool.description, icon: calculators[tool.calc].icon, category: tool.category })),
   ...Object.entries(calculators).filter(([id]) => !tools.some(tool => tool.calc === id)).flatMap(([id, calc]) => {
     const hosts = posts.filter(post => post.body.includes(`{{calc:${id}}}`));
-    return hosts.length ? [{ title: calc.title, url: `${hosts[0].url}#${id}-title`, summary: calc.intro, where: hosts.map(post => post.title), icon: calc.icon }] : [];
+    return hosts.length ? [{ title: calc.title, url: `${hosts[0].url}#${id}-title`, summary: calc.intro, where: hosts.map(post => post.title), icon: calc.icon, category: hosts[0].category }] : [];
   }),
 ];
 const renderToolsIndex = () => {
-  const url = `${canonical}/tools/`;
+  const url = `${canonical}/calculators/`;
   const entries = toolEntries();
-  const breadcrumb = crumbs(url, [{ name: 'Tools', item: url }]);
+  const breadcrumb = crumbs(url, [{ name: 'Calculators', item: url }]);
   const jsonLd = [{ '@context': 'https://schema.org', '@graph': [organization, website, breadcrumb, {
     '@type': 'CollectionPage', '@id': `${url}#collection`, url, name: toolsPage.title, description: toolsPage.description,
     isPartOf: { '@id': websiteId }, breadcrumb: { '@id': breadcrumb['@id'] }, inLanguage: site.locale,
@@ -767,18 +898,19 @@ const renderToolsIndex = () => {
   }] }];
   return `${docHead({ title: toolsPage.title, description: toolsPage.description, url, image: 'desk-sea-view', jsonLd })}
 <body>
-${header({ slug: 'tools' })}
+${header({ slug: 'calculators' })}
 <main id="main">
   <section class="hero no-image articles-hero">${sprig}
     <div class="wrap"><div class="hero-text">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Tools</span></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Calculators</span></nav>
       <span class="eyebrow">Free calculators</span>
-      <h1>Wellness Calculators and Tools</h1>
-      <div class="lead"><p>Estimate what classes, memberships, devices, saunas, retreats and apps really cost. Every calculator runs in your browser, needs no login and does not store what you enter.</p></div>
+      <h1>Wellness Calculators &amp; Interactive Tools</h1>
+      <div class="lead"><p>Estimate distance, calories, pace, strength, heart rate zones, sleep and the real cost of classes, apps, devices and retreats. Every calculator shows its formula, runs in your browser and stores nothing you enter.</p></div>
+      ${(() => { const used = categories.filter(c => entries.some(e => e.category === c.slug)); return used.length > 1 ? `<div class="topics" role="group" aria-label="Filter by category"><button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>${used.map(c => `<button type="button" class="chip" data-filter="${c.slug}" aria-pressed="false">${esc(c.name)}</button>`).join('')}</div>` : ''; })()}
     </div></div>
   </section>
   <section class="section tone-white"><div class="wrap">
-    <ul class="tool-list">${entries.map(entry => `<li><a class="tool-card" href="${entry.url}"><span class="tool-icon">${ti(entry.icon)}</span><h2>${esc(entry.title)}</h2><p>${esc(entry.summary)}</p><span class="tool-where">${esc(Array.isArray(entry.where) ? `In: ${entry.where.join('; ')}` : entry.where)}</span><span class="more">Open calculator ${icon('arrow', 16)}</span></a></li>`).join('')}</ul>
+    <ul class="tool-list" data-filterable>${entries.map(toolCard).join('')}</ul>
   </div></section>
 </main>
 ${footer}
@@ -842,8 +974,12 @@ for (const tool of tools) {
   await mkdir(`dist${tool.url}`, { recursive: true });
   await writeFile(`dist${tool.url}index.html`, withCalcScript(renderTool(tool)));
 }
-await mkdir('dist/tools', { recursive: true });
-await writeFile('dist/tools/index.html', withSprite(renderToolsIndex()));
+for (const page of faqs) {
+  await mkdir(`dist${page.url}`, { recursive: true });
+  await writeFile(`dist${page.url}index.html`, withSprite(renderFaq(page)));
+}
+await mkdir('dist/calculators', { recursive: true });
+await writeFile('dist/calculators/index.html', withSprite(renderToolsIndex()));
 await mkdir('dist/articles', { recursive: true });
 await writeFile('dist/articles/index.html', renderArticlesIndex());
 for (const slug of Object.keys(authors)) {
@@ -861,7 +997,7 @@ await writeFile('dist/robots.txt', production
   : 'User-agent: *\nDisallow: /\n'
 );
 await writeFile('dist/sitemap.xml', production
-  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url><url><loc>${canonical}/tools/</loc></url>${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
+  ? `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${canonical}${path(page.slug)}</loc></url>`).join('')}<url><loc>${canonical}/articles/</loc></url><url><loc>${canonical}/calculators/</loc></url>${faqs.map(f => `<url><loc>${canonical}${f.url}</loc><lastmod>${f.updated}</lastmod></url>`).join('')}${Object.keys(authors).map(slug => `<url><loc>${canonical}${authorUrl(slug)}</loc></url>`).join('')}${tools.map(tool => `<url><loc>${canonical}${tool.url}</loc><lastmod>${tool.updated}</lastmod></url>`).join('')}${posts.map(post => `<url><loc>${canonical}${post.url}</loc><lastmod>${post.updated}</lastmod></url>`).join('')}</urlset>`
   : '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>'
 );
 // llms.txt: live posts grouped by silo, from the same set as the sitemap.
@@ -871,7 +1007,7 @@ await writeFile('dist/llms.txt', production
   ? [`# ${site.name}`, '', `> ${site.description}`, '',
     `${site.name} publishes sourced research and analysis on the business and evidence behind wellness. Every statistic links to its primary source.`, '',
     '## Site', '', `- [About](${canonical}/about/): Who we are and our editorial standards`, `- [All articles](${canonical}/articles/): Every published article and blog`, `- [Contact](${canonical}/contact/): Editorial contact`, '',
-    ...(tools.length ? ['## Calculators', '', `- [All calculators](${canonical}/tools/): Free wellness cost calculators`, ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
+    ...(tools.length ? ['## Calculators', '', `- [All calculators](${canonical}/calculators/): Free wellness calculators and interactive tools`, ...faqs.map(f => `- [${f.title}](${canonical}${f.url}): ${plain(f.description)}`), ...tools.map(tool => `- [${tool.title}](${canonical}${tool.url}): ${plain(tool.description)}`), ''] : []),
     ...categories.filter(c => posts.some(p => p.category === c.slug)).flatMap(c => [
       `## ${c.name}`, '', `- [${c.name} hub](${canonical}/${c.slug}/): ${c.summary}`,
       ...silo(c.slug).map(post => `- [${post.title}](${canonical}${post.url}): ${plain(post.description)}`), '',
@@ -886,7 +1022,8 @@ await writeFile('dist/build-manifest.json', JSON.stringify({
   pages: [
     ...pages.map(page => ({ slug: path(page.slug), draft: false })),
     { slug: '/articles/', draft: false },
-    { slug: '/tools/', draft: false },
+    { slug: '/calculators/', draft: false },
+    ...faqs.map(f => ({ slug: f.url, draft: false })),
     ...Object.keys(authors).map(slug => ({ slug: authorUrl(slug), draft: false })),
     ...tools.map(tool => ({ slug: tool.url, draft: false })),
     ...posts.map(post => ({ slug: post.url, draft: false, published: post.published })),

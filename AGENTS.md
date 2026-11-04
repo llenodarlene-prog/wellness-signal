@@ -27,8 +27,11 @@ scheduled until this pass is complete and reported.
 5. **Draft leftovers:** remove internal notes (CMS, "suggested internal
    links", affiliate placement, "verify before publishing") and replace them
    with reader-facing disclosures where needed.
-6. **SEO checks:** `npm run verify` for every publish date in the batch.
-7. **Report:** tell the editor what was confirmed, what was fixed, and what
+6. **Product screenshots:** listicles, roundups and comparisons of tools or apps include a real, credited
+   screenshot of each product (see `docs/EDITORIAL-QA-SOP.md`, section 12). Missing screenshots are
+   flagged to the editor, never replaced with mockups or AI images.
+7. **SEO checks:** `npm run verify` for every publish date in the batch.
+8. **Report:** tell the editor what was confirmed, what was fixed, and what
    could not be verified, before asking them to merge. Contradicted claims are
    fixed or removed; unverifiable claims are flagged for the editor to decide.
 

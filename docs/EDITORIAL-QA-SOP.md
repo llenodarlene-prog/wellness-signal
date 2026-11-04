@@ -87,7 +87,37 @@ Primary keyword once in the main heading and twice in the body (once in the intr
 
 US English across all brands. Follow brand voice, sentence-length, word-limit and banned-word rules. No em dashes, filler, unsupported superlatives or formulaic promotion. Lists for steps, tables for comparisons, FAQs only when useful. Tables, captions, graphics, metadata and alt text must match verified claims.
 
-## 12. Final QA Status
+## 12. Product and App Screenshots
+
+Listicles, roundups and comparisons that name tools, apps, devices or services need a real image of each one. Readers want to see what they're choosing. A screenshot also proves the product exists as described.
+
+When a screenshot is required:
+
+- **Listicles and roundups:** one screenshot for every tool or app in the list.
+- **Head-to-head comparisons:** one screenshot of each product compared.
+- **Single highlights:** one or two screenshots when an article features one or two tools in depth.
+
+Where screenshots come from:
+
+1. **Our own capture** of the product's public website, pricing page or app store listing. This is the default.
+2. **The official press kit or media page**, when the brand offers one. Follow its usage terms.
+3. **The editor's own device**, for in-app views that need an account.
+
+Never use AI-generated product images, mockups, stock photos presented as the product, or images copied from review sites or competitors.
+
+Rules for every screenshot:
+
+- **Show the real product.** Capture the screen the article discusses, such as the pricing table or sleep dashboard.
+- **Hide personal data.** No names, emails, health data, location or account details belonging to anyone.
+- **No affiliate or promo overlays.** Crop out pop-ups, cookie banners and discount codes.
+- **Caption with a credit and date.** Example: "Screenshot: Calm website pricing page, captured October 2026."
+- **Write descriptive alt text.** Say what the image shows, not "screenshot".
+- **Match the text.** Prices, plan names and features in the image must match the verified copy. If the product changes, replace or remove the image.
+- **Format.** WebP, 1200 px wide plus an 800 px version, saved in `assets/images/` with a descriptive name such as `calm-pricing-page`.
+
+If a usable screenshot can't be obtained, flag it to the editor in the QA report. Do not publish a placeholder or a stand-in image of a different product.
+
+## 13. Final QA Status
 
 | Status | Requirement |
 |---|---|

@@ -51,6 +51,8 @@ These are service summaries rather than guarantees of permanent pricing. App pro
 
 ## 1. Nike Training Club: Best for Free Guided Workouts
 
+![Nike Training Club app screens showing the Workouts tab with new workouts and the Expert Tips tab with nutrition tips](shot-nike-training-club-app-screens "Nike Training Club app screens. Image: Nike, November 2026.")
+
 [Nike Training Club](https://www.nike.com/ntc-app) is well suited to people who want someone to lead a workout rather than enter sets and repetitions into a tracker. Nike provides a library of free sessions spanning strength, yoga, bodyweight training and other formats, alongside multiweek programmes and wellness guidance.
 
 The main advantage is that the workout itself is the product, not a short preview of a paid class library. Users can look for sessions that fit their available time, equipment and general fitness level, which makes the app suitable for exercising at home or supplementing a gym routine.
@@ -64,6 +66,8 @@ The trade-off is specialisation. Someone seeking detailed barbell progression, c
 **Best fit:** Beginners and general exercisers who prefer guided, no-cost sessions.
 
 ## 2. Nike Run Club: Best for Guided Running
+
+![Nike Run Club app page on Nike.com with runners on a night run](shot-nike-run-club-website "Screenshot: Nike Run Club page on Nike.com, captured November 2026.")
 
 [Nike Run Club](https://www.nike.com/nrc-app) focuses on running rather than the full range of gym activities. Nike identifies it as a free app with coaching, tracking and community tools, so users can build a running routine without paying for a general fitness membership.
 
@@ -79,6 +83,8 @@ This makes it a sensible choice when tracking routes, runs and consistency is th
 
 ## 3. FitOn: Best for Free Video Classes With Optional Extras
 
+![FitOn homepage headline describing unlimited workouts, meditation and nutrition with a free sign-up button](shot-fiton-website "Screenshot: FitOn homepage, captured November 2026.")
+
 [FitOn](https://fitonapp.com/) provides a range of instructor-led fitness videos and states that its workouts remain free. The company sells FitOn PRO as an optional package of additional functions, so it is important to distinguish access to the workouts from access to premium conveniences.
 
 FitOn may suit people who prefer the experience of joining a class from home. It also offers several workout styles, reducing the need to use a different app whenever someone changes from strength training to stretching or a shorter session.
@@ -92,6 +98,8 @@ The key distinction is that paid extras do not necessarily make the free workout
 **Best fit:** People who want a varied home-workout video library without buying a class subscription.
 
 ## 4. Boostcamp: Best for Free Strength Training Programmes
+
+![Boostcamp homepage showing its free workout tracker and a phone screen of free strength programs](shot-boostcamp-website "Screenshot: Boostcamp homepage, captured November 2026.")
 
 [Boostcamp](https://www.boostcamp.app/) is designed around structured strength programmes and workout tracking. Its October 2026 programme information advertises a large free library that includes user-created programmes and many coach-designed options, along with logging features for sets, repetitions, weights and progress.
 
@@ -107,6 +115,8 @@ Boostcamp's October 2026 programme page lists more than 14,000 programmes, inclu
 
 ## 5. Hevy: Best for Recording Gym Workouts
 
+![Hevy homepage showing the workout log on a phone and Apple Watch](shot-hevy-website "Screenshot: Hevy homepage, captured November 2026.")
+
 [Hevy](https://www.hevyapp.com/) focuses on logging strength-training sessions, saving routines and following progress. Its free plan supports core tracking functions, but the provider publishes explicit limits that users should check before transferring an extensive workout history into the app.
 
 Hevy's organised logging format is useful for lifters who already know their exercises and want a repeatable record. It is less suitable for someone expecting the free version to provide unlimited programme-building options or comprehensive historical analytics.
@@ -121,6 +131,8 @@ Those restrictions may be entirely manageable for someone following a simple thr
 
 ## 6. Strava: Best for Free Activity Recording and Community
 
+![Strava subscription page headline on a dark orange background](shot-strava-subscription-page "Screenshot: Strava subscription page, captured November 2026.")
+
 [Strava](https://www.strava.com/) offers activity recording and a social network centred on exercise. It is particularly relevant to runners, cyclists and other outdoor exercisers who want to record sessions and follow people with similar interests.
 
 The free version provides a usable entry point, but Strava positions a substantial set of training and route features as subscriber benefits. It should therefore be assessed as a recording-and-community option first, not a promise of complete coaching functionality at no cost.
@@ -134,6 +146,8 @@ Someone who wants a basic record of runs or rides may not need those extras. A m
 **Best fit:** Outdoor exercisers motivated by recording activities and connecting with a community.
 
 ## 7. Adidas Running: Best for Free Outdoor Activity Basics
+
+![adidas Running app page on adidas.com showing the activity feed, a run tracking screen and a smartwatch view](shot-adidas-running-website "Screenshot: adidas Running app page on adidas.com, captured November 2026.")
 
 [adidas Running](https://www.adidas.com/us/running-app) supports tracking of runs, walks, hikes and other supported activities. The company's official app page describes GPS tracking, activity statistics, challenges and community functions alongside coaching and training-plan features.
 

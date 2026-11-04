@@ -7,6 +7,7 @@ calc: classpass-cost
 category: fitness
 image: phone-class-booking
 updated: 2026-10-28
+related_tools: pilates-class-cost-calculator, running-pace-calculator, heart-rate-zone-calculator
 ---
 
 ClassPass cost is easy to see on your bill and harder to see per class. Because the plan is priced in credits and each booking costs a different number of credits, the real price of a class depends on what you book. This calculator converts your plan into a cost per credit, an estimated cost per class and a comparison with booking directly.

@@ -57,6 +57,8 @@ Not every app in this article is marketed only to women. We included several gen
 
 ## 1. Sweat
 
+![Sweat homepage headline describing a fitness app designed by women, for women](shot-sweat-website "Screenshot: Sweat homepage, captured November 2026.")
+
 Sweat is one of the most established fitness apps built specifically for women. The company says the platform has more than **60 programmes** and more than 13,000 workouts.
 
 Training styles include strength, HIIT, Pilates, yoga, barre, low-impact workouts, pregnancy, and post-pregnancy programmes. This makes Sweat suitable for users who want a broad training library rather than one narrowly defined method.
@@ -72,6 +74,8 @@ The platform is programme-led rather than simply a video library. Users can sele
 Sweat is strongest for women who want a large choice of structured programmes across several stages of life. It may be less suitable for someone who only wants progressive barbell training or a very low-cost fitness app.
 
 ## 2. EvolveYou
+
+![EvolveYou homepage describing its strength training and wellbeing app for women](shot-evolveyou-website "Screenshot: EvolveYou homepage, captured November 2026.")
 
 EvolveYou describes itself as a strength training and wellbeing app made by women for women. It was co-founded in 2019 by trainer Krissy Cela and offers training at home, in the gym, or with limited equipment.
 
@@ -89,6 +93,8 @@ EvolveYou is a strong option for women who want progressive strength training co
 
 ## 3. Alive by Whitney Simmons
 
+![Alive by Whitney Simmons homepage with a free trial button](shot-alive-app-website "Screenshot: Alive app homepage, captured November 2026.")
+
 Alive is a female-led training app associated with Whitney Simmons and other women coaches. Its programming includes strength, hypertrophy, Pilates, endurance, pregnancy and postpartum, and beginner-to-advanced training.
 
 The company currently advertises more than **10 programmes**, 100+ daily workouts, video demonstrations, weight and rep tracking, progress photos, and Apple Watch support.
@@ -104,6 +110,8 @@ The platform also includes journaling and wellness features, which separates it 
 Alive suits users who prefer female coaches and structured strength-oriented programming. It also offers Pilates and pregnancy-related options, giving it broader appeal than a conventional bodybuilding app.
 
 ## 4. Ladder
+
+![Ladder homepage promoting its strength training plans](shot-ladder-website "Screenshot: Ladder homepage, captured November 2026.")
 
 Ladder is built around progressive strength training rather than a large on-demand class catalogue. Members join coaching teams and receive new programmed workouts each week.
 
@@ -121,6 +129,8 @@ Ladder is strongest for users who already intend to train consistently and want 
 
 ## 5. Peloton App
 
+![Peloton App page showing class and workout screens on two phones](shot-peloton-app-page "Screenshot: Peloton App page, captured November 2026.")
+
 Peloton's app provides fitness programming without requiring Peloton equipment. App One includes unlimited strength, yoga, meditation, outdoor running, gym, Pilates, HIIT, and related floor workouts, plus limited cardio-equipment classes.
 
 Peloton currently advertises more than 15 workout types and more than 55 instructors. Users can follow live or on-demand sessions and use scheduling and progress-tracking features.
@@ -136,6 +146,8 @@ For people who do not own a Peloton Bike, Tread, or Row, App One is the more rel
 Peloton works well for people who enjoy instructor-led classes and variety. It is less specialised than EvolveYou or Ladder for progressive strength programming but offers a much broader mix of class formats.
 
 ## 6. Apple Fitness+
+
+![Apple Fitness+ page showing a group floor workout class](shot-apple-fitness-plus-page "Screenshot: Apple Fitness+ page on Apple.com, captured November 2026.")
 
 Apple Fitness+ is a general fitness subscription built into Apple's ecosystem. It offers 12 workout types, such as Strength, HIIT, Yoga, Pilates, Cycling and Dance, plus Meditation.
 
@@ -153,6 +165,8 @@ Apple Fitness+ is suitable for people who want guided classes across many format
 
 ## 7. Nike Training Club
 
+![Nike Training Club app screens showing the Workouts tab with new workouts and the Expert Tips tab with nutrition tips](shot-nike-training-club-app-screens "Nike Training Club app screens. Image: Nike, November 2026.")
+
 Nike Training Club provides guided workouts, training programmes, and wellness content without a paid subscription. Nike states that the app includes more than **185 free workouts** across strength, endurance, yoga, mobility, HIIT, and bodyweight training.
 
 Workout duration ranges from approximately five to 50 minutes. Some sessions require no equipment, while others are designed for gym environments.
@@ -169,6 +183,8 @@ Nike Training Club is a practical starting point for people who want a variety o
 
 ## 8. FitOn
 
+![FitOn homepage headline describing unlimited workouts, meditation and nutrition with a free sign-up button](shot-fiton-website "Screenshot: FitOn homepage, captured November 2026.")
+
 FitOn offers free workouts covering strength, cardio, Pilates, yoga, barre, dance, and meditation. The company continues to describe core workouts as free while selling a paid PRO subscription for additional features.
 
 PRO adds structured fitness and nutrition programmes, premium music, meal plans, more than 500 recipes, offline downloads, and supported device integrations.
@@ -184,6 +200,8 @@ This is an example of why comparing apps by advertised price alone can be mislea
 FitOn works well for users who want a large free class library. People who need downloadable workouts, advanced nutrition content, or structured premium programmes may prefer PRO.
 
 ## 9. Centr
+
+![Centr homepage headline about strength equipment and coaching](shot-centr-website "Screenshot: Centr homepage, captured November 2026.")
 
 Centr combines fitness programming with nutrition and wellness content. Its current app includes strength, HIIT, Pilates, yoga, HYROX, boxing, MMA, meal plans, progress tracking, and personalised training.
 

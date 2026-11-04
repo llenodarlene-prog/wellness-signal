@@ -149,6 +149,8 @@ The blanket may appeal to people with limited space, although comfort, heat dist
 
 ### Almost Heaven and Traditional Sauna Cabins
 
+![Almost Heaven Saunas homepage headline about handcrafting saunas since 1977](shot-almost-heaven-website "Screenshot: Almost Heaven Saunas homepage, captured November 2026.")
+
 [Almost Heaven's Pinnacle barrel sauna](https://almostheaven.com/collections/saunas/products/pinnacle-4-person-barrel-sauna) is a useful reference for traditional cabin ownership. Its published heater specification requires a 240-volt, 30-amp hardwired electrical connection, which may require professional installation work.
 
 The Shenandoah is a different, larger arrangement incorporating a changing room. The equipment price does not necessarily represent the final installed cost after electrical work, site preparation, and other expenses.
