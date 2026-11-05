@@ -99,7 +99,7 @@ The Ranch is associated with structured wellness retreats centred on outdoor mov
 
 ### Choosing an Intensive Activity Programme
 
-For readers seeking organised exercise, that structure may be part of the attraction. However, the intensity of hikes and workouts, available modifications and any pre-arrival requirements deserve more scrutiny than the aesthetics of the property.
+For readers seeking organised exercise, that structure may be part of the attraction. However, the intensity of hikes and workouts, available modifications and any pre-arrival requirements deserve more scrutiny than the aesthetics of the property. If you plan to hike independently before or after a retreat, our comparison of the [best hiking apps](/travel-retreats/best-hiking-apps/) covers offline maps and trail navigation.
 
 ### Booking Information to Confirm
 

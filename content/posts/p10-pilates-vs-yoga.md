@@ -160,7 +160,7 @@ Machines add maintenance, floor-space, and instructor-training costs for studios
 
 ## 8. Beginner Friendliness and Learning Curve
 
-Either practice can be suitable for beginners when taught in an appropriate class. The biggest risk is selecting an advanced session based on a broad label rather than the actual movements and expectations.
+Either practice can be suitable for beginners when taught in an appropriate class. The biggest risk is selecting an advanced session based on a broad label rather than the actual movements and expectations. If you would rather start at home, our comparison of [Pilates apps](/fitness/pilates-apps/) covers free and paid mat and reformer classes.
 
 ### Choosing a First Pilates Class
 

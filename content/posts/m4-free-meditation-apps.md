@@ -180,7 +180,9 @@ The difference between a free library and an optional subscription is worth stat
 
 Meditation apps often include sleep stories, relaxation audio or guided practices intended for bedtime, but these categories are not equivalent to medical sleep treatment. Paid sleep apps such as Calm, Headspace and BetterSleep are compared in [meditation apps for sleep](/mind-sleep/meditation-apps-for-sleep-compared/). Medito explicitly lists sleep content as free, Plum Village provides deep-relaxation recordings, and Insight Timer offers sleep tracks with free and premium options.
 
-For a sleep-focused comparison, consider whether the recording can play with the screen off, how long it lasts, whether offline listening is available, and whether the provider interrupts playback with promotional messages. These product features are easier to verify than promises that one particular app will cure insomnia. If you also want movement sessions, our guide to [free fitness apps](/fitness/best-free-fitness-apps/) applies the same free-versus-paid test.
+For a sleep-focused comparison, consider whether the recording can play with the screen off, how long it lasts, whether offline listening is available, and whether the provider interrupts playback with promotional messages. These product features are easier to verify than promises that one particular app will cure insomnia.
+
+Tracking sleep is a separate job from listening to sleep audio. Our comparisons of [sleep apps for Apple Watch](/mind-sleep/best-sleep-apps-apple-watch/) and [sleep tracking apps for iPhone](/mind-sleep/sleep-tracking-apps-for-iphone/) cover that side. For journaling and mood tools, see [mental wellness apps](/mind-sleep/mental-wellness-apps/), and for screen time, [digital wellbeing apps](/mind-sleep/digital-wellbeing-apps/). If you also want movement sessions, our guide to [free fitness apps](/fitness/best-free-fitness-apps/) applies the same free-versus-paid test.
 
 ## What to Check Before Installing a Meditation App
 

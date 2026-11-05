@@ -6,13 +6,14 @@ import { categories, pages } from '../content/pages.mjs';
 import { loadPosts } from './lib/posts.mjs';
 import { toBlocks } from './lib/markdown.mjs';
 import { loadTools } from './lib/tools.mjs';
+import { loadFaqs } from './lib/faqs.mjs';
 
 const today = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
 const posts = await loadPosts(today);
 const byUrl = new Map(posts.map(post => [post.url, post]));
 const scheduled = new Set((await loadPosts('9999-12-31')).map(post => post.url).filter(url => !byUrl.has(url)));
 // Calculator pages are utilities, so links to them do not count toward silo link totals.
-const toolUrls = new Set((await loadTools()).map(tool => tool.url));
+const toolUrls = new Set([...(await loadTools()).map(tool => tool.url), ...(await loadFaqs()).map(faq => faq.url)]);
 const pageUrls = new Set([...pages.map(page => (page.slug ? `/${page.slug}/` : '/')), '/articles/', '/calculators/', '/faq/', ...toolUrls]);
 const images = new Set((await readdir('assets/images')).map(name => name.replace(/\.webp$/, '')));
 const failures = [];
@@ -92,12 +93,15 @@ for (const post of posts) {
   }
   // Headings use title case: every word starts with a capital except short minor words.
   const minor = new Set(['a', 'an', 'the', 'and', 'but', 'or', 'nor', 'for', 'so', 'yet', 'as', 'at', 'by', 'in', 'of', 'off', 'on', 'per', 'to', 'up', 'via', 'vs', 'vs.']);
+  // Brand names that are styled in lowercase (one sec, stoic., komoot) are exempt per post.
+  const exempt = String(post.case_exempt || '').split(',').map(x => x.trim()).filter(Boolean);
   for (const block of blocks.filter(b => b.type === 'h')) {
-    const words = block.text.split(/\s+/).filter(Boolean);
+    const words = exempt.reduce((text, brand) => text.split(brand).join(brand.replace(/\b[a-z]/g, c => c.toUpperCase())), block.text).split(/\s+/).filter(Boolean);
     words.forEach((word, i) => {
       const bare = word.replace(/^[\u201c\u2018"'(\[]+/, '');
       const first = i === 0 || /[:]$/.test(words[i - 1] || '') || /^\d+[.)]$/.test(words[i - 1] || '');
       if (!/^[a-z]/.test(bare)) return;
+      if (/^[a-z]+[A-Z]/.test(bare)) return; // camel-case brands such as iPhone and onX
       if (!first && i !== words.length - 1 && minor.has(bare.replace(/[?:.,!]+$/, ''))) return;
       fail(post, `heading "${block.text}" is not in title case ("${word}")`);
     });

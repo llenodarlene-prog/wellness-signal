@@ -111,7 +111,7 @@ const picture = (name, { eager = false, sizes = '(max-width: 860px) 100vw, 50vw'
 setImageRenderer(({ alt, src, caption }) => {
   if (!imageSize[src]) throw new Error(`Missing image assets/images/${src}.webp`);
   const [w, h] = dims(src);
-  return `<figure class="post-shot"><img src="/assets/images/${src}.webp" srcset="/assets/images/${src}-800.webp 800w, /assets/images/${src}.webp ${w}w" sizes="(max-width: 860px) 100vw, 760px" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">${caption ? `<figcaption>${mdInline(caption)}</figcaption>` : ''}</figure>`;
+  return `<figure class="post-shot${h > w * 1.2 ? ' is-portrait' : ''}"><img src="/assets/images/${src}.webp" srcset="/assets/images/${src}-800.webp 800w, /assets/images/${src}.webp ${w}w" sizes="${h > w * 1.2 ? '(max-width: 400px) 90vw, 340px' : '(max-width: 860px) 100vw, 760px'}" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">${caption ? `<figcaption>${mdInline(caption)}</figcaption>` : ''}</figure>`;
 });
 
 const navItems = [
