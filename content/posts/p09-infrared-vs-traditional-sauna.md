@@ -143,6 +143,8 @@ These examples should not be converted into a claim that infrared saunas are che
 
 ### HigherDOSE and the Portable Infrared Category
 
+![HigherDOSE infrared sauna blanket laid flat on a wood floor beside a rolled black towel and a bottle of body oil](shot-higherdose-product-image "Image: HigherDOSE official website, November 2026.")
+
 [HigherDOSE's infrared sauna collection](https://higherdose.com/collections/infrared-sauna-collection) includes a $699 blanket and full-spectrum cabins from $7,999 (two-person) to $8,999 (three-person) in the reviewed US listings. The brand promotes several wellness benefits, but these promotional claims do not establish superior health outcomes.
 
 The blanket may appeal to people with limited space, although comfort, heat distribution, cleaning, and accessibility differ from a walk-in sauna.
