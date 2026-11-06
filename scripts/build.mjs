@@ -100,7 +100,10 @@ const alts = {
   'pilates-studio': 'Yoga mat, dumbbells, and water bottle in a sunlit Pilates studio',
   'recovery-bench': 'Foam roller, towels, and cucumber water on a wooden recovery bench',
   'skincare-vanity': 'Skincare oils, jade roller, and gua sha on a bathroom vanity',
+  'desk-laptop-brighter': 'Laptop showing a wellness website on a wooden desk with a notebook, lemon water and a lake view',
 };
+// Article images reused elsewhere (cards, tool and FAQ pages) keep the article's own alt text.
+for (const post of await loadPosts('9999-12-31')) if (post.image_alt && !alts[post.image]) alts[post.image] = post.image_alt;
 const picture = (name, { eager = false, sizes = '(max-width: 860px) 100vw, 50vw', alt = alts[name] || '' } = {}) =>
   `<img src="/assets/images/${name}.webp" srcset="/assets/images/${name}-800.webp 800w, /assets/images/${name}.webp 1672w" sizes="${sizes}" width="1672" height="941" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
 
@@ -108,7 +111,7 @@ const picture = (name, { eager = false, sizes = '(max-width: 860px) 100vw, 50vw'
 setImageRenderer(({ alt, src, caption }) => {
   if (!imageSize[src]) throw new Error(`Missing image assets/images/${src}.webp`);
   const [w, h] = dims(src);
-  return `<figure class="post-shot"><img src="/assets/images/${src}.webp" srcset="/assets/images/${src}-800.webp 800w, /assets/images/${src}.webp ${w}w" sizes="(max-width: 860px) 100vw, 760px" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">${caption ? `<figcaption>${mdInline(caption)}</figcaption>` : ''}</figure>`;
+  return `<figure class="post-shot${h > w * 1.2 ? ' is-portrait' : ''}"><img src="/assets/images/${src}.webp" srcset="/assets/images/${src}-800.webp 800w, /assets/images/${src}.webp ${w}w" sizes="${h > w * 1.2 ? '(max-width: 400px) 90vw, 340px' : '(max-width: 860px) 100vw, 760px'}" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">${caption ? `<figcaption>${mdInline(caption)}</figcaption>` : ''}</figure>`;
 });
 
 const navItems = [
@@ -279,7 +282,7 @@ const lensBlock = page => {
 };
 
 const categoryCard = (category, i) => `<a class="cat reveal" href="${path(category.slug)}" style="--d:${i % 4}">
-  <span class="cat-media">${picture(category.image, { sizes: '(max-width: 600px) 100vw, 380px', alt: '' })}<span class="icon-badge on-image">${icon(categoryIcons[category.slug])}</span></span>
+  <span class="cat-media">${picture(category.image, { sizes: '(max-width: 600px) 100vw, 380px', alt: alts[category.image] || '' })}<span class="icon-badge on-image">${icon(categoryIcons[category.slug])}</span></span>
   <span class="cat-body"><span class="cat-num">${pad(i + 1)}</span><h3>${esc(category.name)}</h3><span class="cat-text">${esc(category.summary)}</span><span class="more">Read coverage ${icon('arrow', 16)}</span></span>
 </a>`;
 
@@ -426,7 +429,7 @@ const heroBlock = page => {
   </section>`;
 };
 
-const docHead = ({ title, description, url, image, type = 'website', jsonLd = [], preload, extra = '' }) => `<!doctype html>
+const docHead = ({ title, description, url, image, imageAlt: ogAlt, type = 'website', jsonLd = [], preload, extra = '' }) => `<!doctype html>
 <html lang="${site.locale}">
 <head>
   <meta charset="utf-8">
@@ -443,7 +446,8 @@ const docHead = ({ title, description, url, image, type = 'website', jsonLd = []
   <meta property="og:image" content="${canonical}/assets/images/${image}.webp">
   <meta property="og:image:width" content="${dims(image)[0]}">
   <meta property="og:image:height" content="${dims(image)[1]}">
-  <meta property="og:image:alt" content="${esc(alts[image] || title)}">
+  <meta property="og:image:alt" content="${esc(ogAlt || alts[image] || title)}">
+  <meta name="twitter:image:alt" content="${esc(ogAlt || alts[image] || title)}">
   <meta property="og:locale" content="${site.locale.replace('-', '_')}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
@@ -547,7 +551,7 @@ const categoryName = slug => categories.find(c => c.slug === slug)?.name || slug
 const longDate = iso => new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
 const postCard = (post, i = 0) => `<a class="post-card reveal" href="${post.url}" style="--d:${i % 3}">
-  <span class="post-media">${picture(post.image, { sizes: '(max-width: 640px) 100vw, 400px', alt: '' })}</span>
+  <span class="post-media">${picture(post.image, { sizes: '(max-width: 640px) 100vw, 400px', alt: post.image_alt || '' })}</span>
   <span class="post-body">
     <span class="post-meta">${icon(categoryIcons[post.category], 15)} ${esc(categoryName(post.category))} &middot; ${esc(post.type || 'Article')} &middot; ${post.readingMinutes} min read</span>
     <h3>${esc(post.title)}</h3>
@@ -593,7 +597,7 @@ const renderPost = post => {
     isPartOf: { '@id': websiteId },
     breadcrumb: { '@id': `${url}#breadcrumb` },
     mainEntity: { '@id': articleId },
-    primaryImageOfPage: { '@type': 'ImageObject', url: imageUrl, width: dims(post.image)[0], height: dims(post.image)[1] },
+    primaryImageOfPage: { '@type': 'ImageObject', url: imageUrl, width: dims(post.image)[0], height: dims(post.image)[1], ...(post.image_alt ? { caption: post.image_alt } : {}) },
     inLanguage: site.locale,
   };
   const article = {
@@ -641,7 +645,7 @@ const renderPost = post => {
     return `<section id="${section.id}"><h2>${esc(section.title)}</h2>${section.blocks.map(block => renderBlock(block, charts, calculators)).join('\n')}</section>`;
   }).join('\n');
 
-  return `${docHead({ title: post.seo_title || post.title, description: post.description, url, image: post.image, type: 'article', jsonLd, preload: post.image, extra })}
+  return `${docHead({ title: post.seo_title || post.title, description: post.description, url, image: post.image, imageAlt: post.image_alt, type: 'article', jsonLd, preload: post.image, extra })}
 <body class="post-page">
 ${header({ slug: post.category })}
 <main id="main">

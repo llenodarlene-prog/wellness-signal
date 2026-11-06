@@ -78,7 +78,7 @@ For that reason, the free content count should not be the only selection factor.
 
 ## 3. Calm: Sleep Stories and a Verified Free Selection
 
-![Calm App Store listing showing sleep stories and guided meditation screens](shot-calm-app-store "Screenshot: Calm listing on the Apple App Store, captured November 2026.")
+![Calm App Store artwork over a mountain lake calling it the number one app for sleep and meditation](shot-calm-app-store "Screenshot: Calm listing on the Apple App Store, captured November 2026.")
 
 [Calm](https://www.calm.com/) combines guided meditation with Sleep Stories, ambient audio and music. Its help centre, updated in October 2026, specifically identifies more than 230 free meditation sessions and eight free sleep sessions, a larger offering than older articles sometimes describe.
 

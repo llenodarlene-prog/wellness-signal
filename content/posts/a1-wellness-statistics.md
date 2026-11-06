@@ -180,6 +180,8 @@ This projection represents expected future activity rather than guaranteed marke
 
 The 2029 estimate should therefore be identified as a projection whenever it is cited. Treating future market size as an established result would misrepresent the research.
 
+Consumer wellness also shows up in small daily tools. Our comparison of [water reminder apps](/wellness/water-reminder-apps/) looks at one example: apps that prompt people to drink and log what they have.
+
 ## How Businesses Should Use Wellness Statistics
 
 Wellness market figures can help businesses evaluate consumer groups, identify areas for further research, and compare different market segments. They are less useful when treated as proof that a particular product or service will succeed.

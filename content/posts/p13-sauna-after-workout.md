@@ -119,7 +119,7 @@ If the session involved intense exertion or the person feels lightheaded, it is 
 
 Post-exercise heating has attracted research interest because of possible heat acclimation in endurance athletes. Results apply to planned protocols under specific training conditions, not casual use after every run.
 
-A long run, especially in warm weather, may already produce considerable dehydration or heat stress. Adding a sauna without accounting for that load can increase discomfort and potentially raise risk.
+A long run, especially in warm weather, may already produce considerable dehydration or heat stress. Adding a sauna without accounting for that load can increase discomfort and potentially raise risk. If you often forget to drink after training, simple prompts can help, and our guide to [water reminder apps](/wellness/water-reminder-apps/) compares the options.
 
 ### After Hot-Weather Training
 
