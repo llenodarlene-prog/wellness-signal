@@ -195,7 +195,7 @@ Yes. Strava's free tier records runs and lets you take part in its social networ
 
 ### Which Free Running App Is Best for Beginners?
 
-Nike Run Club is especially beginner-friendly, because its Guided Runs explain pace and effort as you go. Decathlon Coach offers structured programs by level, and Runkeeper is a simple tracker with audio feedback.
+Nike Run Club is especially beginner-friendly, because its Guided Runs explain pace and effort as you go. Decathlon Coach offers structured programs by level, and Runkeeper is a simple tracker with audio feedback. If you're brand new to running, our [running FAQ](/faq/fitness/running/) covers run-walk plans and how fast to build up.
 
 ### Can I Run Without Carrying My Phone?
 

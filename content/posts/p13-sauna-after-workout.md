@@ -125,7 +125,7 @@ A long run, especially in warm weather, may already produce considerable dehydra
 
 CDC guidance warns that athletes exercising in heat can become dehydrated or develop heat-related illness. Feeling faint or weak is a reason to stop activity and move somewhere cool, not continue into a heated room.
 
-An athlete recovering from heavy exertion in high temperatures should prioritise cooling and hydration. Additional heat is not a sensible default when signs of heat illness are present.
+An athlete recovering from heavy exertion in high temperatures should prioritise cooling and hydration. Additional heat is not a sensible default when signs of heat illness are present. For general session length and temperature guidance, see our [sauna FAQ](/faq/longevity-recovery/sauna/).
 
 ## Safety, Hydration and Session Length
 
