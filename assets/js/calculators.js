@@ -233,6 +233,49 @@
       };
     },
 
+    'hiking-calories': v => {
+      const errors = {};
+      if (!(v.weight > 0)) errors.weight = 'Enter your body weight.';
+      if (!(v.pack >= 0)) errors.pack = 'Enter a pack weight of 0 or more.';
+      else if (v.weight > 0 && v.pack > v.weight * 0.7) errors.pack = 'Enter a pack under 70% of your body weight.';
+      if (!(v.miles > 0)) errors.miles = 'Enter a distance greater than zero.';
+      if (!(v.gain >= 0)) errors.gain = 'Enter an elevation gain of 0 or more.';
+      if (Object.keys(errors).length) return { errors };
+      const kg = toKg(v.weight, v.wunit);
+      const load = toKg(v.pack || 0, v.wunit) / kg;
+      const mph = Number(v.pace);
+      const s = mph * 0.44704;
+      const meters = v.miles * 1609.344;
+      const grade = v.gain ? (v.gain * 0.3048) / (meters / 2) : 0;
+      if (grade > 0.4) return { errors: { gain: 'That gain is steeper than a 40% average grade for this distance. Check the distance and gain.' } };
+      const REST = 3.5 * 20.1 / 60;
+      const gradeCost = g => 34 * s * g * (1 - Math.pow(1.05, 1 - Math.pow(1.1, 100 * g + 32)));
+      const loadMult = 1 + 1.96 * Math.pow(load, 1.36);
+      const cost = g => Math.max(REST, REST + (0.19 + 1.78 * Math.pow(s, 0.58) + 0.27 * Math.pow(s, 4) + gradeCost(g)) * loadMult);
+      const secs = v.miles / mph * 3600;
+      const up = cost(grade), down = cost(-grade);
+      const avg = (up + down) / 2;
+      const total = avg * kg * secs / 4184;
+      const baseTotal = (REST + 0.19 + 1.78 * Math.pow(s, 0.58) + 0.27 * Math.pow(s, 4)) * kg * secs / 4184;
+      const mets = avg / REST;
+      const perMile = total / v.miles;
+      return {
+        hero: { icon: 'flame', value: num(total, 0), label: 'estimated calories burned' },
+        rows: [
+          ['Estimated calories', `${num(total, 0)} kcal`],
+          ['Moving time', fmtDur(secs / 60), 'clock'],
+          ['Average grade', `${num(grade * 100, 1)}% up and down`, 'mountain'],
+          ['Calories per mile', `${num(perMile, 0)} kcal`, 'route'],
+          ['Calories per hour', `${num(total / (secs / 3600), 0)} kcal`, 'clock'],
+          ['Same distance, flat, no pack', `${num(baseTotal, 0)} kcal`, 'walk'],
+          ['Intensity', `${num(mets, 1)} METs · ${intensity(mets)}`, 'activity'],
+        ],
+        range: { title: 'Average intensity on the MET scale', min: 1, max: 12, value: mets, fmt: n => `${num(n, 1)} MET${n === 1 ? '' : 's'}`, bands: [['Below moderate', 1, 3], ['Moderate', 3, 6], ['Vigorous', 6, 12]] },
+        insight: `A ${num(v.miles, 1)}-mile hike with ${num(v.gain, 0)} ft of climbing${v.pack ? ` and a ${num(v.pack, 0)} ${v.wunit} pack` : ''} at ${num(mph, 1)} mph works out to about ${num(total, 0)} calories over ${fmtDur(secs / 60)} of moving time. Climbing costs far more than descending, so most of the extra energy comes on the way up. This is a gross estimate that includes the energy you burn at rest.`,
+        note: mph < 2.5 ? 'The equation was built from walking at about 2.5 to 4.0 mph, so treat slower paces as rougher estimates.' : '',
+      };
+    },
+
     'steps-to-miles': v => {
       const errors = {};
       if (!(v.steps > 0)) errors.steps = 'Enter a step count greater than zero.';
