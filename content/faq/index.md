@@ -47,7 +47,7 @@ Sleep debt is the gap between the sleep you need and the sleep you get. Miss an 
 
 ## Fitness
 
-Exercise advice gets noisy fast. These answers stick to the CDC's activity guidelines and published research.
+Exercise advice gets noisy fast. These answers stick to the CDC's activity guidelines and published research. New runners can start with the [running FAQ](/faq/fitness/running/).
 
 ### How much exercise do adults need each week?
 
@@ -85,7 +85,7 @@ The Global Wellness Institute estimates the global wellness economy reached $6.8
 
 ## Longevity & Recovery
 
-Saunas get plenty of bold claims online. Our answers separate what studies show from what marketing suggests.
+Saunas get plenty of bold claims online. Our answers separate what studies show from what marketing suggests. For session length, temperature and safety, see the [sauna FAQ](/faq/longevity-recovery/sauna/).
 
 ### Is an infrared sauna better than a traditional sauna?
 
