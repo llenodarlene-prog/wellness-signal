@@ -803,6 +803,12 @@ illustrations['sleep-stages'] = () => {
     <figcaption>Simplified illustration, not measured data. Each cycle lasts about 80 to 100 minutes (NHLBI).</figcaption>
   </figure>`;
 };
+const stepCards = (label, steps, caption) => `<figure class="faq-map" aria-label="${label}">
+    <ol>${steps.map(([ic, t, d]) => `<li>${ti(ic)}<strong>${t}</strong><span>${d}</span></li>`).join('')}</ol>
+    <figcaption>${caption}</figcaption>
+  </figure>`;
+illustrations['run-walk'] = () => stepCards('How a beginner run-walk plan builds to 30 minutes of running', [['walk', 'Run-walk', 'Short runs with walking breaks, 3 times a week'], ['calendar-week', 'Rest days', 'A day off between runs'], ['trending-up', 'Build slowly', 'Longer runs, shorter walks each week'], ['flag', '30 minutes', 'Nonstop running after about 9 weeks']], 'Based on the NHS Couch to 5K plan. Take longer than 9 weeks if you need to.');
+illustrations['sauna-time'] = () => stepCards('A safe sauna session: hydrate, keep it to 15 to 20 minutes, leave if unwell, cool down and drink water', [['droplet', 'Drink first', 'Water before you go in'], ['clock', '15 to 20 min', 'Start with about 5 if you are new'], ['alert-circle', 'Leave early', 'If you feel dizzy or unwell'], ['temperature', 'Cool down', 'Gradually, not all at once'], ['droplet', 'Rehydrate', '2 to 4 glasses of water after']], 'Guidance from Harvard Health and Cleveland Clinic for healthy adults. Check with a clinician first if you have a heart condition or are pregnant.');
 const faqBlocks = blocks => blocks.map(block => {
   const m = block.type === 'p' && block.text.match(/^\{\{illustration:([a-z0-9-]+)\}\}$/);
   return m ? illustrations[m[1]]() : renderBlock(block, charts, calculators);
