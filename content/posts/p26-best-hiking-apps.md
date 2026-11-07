@@ -151,7 +151,7 @@ Match the app to the kind of hiking you do most.
 
 No app makes a poorly planned route safe. Before a remote hike, check closures, weather, daylight and water, and confirm your map source is reliable. Carry a backup that fits the risk of getting lost.
 
-Hiking is also a great way to stay active on a wellness trip. Our [wellness retreats in the US](/travel-retreats/wellness-retreats-in-the-us/) guide covers retreats with trail access. If you also run, our [best free running apps](/fitness/best-free-running-apps/) comparison covers GPS tracking and training plans. You can estimate trail effort with our [Walking Calories Burned Calculator](/walking-calories-burned-calculator/).
+Hiking is also a great way to stay active on a wellness trip. Our [wellness retreats in the US](/travel-retreats/wellness-retreats-in-the-us/) guide covers retreats with trail access. If you also run, our [best free running apps](/fitness/best-free-running-apps/) comparison covers GPS tracking and training plans. You can estimate trail effort, including elevation and pack weight, with our [Hiking Calories Burned Calculator](/hiking-calories-burned-calculator/).
 
 ## FAQs
 
