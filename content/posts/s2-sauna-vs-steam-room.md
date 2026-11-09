@@ -49,7 +49,7 @@ The most immediate difference is how the environment delivers heat. A traditiona
 | Main maintenance challenge | Heater, wood surfaces and ventilation | Waterproofing, steam generator, drainage and mould control |
 | Proven superiority | Neither type established as universally better | Neither type established as universally better |
 
-These temperatures are typical operating ranges, not an instruction to use the upper limit. Actual settings differ by venue, local rules and equipment manufacturer, while [infrared saunas](/longevity-recovery/infrared-sauna-vs-traditional-sauna/) form a separate category that generally operates at lower air temperatures.
+These temperatures are typical operating ranges, not an instruction to use the upper limit. Actual settings differ by venue, local rules and equipment manufacturer, while [infrared saunas](/longevity-recovery/infrared-sauna-vs-traditional-sauna/) form a separate category that generally operates at lower air temperatures. Heat delivered through water is compared in [sauna vs hot tub](/longevity-recovery/sauna-vs-hot-tub/), and light-based devices in [red light therapy vs infrared sauna](/longevity-recovery/red-light-therapy-vs-infrared-sauna/).
 
 ## 1. Heat Delivery and Temperature
 
@@ -97,7 +97,7 @@ Someone who has just completed intense exercise may already be hot and dehydrate
 
 Neither a dry sauna nor a steam room is established as the superior method for restoring muscle function [after lifting](/longevity-recovery/sauna-after-workout-benefits/). Exercise-recovery studies vary by exposure duration, temperature, timing and the outcomes measured, making confident universal recommendations inappropriate.
 
-If heat use is comfortable and medically appropriate, treat it as an optional recovery ritual rather than a necessary training intervention. Sleep, nutrition, training load and sensible progression still need independent attention. Wearable recovery scores, compared in our [WHOOP vs Oura](/longevity-recovery/whoop-vs-oura/) guide, are trend indicators rather than proof that recovery is complete.
+If heat use is comfortable and medically appropriate, treat it as an optional recovery ritual rather than a necessary training intervention. Sleep, nutrition, training load and sensible progression still need independent attention. Wearable recovery scores, compared in our [WHOOP vs Oura](/longevity-recovery/whoop-vs-oura/) and [WHOOP vs Garmin](/longevity-recovery/whoop-vs-garmin/) guides, are trend indicators rather than proof that recovery is complete.
 
 ## 5. Weight Loss and Sweating Claims
 
