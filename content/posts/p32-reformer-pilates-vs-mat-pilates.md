@@ -10,6 +10,7 @@ slug: reformer-pilates-vs-mat-pilates
 image: reformer-mat-pilates-studio
 image_alt: One woman rows on a wooden Pilates reformer while another holds a V-sit on a mat in a bright studio
 published: 2026-11-12
+publish_time: "21:00"
 role: supporting
 draft: false
 ---

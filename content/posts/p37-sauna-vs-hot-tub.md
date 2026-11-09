@@ -10,6 +10,7 @@ slug: sauna-vs-hot-tub
 image: outdoor-sauna-hot-tub
 image_alt: A glass-fronted wooden sauna glows next to a steaming outdoor hot tub on a stone patio overlooking a lake at dusk
 published: 2026-11-15
+publish_time: "13:00"
 role: supporting
 draft: false
 ---

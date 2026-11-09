@@ -20,7 +20,7 @@ const production = environment === 'production';
 const robots = production ? 'index,follow' : 'noindex,nofollow,noarchive';
 const canonical = site.url.replace(/\/$/, '');
 const year = new Date().getUTCFullYear();
-const buildDate = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
+const buildDate = process.env.BUILD_DATE || new Date().toISOString().slice(0, 16);
 const posts = await loadPosts(buildDate);
 // Links to scheduled posts render as plain text until the post goes live.
 const scheduledUrls = new Set((await loadPosts('9999-12-31')).map(p => p.url).filter(url => !posts.some(p => p.url === url)));

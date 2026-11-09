@@ -10,6 +10,7 @@ slug: walking-pad-vs-treadmill
 image: walking-pad-treadmill-home
 image_alt: A flat walking pad on a rug beside a folding treadmill in a sunny home office with a desk and plants
 published: 2026-11-11
+publish_time: "21:00"
 role: supporting
 draft: false
 ---

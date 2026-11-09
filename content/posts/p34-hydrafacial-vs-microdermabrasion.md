@@ -10,6 +10,7 @@ slug: hydrafacial-vs-microdermabrasion
 image: hydrafacial-microdermabrasion-split
 image_alt: Split image of a clinician using a hydro facial wand on one client and a microdermabrasion wand on another
 published: 2026-11-13
+publish_time: "21:00"
 role: supporting
 draft: false
 ---

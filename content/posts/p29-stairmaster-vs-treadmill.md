@@ -10,6 +10,7 @@ slug: stairmaster-vs-treadmill
 image: stairmaster-treadmill-gym
 image_alt: A woman climbs a stair machine while a man runs on a treadmill beside her in a bright gym
 published: 2026-11-11
+publish_time: "13:00"
 role: supporting
 draft: false
 ---
