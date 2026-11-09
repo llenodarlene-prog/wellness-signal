@@ -49,7 +49,7 @@ The most immediate difference is how the environment delivers heat. A traditiona
 | Main maintenance challenge | Heater, wood surfaces and ventilation | Waterproofing, steam generator, drainage and mould control |
 | Proven superiority | Neither type established as universally better | Neither type established as universally better |
 
-These temperatures are typical operating ranges, not an instruction to use the upper limit. Actual settings differ by venue, local rules and equipment manufacturer, while [infrared saunas](/longevity-recovery/infrared-sauna-vs-traditional-sauna/) form a separate category that generally operates at lower air temperatures. Heat delivered through water is compared in [sauna vs hot tub](/longevity-recovery/sauna-vs-hot-tub/), and light-based devices in [red light therapy vs infrared sauna](/longevity-recovery/red-light-therapy-vs-infrared-sauna/).
+These temperatures are typical operating ranges, not an instruction to use the upper limit. Actual settings differ by venue, local rules and equipment manufacturer, while [infrared saunas](/longevity-recovery/infrared-sauna-vs-traditional-sauna/) form a separate category that generally operates at lower air temperatures. Heat delivered through water is compared in [sauna vs hot tub](/longevity-recovery/sauna-vs-hot-tub/), and light-based devices in [red light therapy vs infrared sauna](/longevity-recovery/red-light-therapy-vs-infrared-sauna/). Heat raises your pulse, which our [average heart rate by age](/longevity-recovery/average-heart-rate-by-age/) guide puts in context, and sweat loss can skew the readings covered in [average body fat percentage by age](/longevity-recovery/average-body-fat-percentage-by-age/).
 
 ## 1. Heat Delivery and Temperature
 
