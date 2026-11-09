@@ -3,8 +3,13 @@ import path from 'node:path';
 import { parsePost, plain, slugify, toBlocks } from './markdown.mjs';
 
 // Loads approved posts from content/posts. A post is included when it is not a
-// draft and its `published` date (YYYY-MM-DD) is on or before the build date.
-export const loadPosts = async (today = new Date().toISOString().slice(0, 10)) => {
+// draft and its publish moment is on or before the cutoff. The publish moment is
+// `published` (YYYY-MM-DD) plus optional `publish_time` (HH:MM, UTC, default 00:00).
+// The cutoff is either a date (meaning the end of that day) or an ISO date-time.
+export const publishMoment = meta => `${String(meta.published || '')}T${/^\d{2}:\d{2}$/.test(String(meta.publish_time || '')) ? meta.publish_time : '00:00'}`;
+export const cutoffKey = cutoff => (String(cutoff).length === 10 ? `${cutoff}T23:59` : String(cutoff).slice(0, 16));
+export const loadPosts = async (today = new Date().toISOString().slice(0, 16)) => {
+  const cutoff = cutoffKey(today);
   let names = [];
   try {
     names = (await readdir('content/posts')).filter(name => name.endsWith('.md')).sort();
@@ -16,7 +21,8 @@ export const loadPosts = async (today = new Date().toISOString().slice(0, 10)) =
   for (const name of names) {
     const { meta, body } = parsePost(await readFile(path.join('content/posts', name), 'utf8'));
     const published = String(meta.published || '');
-    if (meta.draft === true || !/^\d{4}-\d{2}-\d{2}$/.test(published) || published > today) continue;
+    if (meta.draft === true || !/^\d{4}-\d{2}-\d{2}$/.test(published) || publishMoment(meta) > cutoff) continue;
+    if (meta.publish_time !== undefined && !/^\d{2}:\d{2}$/.test(String(meta.publish_time))) throw new Error(`${name}: publish_time must be HH:MM (UTC)`);
     for (const key of ['title', 'description', 'category', 'slug', 'image']) {
       if (!meta[key]) throw new Error(`${name}: missing front matter "${key}"`);
     }
@@ -55,6 +61,7 @@ export const loadPosts = async (today = new Date().toISOString().slice(0, 10)) =
     posts.push({
       ...meta,
       published,
+      publishAt: publishMoment(meta),
       updated: String(meta.updated || published),
       url: `/${meta.category}/${meta.slug}/`,
       intro,
@@ -69,5 +76,5 @@ export const loadPosts = async (today = new Date().toISOString().slice(0, 10)) =
       plainDescription: plain(meta.description),
     });
   }
-  return posts.sort((a, b) => (a.published < b.published ? 1 : a.published > b.published ? -1 : a.title.localeCompare(b.title)));
+  return posts.sort((a, b) => (a.publishAt < b.publishAt ? 1 : a.publishAt > b.publishAt ? -1 : a.title.localeCompare(b.title)));
 };
