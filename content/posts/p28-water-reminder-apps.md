@@ -10,6 +10,7 @@ slug: water-reminder-apps
 image: water-bottle-hydration-app
 image_alt: A water bottle with lemon and mint beside a phone showing a hydration tracker on a sunny desk
 published: 2026-11-10
+publish_time: "21:00"
 role: supporting
 draft: false
 ---

@@ -10,6 +10,7 @@ slug: whoop-vs-garmin
 image: athlete-band-watch-mountains
 image_alt: An athlete resting on a mountain ledge at sunset wears a screenless band on one wrist and a sports watch on the other
 published: 2026-11-14
+publish_time: "21:00"
 role: supporting
 draft: false
 ---

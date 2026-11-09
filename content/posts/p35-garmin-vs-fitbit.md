@@ -10,6 +10,7 @@ slug: garmin-vs-fitbit
 image: sport-watch-fitness-band-mat
 image_alt: A black GPS sports watch and a purple fitness band showing a heart icon on a yoga mat beside a dumbbell
 published: 2026-11-14
+publish_time: "13:00"
 role: supporting
 draft: false
 ---

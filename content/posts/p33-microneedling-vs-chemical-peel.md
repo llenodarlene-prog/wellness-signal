@@ -10,6 +10,7 @@ slug: microneedling-vs-chemical-peel
 image: microneedling-facial-spa
 image_alt: A clinician in gloves uses a microneedling pen on a relaxed client's cheek in a bright treatment room
 published: 2026-11-13
+publish_time: "13:00"
 role: supporting
 draft: false
 ---

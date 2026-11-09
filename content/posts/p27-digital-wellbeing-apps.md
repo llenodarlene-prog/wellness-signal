@@ -10,6 +10,7 @@ slug: digital-wellbeing-apps
 image: phone-facedown-desk-break
 image_alt: A phone lies face down on a desk beside a book and tea while a woman leans back to rest
 published: 2026-11-10
+publish_time: "13:00"
 role: supporting
 draft: false
 case_exempt: one sec

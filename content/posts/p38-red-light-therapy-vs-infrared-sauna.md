@@ -10,6 +10,7 @@ slug: red-light-therapy-vs-infrared-sauna
 image: red-light-panel-infrared-sauna
 image_alt: A woman in a towel sits between a glowing red light therapy panel and a wooden infrared sauna cabin
 published: 2026-11-15
+publish_time: "21:00"
 role: supporting
 draft: false
 ---

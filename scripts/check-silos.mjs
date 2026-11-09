@@ -8,7 +8,7 @@ import { toBlocks } from './lib/markdown.mjs';
 import { loadTools } from './lib/tools.mjs';
 import { loadFaqs } from './lib/faqs.mjs';
 
-const today = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
+const today = process.env.BUILD_DATE || new Date().toISOString().slice(0, 16);
 const posts = await loadPosts(today);
 const byUrl = new Map(posts.map(post => [post.url, post]));
 const scheduled = new Set((await loadPosts('9999-12-31')).map(post => post.url).filter(url => !byUrl.has(url)));

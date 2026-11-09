@@ -10,6 +10,7 @@ slug: barre-vs-pilates
 image: barre-studio-mat-rest
 image_alt: A woman sits on a mat in a sunlit studio with a ballet barre on one side and a Pilates reformer behind her
 published: 2026-11-12
+publish_time: "13:00"
 role: supporting
 draft: false
 ---
