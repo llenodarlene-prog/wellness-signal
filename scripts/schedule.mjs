@@ -48,14 +48,33 @@ for(const name of names) {
     published:published || '-',
     at:approved ? moment(metadata) : '-',
     state:metadata.draft === true ? 'draft' : (!approved ? 'unscheduled' : moment(metadata) > nowKey ? 'scheduled' : 'live'),
-    slug:String(metadata.slug || '')
+    slug:String(metadata.slug || ''),
+    category:String(metadata.category || '')
   });
 }
 
 const goingLive=rows.filter(row=>row.state==='live' && row.at>windowStart && row.at<=nowKey);
 if(mode==='due') {
+  // GitHub runs scheduled jobs late and irregularly (hours apart), so a fixed time
+  // window can miss posts. Also deploy when any post due in the last 14 days is
+  // missing from the live site. Set SKIP_LIVE_CHECK=1 to use the window only.
+  const site=(process.env.SITE_URL || JSON.parse(await readFile('data/site.json','utf8')).url || '').replace(/\/$/,'');
+  const recentStart=new Date(Date.parse(`${nowKey}:00Z`) - 14 * 86400000).toISOString().slice(0, 16);
+  const missing=[];
+  if(site && !process.env.SKIP_LIVE_CHECK) {
+    for(const row of rows.filter(r=>r.state==='live' && r.at>recentStart && r.at<=nowKey && r.category && r.slug)) {
+      try {
+        const res=await fetch(`${site}/${row.category}/${row.slug}/`,{method:'HEAD',redirect:'manual'});
+        if(res.status===404) missing.push(row);
+      } catch(error) {
+        console.log(`Could not check ${row.slug}: ${error.message}`);
+      }
+    }
+  }
+  for(const row of missing) if(!goingLive.includes(row)) goingLive.push(row);
+  if(missing.length) console.log(`Missing from the live site: ${missing.map(r=>r.slug).join(', ')}`);
   const due=goingLive.length>0;
-  console.log(due ? `${goingLive.length} post(s) went live since ${windowStart} UTC: ${goingLive.map(row=>`${row.slug} (${row.at})`).join(', ')}` : `Nothing went live between ${windowStart} and ${nowKey} UTC.`);
+  console.log(due ? `${goingLive.length} post(s) due to publish as of ${nowKey} UTC: ${goingLive.map(row=>`${row.slug} (${row.at})`).join(', ')}` : `Nothing went live between ${windowStart} and ${nowKey} UTC.`);
   if(process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT,`due=${due}\n`);
 } else {
   console.log(`Publishing schedule as of ${nowKey} UTC\n`);
