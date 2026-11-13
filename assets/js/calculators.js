@@ -276,6 +276,137 @@
       };
     },
 
+    'bmi': v => {
+      const errors = {};
+      if (!(v.weight > 0)) errors.weight = 'Enter your weight.';
+      if (!(v.height > 0)) errors.height = 'Enter your height.';
+      if (Object.keys(errors).length) return { errors };
+      const kg = toKg(v.weight, v.wunit);
+      const m = (v.hunit === 'cm' ? v.height : v.height * 2.54) / 100;
+      const bmi = kg / (m * m);
+      if (bmi < 8 || bmi > 120) return { errors: { height: 'Check your height and weight units.' } };
+      const cat = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Healthy weight' : bmi < 30 ? 'Overweight' : bmi < 35 ? 'Obesity, class 1' : bmi < 40 ? 'Obesity, class 2' : 'Obesity, class 3';
+      const lo = 18.5 * m * m, hi = 24.9 * m * m;
+      const show = kgv => (v.wunit === 'kg' ? `${num(kgv, 1)} kg` : `${num(kgv / 0.45359237, 0)} lb`);
+      return {
+        hero: { icon: 'scale', value: num(bmi, 1), label: `BMI · ${cat.toLowerCase()}` },
+        rows: [
+          ['BMI', num(bmi, 1)],
+          ['CDC adult category', cat, 'activity'],
+          ['Healthy weight range for your height', `${show(lo)} to ${show(hi)}`, 'scale'],
+        ],
+        range: { title: 'Where your BMI falls', min: 15, max: 45, value: Math.min(45, Math.max(15, bmi)), fmt: n => num(n, 1), bands: [['Under', 15, 18.5], ['Healthy', 18.5, 25], ['Over', 25, 30], ['Obesity', 30, 45]] },
+        insight: `A BMI of ${num(bmi, 1)} falls in the CDC's ${cat.toLowerCase()} category for adults. BMI is a screening tool; it doesn't measure body fat or health directly.`,
+        note: 'For adults 20 and older. Children and teens use BMI-for-age percentiles.',
+      };
+    },
+
+    'waist-height': v => {
+      const errors = {};
+      if (!(v.waist > 0)) errors.waist = 'Enter your waist measurement.';
+      if (!(v.height > 0)) errors.height = 'Enter your height.';
+      if (Object.keys(errors).length) return { errors };
+      const r = v.waist / v.height;
+      if (r < 0.2 || r > 1.2) return { errors: { waist: 'Check that waist and height use the same unit.' } };
+      const band = r < 0.4 ? 'Below the NICE healthy band' : r < 0.5 ? 'Healthy' : r < 0.6 ? 'Increased health risk' : 'High health risk';
+      const u = v.unit === 'cm' ? 'cm' : 'in';
+      return {
+        hero: { icon: 'ruler', value: num(r, 2), label: `waist-to-height ratio · ${band.toLowerCase()}` },
+        rows: [
+          ['Waist-to-height ratio', num(r, 2)],
+          ['NICE band', band, 'activity'],
+          ['Waist that keeps you under 0.5', `under ${num(v.height / 2, 1)} ${u}`, 'ruler-2'],
+        ],
+        range: { title: 'NICE waist-to-height bands', min: 0.3, max: 0.8, value: Math.min(0.8, Math.max(0.3, r)), fmt: n => num(n, 2), bands: [['Low', 0.3, 0.4], ['Healthy', 0.4, 0.5], ['Increased', 0.5, 0.6], ['High', 0.6, 0.8]] },
+        insight: `Your waist is ${num(r * 100, 0)}% of your height. NICE suggests keeping your waist to less than half your height, a ratio under 0.5.`,
+        note: r < 0.4 ? 'NICE does not set a risk band below 0.4. A very low ratio is not a target; discuss concerns with a clinician.' : '',
+      };
+    },
+
+    'sunscreen': v => {
+      const errors = {};
+      if (!(v.weight > 0)) errors.weight = 'Enter your weight.';
+      if (!(v.height > 0)) errors.height = 'Enter your height.';
+      if (!(v.hours > 0)) errors.hours = 'Enter the hours you will be outdoors.';
+      if (Object.keys(errors).length) return { errors };
+      const kg = toKg(v.weight, v.wunit);
+      const cm = v.hunit === 'cm' ? v.height : v.height * 2.54;
+      const bsa = Math.sqrt(cm * kg / 3600);
+      if (bsa < 0.3 || bsa > 3.5) return { errors: { height: 'Check your height and weight units.' } };
+      const frac = Number(v.exposed);
+      const grams = bsa * 10000 * frac * 2 / 1000;
+      const apps = 1 + Math.floor(Math.max(0, v.hours - 0.01) / 2);
+      const oz = grams / 29.5735;
+      return {
+        hero: { icon: 'sun', value: num(grams, 0), label: 'mL of sunscreen per application' },
+        rows: [
+          ['Per application', `${num(grams, 0)} mL (${num(oz, 2)} fl oz, about ${num(grams / 5, 1)} teaspoons)`],
+          ['Body surface area', `${num(bsa, 2)} m²`, 'user'],
+          ['Skin exposed', `${num(frac * 100, 0)}%`, 'percentage'],
+          ['Applications for your time outside', `${apps}`, 'clock'],
+          ['Total for the day', `${num(grams * apps, 0)} mL (${num(oz * apps, 1)} fl oz)`, 'bottle'],
+        ],
+        insight: `Covering ${num(frac * 100, 0)}% of your skin at the 2 mg/cm² used in SPF testing takes about ${num(grams, 0)} mL. The AAD says most adults need about 1 ounce, a shot glass full, to cover skin not covered by clothing.`,
+        note: 'Apply about 15 minutes before going outside, and reapply every 2 hours and right after swimming or sweating (AAD).',
+      };
+    },
+
+    'jet-lag': v => {
+      const errors = {};
+      if (!(v.zones >= 1)) errors.zones = 'Enter at least one time zone.';
+      if (Object.keys(errors).length) return { errors };
+      const zones = Math.round(v.zones);
+      const pre = Math.min(3, Math.max(0, Math.round(v.preshift || 0)), zones);
+      const rate = v.direction === 'west' ? 1.5 : 1;
+      const left = zones - pre;
+      const days = Math.ceil(left / rate);
+      const noPre = Math.ceil(zones / rate);
+      const east = v.direction !== 'west';
+      return {
+        hero: { icon: 'plane', value: num(days, 0), label: `estimated ${days === 1 ? 'day' : 'days'} to adjust after arrival` },
+        rows: [
+          ['Hours your body clock must shift', `${zones} h ${east ? 'earlier' : 'later'}`],
+          ['Shifted before you fly', `${pre} h`, 'moon-stars'],
+          ['Average adjustment rate', `${num(rate, 1)} h per day ${east ? '(eastward)' : '(westward)'}`, 'clock'],
+          ['Estimated days to adjust', `${days}${pre ? ` (vs ${noPre} with no pre-trip shift)` : ''}`, 'calendar'],
+        ],
+        insight: east
+          ? `Flying east means your body clock has to move earlier, which is harder. In the 2 to 3 days before you fly, going to bed and waking up 1 hour earlier each day can cut your adjustment time.`
+          : `Flying west means your body clock has to move later, which most people find easier. In the 2 to 3 days before you fly, going to bed and waking up 1 hour later each day can cut your adjustment time.`,
+        note: 'Averages from the CDC Yellow Book. Sleep on the flight, light exposure and age all change how quickly you adjust.',
+      };
+    },
+
+    'desk-height': v => {
+      const errors = {};
+      if (!(v.elbow > 0)) errors.elbow = 'Enter your elbow height.';
+      if (Object.keys(errors).length) return { errors };
+      const cm = v.unit === 'cm';
+      const u = cm ? 'cm' : 'in';
+      const toIn = x => (cm ? x / 2.54 : x);
+      const fmt = x => `${num(x, 1)} ${u}`;
+      const kb = v.kb >= 0 ? v.kb : 0;
+      const surface = v.elbow - kb;
+      const sit = v.mode !== 'stand';
+      const [lo, hi] = sit ? [22, 30] : [36, 46.5];
+      const kbIn = toIn(v.elbow);
+      const rows = [
+        ['Keyboard home row', `${fmt(v.elbow)} (your elbow height)`],
+        ['Desk or keyboard-tray surface', fmt(surface), 'desk'],
+      ];
+      if (v.eye > 0) rows.push(['Top line of the screen', `at or slightly below ${fmt(v.eye)}`, 'eye']);
+      rows.push(['Screen distance', cm ? '50 to 100 cm from your eyes' : '20 to 40 in from your eyes', 'ruler']);
+      let note = '';
+      if (kbIn < lo || kbIn > hi) note = `Your keyboard height is outside OSHA's ${sit ? 'seated' : 'standing'} adjustment range of ${lo} to ${hi} inches. Check your measurement, or plan on a keyboard tray${sit ? ', a chair adjustment or a footrest' : ''}.`;
+      else if (sit) note = 'If your desk is fixed and too high, raise your chair to reach the right elbow height and use a footrest so your feet stay supported (OSHA).';
+      return {
+        hero: { icon: 'desk', value: num(surface, 1), label: `${u} desk surface height` },
+        rows,
+        insight: `With your elbows at ${fmt(v.elbow)} and a ${fmt(kb)} keyboard, a work surface at about ${fmt(surface)} puts the keys at elbow height, as OSHA recommends.`,
+        note,
+      };
+    },
+
     'steps-to-miles': v => {
       const errors = {};
       if (!(v.steps > 0)) errors.steps = 'Enter a step count greater than zero.';
