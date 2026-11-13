@@ -167,6 +167,8 @@ A lifting app should make real progress easier to see. It can suggest a weight o
 
 Want to check an estimate yourself? Our [1 Rep Max Calculator](/one-rep-max-calculator/) uses the Epley and Brzycki formulas and builds a training ladder from 50% to 100%. You'll find more tools on our [calculators page](/calculators/), and wider context in our [fitness statistics by activity and age](/fitness/fitness-statistics-by-activity-and-age/).
 
+For sets, reps and how often to train, see our [strength training FAQ](/faq/fitness/strength-training/).
+
 ## FAQs
 
 ### What Is the Best Free Weightlifting App?

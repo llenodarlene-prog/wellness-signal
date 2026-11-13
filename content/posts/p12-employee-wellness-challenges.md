@@ -80,6 +80,8 @@ A team can record whether employees had a reasonable opportunity to take their s
 
 This programme is particularly useful as an operational question: does the workplace permit staff to take breaks already available to them? It should not shift responsibility to workers when staffing or workload prevents those breaks.
 
+For desk, chair and monitor setup that makes breaks easier to take, see our [ergonomics FAQ](/faq/work-wellness/ergonomics/).
+
 ## 3. Hydration Awareness Challenge
 
 A hydration challenge can focus on access to drinking water and optional reminders rather than individual consumption quotas. Water needs differ according to health, activity, climate, and other circumstances.
