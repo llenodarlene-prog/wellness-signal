@@ -49,7 +49,7 @@ Patients should ask which clinician will do the injection, how that clinician wa
 
 Some aesthetic practices employ a medical director or supervising clinician, with responsibilities defined by local law and the clinic's operating model. The director's name on a website does not, by itself, demonstrate that the person administering a treatment has been appropriately trained or that the supervising professional is involved in patient care.
 
-A credible practice should be able to explain who evaluates patients, who authorises treatment where required, and who handles an unexpected reaction. These points connect directly with the broader [medical director responsibilities](/beauty-aesthetics/medical-director-responsibilities-wellness-clinics/) in wellness and aesthetic clinics. The same provider checks apply to skin treatments such as [microneedling vs chemical peels](/beauty-aesthetics/microneedling-vs-chemical-peel/) and [HydraFacial vs microdermabrasion](/beauty-aesthetics/hydrafacial-vs-microdermabrasion/).
+A credible practice should be able to explain who evaluates patients, who authorises treatment where required, and who handles an unexpected reaction. These points connect directly with the broader [medical director responsibilities](/beauty-aesthetics/medical-director-responsibilities-wellness-clinics/) in wellness and aesthetic clinics. For results, aftercare and side effects, see our [Botox FAQ](/faq/beauty-aesthetics/botox/). The same provider checks apply to skin treatments such as [microneedling vs chemical peels](/beauty-aesthetics/microneedling-vs-chemical-peel/) and [HydraFacial vs microdermabrasion](/beauty-aesthetics/hydrafacial-vs-microdermabrasion/).
 
 ## 9 Checks Before Choosing a Botox Injector
 

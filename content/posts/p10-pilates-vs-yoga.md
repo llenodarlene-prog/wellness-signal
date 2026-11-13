@@ -216,6 +216,8 @@ The practical decision depends on the intended outcome and which sessions a pers
 - **Specific pain or rehabilitation concerns:** Seek clinical guidance before selecting either programme as treatment.
 - **Varied training:** Some people combine both practices with aerobic exercise and resistance training rather than choosing one exclusively.
 
+For quick answers on mat vs reformer, frequency and cost, see our [Pilates FAQ](/faq/fitness/pilates/).
+
 ## FAQs
 
 ### Is Pilates Better Than Yoga for Strength?

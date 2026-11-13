@@ -51,6 +51,8 @@ This is an editorial comparison based on publicly available descriptions, not a 
 
 *The table shows programme categories, not guaranteed inclusions for specific dates. No affiliate links appear in the table.*
 
+Flying in from another time zone? Our [jet lag FAQ](/faq/travel-retreats/jet-lag/) covers how to adjust faster.
+
 ## 1. Canyon Ranch Tucson, Arizona: Broad Wellness Programming
 
 Canyon Ranch Tucson brings together fitness classes, nutrition guidance, spa facilities and specialist-led experiences in the Sonoran Desert. Its published materials describe inclusive stays with meals, activities and amenities, while specific individual services depend on the package selected.

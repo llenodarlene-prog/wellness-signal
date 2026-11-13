@@ -47,7 +47,7 @@ Sleep debt is the gap between the sleep you need and the sleep you get. Miss an 
 
 ## Fitness
 
-Exercise advice gets noisy fast. These answers stick to the CDC's activity guidelines and published research. New runners can start with the [running FAQ](/faq/fitness/running/).
+Exercise advice gets noisy fast. These answers stick to the CDC's activity guidelines and published research. New runners can start with the [running FAQ](/faq/fitness/running/). Lifters can see the [strength training FAQ](/faq/fitness/strength-training/), and studio fans the [Pilates FAQ](/faq/fitness/pilates/).
 
 ### How much exercise do adults need each week?
 
@@ -97,7 +97,7 @@ The evidence is mixed. A 2025 systematic review of 14 studies, with 194 particip
 
 ## Beauty & Aesthetics
 
-Cosmetic treatments are medical procedures. Our answers focus on safety and the questions to ask before you book.
+Cosmetic treatments are medical procedures. Our answers focus on safety and the questions to ask before you book. For results, aftercare and side effects, see the [Botox FAQ](/faq/beauty-aesthetics/botox/).
 
 ### How do I choose a Botox injector?
 
@@ -116,7 +116,7 @@ No. Botox is one brand of botulinum toxin. Other approved products have differen
 
 ## Work & Wellness
 
-Workplace wellness is common, but having a program and getting results aren't the same thing.
+Workplace wellness is common, but having a program and getting results aren't the same thing. For desk, chair and monitor setup, see the [ergonomics FAQ](/faq/work-wellness/ergonomics/).
 
 ### How many employers offer wellness programs?
 
@@ -128,7 +128,7 @@ Not on its own. Offering a program doesn't guarantee people take part or that th
 
 ## Travel & Retreats
 
-Retreat pricing can be confusing. These answers help you compare offers fairly.
+Retreat pricing can be confusing. These answers help you compare offers fairly. Flying across time zones? See the [jet lag FAQ](/faq/travel-retreats/jet-lag/).
 
 ### What is a wellness retreat?
 
