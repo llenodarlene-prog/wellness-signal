@@ -407,6 +407,131 @@
       };
     },
 
+    'bmr': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.age >= 18 && v.age <= 100)) errors.age = 'Enter an age from 18 to 100.';
+      if (!(v.weight > 0)) errors.weight = 'Enter your weight.';
+      if (!(v.height > 0)) errors.height = 'Enter your height.';
+      if (Object.keys(errors).length) return { errors };
+      const kg = C.toKg(v.weight, v.wunit), cm = C.toCm(v.height, v.hunit);
+      if (kg < 25 || kg > 350 || cm < 100 || cm > 250) return { errors: { height: 'Check your height and weight units.' } };
+      const bmr = C.mifflin({ sex: v.sex, kg, cm, age: v.age });
+      return {
+        hero: { icon: 'flame', value: num(bmr, 0), label: 'calories a day at rest (BMR)' },
+        rows: [
+          ['Basal metabolic rate', `${num(bmr, 0)} kcal/day`],
+          ['Per hour', `${num(bmr / 24, 0)} kcal`, 'clock'],
+          ['Equation', `Mifflin-St Jeor, ${v.sex === 'male' ? 'male' : 'female'} version`, 'activity'],
+        ],
+        insight: `Your body uses an estimated ${num(bmr, 0)} calories a day just to keep you alive at rest. Your total daily needs are higher once you add movement, which the TDEE Calculator estimates.`,
+        note: v.age < 19 || v.age > 78 ? 'The equation was developed from adults aged 19 to 78, so treat results outside that range as rougher estimates.' : '',
+      };
+    },
+
+    'tdee': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.age >= 18 && v.age <= 100)) errors.age = 'Enter an age from 18 to 100.';
+      if (!(v.weight > 0)) errors.weight = 'Enter your weight.';
+      if (!(v.height > 0)) errors.height = 'Enter your height.';
+      if (Object.keys(errors).length) return { errors };
+      const kg = C.toKg(v.weight, v.wunit), cm = C.toCm(v.height, v.hunit);
+      if (kg < 25 || kg > 350 || cm < 100 || cm > 250) return { errors: { height: 'Check your height and weight units.' } };
+      const bmr = C.mifflin({ sex: v.sex, kg, cm, age: v.age });
+      const t = C.tdee(bmr, v.level);
+      return {
+        hero: { icon: 'activity', value: num(t.typical, 0), label: 'estimated calories a day (TDEE)' },
+        rows: [
+          ['Estimated TDEE', `${num(t.typical, 0)} kcal/day`],
+          ['Range for this activity level', `${num(t.lo, 0)} to ${num(t.hi, 0)} kcal/day`, 'activity'],
+          ['BMR (at rest)', `${num(bmr, 0)} kcal/day`, 'flame'],
+          ['Activity multiplier', `${num(t.pal.typical, 2)} (band ${num(t.pal.lo, 2)} to ${num(t.pal.hi, 2)})`, 'walk'],
+        ],
+        insight: `At a ${t.pal.label.toLowerCase()} lifestyle, you burn an estimated ${num(t.typical, 0)} calories a day. The FAO band for this level runs from ${num(t.lo, 0)} to ${num(t.hi, 0)}, which shows how much activity estimates can vary.`,
+        note: v.age < 19 || v.age > 78 ? 'The BMR equation was developed from adults aged 19 to 78, so treat results outside that range as rougher estimates.' : '',
+      };
+    },
+
+    'calorie-deficit': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.maint >= 800 && v.maint <= 10000)) errors.maint = 'Enter maintenance calories between 800 and 10,000.';
+      const d = v.deficit === 'custom' ? v.custom : Number(v.deficit);
+      if (v.deficit === 'custom' && !(v.custom >= 0)) errors.custom = 'Enter a deficit of 0 or more.';
+      if (Object.keys(errors).length) return { errors };
+      if (d >= v.maint) return { errors: { custom: 'The deficit must be smaller than your maintenance calories.' } };
+      const target = C.deficitTarget(v.maint, d);
+      const note = target <= 800
+        ? 'A target of about 800 calories a day or less counts as a very low-calorie diet, which NIDDK describes as supervised by a health care professional. Talk to a clinician before eating this little.'
+        : 'This is arithmetic, not a prediction. Real weight change depends on many factors, and the CDC notes that gradual loss of about 1 to 2 pounds a week is more likely to last.';
+      return {
+        hero: { icon: 'scale', value: num(target, 0), label: 'calories a day target' },
+        rows: [
+          ['Target intake', `${num(target, 0)} kcal/day`],
+          ['Daily deficit', `${num(d, 0)} kcal`, 'trending-down'],
+          ['Weekly deficit', `${num(d * 7, 0)} kcal`, 'calendar'],
+          ['Maintenance', `${num(v.maint, 0)} kcal/day`, 'flame'],
+        ],
+        insight: `Eating about ${num(target, 0)} calories a day would put you ${num(d, 0)} calories below your estimated maintenance of ${num(v.maint, 0)}.`,
+        note,
+      };
+    },
+
+    'macro': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.kcal >= 500 && v.kcal <= 10000)) errors.kcal = 'Enter daily calories between 500 and 10,000.';
+      let pct;
+      if (v.preset === 'custom') {
+        ['p', 'c', 'f'].forEach(k => { if (!(v[k] >= 0 && v[k] <= 100)) errors[k] = 'Enter a percentage from 0 to 100.'; });
+        pct = { protein: v.p, carbs: v.c, fat: v.f };
+        if (!Object.keys(errors).length && Math.abs(v.p + v.c + v.f - 100) > 0.01) errors.f = `Your percentages add up to ${num(v.p + v.c + v.f, 1)}%. Adjust them to total 100%.`;
+      } else {
+        const [p, c, f] = String(v.preset).split('-').map(Number);
+        pct = { protein: p, carbs: c, fat: f };
+      }
+      if (Object.keys(errors).length) return { errors };
+      const g = C.macros(v.kcal, pct);
+      const out = (k, lo, hi) => pct[k] < lo || pct[k] > hi;
+      const flags = [out('protein', 10, 35) && 'protein', out('carbs', 45, 65) && 'carbohydrate', out('fat', 20, 35) && 'fat'].filter(Boolean);
+      return {
+        hero: { icon: 'activity', value: `${num(g.protein, 0)} / ${num(g.carbs, 0)} / ${num(g.fat, 0)}`, label: 'grams of protein / carbs / fat a day' },
+        rows: [
+          ['Protein', `${num(g.protein, 0)} g (${num(pct.protein, 0)}%, ${num(g.protein * 4, 0)} kcal)`, 'barbell'],
+          ['Carbohydrate', `${num(g.carbs, 0)} g (${num(pct.carbs, 0)}%, ${num(g.carbs * 4, 0)} kcal)`, 'activity'],
+          ['Fat', `${num(g.fat, 0)} g (${num(pct.fat, 0)}%, ${num(g.fat * 9, 0)} kcal)`, 'droplet'],
+        ],
+        insight: `${num(v.kcal, 0)} calories split ${num(pct.protein, 0)}/${num(pct.carbs, 0)}/${num(pct.fat, 0)} works out to ${num(g.protein, 0)} g protein, ${num(g.carbs, 0)} g carbohydrate and ${num(g.fat, 0)} g fat a day.`,
+        note: flags.length ? `Your ${flags.join(' and ')} share is outside the adult Acceptable Macronutrient Distribution Range (protein 10 to 35%, carbohydrate 45 to 65%, fat 20 to 35%).` : '',
+      };
+    },
+
+    'protein': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.weight > 0)) errors.weight = 'Enter your body weight.';
+      if (Object.keys(errors).length) return { errors };
+      const kg = C.toKg(v.weight, v.wunit);
+      if (kg < 25 || kg > 350) return { errors: { weight: 'Check your weight and unit.' } };
+      const r = C.protein(kg, v.scenario);
+      const range = r.lo === r.hi ? `${num(r.lo, 0)} g` : `${num(r.lo, 0)} to ${num(r.hi, 0)} g`;
+      const rda = C.protein(kg, 'rda').lo;
+      return {
+        hero: { icon: 'barbell', value: range.replace(' g', ''), label: 'grams of protein a day' },
+        rows: [
+          ['Daily protein', range],
+          ['Scenario', `${r.s.label} (${r.s.lo === r.s.hi ? num(r.s.lo, 1) : `${num(r.s.lo, 1)} to ${num(r.s.hi, 1)}`} g/kg)`, 'activity'],
+          ['Your weight', `${num(kg, 1)} kg`, 'scale'],
+          ['Adult RDA for comparison', `${num(rda, 0)} g`, 'user'],
+        ],
+        insight: v.scenario === 'rda'
+          ? `The RDA works out to about ${num(rda, 0)} g of protein a day at your weight. That's the amount that meets the needs of nearly all healthy adults.`
+          : `For most people who exercise, the ISSN suggests ${range} of protein a day at your weight, compared with ${num(rda, 0)} g for the general RDA.`,
+        note: 'People with kidney disease or other medical conditions should ask a clinician before raising their protein intake.',
+      };
+    },
+
     'steps-to-miles': v => {
       const errors = {};
       if (!(v.steps > 0)) errors.steps = 'Enter a step count greater than zero.';

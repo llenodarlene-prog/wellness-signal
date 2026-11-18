@@ -2,6 +2,18 @@
 // assets/js/calculators.js. Nothing entered is stored or sent anywhere.
 // Default values are worked examples and are labelled as such on the page.
 
+
+const personInputs = [
+  { icon: 'user', name: 'sex', label: 'Sex used in the equation', type: 'unit', options: [['female', 'Female'], ['male', 'Male']], value: 'female', help: 'The equation has separate male and female versions' },
+  { icon: 'calendar', name: 'age', label: 'Age', type: 'stepper', min: 18, max: 100, step: 1, value: 35, suffix: 'years', required: true },
+  { icon: 'scale', name: 'weight', label: 'Weight', type: 'number', min: 30, step: 0.5, value: 160, required: true, slider: [80, 400] },
+  { icon: 'scale', name: 'wunit', label: 'Weight unit', type: 'unit', options: [['lb', 'lb'], ['kg', 'kg']], value: 'lb' },
+  { icon: 'ruler', name: 'height', label: 'Height', type: 'number', min: 36, step: 0.5, value: 66, required: true, help: '66 in is 5 ft 6 in' },
+  { icon: 'ruler', name: 'hunit', label: 'Height unit', type: 'unit', options: [['in', 'inches'], ['cm', 'cm']], value: 'in' },
+];
+const mifflinSource = ['Mifflin et al. 1990, Am J Clin Nutr (PMID 2305711)', 'https://pubmed.ncbi.nlm.nih.gov/2305711/'];
+const faoSource = ['FAO/WHO/UNU, Human Energy Requirements (2001), chapter 5', 'https://www.fao.org/4/y5686e/y5686e07.htm'];
+
 export const calculators = {
   'pilates-cost': {
     icon: 'stretching',
@@ -447,6 +459,95 @@ export const calculators = {
     sources: [['OSHA eTool, Keyboards', 'https://www.osha.gov/etools/computer-workstations/components/keyboards'], ['OSHA eTool, Monitors', 'https://www.osha.gov/etools/computer-workstations/components/monitors'], ['OSHA eTool, Purchasing Guide', 'https://www.osha.gov/etools/computer-workstations/checklists/purchasing-guide']],
     reviewed: 'November 2026',
     disclaimer: 'A starting point, not a fit for everyone. OSHA notes there is no single correct posture. Adjust for comfort, change position often, and see a clinician or ergonomist if you have pain.',
+  },
+  'bmr': {
+    icon: 'flame',
+    title: 'BMR Calculator',
+    intro: 'Estimate your basal metabolic rate, the calories your body uses at rest, with the Mifflin-St Jeor equation.',
+    empty: 'Enter your age, height and weight to estimate your BMR.',
+    inputs: personInputs,
+    formulas: [
+      'Men: BMR = 10 × weight (kg) + 6.25 × height (cm) − 5 × age (years) + 5',
+      'Women: BMR = 10 × weight (kg) + 6.25 × height (cm) − 5 × age (years) − 161',
+      'Mifflin-St Jeor was developed from 498 healthy adults aged 19 to 78 with resting energy measured by indirect calorimetry',
+    ],
+    sources: [mifflinSource],
+    reviewed: 'November 2026',
+    disclaimer: 'An estimate of resting energy use, not a measurement. Individual results can differ from the equation, especially for very muscular people, older adults, during pregnancy and with some health conditions.',
+  },
+  'tdee': {
+    icon: 'activity',
+    title: 'TDEE Calculator',
+    intro: 'Estimate your total daily energy expenditure by multiplying your BMR by an activity level from the FAO/WHO/UNU energy report.',
+    empty: 'Enter your details to estimate your daily calories.',
+    inputs: [...personInputs, { icon: 'walk', name: 'level', label: 'Typical activity', type: 'choice', wide: true, options: [['sedentary', 'Sedentary or light', 'user', 'Desk job, little exercise'], ['active', 'Moderately active', 'walk', 'Regular activity most days'], ['vigorous', 'Vigorously active', 'run', 'Heavy work or hard training']], value: 'sedentary' }],
+    formulas: [
+      'BMR from the Mifflin-St Jeor equation (see the BMR Calculator)',
+      'TDEE = BMR × physical activity level (PAL)',
+      'FAO/WHO/UNU 2001 PAL bands: sedentary or light 1.40 to 1.69 (example 1.53); active 1.70 to 1.99 (example 1.76); vigorous 2.00 to 2.40 (example 2.25)',
+    ],
+    sources: [mifflinSource, faoSource],
+    reviewed: 'November 2026',
+    disclaimer: 'Activity levels are broad bands designed for population estimates, so your real needs may sit anywhere in the range shown, or outside it. Track your weight over a few weeks to see how the estimate fits you.',
+  },
+  'calorie-deficit': {
+    icon: 'scale',
+    title: 'Calorie Deficit Calculator',
+    intro: 'Subtract a calorie deficit you choose from your maintenance calories to see the daily intake target it implies.',
+    empty: 'Enter your maintenance calories and a deficit.',
+    inputs: [
+      { icon: 'flame', name: 'maint', label: 'Maintenance calories', type: 'number', min: 800, step: 10, value: 2300, suffix: 'kcal/day', required: true, help: 'From the TDEE Calculator or your own tracking', slider: [1200, 4000] },
+      { icon: 'trending-down', name: 'deficit', label: 'Daily deficit', type: 'choice', wide: true, options: [['250', 'Small', 'trending-down', '250 kcal'], ['500', 'Moderate', 'trending-down', '500 kcal'], ['750', 'Larger', 'trending-down', '750 kcal'], ['custom', 'Custom', 'activity', 'Enter below']], value: '500' },
+      { icon: 'activity', name: 'custom', label: 'Custom deficit', type: 'number', min: 0, step: 10, help: 'Used when Daily deficit is Custom', showIf: 'deficit=custom' },
+    ],
+    formulas: [
+      'Target intake = maintenance calories − chosen daily deficit',
+      'Weekly deficit = daily deficit × 7',
+      'This is arithmetic only. It does not predict how much or how fast your weight will change.',
+    ],
+    sources: [['CDC, Losing Weight', 'https://www.cdc.gov/healthy-weight-growth/losing-weight/index.html'], ['NIDDK, Very Low-Calorie Diet (definition)', 'https://www.niddk.nih.gov/Dictionary/V/very-low-calorie-diet']],
+    reviewed: 'November 2026',
+    disclaimer: 'Not a diet plan or a weight-loss prediction. Talk to a clinician before cutting calories if you are pregnant or breastfeeding, have diabetes or another health condition, take medicines that affect weight or appetite, or have a history of disordered eating.',
+  },
+  'macro': {
+    icon: 'activity',
+    title: 'Macro Calculator',
+    intro: 'Split a daily calorie target into grams of protein, carbohydrate and fat using percentages you choose.',
+    empty: 'Enter your calories and macro split.',
+    inputs: [
+      { icon: 'flame', name: 'kcal', label: 'Daily calories', type: 'number', min: 500, step: 10, value: 2000, suffix: 'kcal', required: true, slider: [1200, 4000] },
+      { icon: 'activity', name: 'preset', label: 'Macro split', type: 'choice', wide: true, options: [['20-50-30', 'Balanced', 'activity', '20% P · 50% C · 30% F'], ['30-40-30', 'Higher protein', 'barbell', '30% P · 40% C · 30% F'], ['25-35-40', 'Lower carb', 'trending-down', '25% P · 35% C · 40% F'], ['custom', 'Custom', 'ruler', 'Set your own']], value: '20-50-30' },
+      { icon: 'barbell', name: 'p', label: 'Protein %', type: 'number', min: 0, max: 100, step: 1, value: 20, suffix: '%', showIf: 'preset=custom' },
+      { icon: 'activity', name: 'c', label: 'Carbohydrate %', type: 'number', min: 0, max: 100, step: 1, value: 50, suffix: '%', showIf: 'preset=custom' },
+      { icon: 'droplet', name: 'f', label: 'Fat %', type: 'number', min: 0, max: 100, step: 1, value: 30, suffix: '%', showIf: 'preset=custom' },
+    ],
+    formulas: [
+      'Grams = calories × percentage ÷ calories per gram',
+      'General factors: 4 kcal per gram of protein, 4 per gram of carbohydrate, 9 per gram of fat (21 CFR 101.9)',
+      'Adult Acceptable Macronutrient Distribution Ranges: protein 10 to 35%, carbohydrate 45 to 65%, fat 20 to 35% of calories',
+    ],
+    sources: [['FDA, 21 CFR 101.9 (4, 4 and 9 kcal per gram)', 'https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-101/subpart-A/section-101.9'], ['Healthy U.S.-style dietary patterns and protein, Nutrition Journal 2022 (adult AMDRs)', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9206338/'], ['Wolfe & Cifelli 2017, Adv Nutr (protein AMDR)', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5347101/']],
+    reviewed: 'November 2026',
+    disclaimer: 'A planning tool, not a diet prescription. Fiber, alcohol and sugar alcohols are not counted separately. Talk to a registered dietitian if you have a health condition or special dietary needs.',
+  },
+  'protein': {
+    icon: 'barbell',
+    title: 'Protein Calculator',
+    intro: 'See daily protein amounts for your body weight under two sourced scenarios: the general adult RDA and the range suggested for most exercising adults.',
+    empty: 'Enter your weight to see protein ranges.',
+    inputs: [
+      { icon: 'scale', name: 'weight', label: 'Body weight', type: 'number', min: 30, step: 0.5, value: 160, required: true, slider: [80, 400] },
+      { icon: 'scale', name: 'wunit', label: 'Weight unit', type: 'unit', options: [['lb', 'lb'], ['kg', 'kg']], value: 'lb' },
+      { icon: 'activity', name: 'scenario', label: 'Scenario', type: 'choice', wide: true, options: [['rda', 'General adult', 'user', 'RDA, 0.8 g/kg'], ['exercise', 'Regular exercise', 'barbell', 'ISSN, 1.4 to 2.0 g/kg']], value: 'rda' },
+    ],
+    formulas: [
+      'Protein (g/day) = body weight (kg) × grams per kg',
+      'RDA for adults: 0.8 g per kg per day',
+      'ISSN 2017: 1.4 to 2.0 g per kg per day is sufficient for most exercising individuals',
+    ],
+    sources: [['Wolfe & Cifelli 2017, Adv Nutr (RDA 0.8 g/kg)', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5347101/'], ['Jäger et al. 2017, ISSN position stand: protein and exercise (PMID 28642676)', 'https://pubmed.ncbi.nlm.nih.gov/28642676/']],
+    reviewed: 'November 2026',
+    disclaimer: 'General reference amounts, not a personal prescription. People with kidney disease or other medical conditions, and those who are pregnant or breastfeeding, have different needs; ask a clinician or registered dietitian.',
   },
   'sleep-debt': {
     icon: 'moon',
