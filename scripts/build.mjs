@@ -29,6 +29,7 @@ const sprite = await tablerSprite();
 const assetVersion = createHash('sha256')
   .update(await readFile('assets/css/site.css'))
   .update(await readFile('assets/js/site.js'))
+  .update(await readFile('assets/js/calc-core.js'))
   .update(await readFile('assets/js/calculators.js'))
   .update(sprite)
   .digest('hex').slice(0, 10);
@@ -171,7 +172,7 @@ const pageSprite = html => {
   return sprite.replace(/<symbol id="ti-([a-z0-9-]+)"[\s\S]*?<\/symbol>/g, (sym, name) => (used.has(name) ? sym : ''));
 };
 const withSprite = html => html.replace(/<body([^>]*)>/, (tag) => `${tag}\n${pageSprite(html)}`);
-const withCalcScript = html => (html.includes('data-calc=') ? withSprite(html).replace('</body>', `<script src="/assets/js/calculators.js?v=${assetVersion}" defer></script>\n</body>`) : html);
+const withCalcScript = html => (html.includes('data-calc=') ? withSprite(html).replace('</body>', `<script src="/assets/js/calc-core.js?v=${assetVersion}" defer></script>\n<script src="/assets/js/calculators.js?v=${assetVersion}" defer></script>\n</body>`) : html);
 
 // ---------- Feature blocks ----------
 
