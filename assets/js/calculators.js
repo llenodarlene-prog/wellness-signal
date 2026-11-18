@@ -43,6 +43,32 @@
     return (v.hunit === 'cm' ? v.height / 2.54 : v.height) * 0.414;
   };
 
+
+  // Even-pace race splits for the marathon and half marathon calculators.
+  const raceCalc = (v, race) => {
+    const C = window.WSCore;
+    const mins = parseDur(v.time);
+    if (!(mins > 0)) return { errors: { time: 'Enter your goal time as h:mm:ss, for example 4:00:00.' } };
+    const D = C.RACE[race];
+    const fin = mins * 60;
+    const lo = race === 'marathon' ? 120 : 57, hi = race === 'marathon' ? 600 : 300;
+    if (mins < lo || mins > hi) return { errors: { time: `Enter a time between ${fmtDur(lo)} and ${fmtDur(hi)}.` } };
+    const at = race === 'marathon' ? [5000, 10000, 15000, 20000, C.RACE.half, 25000, 30000, 35000, 40000] : [5000, 10000, 15000, 20000];
+    const lab = m => (m === C.RACE.half ? 'Halfway (13.1 mi)' : `${m / 1000}K`);
+    const perMi = C.paceSec(fin, D, C.MI) / 60, perKm = C.paceSec(fin, D, 1000) / 60;
+    return {
+      hero: { icon: 'stopwatch', value: fmtDur(perMi), label: 'per mile goal pace' },
+      rows: [
+        ['Pace per mile', fmtDur(perMi)],
+        ['Pace per kilometer', fmtDur(perKm), 'flag'],
+        ['Speed', `${num(D / C.MI / (mins / 60), 2)} mph`, 'gauge'],
+        ...at.map(m => [`Split at ${lab(m)}`, fmtDur(C.split(fin, D, m) / 60), 'route']),
+        ['Finish', fmtDur(mins), 'flag'],
+      ],
+      insight: `To finish in ${fmtDur(mins)}, run about ${fmtDur(perMi)} per mile (${fmtDur(perKm)} per km) the whole way. The splits assume an even pace.`,
+    };
+  };
+
   // Each calculator returns { rows: [[label, value, emphasis?]], note? } or { errors: {field: message} }.
   const calcs = {
     'pilates-cost': v => {
@@ -529,6 +555,83 @@
           ? `The RDA works out to about ${num(rda, 0)} g of protein a day at your weight. That's the amount that meets the needs of nearly all healthy adults.`
           : `For most people who exercise, the ISSN suggests ${range} of protein a day at your weight, compared with ${num(rda, 0)} g for the general RDA.`,
         note: 'People with kidney disease or other medical conditions should ask a clinician before raising their protein intake.',
+      };
+    },
+
+    'vo2-max': v => {
+      const C = window.WSCore;
+      if (!(v.distance > 0)) return { errors: { distance: 'Enter the distance you covered.' } };
+      const m = v.dunit === 'mi' ? v.distance * C.MI : v.dunit === 'km' ? v.distance * 1000 : v.distance;
+      if (m < 800 || m > 5500) return { errors: { distance: 'Enter a 12-minute distance between about 0.5 and 3.4 miles (800 to 5,500 m). Check the unit.' } };
+      const vo2 = C.cooper(m);
+      return {
+        hero: { icon: 'heartbeat', value: num(vo2, 1), label: 'estimated VO2 max (mL/kg/min)' },
+        rows: [
+          ['Estimated VO2 max', `${num(vo2, 1)} mL/kg/min`],
+          ['Distance in 12 minutes', `${num(m, 0)} m (${num(m / C.MI, 2)} mi)`, 'route'],
+          ['Average pace', `${fmtDur(12 / (m / C.MI))} per mile`, 'stopwatch'],
+        ],
+        insight: `Covering ${num(m / C.MI, 2)} miles in 12 minutes gives an estimated VO2 max of ${num(vo2, 1)} mL/kg/min with the Cooper formula. Lab treadmill tests measure it directly.`,
+        note: 'For context, the FRIEND registry reports measured treadmill averages of 38.8 mL/kg/min for men and 27.9 for women aged 40 to 49. A field estimate and a lab test are not directly comparable.',
+      };
+    },
+
+    'weight-loss-percentage': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.start > 0)) errors.start = 'Enter a starting weight above zero.';
+      if (!(v.current > 0)) errors.current = 'Enter a current weight above zero.';
+      if (Object.keys(errors).length) return { errors };
+      if (v.current > v.start * 3 || v.current < v.start / 3) return { errors: { current: 'Check both weights use the same unit.' } };
+      const pc = C.pctChange(v.start, v.current);
+      const diff = v.start - v.current;
+      const u = v.wunit;
+      const word = diff > 0 ? 'lost' : diff < 0 ? 'gained' : 'no change';
+      return {
+        hero: { icon: 'scale', value: `${num(Math.abs(pc), 1)}%`, label: diff > 0 ? 'of starting weight lost' : diff < 0 ? 'gained from starting weight' : 'change from starting weight' },
+        rows: [
+          ['Percent change', `${pc > 0 ? '+' : ''}${num(pc, 2)}%`],
+          [diff >= 0 ? 'Weight lost' : 'Weight gained', `${num(Math.abs(diff), 1)} ${u}`, 'scale'],
+          ['Starting weight', `${num(v.start, 1)} ${u}`, 'flag'],
+          ['Current weight', `${num(v.current, 1)} ${u}`, 'activity'],
+        ],
+        insight: diff === 0 ? 'Your current weight matches your starting weight.' : `Going from ${num(v.start, 1)} to ${num(v.current, 1)} ${u} is a ${num(Math.abs(pc), 1)}% ${diff > 0 ? 'decrease' : 'increase'}, or ${num(Math.abs(diff), 1)} ${u} ${word}.`,
+      };
+    },
+
+    'marathon-pace': v => raceCalc(v, 'marathon'),
+    'half-marathon-pace': v => raceCalc(v, 'half'),
+
+    'treadmill-calories': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.weight > 0)) errors.weight = 'Enter your body weight.';
+      if (!(v.mph > 0 && v.mph <= 15)) errors.mph = 'Enter a speed from 0.5 to 15 mph.';
+      if (!(v.grade >= 0 && v.grade <= 15)) errors.grade = 'Enter an incline from 0% to 15%.';
+      if (!(v.minutes > 0)) errors.minutes = 'Enter a duration greater than zero.';
+      if (Object.keys(errors).length) return { errors };
+      const kg = C.toKg(v.weight, v.wunit);
+      const spd = C.mphToMpm(v.mph), g = v.grade / 100;
+      const run = v.mode === 'run';
+      const vo2 = run ? C.acsmRun(spd, g) : C.acsmWalk(spd, g);
+      const gross = C.kcalPerMin(vo2, kg) * v.minutes;
+      const net = C.kcalPerMin(vo2 - 3.5, kg) * v.minutes;
+      const mets = vo2 / 3.5;
+      let note = '';
+      if (!run && (v.mph < 1.9 || v.mph > 3.7)) note = 'The ACSM walking equation is most accurate at about 1.9 to 3.7 mph, so treat this result as rougher.';
+      if (run && v.mph < 4) note = 'At this speed most people walk. Switch to Walking unless you are truly jogging.';
+      return {
+        hero: { icon: 'flame', value: num(gross, 0), label: 'estimated calories burned' },
+        rows: [
+          ['Gross calories', `${num(gross, 0)} kcal`],
+          ['Net calories (above resting)', `${num(net, 0)} kcal`, 'activity'],
+          ['Calories per hour', `${num(gross / v.minutes * 60, 0)} kcal`, 'clock'],
+          ['Intensity', `${num(mets, 1)} METs · ${intensity(mets)}`, 'gauge'],
+          ['Pace', `${fmtDur(60 / v.mph)} per mile`, 'stopwatch'],
+        ],
+        range: { title: 'Intensity on the MET scale', min: 1, max: 14, value: Math.min(14, mets), fmt: n => `${num(n, 1)} METs`, bands: [['Below moderate', 1, 3], ['Moderate', 3, 6], ['Vigorous', 6, 14]] },
+        insight: `${run ? 'Running' : 'Walking'} at ${num(v.mph, 1)} mph${v.grade ? ` on a ${num(v.grade, 1)}% incline` : ''} for ${num(v.minutes, 0)} minutes burns about ${num(gross, 0)} calories in total, or ${num(net, 0)} above what you'd burn at rest.`,
+        note,
       };
     },
 

@@ -55,7 +55,28 @@
     return { lo: kg * s.lo, hi: kg * s.hi, s };
   };
 
-  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein };
+
+  // Cooper 12-minute run (Cooper KH, JAMA 1968): VO2max = (metres - 504.9) / 44.73, mL/kg/min.
+  const MI = 1609.344;
+  const cooper = meters => (meters - 504.9) / 44.73;
+
+  // Percent change from a starting value. Positive = increase.
+  const pctChange = (start, current) => ((current - start) / start) * 100;
+
+  // Official road race distances in metres (World Athletics).
+  const RACE = { marathon: 42195, half: 21097.5 };
+  // Even-pace split time (seconds) at a distance (metres) for a finish time (seconds).
+  const split = (finishSec, raceM, atM) => finishSec * (atM / raceM);
+  const paceSec = (finishSec, raceM, unitM) => finishSec / (raceM / unitM);
+
+  // ACSM metabolic equations, VO2 in mL/kg/min. Speed in m/min, grade as a decimal.
+  const acsmWalk = (sMpm, grade) => 0.1 * sMpm + 1.8 * sMpm * grade + 3.5;
+  const acsmRun = (sMpm, grade) => 0.2 * sMpm + 0.9 * sMpm * grade + 3.5;
+  // About 5 kcal per litre of oxygen.
+  const kcalPerMin = (vo2, kg) => vo2 * kg / 1000 * 5;
+  const mphToMpm = mph => mph * MI / 60;
+
+  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm };
   root.WSCore = core;
   if (typeof module !== 'undefined' && module.exports) module.exports = core;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

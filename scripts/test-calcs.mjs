@@ -51,4 +51,30 @@ p = C.protein(C.toKg(160, 'lb'), 'rda');
 near(p.lo, 58.05982336, 1e-6, 'rda 160 lb');
 throws(() => C.protein(70, 'bodybuilder'), 'unknown scenario');
 
+
+// Cooper: 2,400 m -> (2400 - 504.9) / 44.73 = 42.367
+near(C.cooper(2400), 1895.1 / 44.73, 1e-9, 'cooper 2400 m');
+near(C.cooper(1.5 * 1609.344), (2414.016 - 504.9) / 44.73, 1e-9, 'cooper 1.5 mi'); // 42.68
+near(C.cooper(504.9), 0, 1e-12, 'cooper zero point');
+
+// Percent change
+near(C.pctChange(200, 180), -10, 1e-12, 'loss 10%');
+near(C.pctChange(80, 84), 5, 1e-12, 'gain 5%');
+near(C.pctChange(150, 150), 0, 0, 'no change');
+
+// Race pace: 4:00:00 marathon -> 14,400 s / 26.2188 mi = 549.2 s/mi (9:09)
+near(C.paceSec(14400, 42195, 1609.344), 14400 / (42195 / 1609.344), 1e-9, 'marathon pace/mi');
+near(C.paceSec(14400, 42195, 1000), 14400 / 42.195, 1e-9, 'marathon pace/km'); // 341.27
+near(C.split(14400, 42195, 21097.5), 7200, 1e-9, 'halfway split');
+near(C.split(7200, 21097.5, 10000), 7200 * 10000 / 21097.5, 1e-9, 'half 10K split'); // 3412.73
+near(C.RACE.half * 2, C.RACE.marathon, 0, 'half is half');
+
+// ACSM: walking 3 mph (80.4672 m/min) flat -> 0.1*80.4672 + 3.5 = 11.54672
+near(C.mphToMpm(3), 80.4672, 1e-9, 'mph to m/min');
+near(C.acsmWalk(80.4672, 0), 11.54672, 1e-9, 'walk flat');
+near(C.acsmWalk(80.4672, 0.05), 8.04672 + 1.8 * 80.4672 * 0.05 + 3.5, 1e-9, 'walk 5%');
+// Running 6 mph (160.9344 m/min) at 1% -> 32.18688 + 1.44841 + 3.5 = 37.13529
+near(C.acsmRun(160.9344, 0.01), 0.2 * 160.9344 + 0.9 * 160.9344 * 0.01 + 3.5, 1e-9, 'run 1%');
+near(C.kcalPerMin(10, 70), 3.5, 1e-12, 'kcal/min');
+
 console.log(`Calculator core tests passed (${n} assertions).`);
