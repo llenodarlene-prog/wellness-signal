@@ -34,7 +34,7 @@ The good news is that several alternatives scan barcodes for free, and some go f
 
 MyFitnessPal's App Store listing puts barcode scanning, meal scanning and voice logging in Premium, along with ad-free logging. Premium Plus adds nutrition-focused meal planning. The free plan still lets you log food by searching its database.
 
-![MyFitnessPal App Store listing for its calorie counter app](shot-myfitnesspal-app-store "Screenshot: MyFitnessPal listing on the Apple App Store, retrieved November 2026.")
+![MyFitnessPal logging options showing Log Food, Barcode Scan, Voice Log and Meal Scan](shot-myfitnesspal-barcode-scan "Image: MyFitnessPal Support, Barcode Scanner article, captured November 2026.")
 
 ## 1. MyNetDiary: Most Generous Free Tier
 
@@ -42,7 +42,7 @@ MyNetDiary's free version includes what MyFitnessPal charges for. Its App Store 
 
 **Choose MyNetDiary if** you want free barcode scanning and detailed nutrients in one app.
 
-![MyNetDiary App Store listing showing barcode scanning and Meal Scan food logging](shot-mynetdiary-app-store "Screenshot: MyNetDiary listing on the Apple App Store, retrieved November 2026.")
+![MyNetDiary tracking dashboard beside its Meal Scan camera view](shot-mynetdiary-app-tracking "Image: MyNetDiary app screens from mynetdiary.com, captured November 2026.")
 
 ## 2. FatSecret: Simplest Free Diary
 
