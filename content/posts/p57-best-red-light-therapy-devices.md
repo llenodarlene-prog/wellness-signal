@@ -1,25 +1,25 @@
 ---
 type: Blog
-title: "Best Red Light Therapy Devices: 3 Home Options and What the Evidence Says"
+title: "Best Red Light Therapy Devices: 4 Home Options and What the Evidence Says"
 seo_title: Best Red Light Therapy Devices and What the Evidence Says
-description: Compare red light therapy devices from Hooga, Mito Red Light and Omnilux by wavelength, power, price and FDA status, plus what research supports.
+description: Compare red light therapy devices from Hooga, Mito Red Light, Omnilux and CurrentBody by wavelength, power, price and FDA status, plus what research supports.
 primary_keyword: best red light therapy devices
 keywords: best red light therapy devices, red light therapy panel, red light therapy at home, led face mask, fda cleared red light therapy
 category: longevity-recovery
 slug: best-red-light-therapy-devices
 image: best-red-light-therapy-devices
-image_alt: A compact red light therapy panel glowing on a white bedside table
+image_alt: A woman relaxes with her eyes closed in front of a red light therapy panel on a stand
 published: 2026-11-25
 publish_time: "17:00"
 role: supporting
 draft: false
 ---
 
-# Best Red Light Therapy Devices: 3 Home Options and What the Evidence Says
+# Best Red Light Therapy Devices: 4 Home Options and What the Evidence Says
 
 The best red light therapy devices tell you exactly what you're getting: the wavelengths, the power at a stated distance and what the device is meant to treat. Marketing often promises much more than research supports. So before comparing products, it helps to know what the evidence actually says.
 
-We compared three popular home devices using the makers' official product pages, checked in November 2026, along with two 2026 research reviews and the FDA's guidance on these devices. This is a research-based comparison, not a hands-on test, and no brand paid to be included.
+We compared four popular home devices using the makers' official product pages, checked in November 2026, along with two 2026 research reviews and the FDA's guidance on these devices. This is a research-based comparison, not a hands-on test, and no brand paid to be included.
 
 ## Red Light Therapy Devices at a Glance
 
@@ -27,6 +27,7 @@ We compared three popular home devices using the makers' official product pages,
 |---|---|---|---|---|---|
 | Hooga HG300 | Compact panel | 660 nm red, 850 nm near-infrared | 73 mW/cm² at 6 inches | No FDA claim on product page | $199 |
 | Mito Red Light MitoMIN 2.0 | Compact panel | 660 nm red, 850 nm near-infrared | Over 115 mW/cm² at 6 inches | Lists FDA Class II registration, not a clearance | Original 2.0 line from $249 |
+| CurrentBody LED Mask Series 3 | Face mask | Red, near-infrared, deep near-infrared, blue, yellow, green | Not compared | Described as FDA cleared by CurrentBody | $569.99 |
 | Omnilux Contour Face | Flexible face mask | 633 nm red, 830 nm near-infrared | Not compared | FDA cleared for full-face wrinkles | $395 |
 
 ## What the Research Supports
@@ -64,6 +65,16 @@ The Omnilux Contour Face is a flexible mask rather than a panel. Omnilux says it
 **Choose Omnilux if** your main goal is facial skin and you want a device cleared for that use.
 
 ![Omnilux Contour Face flexible LED mask](shot-omnilux-contour-face-website "Screenshot: Omnilux Contour Face product page, captured November 2026.")
+
+## 4. CurrentBody LED Mask Series 3: Most Wavelengths
+
+CurrentBody's Series 3 mask lists six wavelengths: red (633 nm), near-infrared (830 nm), deep near-infrared (1072 nm), blue (415 nm), yellow (590 nm) and green (532 nm). Blue light is aimed at blemishes rather than aging. List price was $569.99.
+
+CurrentBody describes the mask as FDA cleared. The FDA's 510(k) database confirms clearance for its earlier Series 2 mask (K250966, June 2025), but we couldn't match the Series 3 to a specific FDA record. Ask CurrentBody for the clearance number if that matters to you.
+
+**Choose CurrentBody if** you want one face mask that covers both aging and blemish settings.
+
+![CurrentBody LED light therapy face mask held by a model](shot-currentbody-led-mask-website "Screenshot: CurrentBody LED face mask product page, captured November 2026.")
 
 ## What FDA Cleared Really Means
 
@@ -115,3 +126,5 @@ The 2026 at-home LED review found side effects were infrequent, mild and short-l
 5. [Mito Red Light, *MitoMIN 2.0*](https://mitoredlight.com/products/mitomin). Wavelengths, irradiance and warranty.
 6. [21 CFR 807.39, *Misbranding by Reference to Establishment Registration*](https://www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-807/subpart-B/section-807.39). Registration does not denote approval.
 7. [Omnilux, *Contour Face*](https://omniluxled.com/products/omnilux-contour-face). FDA clearance, wavelengths, warranty and price.
+8. [CurrentBody, *LED Light Therapy Face Mask: Series 3*](https://us.currentbody.com/products/currentbody-skin-led-light-therapy-mask). Wavelengths and price.
+9. [FDA 510(k) database, *K250966*](https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K250966). CurrentBody Series 2 clearance.

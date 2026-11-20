@@ -8,7 +8,7 @@ keywords: myfitnesspal alternatives, myfitnesspal alternative free, free barcode
 category: wellness
 slug: myfitnesspal-alternatives
 image: myfitnesspal-alternatives
-image_alt: A woman at a laptop reviews a food log with a nutrition pie chart
+image_alt: A laptop and phone showing nutrition charts on a kitchen table beside a salad bowl
 published: 2026-11-21
 publish_time: "09:00"
 role: supporting
