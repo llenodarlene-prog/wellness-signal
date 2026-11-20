@@ -153,6 +153,8 @@ The best reminder fits your routine without becoming another chore. A bottle pre
 
 Hydration often works better as a shared habit, too. Our [employee wellness challenges](/work-wellness/employee-wellness-challenges-small-teams/) guide includes a hydration challenge built on access and reminders rather than a fixed quota. For the bigger picture on wellness habits and spending, see our [wellness statistics](/wellness/wellness-statistics-participation-spending/).
 
+If you track other health habits on your phone, our guide to the [best period tracker apps](/wellness/best-period-tracker-apps/) compares how each one stores your data.
+
 ## FAQs
 
 ### What Is the Best Free Water Reminder App?

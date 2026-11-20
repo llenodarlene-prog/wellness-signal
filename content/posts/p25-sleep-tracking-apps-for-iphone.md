@@ -150,6 +150,8 @@ Start with what you want most from a night of tracking.
 
 The most useful number is often simpler than the headline score. Bedtime consistency, total sleep and clear changes over a few weeks are easier to read than small nightly shifts in estimated REM or deep sleep. Our [Sleep Debt Calculator](/sleep-debt-calculator/) can help you see how a week adds up. For more free audio options, browse our [free meditation apps](/mind-sleep/free-meditation-apps-compared/) guide.
 
+If noise wakes you up, our guide to the [best sleep headphones](/mind-sleep/best-sleep-headphones/) compares earbuds and headbands made for side sleepers.
+
 ## FAQs
 
 ### Can an iPhone Track Sleep Without Apple Watch?

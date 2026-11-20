@@ -108,6 +108,8 @@ A small red light panel and a full sauna cabin aren't comparable purchases, and 
 
 Don't choose either because someone claims it detoxes, reverses aging or treats a disease without evidence for that exact use. For how saunas compare with steam rooms, see our [sauna vs steam room](/longevity-recovery/sauna-vs-steam-room-benefits-differences/) guide.
 
+If you've decided on light therapy, our guide to the [best red light therapy devices](/longevity-recovery/best-red-light-therapy-devices/) compares home panels and masks by wavelength, power and FDA status.
+
 ## FAQs
 
 ### Is Red Light Therapy the Same as an Infrared Sauna?

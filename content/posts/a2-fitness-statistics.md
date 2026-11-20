@@ -73,6 +73,8 @@ A person can meet aerobic guidelines through walking, cycling or running without
 
 The Sports & Fitness Industry Association estimated that 247.1 million Americans aged six and older took part in at least one tracked activity in 2024. This broader measure includes sports and recreation, and should not be compared directly with CDC adult aerobic guideline compliance.
 
+Two newer guides cover tools for tracking that work: [Fitbod alternatives](/fitness/fitbod-alternatives/) compares strength apps by price and free tier, and our roundup of the [best body composition scales](/fitness/best-body-composition-scales/) explains what smart scales can and can't measure.
+
 ## FAQs
 
 ### What Percentage of US Adults Meet Aerobic Activity Guidelines?
