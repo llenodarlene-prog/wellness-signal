@@ -45,7 +45,7 @@ At $199, the Gen 2 Air costs half the price of an Oura Ring 5, and RingConn char
 
 **Choose the Gen 2 Air if** you want the lowest total cost.
 
-![RingConn Gen 2 Air product page showing the gold smart ring](shot-ringconn-gen-2-air-website "Screenshot: RingConn Gen 2 Air product page, captured November 2026.")
+![RingConn Gen 2 Air smart ring showing its inner sensors](shot-ringconn-gen-2-air-product "Image: RingConn Gen 2 Air product image from RingConn, captured November 2026.")
 
 ## 2. RingConn Gen 3: Longest Battery Life
 

@@ -38,7 +38,7 @@ Apple's support page explains its privacy protections. When your iPhone is locke
 
 **Choose Apple Health if** you're on iPhone and want a private tracker with no extra app.
 
-![Apple Support page explaining how to track your period with Cycle Tracking](shot-apple-health-cycle-tracking-page "Screenshot: Apple Support, Track Your Period With Cycle Tracking, captured November 2026.")
+![Apple Health Cycle Tracking log on iPhone with a period entry on Apple Watch](shot-apple-health-cycle-tracking-app "Image: Apple Support, Cycle Tracking example screens, captured November 2026.")
 
 ## 2. Clue: Detailed Tracking Under EU Privacy Law
 
