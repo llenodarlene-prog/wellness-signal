@@ -165,6 +165,8 @@ Choose based on comfort, access, safe operating conditions and the type of exper
 
 Do not choose either solely because a venue promises detoxification, rapid fat loss or guaranteed recovery benefits. The current research does not support naming one as universally superior, and personal medical circumstances can make both unsuitable.
 
+Heat is one recovery tool among several. For tracking how you recover, compare [Oura Ring alternatives](/longevity-recovery/oura-ring-alternatives/) and [WHOOP alternatives](/longevity-recovery/whoop-alternatives/). For light-based therapy, see our guide to the [best red light therapy devices](/longevity-recovery/best-red-light-therapy-devices/).
+
 ## FAQs
 
 ### Is a Sauna Healthier Than a Steam Room?
