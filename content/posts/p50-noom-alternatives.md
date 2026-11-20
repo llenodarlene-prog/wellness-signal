@@ -36,7 +36,7 @@ Noom's App Store listing describes daily lessons on habits and behavior change, 
 
 That bundle matters when you compare. A food diary replaces the logging, not the lessons or the coaching. If those are what kept you going, a calorie counter alone may not fill the gap.
 
-![Noom App Store listing showing its psychology-based weight loss program](shot-noom-app-store "Screenshot: Noom listing on the Apple App Store, retrieved November 2026.")
+![Noom app progress screen with a weight trend chart and daily steps](shot-noom-app-progress "Image: Noom app progress screen from noom.com, captured November 2026.")
 
 ## 1. WeightWatchers: The Closest Structured Program
 
@@ -46,7 +46,7 @@ Like Noom, WeightWatchers now offers clinical support. Weight Watchers Med+ give
 
 **Choose WeightWatchers if** you want structure, a community and access to human coaches.
 
-![WeightWatchers App Store listing showing Points, macros and progress tracking](shot-weightwatchers-app-store "Screenshot: WeightWatchers listing on the Apple App Store, retrieved November 2026.")
+![WeightWatchers app home screen showing daily Points beside a plated meal](shot-weightwatchers-app "Image: WeightWatchers app artwork from weightwatchers.com, captured November 2026.")
 
 ## 2. Lose It!: The Easiest Calorie Budget
 
@@ -76,7 +76,7 @@ It also has a feature called Professional Connect, which lets you share your dia
 
 **Choose MyNetDiary if** you want a full-featured food diary without paying.
 
-![MyNetDiary App Store listing showing barcode scanning and Meal Scan food logging](shot-mynetdiary-app-store "Screenshot: MyNetDiary listing on the Apple App Store, retrieved November 2026.")
+![MyNetDiary dashboard showing a calorie budget, meals and daily advice](shot-mynetdiary-app-dashboard "Image: MyNetDiary app dashboard from mynetdiary.com, captured November 2026.")
 
 ## When a Person Beats an App
 

@@ -37,7 +37,7 @@ Fitbod's help center lists two US plans: $15.99 a month or $95.99 a year, which 
 
 A cheaper logger can save money, but only if you don't need the app to plan for you. If you do, look for an alternative's guided or "generator" feature, which is usually the paid part.
 
-![Fitbod App Store listing showing a generated strength workout](shot-fitbod-app-store "Screenshot: Fitbod listing on the Apple App Store, retrieved November 2026.")
+![Fitbod app showing a back squat workout with logged sets and estimated strength](shot-fitbod-app-workout "Image: Fitbod app workout screens from fitbod.me, captured November 2026.")
 
 ## 1. Hevy: The Low-Cost All-Rounder
 
@@ -47,7 +47,7 @@ Hevy Pro costs $2.99 a month or $23.99 a year. It removes those limits and adds 
 
 **Choose Hevy if** you want free logging now and the option of guided plans later.
 
-![Hevy App Store artwork reading Log Workouts, Get Stronger, Stay Motivated](shot-hevy-app-store "Screenshot: Hevy listing on the Apple App Store, retrieved November 2026.")
+![Hevy app logging bench press and overhead press sets on iPhone and Apple Watch](shot-hevy-app-workout "Image: Hevy workout logging screens from hevyapp.com, captured November 2026.")
 
 ## 2. Strong: The Simplest Logger
 
