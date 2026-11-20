@@ -70,6 +70,8 @@ Fitness is one of those missing pieces. Our [average VO2 max by age](/fitness/av
 
 If you're tracking change, use the same method each time, under similar conditions. Avoid big health decisions based on one reading from a consumer device. A clinician can put your number in context with your history and other measures. To track activity alongside body changes, our [WHOOP vs Oura](/longevity-recovery/whoop-vs-oura/) comparison covers two popular wearables.
 
+Tracking at home? Our guide to the [best body composition scales](/fitness/best-body-composition-scales/) explains how far smart scale readings can drift from lab methods.
+
 ## FAQs
 
 ### What Is the Average Body Fat Percentage for Adults by Age?

@@ -10,7 +10,7 @@ slug: fitbod-alternatives
 image: fitbod-alternatives
 image_alt: A lifter checks a strength training app on her phone between sets in a gym
 published: 2026-11-21
-publish_time: "09:00"
+publish_time: "18:00"
 role: supporting
 draft: false
 ---

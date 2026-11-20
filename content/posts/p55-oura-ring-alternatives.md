@@ -10,7 +10,7 @@ slug: oura-ring-alternatives
 image: oura-ring-alternatives
 image_alt: A hand holding a black smart ring up to the light near a houseplant
 published: 2026-11-24
-publish_time: "11:00"
+publish_time: "20:00"
 role: supporting
 draft: false
 ---
@@ -79,7 +79,7 @@ That's a gap of about $410 between Oura and the Gen 2 Air over three years. Tota
 
 ## Do You Need a Ring at All?
 
-A smartwatch or a band also tracks sleep and heart rate, with a screen and better workout features. Rings win on comfort in bed and fewer distractions. If you're weighing a band instead, our [WHOOP vs Oura](/longevity-recovery/whoop-vs-oura/) comparison covers that choice.
+A smartwatch or a band also tracks sleep and heart rate, with a screen and better workout features. Rings win on comfort in bed and fewer distractions. If you're weighing a band instead, our [WHOOP vs Oura](/longevity-recovery/whoop-vs-oura/) comparison covers that choice. For screen-free bands without a membership, see our [WHOOP alternatives](/longevity-recovery/whoop-alternatives/) guide.
 
 ## What to Check Before You Buy
 

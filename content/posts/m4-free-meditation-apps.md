@@ -204,6 +204,8 @@ The links above are regular editorial links to providers and do not include affi
 
 Several free nonprofit apps have no commission programme, and that has not affected their inclusion. We choose free tools for reader suitability and verifiable access, not monetisation.
 
+If noise or heat is what keeps you awake, two related guides may help: the [best sleep headphones](/mind-sleep/best-sleep-headphones/) for side sleepers, and [Eight Sleep alternatives](/mind-sleep/eight-sleep-alternatives/) for cooling your bed.
+
 ## FAQs About Free Meditation Apps
 
 ### Are There Meditation Apps That Remain Free Forever?

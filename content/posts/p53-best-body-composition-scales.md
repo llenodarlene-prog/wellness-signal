@@ -10,7 +10,7 @@ slug: best-body-composition-scales
 image: best-body-composition-scales
 image_alt: A white smart scale with four metal electrodes next to a phone showing body composition charts
 published: 2026-11-23
-publish_time: "08:00"
+publish_time: "16:00"
 role: supporting
 draft: false
 ---

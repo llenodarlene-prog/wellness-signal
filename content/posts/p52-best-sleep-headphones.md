@@ -9,8 +9,8 @@ category: mind-sleep
 slug: best-sleep-headphones
 image: best-sleep-headphones
 image_alt: A woman sleeps on her side wearing a soft lavender headband with built-in headphones
-published: 2026-11-22
-publish_time: "19:00"
+published: 2026-11-23
+publish_time: "08:00"
 role: supporting
 draft: false
 ---
@@ -40,7 +40,7 @@ They don't have ANC. Ozlo says they use noise masking to reduce disruptions such
 
 ![Ozlo Sleepbuds 2 product page showing an exploded view of the small sleep earbud](shot-ozlo-sleepbuds-2-website "Screenshot: Ozlo Sleepbuds 2 product page, captured November 2026.")
 
-## 2. soundcore Sleep A30 Special: Best for Active Noise Cancelling
+## 2. Soundcore Sleep A30 Special: Best for Active Noise Cancelling
 
 The Sleep A30 Special combines ANC, passive isolation and snore masking guided by a microphone in the case. soundcore pitches it at people who need more than masking, such as for traffic or a partner's snoring. It also tracks sleep duration, position and snoring, and the Special edition includes selected Calm Sleep Stories.
 
@@ -50,7 +50,7 @@ Battery life depends heavily on settings. soundcore's FAQ gives 10 hours by defa
 
 ![soundcore Sleep A30 Special earbuds and charging case in lilac](shot-soundcore-sleep-a30-website "Screenshot: soundcore Sleep A30 Special product page, captured November 2026.")
 
-## 3. soundcore Sleep A20: Simpler Earbuds Without ANC
+## 3. Soundcore Sleep A20: Simpler Earbuds Without ANC
 
 The Sleep A20 is soundcore's lower-priced sleep earbud, at a $179.99 list price. It skips ANC. Instead, it uses twin-seal ear tips for passive blocking plus noise masking.
 

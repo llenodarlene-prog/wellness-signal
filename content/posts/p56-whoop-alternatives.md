@@ -9,8 +9,8 @@ category: longevity-recovery
 slug: whoop-alternatives
 image: whoop-alternatives
 image_alt: A woman fastens a black screen-free fitness band on her wrist outdoors
-published: 2026-11-24
-publish_time: "20:00"
+published: 2026-11-25
+publish_time: "09:00"
 role: supporting
 draft: false
 ---

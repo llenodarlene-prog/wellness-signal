@@ -10,7 +10,7 @@ slug: eight-sleep-alternatives
 image: eight-sleep-alternatives
 image_alt: A made bed with a cooling mattress cover and its control unit on a bedside table
 published: 2026-11-22
-publish_time: "10:00"
+publish_time: "19:00"
 role: supporting
 draft: false
 ---

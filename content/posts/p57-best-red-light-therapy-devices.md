@@ -10,7 +10,7 @@ slug: best-red-light-therapy-devices
 image: best-red-light-therapy-devices
 image_alt: A compact red light therapy panel glowing on a white bedside table
 published: 2026-11-25
-publish_time: "09:00"
+publish_time: "17:00"
 role: supporting
 draft: false
 ---
@@ -67,7 +67,7 @@ The Omnilux Contour Face is a flexible mask rather than a panel. Omnilux says it
 
 ## What FDA Cleared Really Means
 
-FDA clearance applies to a specific device for a specific use. Omnilux's clearance for wrinkles doesn't validate every claim about red light, and it doesn't mean a different brand's panel works the same way. The FDA has published a draft guidance on what makers should submit for photobiomodulation devices, including testing, clinical studies and labeling. If a seller makes a medical claim, ask which device was cleared and for exactly what use. Watch the wording, too: "FDA registered" usually means the company or device is listed with the FDA, which isn't the same as the FDA reviewing it for a specific use.
+FDA clearance applies to a specific device for a specific use. Omnilux's clearance for wrinkles doesn't validate every claim about red light, and it doesn't mean a different brand's panel works the same way. The FDA has published a draft guidance on what makers should submit for photobiomodulation devices, including testing, clinical studies and labeling. If a seller makes a medical claim, ask which device was cleared and for exactly what use. Watch the wording, too. Under federal rules (21 CFR 807.39), registering a device establishment with the FDA "does not in any way denote approval" of the establishment or its products.
 
 ## Panel Size Is Not the Same as Dose
 
@@ -113,4 +113,5 @@ The 2026 at-home LED review found side effects were infrequent, mild and short-l
 3. [FDA, *Photobiomodulation (PBM) Devices: Premarket Notification [510(k)] Submissions*, draft guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/photobiomodulation-pbm-devices-premarket-notification-510k-submissions). Testing, studies and labeling.
 4. [Hooga, *HG300*](https://hoogahealth.com/products/hooga-300w-red-and-near-infrared-light-therapy-panel). Wavelengths, irradiance, warranty and price.
 5. [Mito Red Light, *MitoMIN 2.0*](https://mitoredlight.com/products/mitomin). Wavelengths, irradiance and warranty.
-6. [Omnilux, *Contour Face*](https://omniluxled.com/products/omnilux-contour-face). FDA clearance, wavelengths, warranty and price.
+6. [21 CFR 807.39, *Misbranding by Reference to Establishment Registration*](https://www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-807/subpart-B/section-807.39). Registration does not denote approval.
+7. [Omnilux, *Contour Face*](https://omniluxled.com/products/omnilux-contour-face). FDA clearance, wavelengths, warranty and price.

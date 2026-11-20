@@ -9,8 +9,8 @@ category: wellness
 slug: noom-alternatives
 image: noom-alternatives
 image_alt: A phone showing a food tracking app beside a salad bowl, a glass of water and a notebook
-published: 2026-11-21
-publish_time: "18:00"
+published: 2026-11-22
+publish_time: "10:00"
 role: supporting
 draft: false
 ---

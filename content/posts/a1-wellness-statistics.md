@@ -196,6 +196,8 @@ Before using broad industry figures for planning, businesses should check the sc
 
 A useful market assessment often requires more than one dataset. Consumer surveys can indicate purchasing preferences, while industry statistics reveal broader commercial activity and scientific studies examine specific health outcomes.
 
+Much of that spending now goes through apps. Our guides compare [Noom alternatives](/wellness/noom-alternatives/) for coaching, [MyFitnessPal alternatives](/wellness/myfitnesspal-alternatives/) for food logging and the [best period tracker apps](/wellness/best-period-tracker-apps/) for privacy.
+
 ## FAQs About Wellness Statistics
 
 ### How Much Is the Global Wellness Industry Worth?

@@ -9,8 +9,8 @@ category: wellness
 slug: best-period-tracker-apps
 image: best-period-tracker-apps
 image_alt: A phone showing a period tracking calendar on a table with a notebook, pen and cup of tea
-published: 2026-11-23
-publish_time: "16:00"
+published: 2026-11-24
+publish_time: "11:00"
 role: supporting
 draft: false
 ---
@@ -58,7 +58,7 @@ The core app is free, with a paid Flo Premium plan for more features.
 
 ![Flo App Store listing showing period prediction, fertile days and symptom logging](shot-flo-app-store "Screenshot: Flo listing on the Apple App Store, retrieved November 2026.")
 
-## 4. drip: Your Data Never Leaves Your Phone
+## 4. Drip: Your Data Never Leaves Your Phone
 
 drip takes the strictest approach. Its website says everything you enter stays on your device. It's open source, so anyone can check how it works, and it shows how it calculates predictions instead of hiding them. You can track just your period or use the symptothermal method to track fertility signs. It's available on iPhone, Google Play and F-Droid.
 

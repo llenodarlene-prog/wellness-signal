@@ -245,6 +245,8 @@ A planner gets more valuable as it collects months of training. Before you commi
 
 Export doesn't feel exciting on day one. After two years of training history, it matters a lot. You can also check your progress against our [1 Rep Max Calculator](/one-rep-max-calculator/), which estimates working weights from any set.
 
+Leaving Fitbod specifically? Our [Fitbod alternatives](/fitness/fitbod-alternatives/) guide compares cheaper apps by what their free tiers include.
+
 ## FAQs
 
 ### What Is the Best Free Workout Planner App?
