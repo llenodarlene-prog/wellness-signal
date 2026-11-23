@@ -635,6 +635,125 @@
       };
     },
 
+    'lean-body-mass': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.weight > 0)) errors.weight = 'Enter your body weight.';
+      if (!(v.bf >= 0 && v.bf < 100)) errors.bf = 'Enter a body fat percentage from 0 to 99.';
+      if (Object.keys(errors).length) return { errors };
+      if (v.bf < 2 || v.bf > 70) return { errors: { bf: 'Check this value: body fat is rarely below 2% or above 70%.' } };
+      const r = C.leanMass(v.weight, v.bf);
+      const u = v.wunit, other = u === 'lb' ? 'kg' : 'lb';
+      const conv = x => (u === 'lb' ? x * C.LB : x / C.LB);
+      return {
+        hero: { icon: 'scale', value: `${num(r.lean, 1)} ${u}`, label: 'estimated lean body mass' },
+        rows: [
+          ['Lean body mass', `${num(r.lean, 1)} ${u} (${num(conv(r.lean), 1)} ${other})`],
+          ['Fat mass', `${num(r.fat, 1)} ${u} (${num(conv(r.fat), 1)} ${other})`, 'activity'],
+          ['Lean share of body weight', `${num(100 - v.bf, 1)}%`, 'gauge'],
+        ],
+        insight: `At ${num(v.weight, 1)} ${u} and ${num(v.bf, 1)}% body fat, about ${num(r.lean, 1)} ${u} is lean mass and ${num(r.fat, 1)} ${u} is fat.`,
+        note: 'Lean mass is not the same as muscle. It also includes bone, organs and water.',
+      };
+    },
+
+    'waist-hip': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.waist > 0)) errors.waist = 'Enter your waist measurement.';
+      if (!(v.hip > 0)) errors.hip = 'Enter your hip measurement.';
+      if (Object.keys(errors).length) return { errors };
+      const r = C.whr(v.waist, v.hip);
+      if (r < 0.5 || r > 1.5) return { errors: { waist: 'Check that waist and hips use the same unit.' } };
+      const cut = C.WHR_CUT[v.sex === 'male' ? 'male' : 'female'];
+      const high = r >= cut;
+      const u = v.unit === 'cm' ? 'cm' : 'in';
+      return {
+        hero: { icon: 'ruler', value: num(r, 2), label: high ? 'at or above the WHO cut-off' : 'below the WHO cut-off' },
+        rows: [
+          ['Waist-to-hip ratio', num(r, 2)],
+          [`WHO cut-off (${v.sex === 'male' ? 'men' : 'women'})`, num(cut, 2), 'flag'],
+          ['Waist at the cut-off for your hips', `${num(v.hip * cut, 1)} ${u}`, 'ruler-2'],
+        ],
+        range: { title: 'Waist-to-hip ratio vs the WHO cut-off', min: 0.6, max: 1.2, value: Math.min(1.2, Math.max(0.6, r)), fmt: n => num(n, 2), bands: [['Below cut-off', 0.6, cut], ['At or above', cut, 1.2]] },
+        insight: high
+          ? `A ratio of ${num(r, 2)} is at or above the WHO cut-off of ${num(cut, 2)}, which WHO links to a substantially increased risk of metabolic complications.`
+          : `A ratio of ${num(r, 2)} is below the WHO cut-off of ${num(cut, 2)} for ${v.sex === 'male' ? 'men' : 'women'}.`,
+      };
+    },
+
+    'navy-body-fat': v => {
+      const C = window.WSCore;
+      const errors = {};
+      for (const k of ['height', 'neck', 'waist']) if (!(v[k] > 0)) errors[k] = 'Enter this measurement.';
+      const female = v.sex === 'female';
+      if (female && !(v.hip > 0)) errors.hip = 'Enter your hip measurement.';
+      if (Object.keys(errors).length) return { errors };
+      const f = v.unit === 'cm' ? 1 / 2.54 : 1;
+      const m = { sex: v.sex, height: v.height * f, neck: v.neck * f, waist: v.waist * f, hip: (v.hip || 0) * f };
+      if (m.height < 48 || m.height > 90) return { errors: { height: 'Check your height and unit.' } };
+      if (!female && m.waist <= m.neck) return { errors: { waist: 'Waist must be larger than neck for this equation.' } };
+      const bf = C.navyBF(m);
+      if (!(bf > 2 && bf < 65)) return { errors: { waist: 'These measurements give an implausible result. Recheck each one and the unit.' } };
+      return {
+        hero: { icon: 'activity', value: `${num(bf, 1)}%`, label: 'estimated body fat (Navy method)' },
+        rows: [
+          ['Estimated body fat', `${num(bf, 1)}%`],
+          ['Equation', female ? 'Navy female (waist + hip − neck)' : 'Navy male (waist − neck)', 'flag'],
+          ['Measurements used', `height ${num(m.height, 1)} in, neck ${num(m.neck, 1)} in, waist ${num(m.waist, 1)} in${female ? `, hips ${num(m.hip, 1)} in` : ''}`, 'ruler-2'],
+        ],
+        insight: `The Navy circumference equation estimates your body fat at about ${num(bf, 1)}%. Enter it in the Lean Body Mass Calculator to split your weight into lean and fat mass.`,
+        note: 'Tape estimates can differ from DEXA by several percentage points. Re-measure with the same method to track change.',
+      };
+    },
+
+    'caffeine-intake': v => {
+      const C = window.WSCore;
+      const keys = ['coffee', 'blackTea', 'greenTea', 'soda', 'energy'];
+      const s = {};
+      for (const k of keys) s[k] = v[k] > 0 ? v[k] : 0;
+      const extra = v.extra > 0 ? v.extra : 0;
+      if (keys.every(k => !s[k]) && !extra) return { errors: { coffee: 'Add at least one drink or a label amount.' } };
+      const r = C.caffeine(s, extra);
+      const names = { coffee: 'Brewed coffee', blackTea: 'Black tea', greenTea: 'Green tea', soda: 'Caffeinated soda', energy: 'Energy drink' };
+      const mg = (a, b) => (a === b ? `${num(a, 0)} mg` : `${num(a, 0)} to ${num(b, 0)} mg`);
+      const rows = keys.filter(k => s[k]).map(k => [`${names[k]} × ${num(s[k], 1)}`, mg(C.CAFFEINE_12OZ[k][0] * s[k], C.CAFFEINE_12OZ[k][1] * s[k]), 'bolt']);
+      if (extra) rows.push(['From labels', `${num(extra, 0)} mg`, 'activity']);
+      const over = r.hi > 400;
+      return {
+        hero: { icon: 'bolt', value: r.lo === r.hi ? `${num(r.lo, 0)} mg` : `${num(r.lo, 0)}–${num(r.hi, 0)} mg`, label: 'estimated caffeine today' },
+        rows: [['Estimated total', mg(r.lo, r.hi)], ...rows, ['FDA reference for most adults', '400 mg a day', 'flag']],
+        range: { title: 'Upper estimate vs the FDA’s 400 mg reference', min: 0, max: 800, value: Math.min(800, r.hi), fmt: n => `${num(n, 0)} mg`, bands: [['Under 400 mg', 0, 400], ['Over 400 mg', 400, 800]] },
+        insight: over
+          ? `Your drinks add up to ${mg(r.lo, r.hi)}. The upper end is above the 400 mg a day the FDA cites for most adults.`
+          : `Your drinks add up to ${mg(r.lo, r.hi)}, within the 400 mg a day the FDA cites for most adults.`,
+        note: 'Brewed coffee varies most. Check labels where you can and enter exact amounts under Other.',
+      };
+    },
+
+    'walking-time': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.distance > 0)) errors.distance = 'Enter a distance greater than zero.';
+      if (!(v.speed > 0)) errors.speed = 'Enter a walking speed greater than zero.';
+      if (Object.keys(errors).length) return { errors };
+      const mi = v.dunit === 'km' ? v.distance / 1.609344 : v.distance;
+      const brk = v.breaks > 0 ? v.breaks : 0;
+      const t = C.walkMinutes(mi, v.speed, brk);
+      const at = s => fmtDur(C.walkMinutes(mi, s, brk));
+      return {
+        hero: { icon: 'clock', value: fmtDur(t), label: 'estimated walking time' },
+        rows: [
+          ['Total time', fmtDur(t)],
+          ['Moving time', fmtDur(t - brk), 'walk'],
+          ['Pace', `${fmtDur(60 / v.speed)} per mile (${fmtDur(60 / (v.speed * 1.609344))} per km)`, 'stopwatch'],
+          ['At 2.5 mph (CDC brisk threshold)', at(2.5), 'gauge'],
+          ['At 3.5 mph', at(3.5), 'gauge'],
+        ],
+        insight: `Walking ${num(v.distance, 1)} ${v.dunit === 'km' ? 'km' : 'miles'} at ${num(v.speed, 1)} mph takes about ${fmtDur(t - brk)}${brk ? `, or ${fmtDur(t)} with ${num(brk, 0)} minutes of breaks` : ''}.`,
+      };
+    },
+
     'steps-to-miles': v => {
       const errors = {};
       if (!(v.steps > 0)) errors.steps = 'Enter a step count greater than zero.';
