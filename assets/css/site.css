@@ -625,7 +625,7 @@ table { width: 100%; border-collapse: collapse; }
 .calc-input:focus-within { border-color: var(--ws-forest); background: var(--ws-white); box-shadow: 0 0 0 4px rgba(31, 107, 79, .14); }
 .calc-field-icon { color: var(--ws-forest); width: 20px; height: 20px; margin-right: 6px; }
 .calc-prefix { color: var(--ws-muted); font-weight: 600; }
-.calc input[type=number], .calc select { width: 100%; font: 500 17px/1.4 var(--sans); color: var(--ws-charcoal); background: transparent; border: 0; padding: 11px 12px 11px 4px; border-radius: 14px; min-height: 48px; font-variant-numeric: tabular-nums; }
+.calc input[type=number], .calc input[type=date], .calc select { width: 100%; font: 500 17px/1.4 var(--sans); color: var(--ws-charcoal); background: transparent; border: 0; padding: 11px 12px 11px 4px; border-radius: 14px; min-height: 48px; font-variant-numeric: tabular-nums; }
 .calc select { cursor: pointer; }
 .calc input:focus-visible, .calc select:focus-visible { outline: none; }
 .calc-input:has([aria-invalid="true"]) { border-color: var(--ws-terracotta-text); background: #FBF1EE; }
