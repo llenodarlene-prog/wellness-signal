@@ -77,4 +77,29 @@ near(C.acsmWalk(80.4672, 0.05), 8.04672 + 1.8 * 80.4672 * 0.05 + 3.5, 1e-9, 'wal
 near(C.acsmRun(160.9344, 0.01), 0.2 * 160.9344 + 0.9 * 160.9344 * 0.01 + 3.5, 1e-9, 'run 1%');
 near(C.kcalPerMin(10, 70), 3.5, 1e-12, 'kcal/min');
 
+
+// Lean body mass: 180 lb at 25% fat -> 135 lb lean, 45 lb fat
+let lb = C.leanMass(180, 25); near(lb.lean, 135, 1e-9, 'lean'); near(lb.fat, 45, 1e-9, 'fat');
+near(C.leanMass(70, 0).lean, 70, 0, 'bf 0');
+throws(() => C.leanMass(70, 100), 'bf 100'); throws(() => C.leanMass(70, -1), 'bf negative');
+
+// Waist-to-hip ratio: 32 / 40 = 0.8
+near(C.whr(32, 40), 0.8, 1e-12, 'whr'); near(C.WHR_CUT.male, 0.9, 0); near(C.WHR_CUT.female, 0.85, 0);
+
+// Navy, man: height 70, neck 15, abdomen 34 -> 86.010*log10(19) - 70.041*log10(70) + 36.76
+near(C.navyBF({ sex: 'male', height: 70, neck: 15, waist: 34 }), 86.010 * Math.log10(19) - 70.041 * Math.log10(70) + 36.76, 1e-9, 'navy male');
+near(C.navyBF({ sex: 'male', height: 70, neck: 15, waist: 34 }), 17.513, 1e-3, 'navy male value'); // by hand: 86.010*1.27875 - 70.041*1.84510 + 36.76 = 109.986 - 129.233 + 36.76
+// Navy, woman: height 64, neck 13, waist 28, hip 38 -> 163.205*log10(53) - 97.684*log10(64) - 78.387
+near(C.navyBF({ sex: 'female', height: 64, neck: 13, waist: 28, hip: 38 }), 163.205 * Math.log10(53) - 97.684 * Math.log10(64) - 78.387, 1e-9, 'navy female');
+near(C.navyBF({ sex: 'female', height: 64, neck: 13, waist: 28, hip: 38 }), 26.589, 1e-3, 'navy female value'); // 163.205*1.72428 - 97.684*1.80618 - 78.387
+throws(() => C.navyBF({ sex: 'male', height: 70, neck: 16, waist: 15 }), 'neck > waist');
+
+// Caffeine: 2 coffees + 1 black tea -> 2*113+71 = 297 to 2*247+71 = 565; plus 80 mg label
+let cf = C.caffeine({ coffee: 2, blackTea: 1 }, 80); near(cf.lo, 377, 0, 'caf lo'); near(cf.hi, 645, 0, 'caf hi');
+near(C.caffeine({}).hi, 0, 0, 'caf none'); throws(() => C.caffeine({ latte: 1 }), 'unknown drink');
+
+// Walking: 3 miles at 3 mph = 60 min; 5 km at 4 km/h + 10 min break = 85 min
+near(C.walkMinutes(3, 3), 60, 1e-12, 'walk'); near(C.walkMinutes(5, 4, 10), 85, 1e-12, 'walk break');
+throws(() => C.walkMinutes(3, 0), 'zero speed');
+
 console.log(`Calculator core tests passed (${n} assertions).`);

@@ -9,6 +9,9 @@
 // - 21 CFR 101.9(c)(1)(i)(B): general factors 4, 4 and 9 kcal per gram
 // - RDA 0.8 g/kg protein (Wolfe & Cifelli, Adv Nutr 2017, PMC5347101)
 // - Jager R et al., ISSN position stand: protein and exercise, 2017 (PMID 28642676)
+// - WHO, Waist Circumference and Waist-Hip Ratio, Expert Consultation 2008 (cut-offs 0.90 M, 0.85 W)
+// - Hodgdon JA, Beckett MB 1984 Navy circumference equations, as given in PMC10282178 and PMC9008774
+// - FDA, Spilling the Beans: How Much Caffeine Is Too Much? (12 fl oz typical amounts)
 (function (root) {
   const LB = 0.45359237;
   const IN = 2.54;
@@ -76,7 +79,55 @@
   const kcalPerMin = (vo2, kg) => vo2 * kg / 1000 * 5;
   const mphToMpm = mph => mph * MI / 60;
 
-  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm };
+
+  // Lean body mass from a known body fat percentage. Lean mass is everything that
+  // is not fat (muscle, bone, organs, water), not muscle alone.
+  const leanMass = (kg, bfPct) => {
+    if (!(bfPct >= 0 && bfPct < 100)) throw new Error('body fat must be 0 to under 100');
+    return { lean: kg * (1 - bfPct / 100), fat: kg * bfPct / 100 };
+  };
+
+  // Waist-to-hip ratio and WHO 2008 cut-offs for substantially increased risk.
+  const whr = (waist, hip) => waist / hip;
+  const WHR_CUT = { male: 0.90, female: 0.85 };
+
+  // US Navy circumference equations (Hodgdon & Beckett 1984), all lengths in inches.
+  // Men: abdomen at the navel. Women: waist at its narrowest plus hips at the widest.
+  const navyBF = ({ sex, height, neck, waist, hip }) => {
+    const L = Math.log10;
+    if (sex === 'female') {
+      const x = waist + hip - neck;
+      if (!(x > 0)) throw new Error('waist + hip must exceed neck');
+      return 163.205 * L(x) - 97.684 * L(height) - 78.387;
+    }
+    const x = waist - neck;
+    if (!(x > 0)) throw new Error('waist must exceed neck');
+    return 86.010 * L(x) - 70.041 * L(height) + 36.76;
+  };
+
+  // FDA typical caffeine per 12 fl oz (mg), low and high (FDA consumer update).
+  const CAFFEINE_12OZ = {
+    coffee: [113, 247], blackTea: [71, 71], greenTea: [37, 37], soda: [23, 83], energy: [41, 246],
+  };
+  // servings: { key: number of 12 fl oz servings }, extraMg: exact mg from labels.
+  const caffeine = (servings, extraMg = 0) => {
+    let lo = extraMg, hi = extraMg;
+    for (const [k, n] of Object.entries(servings)) {
+      const r = CAFFEINE_12OZ[k];
+      if (!r) throw new Error(`unknown drink ${k}`);
+      if (!(n >= 0)) throw new Error('servings must be 0 or more');
+      lo += r[0] * n; hi += r[1] * n;
+    }
+    return { lo, hi };
+  };
+
+  // Walking time in minutes: distance ÷ speed (same distance unit per hour) plus breaks.
+  const walkMinutes = (distance, speedPerHour, breakMin = 0) => {
+    if (!(speedPerHour > 0)) throw new Error('speed must be above zero');
+    return distance / speedPerHour * 60 + breakMin;
+  };
+
+  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm, leanMass, whr, WHR_CUT, navyBF, CAFFEINE_12OZ, caffeine, walkMinutes };
   root.WSCore = core;
   if (typeof module !== 'undefined' && module.exports) module.exports = core;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
