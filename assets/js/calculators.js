@@ -874,6 +874,120 @@
       };
     },
 
+    'net-carb': v => {
+      const C = window.WSCore;
+      const us = v.label !== 'eu';
+      const errors = {};
+      if (!(v.total >= 0) || v.total === null) errors.total = 'Enter the carbohydrate grams from the label.';
+      if (us && v.fiber != null && v.fiber < 0) errors.fiber = 'Fiber cannot be negative.';
+      if (Object.keys(errors).length) return { errors };
+      const fiber = us ? (v.fiber || 0) : 0, poly = v.polyols || 0, sub = v.subpoly !== 'no';
+      if (us && fiber + (sub ? poly : 0) > v.total + 0.5) return { errors: { fiber: 'On a US label, fiber and sugar alcohols are part of total carbohydrate, so they cannot exceed it. Check the figures.' } };
+      const r = C.netCarbs({ total: v.total, fiber, polyols: poly, label: us ? 'us' : 'eu', subtractPolyols: sub });
+      const rows = [['Net carbs', `${num(r.net, 1)} g`], [us ? 'Total carbohydrate' : 'Carbohydrate', `${num(v.total, 1)} g`, 'salad']];
+      if (us) rows.push(['Minus dietary fiber', `${num(fiber, 1)} g`, 'salad']);
+      if (poly) rows.push([sub ? 'Minus sugar alcohols' : 'Sugar alcohols (not subtracted)', `${num(poly, 1)} g`, 'activity']);
+      return {
+        hero: { icon: 'salad', value: `${num(r.net, 1)} g`, label: 'net carbs per serving' },
+        rows,
+        insight: us
+          ? `${num(v.total, 1)} g total carbohydrate minus ${num(fiber, 1)} g fiber${sub && poly ? ` and ${num(poly, 1)} g sugar alcohols` : ''} leaves ${num(r.net, 1)} g net carbs.`
+          : `On an EU or UK label, fiber is already excluded from carbohydrate, so ${num(v.total, 1)} g${sub && poly ? ` minus ${num(poly, 1)} g polyols` : ''} leaves ${num(r.net, 1)} g net carbs.`,
+        note: r.raw < 0 ? 'The figures would give a negative result, so it is shown as 0. Check the label.' : 'Net carbs is not a legal label term, so brands calculate it in different ways.',
+      };
+    },
+
+    'mets': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.met >= 1 && v.met <= 25)) errors.met = 'Enter a MET value from 1 to 25.';
+      if (!(v.minutes > 0)) errors.minutes = 'Enter a duration.';
+      if (Object.keys(errors).length) return { errors };
+      const mm = C.metMinutes(v.met, v.minutes), band = C.metBand(v.met);
+      const rows = [['MET-minutes', num(mm, 0)], ['Intensity', band[0].toUpperCase() + band.slice(1), 'gauge']];
+      let ins = `${num(v.minutes, 0)} minutes at ${num(v.met, 1)} METs is ${num(mm, 0)} MET-minutes of ${band}-intensity activity.`;
+      if (v.weight > 0) {
+        const kg = C.toKg(v.weight, v.wunit), kcal = C.metKcal(v.met, kg, v.minutes);
+        rows.push(['Estimated calories', `${num(kcal, 0)} kcal`, 'flame']);
+        ins += ` At ${num(v.weight, 0)} ${v.wunit}, that is about ${num(kcal, 0)} calories.`;
+      }
+      return {
+        hero: { icon: 'gauge', value: num(mm, 0), label: `MET-minutes · ${band} intensity` },
+        rows,
+        range: { title: 'Intensity by MET value', min: 1, max: 12, value: Math.min(12, v.met), fmt: n => `${num(n, 1)} METs`, bands: [['Light', 1, 3], ['Moderate', 3, 6], ['Vigorous', 6, 12]] },
+        insight: ins,
+      };
+    },
+
+    'intermittent-fasting': v => {
+      const C = window.WSCore;
+      const st = parseClock(v.start);
+      if (st === null) return { errors: { start: 'Enter the time your fast starts.' } };
+      const h = v.plan === 'custom' ? v.hours : Number(v.plan);
+      if (!(h >= 1 && h <= 72)) return { errors: { hours: 'Enter fasting hours from 1 to 72.' } };
+      const end = C.addClock(st, h * 60);
+      const day = d => (d === 0 ? 'same day' : d === 1 ? 'next day' : `${d} days later`);
+      const rows = [['Fast ends', `${fmtClock(end.min)} (${day(end.dayOffset)})`], ['Fasting length', `${num(h, 1)} hours`, 'clock']];
+      let ins = `Starting at ${fmtClock(st)}, a ${num(h, 1)}-hour fast ends at ${fmtClock(end.min)} ${end.dayOffset > 1 ? day(end.dayOffset) : `the ${day(end.dayOffset)}`}.`;
+      if (h < 24) {
+        const w = 24 - h;
+        rows.push(['Eating window', `${fmtClock(end.min)} to ${fmtClock(st)} (${num(w, 1)} hours)`, 'clock']);
+        ins += ` On a daily schedule, your eating window runs ${fmtClock(end.min)} to ${fmtClock(st)}.`;
+      }
+      return {
+        hero: { icon: 'clock', value: fmtClock(end.min), label: `fast ends, ${day(end.dayOffset)}` },
+        rows, insight: ins,
+        note: h > 24 ? 'Fasts longer than a day should be discussed with a clinician first.' : 'Not suitable for everyone. Check with a doctor if you are pregnant, take diabetes medicines or have had an eating disorder.',
+      };
+    },
+
+    'hiking-time': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.distance > 0)) errors.distance = 'Enter the trail distance.';
+      if (!(v.ascent >= 0) || v.ascent === null) errors.ascent = 'Enter the total elevation gain, or 0.';
+      if (Object.keys(errors).length) return { errors };
+      const imp = v.units !== 'metric';
+      const km = imp ? v.distance * 1.609344 : v.distance, m = imp ? v.ascent * 0.3048 : v.ascent;
+      const base = Number(v.pace) || 5, brk = v.breaks > 0 ? v.breaks : 0;
+      const flat = km / base * 60, climb = m / 600 * 60, total = flat + climb + brk;
+      return {
+        hero: { icon: 'clock', value: fmtDur(total), label: 'estimated hiking time' },
+        rows: [
+          ['Total time', fmtDur(total)],
+          ['Walking the distance', fmtDur(flat), 'route'],
+          ['Added for the climb', fmtDur(climb), 'trending-up'],
+          ['Breaks', fmtDur(brk), 'clock'],
+        ],
+        insight: `By Naismith’s rule, ${num(v.distance, 1)} ${imp ? 'miles' : 'km'} with ${num(v.ascent, 0)} ${imp ? 'feet' : 'm'} of climbing takes about ${fmtDur(flat + climb)} of walking${brk ? `, or ${fmtDur(total)} with breaks` : ''}.`,
+        note: 'Naismith’s rule adds no time for steep descents. Allow extra time on rough or steep ground.',
+      };
+    },
+
+    'heart-rate-recovery': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.peak >= 60 && v.peak <= 230)) errors.peak = 'Enter a peak heart rate from 60 to 230 bpm.';
+      if (!(v.after >= 40 && v.after <= 230)) errors.after = 'Enter your heart rate one minute after stopping.';
+      if (Object.keys(errors).length) return { errors };
+      const r = C.hrr(v.peak, v.after);
+      if (r < 0) return { errors: { after: 'Your one-minute heart rate is higher than your peak. Check the readings.' } };
+      const low = r <= C.HRR_ABNORMAL;
+      return {
+        hero: { icon: 'heartbeat', value: `${num(r, 0)} bpm`, label: 'heart rate recovery in 1 minute' },
+        rows: [
+          ['Heart rate recovery', `${num(r, 0)} bpm`],
+          ['Cut-off in Cole et al. 1999', '12 bpm or less defined as abnormal', 'flag'],
+          ['Drop as a share of peak', `${num(r / v.peak * 100, 0)}%`, 'gauge'],
+        ],
+        range: { title: 'One-minute recovery vs the 12 bpm research cut-off', min: 0, max: 60, value: Math.min(60, r), fmt: n => `${num(n, 0)} bpm`, bands: [['12 or less', 0, 12.5], ['Above 12', 12.5, 60]] },
+        insight: low
+          ? `Your heart rate dropped ${num(r, 0)} bpm in the first minute. In the 1999 NEJM study, a drop of 12 bpm or less was defined as abnormal. Consider discussing it with a clinician, especially if this is repeatable.`
+          : `Your heart rate dropped ${num(r, 0)} bpm in the first minute, above the 12 bpm cut-off used in the 1999 NEJM study.`,
+        note: 'Readings depend on how hard you worked and whether you kept moving. Measure the same way each time.',
+      };
+    },
+
     'steps-to-miles': v => {
       const errors = {};
       if (!(v.steps > 0)) errors.steps = 'Enter a step count greater than zero.';

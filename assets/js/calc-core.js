@@ -15,6 +15,10 @@
 // - Fiber AI 14 g/1,000 kcal; 25/38 g (19-50), 21/30 g (51+), as given in PMC9043041
 // - Caffeine half-life about 3 to 7 h (PMC13414015) or 4 to 6 h in many adults (PMC13278887)
 // - Pandolf KB et al. 1977 load carriage equation, as given in PMC4511810
+// - 21 CFR 101.9(c)(6) and EU Regulation 1169/2011 Annex I (carbohydrate, fibre, polyols)
+// - Herrmann SD et al., 2024 Adult Compendium of Physical Activities (PMC10818145)
+// - Naismith's rule as quoted in Wood et al. 2023 (arXiv:2303.16065)
+// - Cole CR et al., NEJM 1999 (PMID 10536127): heart rate recovery
 // - FDA, Spilling the Beans: How Much Caffeine Is Too Much? (12 fl oz typical amounts)
 (function (root) {
   const LB = 0.45359237;
@@ -179,7 +183,30 @@
     1.5 * W + 2.0 * (W + L) * Math.pow(L / W, 2) + eta * (W + L) * (1.5 * V * V + 0.35 * V * G);
   const wattsToKcalPerHour = w => w * 3600 / 4184;
 
-  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm, leanMass, whr, WHR_CUT, navyBF, CAFFEINE_12OZ, caffeine, walkMinutes, addDays, daysBetween, periodDates, FIGO_CYCLE, FIBER_AI, fiberByKcal, remaining, YD, toMeters, per100, pandolf, wattsToKcalPerHour };
+
+  // Net carbs: no legal definition. US labels include fiber and sugar alcohols in total
+  // carbohydrate (21 CFR 101.9); EU labels list fiber separately but include polyols (Reg. 1169/2011).
+  const netCarbs = ({ total, fiber = 0, polyols = 0, label = 'us', subtractPolyols = true }) => {
+    let net = total - (label === 'us' ? fiber : 0) - (subtractPolyols ? polyols : 0);
+    return { net: Math.max(0, net), raw: net };
+  };
+
+  // METs (2024 Adult Compendium): 1 MET = 3.5 mL O2/kg/min, about 1 kcal/kg/h.
+  const metMinutes = (met, minutes) => met * minutes;
+  const metKcal = (met, kg, minutes) => met * kg * minutes / 60;
+  const metBand = met => (met < 3 ? 'light' : met < 6 ? 'moderate' : 'vigorous');
+
+  // Naismith's rule: 1 h per 5 km (3 mi) plus 1 h per 600 m (2,000 ft) of ascent. Minutes.
+  const naismith = (km, ascentM, baseKmh = 5, mPerHour = 600) => (km / baseKmh + ascentM / mPerHour) * 60;
+
+  // Heart rate recovery: peak HR minus HR one minute after stopping (Cole et al. 1999).
+  const hrr = (peak, after) => peak - after;
+  const HRR_ABNORMAL = 12; // 12 bpm or less was defined as abnormal
+
+  // Clock arithmetic in minutes since midnight; returns { min, dayOffset }.
+  const addClock = (startMin, addMin) => ({ min: ((startMin + addMin) % 1440 + 1440) % 1440, dayOffset: Math.floor((startMin + addMin) / 1440) });
+
+  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm, leanMass, whr, WHR_CUT, navyBF, CAFFEINE_12OZ, caffeine, walkMinutes, addDays, daysBetween, periodDates, FIGO_CYCLE, FIBER_AI, fiberByKcal, remaining, YD, toMeters, per100, pandolf, wattsToKcalPerHour, netCarbs, metMinutes, metKcal, metBand, naismith, hrr, HRR_ABNORMAL, addClock };
   root.WSCore = core;
   if (typeof module !== 'undefined' && module.exports) module.exports = core;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

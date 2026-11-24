@@ -129,4 +129,25 @@ near(C.pandolf({ W: 80, L: 20, V: 1.34, G: 0 }), 401.84, 1e-9, 'pandolf flat');
 near(C.pandolf({ W: 80, L: 20, V: 1.34, G: 5 }), 636.34, 1e-9, 'pandolf grade');
 near(C.wattsToKcalPerHour(4184 / 3.6), 1000, 1e-9, 'W to kcal/h');
 
+
+// Net carbs: US 30 total - 10 fiber - 8 polyols = 12; EU 20 carbs - 8 polyols = 12; floor at 0
+near(C.netCarbs({ total: 30, fiber: 10, polyols: 8 }).net, 12, 0, 'net us');
+near(C.netCarbs({ total: 30, fiber: 10, polyols: 8, subtractPolyols: false }).net, 20, 0, 'net us keep polyols');
+near(C.netCarbs({ total: 20, fiber: 10, polyols: 8, label: 'eu' }).net, 12, 0, 'net eu');
+near(C.netCarbs({ total: 5, fiber: 6 }).net, 0, 0, 'net floor'); near(C.netCarbs({ total: 5, fiber: 6 }).raw, -1, 0, 'net raw');
+
+// METs: 4 MET x 30 min = 120 MET-min; 70 kg -> 140 kcal
+near(C.metMinutes(4, 30), 120, 0, 'met-min'); near(C.metKcal(4, 70, 30), 140, 1e-12, 'met kcal');
+if (C.metBand(2.9) !== 'light' || C.metBand(3) !== 'moderate' || C.metBand(6) !== 'vigorous') throw new Error('metBand'); n++;
+
+// Naismith: 10 km + 600 m = 2 h + 1 h = 180 min; 9 mi (14.484 km) + 2,000 ft (609.6 m) -> 3 h + 1.016 h
+near(C.naismith(10, 600), 180, 1e-9, 'naismith');
+near(C.naismith(9 * 1.609344, 2000 * 0.3048), (9 * 1.609344 / 5 + 609.6 / 600) * 60, 1e-9, 'naismith imperial');
+
+// HRR: 160 - 140 = 20; cut-off 12
+near(C.hrr(160, 140), 20, 0, 'hrr'); near(C.HRR_ABNORMAL, 12, 0);
+
+// Clock: 20:00 + 16 h = 12:00 next day
+let ck = C.addClock(20 * 60, 16 * 60); near(ck.min, 720, 0, 'clock'); near(ck.dayOffset, 1, 0, 'clock day');
+
 console.log(`Calculator core tests passed (${n} assertions).`);
