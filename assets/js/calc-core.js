@@ -11,6 +11,10 @@
 // - Jager R et al., ISSN position stand: protein and exercise, 2017 (PMID 28642676)
 // - WHO, Waist Circumference and Waist-Hip Ratio, Expert Consultation 2008 (cut-offs 0.90 M, 0.85 W)
 // - Hodgdon JA, Beckett MB 1984 Navy circumference equations, as given in PMC10282178 and PMC9008774
+// - Munro MG et al., FIGO 2018 normal uterine bleeding (PMID 30198563): cycles 24 to 38 days
+// - Fiber AI 14 g/1,000 kcal; 25/38 g (19-50), 21/30 g (51+), as given in PMC9043041
+// - Caffeine half-life about 3 to 7 h (PMC13414015) or 4 to 6 h in many adults (PMC13278887)
+// - Pandolf KB et al. 1977 load carriage equation, as given in PMC4511810
 // - FDA, Spilling the Beans: How Much Caffeine Is Too Much? (12 fl oz typical amounts)
 (function (root) {
   const LB = 0.45359237;
@@ -127,7 +131,55 @@
     return distance / speedPerHour * 60 + breakMin;
   };
 
-  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm, leanMass, whr, WHR_CUT, navyBF, CAFFEINE_12OZ, caffeine, walkMinutes };
+
+  // Calendar arithmetic on ISO dates (YYYY-MM-DD) in UTC, so daylight saving never shifts a day.
+  const addDays = (iso, n) => {
+    const [y, m, d] = iso.split('-').map(Number);
+    const t = new Date(Date.UTC(y, m - 1, d + n));
+    return t.toISOString().slice(0, 10);
+  };
+  const daysBetween = (a, b) => {
+    const p = s => { const [y, m, d] = s.split('-').map(Number); return Date.UTC(y, m - 1, d); };
+    return Math.round((p(b) - p(a)) / 86400000);
+  };
+  // Predicted period starts: last start + k × cycle length, each with ± variation days.
+  const periodDates = (lastStart, cycle, variation = 0, count = 3) => {
+    if (!(cycle >= 15 && cycle <= 90)) throw new Error('cycle length out of range');
+    return Array.from({ length: count }, (_, i) => {
+      const k = i + 1;
+      return { date: addDays(lastStart, cycle * k), earliest: addDays(lastStart, cycle * k - variation), latest: addDays(lastStart, cycle * k + variation) };
+    });
+  };
+  // FIGO 2018: regular cycles are 24 to 38 days long.
+  const FIGO_CYCLE = { lo: 24, hi: 38 };
+
+  // Dietary fiber Adequate Intakes for adults (g/day) and the 14 g per 1,000 kcal basis.
+  const FIBER_AI = { female: { '19-50': 25, '51+': 21 }, male: { '19-50': 38, '51+': 30 } };
+  const fiberByKcal = kcal => 14 * kcal / 1000;
+
+  // First-order elimination: amount left = dose × 0.5^(hours ÷ half-life).
+  const remaining = (dose, hours, halfLife) => {
+    if (!(halfLife > 0)) throw new Error('half-life must be above zero');
+    return dose * Math.pow(0.5, hours / halfLife);
+  };
+
+  // Swim pace. 1 yard = 0.9144 m exactly (NIST).
+  const YD = 0.9144;
+  const toMeters = (d, unit) => (unit === 'yd' ? d * YD : d);
+  // Seconds per 100 of the chosen unit.
+  const per100 = (seconds, distance, unit, outUnit) => {
+    const m = toMeters(distance, unit);
+    const out = outUnit === 'yd' ? m / YD : m;
+    return seconds / out * 100;
+  };
+
+  // Pandolf et al. 1977 load-carriage equation, metabolic rate in watts.
+  // W body mass kg, L load kg, V speed m/s, G grade %, eta terrain factor (1.0 blacktop or treadmill).
+  const pandolf = ({ W, L, V, G = 0, eta = 1 }) =>
+    1.5 * W + 2.0 * (W + L) * Math.pow(L / W, 2) + eta * (W + L) * (1.5 * V * V + 0.35 * V * G);
+  const wattsToKcalPerHour = w => w * 3600 / 4184;
+
+  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm, leanMass, whr, WHR_CUT, navyBF, CAFFEINE_12OZ, caffeine, walkMinutes, addDays, daysBetween, periodDates, FIGO_CYCLE, FIBER_AI, fiberByKcal, remaining, YD, toMeters, per100, pandolf, wattsToKcalPerHour };
   root.WSCore = core;
   if (typeof module !== 'undefined' && module.exports) module.exports = core;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

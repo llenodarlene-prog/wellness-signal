@@ -22,6 +22,9 @@ const field = (id, input) => {
   } else if (input.type === 'time' || input.type === 'clock') {
     // 'time' is a duration typed as h:mm:ss or mm:ss; 'clock' is a time of day.
     control = `<span class="calc-input">${ti(input.icon, 'calc-field-icon')}<input id="${fid}" name="${input.name}" ${input.type === 'clock' ? 'type="time"' : `type="text" inputmode="numeric" placeholder="${esc(input.placeholder || 'mm:ss')}" autocomplete="off"`}${input.value !== undefined ? ` value="${esc(input.value)}"` : ''}${input.required ? ' required' : ''}${described}></span>`;
+  } else if (input.type === 'date') {
+    // Example dates are filled in the browser relative to today (data-offset days), so they never go stale.
+    control = `<span class="calc-input">${ti(input.icon, 'calc-field-icon')}<input id="${fid}" name="${input.name}" type="date"${input.offset !== undefined ? ` data-offset="${input.offset}"` : ''}${input.required ? ' required' : ''}${described}></span>`;
   } else if (input.type === 'stepper') {
     control = `<span class="calc-input calc-stepper">${ti(input.icon, 'calc-field-icon')}<button type="button" class="calc-step" data-step="-1" aria-label="Decrease ${esc(input.label)}">${ti('minus')}</button>${numberBox(fid, input, described)}${input.suffix ? `<span class="calc-suffix" aria-hidden="true">${esc(input.suffix)}</span>` : ''}<button type="button" class="calc-step" data-step="1" aria-label="Increase ${esc(input.label)}">${ti('plus')}</button></span>`;
   } else {

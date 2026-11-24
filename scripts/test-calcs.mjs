@@ -102,4 +102,31 @@ near(C.caffeine({}).hi, 0, 0, 'caf none'); throws(() => C.caffeine({ latte: 1 })
 near(C.walkMinutes(3, 3), 60, 1e-12, 'walk'); near(C.walkMinutes(5, 4, 10), 85, 1e-12, 'walk break');
 throws(() => C.walkMinutes(3, 0), 'zero speed');
 
+
+// Dates: across a month end, a leap day and the US DST change
+near(C.daysBetween('2026-11-01', '2026-11-29'), 28, 0, 'days');
+if (C.addDays('2026-01-25', 28) !== '2026-02-22') throw new Error('addDays month'); n++;
+if (C.addDays('2028-02-20', 10) !== '2028-03-01') throw new Error('addDays leap'); n++;
+if (C.addDays('2026-03-01', 28) !== '2026-03-29') throw new Error('addDays dst'); n++;
+let pd = C.periodDates('2026-11-01', 28, 3, 3);
+if (pd[0].date !== '2026-11-29' || pd[0].earliest !== '2026-11-26' || pd[0].latest !== '2026-12-02' || pd[2].date !== '2027-01-24') throw new Error('periodDates'); n++;
+throws(() => C.periodDates('2026-11-01', 10), 'cycle too short');
+
+// Fiber: 2,000 kcal -> 28 g; AI table
+near(C.fiberByKcal(2000), 28, 1e-12, 'fiber kcal'); near(C.FIBER_AI.male['19-50'], 38, 0); near(C.FIBER_AI.female['51+'], 21, 0);
+
+// Caffeine half-life: 200 mg, 10 h, 5 h half-life -> 50 mg
+near(C.remaining(200, 10, 5), 50, 1e-12, 'half-life'); near(C.remaining(200, 0, 5), 200, 0, 't0');
+throws(() => C.remaining(200, 5, 0), 'zero half-life');
+
+// Swim: 1,000 yd in 20:00 -> per 100 yd 120 s; per 100 m 120 / 0.9144 = 131.234 s
+near(C.per100(1200, 1000, 'yd', 'yd'), 120, 1e-9, 'swim yd'); near(C.per100(1200, 1000, 'yd', 'm'), 120 / 0.9144, 1e-9, 'swim yd->m');
+near(C.per100(1500, 1500, 'm', 'm'), 100, 1e-12, 'swim m');
+
+// Pandolf: W 80, L 20, V 1.34, G 0 -> 120 + 2*100*0.0625 + 100*1.5*1.7956 = 120 + 12.5 + 269.34 = 401.84 W
+near(C.pandolf({ W: 80, L: 20, V: 1.34, G: 0 }), 401.84, 1e-9, 'pandolf flat');
+// add 5% grade: + 100*0.35*1.34*5 = 234.5 -> 636.34 W
+near(C.pandolf({ W: 80, L: 20, V: 1.34, G: 5 }), 636.34, 1e-9, 'pandolf grade');
+near(C.wattsToKcalPerHour(4184 / 3.6), 1000, 1e-9, 'W to kcal/h');
+
 console.log(`Calculator core tests passed (${n} assertions).`);

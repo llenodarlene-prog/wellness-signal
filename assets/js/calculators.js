@@ -754,6 +754,126 @@
       };
     },
 
+    'menstrual-cycle': v => {
+      const C = window.WSCore;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(v.last || '')) return { errors: { last: 'Choose the first day of your last period.' } };
+      if (!(v.cycle >= 15 && v.cycle <= 90)) return { errors: { cycle: 'Enter a cycle length from 15 to 90 days.' } };
+      const vr = v.variation > 0 ? Math.min(20, v.variation) : 0;
+      const t = new Date(); const today = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+      const ago = C.daysBetween(v.last, today);
+      if (ago < 0) return { errors: { last: 'This date is in the future. Choose the first day of your most recent period.' } };
+      if (ago > 365) return { errors: { last: 'Choose a date within the last year.' } };
+      // Skip predictions already in the past so the first one shown is the next upcoming period.
+      const skip = Math.max(0, Math.floor((ago - 1) / v.cycle));
+      const all = C.periodDates(v.last, v.cycle, vr, skip + 3).slice(skip);
+      const f = iso => new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+      const fs = iso => new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+      const next = all[0]; const until = C.daysBetween(today, next.date);
+      const outside = v.cycle < C.FIGO_CYCLE.lo || v.cycle > C.FIGO_CYCLE.hi;
+      return {
+        hero: { icon: 'calendar', value: f(next.date), label: until === 0 ? 'estimated next period: today' : `estimated next period, in ${until} day${until === 1 ? '' : 's'}` },
+        rows: all.map((p, i) => [i === 0 ? 'Next period' : `Period ${i + 1}`, vr ? `${f(p.date)} (${fs(p.earliest)} to ${fs(p.latest)})` : f(p.date), 'calendar']),
+        insight: `With a ${num(v.cycle, 0)}-day cycle, your next period would start around ${f(next.date)}${vr ? `, give or take ${num(vr, 0)} days` : ''}.`,
+        note: outside ? `FIGO describes regular cycles as 24 to 38 days. A ${num(v.cycle, 0)}-day cycle is outside that range; consider mentioning it to a clinician.` : 'Calendar estimate only. It does not show fertile days and is not birth control.',
+      };
+    },
+
+    'fiber': v => {
+      const C = window.WSCore;
+      const sex = v.sex === 'male' ? 'male' : 'female';
+      const ai = C.FIBER_AI[sex][v.age === '51+' ? '51+' : '19-50'];
+      const rows = [['Adequate Intake', `${ai} g a day`]];
+      let ins = `The Adequate Intake for ${sex === 'male' ? 'men' : 'women'} aged ${v.age === '51+' ? '51 and over' : '19 to 50'} is ${ai} g of fiber a day.`;
+      if (v.kcal != null) {
+        if (!(v.kcal >= 800 && v.kcal <= 6000)) return { errors: { kcal: 'Enter daily calories from 800 to 6,000, or leave blank.' } };
+        const g = C.fiberByKcal(v.kcal);
+        rows.push([`At ${num(v.kcal, 0)} calories (14 g per 1,000)`, `${num(g, 0)} g a day`, 'flame']);
+        ins += ` Scaled to ${num(v.kcal, 0)} calories, the same 14 g per 1,000 basis gives about ${num(g, 0)} g.`;
+      }
+      rows.push(['Per meal, over 3 meals', `about ${num(ai / 3, 0)} g`, 'salad']);
+      return { hero: { icon: 'salad', value: `${ai} g`, label: 'reference daily fiber (Adequate Intake)' }, rows, insight: ins, note: 'Increase fiber gradually and drink enough fluid to avoid bloating.' };
+    },
+
+    'caffeine-half-life': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.dose > 0)) errors.dose = 'Enter a caffeine dose in mg.';
+      if (!(v.hours >= 0)) errors.hours = 'Enter the hours since you had it.';
+      if (!(v.half >= 1 && v.half <= 15)) errors.half = 'Enter a half-life from 1 to 15 hours.';
+      if (Object.keys(errors).length) return { errors };
+      const left = C.remaining(v.dose, v.hours, v.half);
+      const toLevel = target => v.half * Math.log2(v.dose / target);
+      const tl = [2, 4, 8, 12].map(h => [`After ${h} hours`, `${num(C.remaining(v.dose, h, v.half), 0)} mg`, 'clock']);
+      return {
+        hero: { icon: 'bolt', value: `${num(left, 0)} mg`, label: `estimated caffeine left after ${num(v.hours, 1)} hours` },
+        rows: [
+          ['Remaining now', `${num(left, 0)} mg (${num(left / v.dose * 100, 0)}% of the dose)`],
+          ...tl,
+          ['Time until a quarter is left', `${num(toLevel(v.dose / 4), 1)} hours`, 'gauge'],
+        ],
+        insight: `With a ${num(v.half, 1)}-hour half-life, ${num(v.dose, 0)} mg of caffeine falls to about ${num(left, 0)} mg after ${num(v.hours, 1)} hours.`,
+        note: 'Half-life varies widely between people. Try 3 and 7 hours to see the range.',
+      };
+    },
+
+    'swim-pace': v => {
+      const C = window.WSCore;
+      const mins = parseDur(v.time);
+      const errors = {};
+      if (!(v.distance > 0)) errors.distance = 'Enter the distance you swam.';
+      if (!(mins > 0)) errors.time = 'Enter your time as mm:ss or h:mm:ss.';
+      if (Object.keys(errors).length) return { errors };
+      const sec = mins * 60;
+      const pm = C.per100(sec, v.distance, v.dunit, 'm'), py = C.per100(sec, v.distance, v.dunit, 'yd');
+      if (pm < 40 || pm > 600) return { errors: { time: 'Check the time and distance: that pace is outside the usual range.' } };
+      const poolM = { '25yd': 25 * C.YD, '25m': 25, '50m': 50 }[v.pool] || 25 * C.YD;
+      const lengths = C.toMeters(v.distance, v.dunit) / poolM;
+      const fs = s => fmtDur(s / 60);
+      return {
+        hero: { icon: 'stopwatch', value: fs(v.dunit === 'yd' ? py : pm), label: `per 100 ${v.dunit === 'yd' ? 'yards' : 'meters'}` },
+        rows: [
+          ['Pace per 100 m', fs(pm)],
+          ['Pace per 100 yd', fs(py), 'stopwatch'],
+          ['Pool lengths', `${num(lengths, lengths % 1 ? 1 : 0)} lengths of a ${v.pool.replace('yd', ' yd').replace('m', ' m')} pool`, 'ruler'],
+          ['Projected 400 m', fs(pm * 4), 'route'],
+          ['Projected 1,500 m', fs(pm * 15), 'route'],
+        ],
+        insight: `${num(v.distance, 0)} ${v.dunit === 'yd' ? 'yards' : 'meters'} in ${fmtDur(mins)} is a pace of ${fs(pm)} per 100 m, or ${fs(py)} per 100 yards.`,
+        note: lengths % 1 ? 'The distance is not a whole number of lengths for this pool.' : '',
+      };
+    },
+
+    'rucking-calories': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.weight > 0)) errors.weight = 'Enter your body weight.';
+      if (!(v.load >= 0)) errors.load = 'Enter your pack weight, or 0.';
+      if (!(v.mph >= 1 && v.mph <= 4.5)) errors.mph = 'Enter a walking speed from 1 to 4.5 mph.';
+      if (!(v.grade >= 0 && v.grade <= 20)) errors.grade = 'Enter an uphill grade from 0% to 20%.';
+      if (!(v.minutes > 0)) errors.minutes = 'Enter a duration.';
+      if (Object.keys(errors).length) return { errors };
+      const W = C.toKg(v.weight, v.wunit), L = C.toKg(v.load, v.wunit);
+      if (L > W * 0.6) return { errors: { load: 'That pack is over 60% of your body weight. Check the numbers.' } };
+      const V = C.mphToMpm(v.mph) / 60;
+      const eta = Number(v.terrain) || 1;
+      const watts = C.pandolf({ W, L, V, G: v.grade || 0, eta });
+      const noPack = C.pandolf({ W, L: 0, V, G: v.grade || 0, eta });
+      const kcal = C.wattsToKcalPerHour(watts) * v.minutes / 60;
+      const kcal0 = C.wattsToKcalPerHour(noPack) * v.minutes / 60;
+      return {
+        hero: { icon: 'flame', value: num(kcal, 0), label: 'estimated calories' },
+        rows: [
+          ['Estimated calories', `${num(kcal, 0)} kcal`],
+          ['Same walk without the pack', `${num(kcal0, 0)} kcal`, 'walk'],
+          ['Extra from the pack', `${num(kcal - kcal0, 0)} kcal`, 'bottle'],
+          ['Calories per hour', `${num(C.wattsToKcalPerHour(watts), 0)} kcal`, 'clock'],
+          ['Pack as share of body weight', `${num(L / W * 100, 0)}%`, 'scale'],
+        ],
+        insight: `Rucking ${num(v.minutes, 0)} minutes at ${num(v.mph, 1)} mph with a ${num(v.load, 0)} ${v.wunit} pack burns an estimated ${num(kcal, 0)} calories, about ${num(kcal - kcal0, 0)} more than the same walk without it.`,
+        note: 'A 2021 field study found this equation overpredicted loaded outdoor walking by about 13%, so treat the result as an upper-leaning estimate.',
+      };
+    },
+
     'steps-to-miles': v => {
       const errors = {};
       if (!(v.steps > 0)) errors.steps = 'Enter a step count greater than zero.';
@@ -1081,7 +1201,15 @@
       input.value = Number(next.toFixed(4));
       input.dispatchEvent(new Event('input', { bubbles: true }));
     }));
+    // Fill relative example dates (local calendar day) when empty.
+    const fillDates = () => form.querySelectorAll('input[type=date][data-offset]').forEach(d => {
+      if (d.value) return;
+      const t = new Date(); t.setDate(t.getDate() + Number(d.dataset.offset));
+      d.value = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+    });
+    fillDates();
     form.addEventListener('reset', () => setTimeout(() => {
+      fillDates();
       form.querySelectorAll('.calc-range').forEach(r => { r.value = form.elements[r.dataset.for].value || r.min; });
       run(root);
     }, 0));
