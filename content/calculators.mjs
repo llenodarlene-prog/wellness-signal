@@ -941,6 +941,25 @@ export const calculators = {
     reviewed: 'November 2026',
     disclaimer: 'Not a medical test. The 12 bpm cut-off comes from clinical exercise testing of adults referred for heart imaging. Stop exercising and seek care for chest pain, faintness or unusual breathlessness.',
   },
+  'recipe-nutrition': {
+    icon: 'salad',
+    title: 'Recipe Nutrition Calculator',
+    intro: 'Add your ingredients from the USDA food database to see calories and nutrients for the whole recipe and per serving.',
+    empty: 'Search for an ingredient, or load the example recipe.',
+    inputs: [
+      { icon: 'salad', name: 'items', label: 'Ingredients', type: 'recipe', src: '/assets/data/fdc-sr-legacy.json', help: 'Search, then set the amount in grams, ounces or a USDA household measure such as 1 cup' },
+      { icon: 'user', name: 'servings', label: 'Servings', type: 'stepper', min: 1, max: 50, step: 1, value: 2, required: true },
+    ],
+    formulas: [
+      'Each nutrient = ingredient grams × (USDA value per 100 g ÷ 100), summed over all ingredients',
+      'Per serving = recipe total ÷ number of servings',
+      'Household measures (cups, tablespoons) use the gram weights published by USDA for that food',
+      'Where USDA has no value for a nutrient, the total is marked incomplete rather than counted as zero',
+    ],
+    sources: [['USDA FoodData Central, SR Legacy (April 2018), public domain', 'https://fdc.nal.usda.gov/'], ['FoodData Central data licensing (CC0 1.0)', 'https://fdc.nal.usda.gov/api-guide']],
+    reviewed: 'November 2026',
+    disclaimer: 'Estimates from USDA reference foods. Brands, recipes, cooking methods and portion sizes vary, and cooking can change weight and some nutrients. Use package labels where you have them.',
+  },
   'sleep-debt': {
     icon: 'moon',
     title: 'Sleep Debt Calculator',

@@ -11,6 +11,11 @@ const numberBox = (fid, input, described) => `<input id="${fid}" name="${input.n
 const radios = (id, input, kind) => `<fieldset class="calc-field calc-${kind}"><legend>${ti(input.icon, 'calc-field-icon')}${esc(input.label)}</legend><div class="calc-${kind}-set">${input.options.map(([v, l, icon, sub]) => `<label class="calc-${kind}-opt"><input type="radio" name="${input.name}" value="${esc(v)}"${String(input.value) === v ? ' checked' : ''}>${kind === 'choice' ? `<span class="calc-choice-card">${ti(icon)}<strong>${esc(l)}</strong>${sub ? `<small>${esc(sub)}</small>` : ''}</span>` : `<span>${esc(l)}</span>`}</label>`).join('')}</div></fieldset>`;
 
 const field = (id, input) => {
+  if (input.type === 'recipe') {
+    // Ingredient list backed by the bundled USDA SR Legacy file; state is kept in a hidden JSON field.
+    const fid = `${id}-${input.name}`;
+    return `<div class="calc-field is-wide recipe" data-recipe data-src="${esc(input.src)}"><span class="recipe-label">${ti(input.icon, 'calc-field-icon')}${esc(input.label)}</span><ol class="recipe-rows" aria-label="Ingredients added"></ol><div class="recipe-add"><label for="${fid}-q" class="sr-only">Search USDA foods</label><span class="calc-input">${ti('search', 'calc-field-icon')}<input id="${fid}-q" class="recipe-search" type="search" placeholder="Search USDA foods, e.g. rolled oats" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="${fid}-list" aria-describedby="${fid}-help ${fid}-err"></span><ul class="recipe-suggest" id="${fid}-list" role="listbox" hidden></ul></div><span class="calc-help" id="${fid}-help">${esc(input.help || '')}</span><button type="button" class="calc-link recipe-example">${ti('plus')} Load the example recipe</button><input type="hidden" name="${input.name}" value=""><span class="calc-error" id="${fid}-err" role="alert"></span></div>`;
+  }
   if (input.type === 'unit') return radios(id, input, 'unit');
   if (input.type === 'choice') return radios(id, input, 'choice');
   const fid = `${id}-${input.name}`;
