@@ -150,4 +150,19 @@ near(C.hrr(160, 140), 20, 0, 'hrr'); near(C.HRR_ABNORMAL, 12, 0);
 // Clock: 20:00 + 16 h = 12:00 next day
 let ck = C.addClock(20 * 60, 16 * 60); near(ck.min, 720, 0, 'clock'); near(ck.dayOffset, 1, 0, 'clock day');
 
+
+// Recipe: overnight oats example from USDA SR Legacy values (kcal, protein, fat, carbs, fiber)
+const oats = [
+  { grams: 81, per100: [379, 13.15, 6.52, 67.7, 10.1] }, { grams: 244, per100: [50, 3.3, 1.98, 4.8, 0] },
+  { grams: 101, per100: [89, 1.09, 0.33, 22.84, 2.6] }, { grams: 32, per100: [598, 22.21, 51.36, 22.31, 5] },
+  { grams: 21, per100: [304, 0.3, 0, 82.4, 0.2] }];
+let rt = C.recipeTotals(oats, 2, 5);
+near(rt.total[0], 379 * 0.81 + 50 * 2.44 + 89 * 1.01 + 598 * 0.32 + 304 * 0.21, 1e-9, 'recipe kcal'); // 774.08
+near(rt.perServing[0], 387.04, 1e-9, 'recipe kcal per serving');
+near(rt.total[3], 67.7 * 0.81 + 4.8 * 2.44 + 22.84 * 1.01 + 22.31 * 0.32 + 82.4 * 0.21, 1e-9, 'recipe carbs'); // 54.837 + 11.712 + 23.068 + 7.139 + 17.304 = 114.06 near(rt.grams, 479, 0, 'recipe grams');
+let rm = C.recipeTotals([{ grams: 100, per100: [100, null] }, { grams: 50, per100: [200, 4] }], 1, 2);
+near(rm.total[1], 2, 1e-12, 'missing not zero-filled sum'); near(rm.missing[1], 1, 0, 'missing counted');
+throws(() => C.recipeTotals([], 0), 'zero servings');
+near(C.OZ * 16, 453.59237, 1e-9, 'oz');
+
 console.log(`Calculator core tests passed (${n} assertions).`);

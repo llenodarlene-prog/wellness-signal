@@ -19,6 +19,7 @@
 // - Herrmann SD et al., 2024 Adult Compendium of Physical Activities (PMC10818145)
 // - Naismith's rule as quoted in Wood et al. 2023 (arXiv:2303.16065)
 // - Cole CR et al., NEJM 1999 (PMID 10536127): heart rate recovery
+// - USDA FoodData Central SR Legacy (2018), public domain CC0 1.0: nutrient values per 100 g
 // - FDA, Spilling the Beans: How Much Caffeine Is Too Much? (12 fl oz typical amounts)
 (function (root) {
   const LB = 0.45359237;
@@ -206,7 +207,26 @@
   // Clock arithmetic in minutes since midnight; returns { min, dayOffset }.
   const addClock = (startMin, addMin) => ({ min: ((startMin + addMin) % 1440 + 1440) % 1440, dayOffset: Math.floor((startMin + addMin) / 1440) });
 
-  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm, leanMass, whr, WHR_CUT, navyBF, CAFFEINE_12OZ, caffeine, walkMinutes, addDays, daysBetween, periodDates, FIGO_CYCLE, FIBER_AI, fiberByKcal, remaining, YD, toMeters, per100, pandolf, wattsToKcalPerHour, netCarbs, metMinutes, metKcal, metBand, naismith, hrr, HRR_ABNORMAL, addClock };
+
+  // Recipe nutrition: sum grams × (value per 100 g ÷ 100) for each nutrient. Missing values are
+  // never treated as zero; they are counted so the page can mark the total as incomplete.
+  const recipeTotals = (items, servings = 1, nNutrients = 8) => {
+    if (!(servings > 0)) throw new Error('servings must be above zero');
+    const total = Array(nNutrients).fill(0), missing = Array(nNutrients).fill(0);
+    let grams = 0;
+    for (const it of items) {
+      if (!(it.grams >= 0)) throw new Error('grams must be 0 or more');
+      grams += it.grams;
+      for (let i = 0; i < nNutrients; i++) {
+        const v = it.per100[i];
+        if (v == null) missing[i]++; else total[i] += it.grams * v / 100;
+      }
+    }
+    return { total, perServing: total.map(x => x / servings), missing, grams };
+  };
+  const OZ = 28.349523125;
+
+  const core = { LB, IN, toKg, toCm, mifflin, PAL, tdee, deficitTarget, KCAL_PER_G, macros, PROTEIN, protein, MI, cooper, pctChange, RACE, split, paceSec, acsmWalk, acsmRun, kcalPerMin, mphToMpm, leanMass, whr, WHR_CUT, navyBF, CAFFEINE_12OZ, caffeine, walkMinutes, addDays, daysBetween, periodDates, FIGO_CYCLE, FIBER_AI, fiberByKcal, remaining, YD, toMeters, per100, pandolf, wattsToKcalPerHour, netCarbs, metMinutes, metKcal, metBand, naismith, hrr, HRR_ABNORMAL, addClock, recipeTotals, OZ };
   root.WSCore = core;
   if (typeof module !== 'undefined' && module.exports) module.exports = core;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

@@ -988,6 +988,27 @@
       };
     },
 
+    'recipe-nutrition': v => {
+      const C = window.WSCore;
+      let items = [];
+      try { items = JSON.parse(v.items || '[]'); } catch { items = []; }
+      if (!items.length) return { empty: true };
+      if (!(v.servings >= 1)) return { errors: { servings: 'Enter at least 1 serving.' } };
+      const r = C.recipeTotals(items, v.servings);
+      const L = ['Calories', 'Protein', 'Fat', 'Carbohydrate', 'Fiber', 'Sugars', 'Saturated fat', 'Sodium'];
+      const U = ['kcal', 'g', 'g', 'g', 'g', 'g', 'g', 'mg'];
+      const fmt = (i, x) => `${num(x, i === 0 || i === 7 ? 0 : 1)} ${U[i]}${r.missing[i] ? '*' : ''}`;
+      const rows = L.map((l, i) => [`${l} per serving`, `${fmt(i, r.perServing[i])} (recipe ${fmt(i, r.total[i])})`, i ? 'salad' : undefined]);
+      rows.push(['Recipe weight', `${num(r.grams, 0)} g, about ${num(r.grams / v.servings, 0)} g per serving`, 'scale']);
+      const miss = r.missing.some(Boolean);
+      return {
+        hero: { icon: 'salad', value: num(r.perServing[0], 0), label: `calories per serving · ${num(v.servings, 0)} servings` },
+        rows,
+        insight: `This recipe has about ${num(r.total[0], 0)} calories in total, or ${num(r.perServing[0], 0)} per serving, with ${num(r.perServing[1], 1)} g protein, ${num(r.perServing[3], 1)} g carbohydrate and ${num(r.perServing[2], 1)} g fat per serving.`,
+        note: miss ? '* USDA has no value for this nutrient in at least one ingredient, so that total is incomplete.' : 'Values are for ingredients as entered, raw or cooked as described in each USDA entry.',
+      };
+    },
+
     'steps-to-miles': v => {
       const errors = {};
       if (!(v.steps > 0)) errors.steps = 'Enter a step count greater than zero.';
@@ -1236,6 +1257,67 @@
     requestAnimationFrame(step);
   };
 
+
+  // Recipe ingredient widget. Food data is a same-origin static file (USDA SR Legacy, public domain);
+  // searches and recipes never leave the browser.
+  let foodDb = null;
+  const loadFoods = src => (foodDb ||= fetch(src).then(r => { if (!r.ok) throw new Error('data'); return r.json(); }));
+  const EXAMPLE = [[173904, '1 cup'], [171267, '1 cup'], [173944, '1 small (6" to 6-7/8" long)'], [172470, '2 tbsp'], [169640, '1 tbsp']];
+  const recipeWidget = (box, form) => {
+    const q = box.querySelector('.recipe-search'), list = box.querySelector('.recipe-suggest'), rows = box.querySelector('.recipe-rows');
+    const hidden = box.querySelector('input[type=hidden]');
+    const items = [];
+    const sync = () => { hidden.value = JSON.stringify(items.map(it => ({ id: it.f[0], name: it.f[1], grams: it.grams, per100: it.f[3] }))); form.dispatchEvent(new Event('input', { bubbles: true })); };
+    const gramsOf = it => it.unit === 'g' ? it.qty : it.unit === 'oz' ? it.qty * window.WSCore.OZ : it.qty * it.f[4][Number(it.unit)][1];
+    const render = () => {
+      rows.innerHTML = '';
+      items.forEach((it, i) => {
+        const li = document.createElement('li'); li.className = 'recipe-row';
+        const opts = [['g', 'grams'], ['oz', 'ounces'], ...it.f[4].map((p, j) => [String(j), `× ${p[0]} (${p[1]} g)`])];
+        li.innerHTML = `<span class="recipe-name"></span><span class="recipe-qty"><input type="number" min="0" step="any" inputmode="decimal" aria-label="Amount"><select aria-label="Unit"></select></span><button type="button" class="recipe-del" aria-label="Remove">×</button>`;
+        li.querySelector('.recipe-name').textContent = it.f[1];
+        const n = li.querySelector('input'), sel = li.querySelector('select');
+        opts.forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; sel.append(o); });
+        n.value = it.qty; sel.value = it.unit;
+        const upd = () => { it.qty = Number(n.value) || 0; it.unit = sel.value; it.grams = gramsOf(it); sync(); };
+        n.addEventListener('input', e => { e.stopPropagation(); upd(); });
+        sel.addEventListener('change', e => { e.stopPropagation(); upd(); });
+        li.querySelector('.recipe-del').addEventListener('click', () => { items.splice(i, 1); render(); sync(); });
+        rows.append(li);
+      });
+    };
+    const add = (f, unitLabel) => {
+      const j = unitLabel ? f[4].findIndex(p => p[0] === unitLabel) : (f[4].length ? 0 : -1);
+      const it = j >= 0 ? { f, qty: 1, unit: String(j) } : { f, qty: 100, unit: 'g' };
+      it.grams = gramsOf(it); items.push(it); render(); sync();
+    };
+    const search = async () => {
+      const words = q.value.toLowerCase().split(/[\s,]+/).filter(Boolean);
+      if (!words.length) { list.hidden = true; q.setAttribute('aria-expanded', 'false'); return; }
+      let db;
+      try { db = await loadFoods(box.dataset.src); } catch { box.querySelector('.calc-error').textContent = 'The food list could not load. Check your connection and try again.'; return; }
+      const hits = db.foods.filter(f => { const d = f[1].toLowerCase(); return words.every(w => d.includes(w)); })
+        .sort((a, b) => (b[1].toLowerCase().startsWith(words[0]) - a[1].toLowerCase().startsWith(words[0])) || a[1].length - b[1].length).slice(0, 12);
+      list.innerHTML = '';
+      hits.forEach(f => { const li = document.createElement('li'); li.role = 'option'; li.tabIndex = -1; li.textContent = f[1]; li.addEventListener('mousedown', e => { e.preventDefault(); add(f); q.value = ''; list.hidden = true; }); li.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); add(f); q.value = ''; list.hidden = true; q.focus(); } else if (e.key === 'ArrowDown') li.nextElementSibling?.focus(); else if (e.key === 'ArrowUp') (li.previousElementSibling || q).focus(); }); list.append(li); });
+      if (!hits.length) { const li = document.createElement('li'); li.className = 'recipe-none'; li.textContent = 'No USDA match. Try a simpler word, such as "oats" or "chicken breast".'; list.append(li); }
+      list.hidden = false; q.setAttribute('aria-expanded', 'true');
+    };
+    let t;
+    q.addEventListener('input', e => { e.stopPropagation(); clearTimeout(t); t = setTimeout(search, 120); });
+    q.addEventListener('keydown', e => { if (e.key === 'ArrowDown') { e.preventDefault(); list.querySelector('[role=option]')?.focus(); } if (e.key === 'Enter') e.preventDefault(); });
+    q.addEventListener('blur', () => setTimeout(() => { if (!list.contains(document.activeElement)) list.hidden = true; }, 150));
+    const loadExample = async () => {
+      let db; try { db = await loadFoods(box.dataset.src); } catch { box.querySelector('.calc-error').textContent = 'The food list could not load. Check your connection and try again.'; return; }
+      const by = new Map(db.foods.map(f => [f[0], f]));
+      items.length = 0; EXAMPLE.forEach(([id, u]) => by.has(id) && add(by.get(id), u));
+      form.elements.servings.value = 2; form.dispatchEvent(new Event('input', { bubbles: true }));
+    };
+    loadExample();
+    box.querySelector('.recipe-example').addEventListener('click', loadExample);
+    form.addEventListener('reset', () => { items.length = 0; setTimeout(() => { render(); sync(); }, 0); });
+  };
+
   // Numbers become numbers (blank is null); radios, selects and text stay strings.
   const read = form => {
     const v = {};
@@ -1261,6 +1343,11 @@
     const values = read(form);
     toggleFields(root, values);
     const result = calcs[root.dataset.calc](values, form);
+    if (result.empty) {
+      out.innerHTML = root.dataset.emptyHtml || out.innerHTML;
+      root.dataset.copy = '';
+      return;
+    }
     if (result.errors) {
       Object.entries(result.errors).forEach(([name, message]) => {
         const err = root.querySelector(`#${root.dataset.calc}-${name}-err`);
@@ -1315,6 +1402,8 @@
       input.value = Number(next.toFixed(4));
       input.dispatchEvent(new Event('input', { bubbles: true }));
     }));
+    root.dataset.emptyHtml = root.querySelector('.calc-results').innerHTML;
+    root.querySelectorAll('[data-recipe]').forEach(box => recipeWidget(box, form));
     // Fill relative example dates (local calendar day) when empty.
     const fillDates = () => form.querySelectorAll('input[type=date][data-offset]').forEach(d => {
       if (d.value) return;
