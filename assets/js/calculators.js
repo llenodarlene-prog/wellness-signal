@@ -754,6 +754,261 @@
       };
     },
 
+    'menstrual-cycle': v => {
+      const C = window.WSCore;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(v.last || '')) return { errors: { last: 'Choose the first day of your last period.' } };
+      if (!(v.cycle >= 15 && v.cycle <= 90)) return { errors: { cycle: 'Enter a cycle length from 15 to 90 days.' } };
+      const vr = v.variation > 0 ? Math.min(20, v.variation) : 0;
+      const t = new Date(); const today = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+      const ago = C.daysBetween(v.last, today);
+      if (ago < 0) return { errors: { last: 'This date is in the future. Choose the first day of your most recent period.' } };
+      if (ago > 365) return { errors: { last: 'Choose a date within the last year.' } };
+      // Skip predictions already in the past so the first one shown is the next upcoming period.
+      const skip = Math.max(0, Math.floor((ago - 1) / v.cycle));
+      const all = C.periodDates(v.last, v.cycle, vr, skip + 3).slice(skip);
+      const f = iso => new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+      const fs = iso => new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+      const next = all[0]; const until = C.daysBetween(today, next.date);
+      const outside = v.cycle < C.FIGO_CYCLE.lo || v.cycle > C.FIGO_CYCLE.hi;
+      return {
+        hero: { icon: 'calendar', value: f(next.date), label: until === 0 ? 'estimated next period: today' : `estimated next period, in ${until} day${until === 1 ? '' : 's'}` },
+        rows: all.map((p, i) => [i === 0 ? 'Next period' : `Period ${i + 1}`, vr ? `${f(p.date)} (${fs(p.earliest)} to ${fs(p.latest)})` : f(p.date), 'calendar']),
+        insight: `With a ${num(v.cycle, 0)}-day cycle, your next period would start around ${f(next.date)}${vr ? `, give or take ${num(vr, 0)} days` : ''}.`,
+        note: outside ? `FIGO describes regular cycles as 24 to 38 days. A ${num(v.cycle, 0)}-day cycle is outside that range; consider mentioning it to a clinician.` : 'Calendar estimate only. It does not show fertile days and is not birth control.',
+      };
+    },
+
+    'fiber': v => {
+      const C = window.WSCore;
+      const sex = v.sex === 'male' ? 'male' : 'female';
+      const ai = C.FIBER_AI[sex][v.age === '51+' ? '51+' : '19-50'];
+      const rows = [['Adequate Intake', `${ai} g a day`]];
+      let ins = `The Adequate Intake for ${sex === 'male' ? 'men' : 'women'} aged ${v.age === '51+' ? '51 and over' : '19 to 50'} is ${ai} g of fiber a day.`;
+      if (v.kcal != null) {
+        if (!(v.kcal >= 800 && v.kcal <= 6000)) return { errors: { kcal: 'Enter daily calories from 800 to 6,000, or leave blank.' } };
+        const g = C.fiberByKcal(v.kcal);
+        rows.push([`At ${num(v.kcal, 0)} calories (14 g per 1,000)`, `${num(g, 0)} g a day`, 'flame']);
+        ins += ` Scaled to ${num(v.kcal, 0)} calories, the same 14 g per 1,000 basis gives about ${num(g, 0)} g.`;
+      }
+      rows.push(['Per meal, over 3 meals', `about ${num(ai / 3, 0)} g`, 'salad']);
+      return { hero: { icon: 'salad', value: `${ai} g`, label: 'reference daily fiber (Adequate Intake)' }, rows, insight: ins, note: 'Increase fiber gradually and drink enough fluid to avoid bloating.' };
+    },
+
+    'caffeine-half-life': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.dose > 0)) errors.dose = 'Enter a caffeine dose in mg.';
+      if (!(v.hours >= 0)) errors.hours = 'Enter the hours since you had it.';
+      if (!(v.half >= 1 && v.half <= 15)) errors.half = 'Enter a half-life from 1 to 15 hours.';
+      if (Object.keys(errors).length) return { errors };
+      const left = C.remaining(v.dose, v.hours, v.half);
+      const toLevel = target => v.half * Math.log2(v.dose / target);
+      const tl = [2, 4, 8, 12].map(h => [`After ${h} hours`, `${num(C.remaining(v.dose, h, v.half), 0)} mg`, 'clock']);
+      return {
+        hero: { icon: 'bolt', value: `${num(left, 0)} mg`, label: `estimated caffeine left after ${num(v.hours, 1)} hours` },
+        rows: [
+          ['Remaining now', `${num(left, 0)} mg (${num(left / v.dose * 100, 0)}% of the dose)`],
+          ...tl,
+          ['Time until a quarter is left', `${num(toLevel(v.dose / 4), 1)} hours`, 'gauge'],
+        ],
+        insight: `With a ${num(v.half, 1)}-hour half-life, ${num(v.dose, 0)} mg of caffeine falls to about ${num(left, 0)} mg after ${num(v.hours, 1)} hours.`,
+        note: 'Half-life varies widely between people. Try 3 and 7 hours to see the range.',
+      };
+    },
+
+    'swim-pace': v => {
+      const C = window.WSCore;
+      const mins = parseDur(v.time);
+      const errors = {};
+      if (!(v.distance > 0)) errors.distance = 'Enter the distance you swam.';
+      if (!(mins > 0)) errors.time = 'Enter your time as mm:ss or h:mm:ss.';
+      if (Object.keys(errors).length) return { errors };
+      const sec = mins * 60;
+      const pm = C.per100(sec, v.distance, v.dunit, 'm'), py = C.per100(sec, v.distance, v.dunit, 'yd');
+      if (pm < 40 || pm > 600) return { errors: { time: 'Check the time and distance: that pace is outside the usual range.' } };
+      const poolM = { '25yd': 25 * C.YD, '25m': 25, '50m': 50 }[v.pool] || 25 * C.YD;
+      const lengths = C.toMeters(v.distance, v.dunit) / poolM;
+      const fs = s => fmtDur(s / 60);
+      return {
+        hero: { icon: 'stopwatch', value: fs(v.dunit === 'yd' ? py : pm), label: `per 100 ${v.dunit === 'yd' ? 'yards' : 'meters'}` },
+        rows: [
+          ['Pace per 100 m', fs(pm)],
+          ['Pace per 100 yd', fs(py), 'stopwatch'],
+          ['Pool lengths', `${num(lengths, lengths % 1 ? 1 : 0)} lengths of a ${v.pool.replace('yd', ' yd').replace('m', ' m')} pool`, 'ruler'],
+          ['Projected 400 m', fs(pm * 4), 'route'],
+          ['Projected 1,500 m', fs(pm * 15), 'route'],
+        ],
+        insight: `${num(v.distance, 0)} ${v.dunit === 'yd' ? 'yards' : 'meters'} in ${fmtDur(mins)} is a pace of ${fs(pm)} per 100 m, or ${fs(py)} per 100 yards.`,
+        note: lengths % 1 ? 'The distance is not a whole number of lengths for this pool.' : '',
+      };
+    },
+
+    'rucking-calories': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.weight > 0)) errors.weight = 'Enter your body weight.';
+      if (!(v.load >= 0)) errors.load = 'Enter your pack weight, or 0.';
+      if (!(v.mph >= 1 && v.mph <= 4.5)) errors.mph = 'Enter a walking speed from 1 to 4.5 mph.';
+      if (!(v.grade >= 0 && v.grade <= 20)) errors.grade = 'Enter an uphill grade from 0% to 20%.';
+      if (!(v.minutes > 0)) errors.minutes = 'Enter a duration.';
+      if (Object.keys(errors).length) return { errors };
+      const W = C.toKg(v.weight, v.wunit), L = C.toKg(v.load, v.wunit);
+      if (L > W * 0.6) return { errors: { load: 'That pack is over 60% of your body weight. Check the numbers.' } };
+      const V = C.mphToMpm(v.mph) / 60;
+      const eta = Number(v.terrain) || 1;
+      const watts = C.pandolf({ W, L, V, G: v.grade || 0, eta });
+      const noPack = C.pandolf({ W, L: 0, V, G: v.grade || 0, eta });
+      const kcal = C.wattsToKcalPerHour(watts) * v.minutes / 60;
+      const kcal0 = C.wattsToKcalPerHour(noPack) * v.minutes / 60;
+      return {
+        hero: { icon: 'flame', value: num(kcal, 0), label: 'estimated calories' },
+        rows: [
+          ['Estimated calories', `${num(kcal, 0)} kcal`],
+          ['Same walk without the pack', `${num(kcal0, 0)} kcal`, 'walk'],
+          ['Extra from the pack', `${num(kcal - kcal0, 0)} kcal`, 'bottle'],
+          ['Calories per hour', `${num(C.wattsToKcalPerHour(watts), 0)} kcal`, 'clock'],
+          ['Pack as share of body weight', `${num(L / W * 100, 0)}%`, 'scale'],
+        ],
+        insight: `Rucking ${num(v.minutes, 0)} minutes at ${num(v.mph, 1)} mph with a ${num(v.load, 0)} ${v.wunit} pack burns an estimated ${num(kcal, 0)} calories, about ${num(kcal - kcal0, 0)} more than the same walk without it.`,
+        note: 'A 2021 field study found this equation overpredicted loaded outdoor walking by about 13%, so treat the result as an upper-leaning estimate.',
+      };
+    },
+
+    'net-carb': v => {
+      const C = window.WSCore;
+      const us = v.label !== 'eu';
+      const errors = {};
+      if (!(v.total >= 0) || v.total === null) errors.total = 'Enter the carbohydrate grams from the label.';
+      if (us && v.fiber != null && v.fiber < 0) errors.fiber = 'Fiber cannot be negative.';
+      if (Object.keys(errors).length) return { errors };
+      const fiber = us ? (v.fiber || 0) : 0, poly = v.polyols || 0, sub = v.subpoly !== 'no';
+      if (us && fiber + (sub ? poly : 0) > v.total + 0.5) return { errors: { fiber: 'On a US label, fiber and sugar alcohols are part of total carbohydrate, so they cannot exceed it. Check the figures.' } };
+      const r = C.netCarbs({ total: v.total, fiber, polyols: poly, label: us ? 'us' : 'eu', subtractPolyols: sub });
+      const rows = [['Net carbs', `${num(r.net, 1)} g`], [us ? 'Total carbohydrate' : 'Carbohydrate', `${num(v.total, 1)} g`, 'salad']];
+      if (us) rows.push(['Minus dietary fiber', `${num(fiber, 1)} g`, 'salad']);
+      if (poly) rows.push([sub ? 'Minus sugar alcohols' : 'Sugar alcohols (not subtracted)', `${num(poly, 1)} g`, 'activity']);
+      return {
+        hero: { icon: 'salad', value: `${num(r.net, 1)} g`, label: 'net carbs per serving' },
+        rows,
+        insight: us
+          ? `${num(v.total, 1)} g total carbohydrate minus ${num(fiber, 1)} g fiber${sub && poly ? ` and ${num(poly, 1)} g sugar alcohols` : ''} leaves ${num(r.net, 1)} g net carbs.`
+          : `On an EU or UK label, fiber is already excluded from carbohydrate, so ${num(v.total, 1)} g${sub && poly ? ` minus ${num(poly, 1)} g polyols` : ''} leaves ${num(r.net, 1)} g net carbs.`,
+        note: r.raw < 0 ? 'The figures would give a negative result, so it is shown as 0. Check the label.' : 'Net carbs is not a legal label term, so brands calculate it in different ways.',
+      };
+    },
+
+    'mets': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.met >= 1 && v.met <= 25)) errors.met = 'Enter a MET value from 1 to 25.';
+      if (!(v.minutes > 0)) errors.minutes = 'Enter a duration.';
+      if (Object.keys(errors).length) return { errors };
+      const mm = C.metMinutes(v.met, v.minutes), band = C.metBand(v.met);
+      const rows = [['MET-minutes', num(mm, 0)], ['Intensity', band[0].toUpperCase() + band.slice(1), 'gauge']];
+      let ins = `${num(v.minutes, 0)} minutes at ${num(v.met, 1)} METs is ${num(mm, 0)} MET-minutes of ${band}-intensity activity.`;
+      if (v.weight > 0) {
+        const kg = C.toKg(v.weight, v.wunit), kcal = C.metKcal(v.met, kg, v.minutes);
+        rows.push(['Estimated calories', `${num(kcal, 0)} kcal`, 'flame']);
+        ins += ` At ${num(v.weight, 0)} ${v.wunit}, that is about ${num(kcal, 0)} calories.`;
+      }
+      return {
+        hero: { icon: 'gauge', value: num(mm, 0), label: `MET-minutes · ${band} intensity` },
+        rows,
+        range: { title: 'Intensity by MET value', min: 1, max: 12, value: Math.min(12, v.met), fmt: n => `${num(n, 1)} METs`, bands: [['Light', 1, 3], ['Moderate', 3, 6], ['Vigorous', 6, 12]] },
+        insight: ins,
+      };
+    },
+
+    'intermittent-fasting': v => {
+      const C = window.WSCore;
+      const st = parseClock(v.start);
+      if (st === null) return { errors: { start: 'Enter the time your fast starts.' } };
+      const h = v.plan === 'custom' ? v.hours : Number(v.plan);
+      if (!(h >= 1 && h <= 72)) return { errors: { hours: 'Enter fasting hours from 1 to 72.' } };
+      const end = C.addClock(st, h * 60);
+      const day = d => (d === 0 ? 'same day' : d === 1 ? 'next day' : `${d} days later`);
+      const rows = [['Fast ends', `${fmtClock(end.min)} (${day(end.dayOffset)})`], ['Fasting length', `${num(h, 1)} hours`, 'clock']];
+      let ins = `Starting at ${fmtClock(st)}, a ${num(h, 1)}-hour fast ends at ${fmtClock(end.min)} ${end.dayOffset > 1 ? day(end.dayOffset) : `the ${day(end.dayOffset)}`}.`;
+      if (h < 24) {
+        const w = 24 - h;
+        rows.push(['Eating window', `${fmtClock(end.min)} to ${fmtClock(st)} (${num(w, 1)} hours)`, 'clock']);
+        ins += ` On a daily schedule, your eating window runs ${fmtClock(end.min)} to ${fmtClock(st)}.`;
+      }
+      return {
+        hero: { icon: 'clock', value: fmtClock(end.min), label: `fast ends, ${day(end.dayOffset)}` },
+        rows, insight: ins,
+        note: h > 24 ? 'Fasts longer than a day should be discussed with a clinician first.' : 'Not suitable for everyone. Check with a doctor if you are pregnant, take diabetes medicines or have had an eating disorder.',
+      };
+    },
+
+    'hiking-time': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.distance > 0)) errors.distance = 'Enter the trail distance.';
+      if (!(v.ascent >= 0) || v.ascent === null) errors.ascent = 'Enter the total elevation gain, or 0.';
+      if (Object.keys(errors).length) return { errors };
+      const imp = v.units !== 'metric';
+      const km = imp ? v.distance * 1.609344 : v.distance, m = imp ? v.ascent * 0.3048 : v.ascent;
+      const base = Number(v.pace) || 5, brk = v.breaks > 0 ? v.breaks : 0;
+      const flat = km / base * 60, climb = m / 600 * 60, total = flat + climb + brk;
+      return {
+        hero: { icon: 'clock', value: fmtDur(total), label: 'estimated hiking time' },
+        rows: [
+          ['Total time', fmtDur(total)],
+          ['Walking the distance', fmtDur(flat), 'route'],
+          ['Added for the climb', fmtDur(climb), 'trending-up'],
+          ['Breaks', fmtDur(brk), 'clock'],
+        ],
+        insight: `By Naismith’s rule, ${num(v.distance, 1)} ${imp ? 'miles' : 'km'} with ${num(v.ascent, 0)} ${imp ? 'feet' : 'm'} of climbing takes about ${fmtDur(flat + climb)} of walking${brk ? `, or ${fmtDur(total)} with breaks` : ''}.`,
+        note: 'Naismith’s rule adds no time for steep descents. Allow extra time on rough or steep ground.',
+      };
+    },
+
+    'heart-rate-recovery': v => {
+      const C = window.WSCore;
+      const errors = {};
+      if (!(v.peak >= 60 && v.peak <= 230)) errors.peak = 'Enter a peak heart rate from 60 to 230 bpm.';
+      if (!(v.after >= 40 && v.after <= 230)) errors.after = 'Enter your heart rate one minute after stopping.';
+      if (Object.keys(errors).length) return { errors };
+      const r = C.hrr(v.peak, v.after);
+      if (r < 0) return { errors: { after: 'Your one-minute heart rate is higher than your peak. Check the readings.' } };
+      const low = r <= C.HRR_ABNORMAL;
+      return {
+        hero: { icon: 'heartbeat', value: `${num(r, 0)} bpm`, label: 'heart rate recovery in 1 minute' },
+        rows: [
+          ['Heart rate recovery', `${num(r, 0)} bpm`],
+          ['Cut-off in Cole et al. 1999', '12 bpm or less defined as abnormal', 'flag'],
+          ['Drop as a share of peak', `${num(r / v.peak * 100, 0)}%`, 'gauge'],
+        ],
+        range: { title: 'One-minute recovery vs the 12 bpm research cut-off', min: 0, max: 60, value: Math.min(60, r), fmt: n => `${num(n, 0)} bpm`, bands: [['12 or less', 0, 12.5], ['Above 12', 12.5, 60]] },
+        insight: low
+          ? `Your heart rate dropped ${num(r, 0)} bpm in the first minute. In the 1999 NEJM study, a drop of 12 bpm or less was defined as abnormal. Consider discussing it with a clinician, especially if this is repeatable.`
+          : `Your heart rate dropped ${num(r, 0)} bpm in the first minute, above the 12 bpm cut-off used in the 1999 NEJM study.`,
+        note: 'Readings depend on how hard you worked and whether you kept moving. Measure the same way each time.',
+      };
+    },
+
+    'recipe-nutrition': v => {
+      const C = window.WSCore;
+      let items = [];
+      try { items = JSON.parse(v.items || '[]'); } catch { items = []; }
+      if (!items.length) return { empty: true };
+      if (!(v.servings >= 1)) return { errors: { servings: 'Enter at least 1 serving.' } };
+      const r = C.recipeTotals(items, v.servings);
+      const L = ['Calories', 'Protein', 'Fat', 'Carbohydrate', 'Fiber', 'Sugars', 'Saturated fat', 'Sodium'];
+      const U = ['kcal', 'g', 'g', 'g', 'g', 'g', 'g', 'mg'];
+      const fmt = (i, x) => `${num(x, i === 0 || i === 7 ? 0 : 1)} ${U[i]}${r.missing[i] ? '*' : ''}`;
+      const rows = L.map((l, i) => [`${l} per serving`, `${fmt(i, r.perServing[i])} (recipe ${fmt(i, r.total[i])})`, i ? 'salad' : undefined]);
+      rows.push(['Recipe weight', `${num(r.grams, 0)} g, about ${num(r.grams / v.servings, 0)} g per serving`, 'scale']);
+      const miss = r.missing.some(Boolean);
+      return {
+        hero: { icon: 'salad', value: num(r.perServing[0], 0), label: `calories per serving · ${num(v.servings, 0)} servings` },
+        rows,
+        insight: `This recipe has about ${num(r.total[0], 0)} calories in total, or ${num(r.perServing[0], 0)} per serving, with ${num(r.perServing[1], 1)} g protein, ${num(r.perServing[3], 1)} g carbohydrate and ${num(r.perServing[2], 1)} g fat per serving.`,
+        note: miss ? '* USDA has no value for this nutrient in at least one ingredient, so that total is incomplete.' : 'Values are for ingredients as entered, raw or cooked as described in each USDA entry.',
+      };
+    },
+
     'steps-to-miles': v => {
       const errors = {};
       if (!(v.steps > 0)) errors.steps = 'Enter a step count greater than zero.';
@@ -1002,6 +1257,67 @@
     requestAnimationFrame(step);
   };
 
+
+  // Recipe ingredient widget. Food data is a same-origin static file (USDA SR Legacy, public domain);
+  // searches and recipes never leave the browser.
+  let foodDb = null;
+  const loadFoods = src => (foodDb ||= fetch(src).then(r => { if (!r.ok) throw new Error('data'); return r.json(); }));
+  const EXAMPLE = [[173904, '1 cup'], [171267, '1 cup'], [173944, '1 small (6" to 6-7/8" long)'], [172470, '2 tbsp'], [169640, '1 tbsp']];
+  const recipeWidget = (box, form) => {
+    const q = box.querySelector('.recipe-search'), list = box.querySelector('.recipe-suggest'), rows = box.querySelector('.recipe-rows');
+    const hidden = box.querySelector('input[type=hidden]');
+    const items = [];
+    const sync = () => { hidden.value = JSON.stringify(items.map(it => ({ id: it.f[0], name: it.f[1], grams: it.grams, per100: it.f[3] }))); form.dispatchEvent(new Event('input', { bubbles: true })); };
+    const gramsOf = it => it.unit === 'g' ? it.qty : it.unit === 'oz' ? it.qty * window.WSCore.OZ : it.qty * it.f[4][Number(it.unit)][1];
+    const render = () => {
+      rows.innerHTML = '';
+      items.forEach((it, i) => {
+        const li = document.createElement('li'); li.className = 'recipe-row';
+        const opts = [['g', 'grams'], ['oz', 'ounces'], ...it.f[4].map((p, j) => [String(j), `× ${p[0]} (${p[1]} g)`])];
+        li.innerHTML = `<span class="recipe-name"></span><span class="recipe-qty"><input type="number" min="0" step="any" inputmode="decimal" aria-label="Amount"><select aria-label="Unit"></select></span><button type="button" class="recipe-del" aria-label="Remove">×</button>`;
+        li.querySelector('.recipe-name').textContent = it.f[1];
+        const n = li.querySelector('input'), sel = li.querySelector('select');
+        opts.forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; sel.append(o); });
+        n.value = it.qty; sel.value = it.unit;
+        const upd = () => { it.qty = Number(n.value) || 0; it.unit = sel.value; it.grams = gramsOf(it); sync(); };
+        n.addEventListener('input', e => { e.stopPropagation(); upd(); });
+        sel.addEventListener('change', e => { e.stopPropagation(); upd(); });
+        li.querySelector('.recipe-del').addEventListener('click', () => { items.splice(i, 1); render(); sync(); });
+        rows.append(li);
+      });
+    };
+    const add = (f, unitLabel) => {
+      const j = unitLabel ? f[4].findIndex(p => p[0] === unitLabel) : (f[4].length ? 0 : -1);
+      const it = j >= 0 ? { f, qty: 1, unit: String(j) } : { f, qty: 100, unit: 'g' };
+      it.grams = gramsOf(it); items.push(it); render(); sync();
+    };
+    const search = async () => {
+      const words = q.value.toLowerCase().split(/[\s,]+/).filter(Boolean);
+      if (!words.length) { list.hidden = true; q.setAttribute('aria-expanded', 'false'); return; }
+      let db;
+      try { db = await loadFoods(box.dataset.src); } catch { box.querySelector('.calc-error').textContent = 'The food list could not load. Check your connection and try again.'; return; }
+      const hits = db.foods.filter(f => { const d = f[1].toLowerCase(); return words.every(w => d.includes(w)); })
+        .sort((a, b) => (b[1].toLowerCase().startsWith(words[0]) - a[1].toLowerCase().startsWith(words[0])) || a[1].length - b[1].length).slice(0, 12);
+      list.innerHTML = '';
+      hits.forEach(f => { const li = document.createElement('li'); li.role = 'option'; li.tabIndex = -1; li.textContent = f[1]; li.addEventListener('mousedown', e => { e.preventDefault(); add(f); q.value = ''; list.hidden = true; }); li.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); add(f); q.value = ''; list.hidden = true; q.focus(); } else if (e.key === 'ArrowDown') li.nextElementSibling?.focus(); else if (e.key === 'ArrowUp') (li.previousElementSibling || q).focus(); }); list.append(li); });
+      if (!hits.length) { const li = document.createElement('li'); li.className = 'recipe-none'; li.textContent = 'No USDA match. Try a simpler word, such as "oats" or "chicken breast".'; list.append(li); }
+      list.hidden = false; q.setAttribute('aria-expanded', 'true');
+    };
+    let t;
+    q.addEventListener('input', e => { e.stopPropagation(); clearTimeout(t); t = setTimeout(search, 120); });
+    q.addEventListener('keydown', e => { if (e.key === 'ArrowDown') { e.preventDefault(); list.querySelector('[role=option]')?.focus(); } if (e.key === 'Enter') e.preventDefault(); });
+    q.addEventListener('blur', () => setTimeout(() => { if (!list.contains(document.activeElement)) list.hidden = true; }, 150));
+    const loadExample = async () => {
+      let db; try { db = await loadFoods(box.dataset.src); } catch { box.querySelector('.calc-error').textContent = 'The food list could not load. Check your connection and try again.'; return; }
+      const by = new Map(db.foods.map(f => [f[0], f]));
+      items.length = 0; EXAMPLE.forEach(([id, u]) => by.has(id) && add(by.get(id), u));
+      form.elements.servings.value = 2; form.dispatchEvent(new Event('input', { bubbles: true }));
+    };
+    loadExample();
+    box.querySelector('.recipe-example').addEventListener('click', loadExample);
+    form.addEventListener('reset', () => { items.length = 0; setTimeout(() => { render(); sync(); }, 0); });
+  };
+
   // Numbers become numbers (blank is null); radios, selects and text stay strings.
   const read = form => {
     const v = {};
@@ -1027,6 +1343,11 @@
     const values = read(form);
     toggleFields(root, values);
     const result = calcs[root.dataset.calc](values, form);
+    if (result.empty) {
+      out.innerHTML = root.dataset.emptyHtml || out.innerHTML;
+      root.dataset.copy = '';
+      return;
+    }
     if (result.errors) {
       Object.entries(result.errors).forEach(([name, message]) => {
         const err = root.querySelector(`#${root.dataset.calc}-${name}-err`);
@@ -1081,7 +1402,17 @@
       input.value = Number(next.toFixed(4));
       input.dispatchEvent(new Event('input', { bubbles: true }));
     }));
+    root.dataset.emptyHtml = root.querySelector('.calc-results').innerHTML;
+    root.querySelectorAll('[data-recipe]').forEach(box => recipeWidget(box, form));
+    // Fill relative example dates (local calendar day) when empty.
+    const fillDates = () => form.querySelectorAll('input[type=date][data-offset]').forEach(d => {
+      if (d.value) return;
+      const t = new Date(); t.setDate(t.getDate() + Number(d.dataset.offset));
+      d.value = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+    });
+    fillDates();
     form.addEventListener('reset', () => setTimeout(() => {
+      fillDates();
       form.querySelectorAll('.calc-range').forEach(r => { r.value = form.elements[r.dataset.for].value || r.min; });
       run(root);
     }, 0));

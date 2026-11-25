@@ -102,4 +102,67 @@ near(C.caffeine({}).hi, 0, 0, 'caf none'); throws(() => C.caffeine({ latte: 1 })
 near(C.walkMinutes(3, 3), 60, 1e-12, 'walk'); near(C.walkMinutes(5, 4, 10), 85, 1e-12, 'walk break');
 throws(() => C.walkMinutes(3, 0), 'zero speed');
 
+
+// Dates: across a month end, a leap day and the US DST change
+near(C.daysBetween('2026-11-01', '2026-11-29'), 28, 0, 'days');
+if (C.addDays('2026-01-25', 28) !== '2026-02-22') throw new Error('addDays month'); n++;
+if (C.addDays('2028-02-20', 10) !== '2028-03-01') throw new Error('addDays leap'); n++;
+if (C.addDays('2026-03-01', 28) !== '2026-03-29') throw new Error('addDays dst'); n++;
+let pd = C.periodDates('2026-11-01', 28, 3, 3);
+if (pd[0].date !== '2026-11-29' || pd[0].earliest !== '2026-11-26' || pd[0].latest !== '2026-12-02' || pd[2].date !== '2027-01-24') throw new Error('periodDates'); n++;
+throws(() => C.periodDates('2026-11-01', 10), 'cycle too short');
+
+// Fiber: 2,000 kcal -> 28 g; AI table
+near(C.fiberByKcal(2000), 28, 1e-12, 'fiber kcal'); near(C.FIBER_AI.male['19-50'], 38, 0); near(C.FIBER_AI.female['51+'], 21, 0);
+
+// Caffeine half-life: 200 mg, 10 h, 5 h half-life -> 50 mg
+near(C.remaining(200, 10, 5), 50, 1e-12, 'half-life'); near(C.remaining(200, 0, 5), 200, 0, 't0');
+throws(() => C.remaining(200, 5, 0), 'zero half-life');
+
+// Swim: 1,000 yd in 20:00 -> per 100 yd 120 s; per 100 m 120 / 0.9144 = 131.234 s
+near(C.per100(1200, 1000, 'yd', 'yd'), 120, 1e-9, 'swim yd'); near(C.per100(1200, 1000, 'yd', 'm'), 120 / 0.9144, 1e-9, 'swim yd->m');
+near(C.per100(1500, 1500, 'm', 'm'), 100, 1e-12, 'swim m');
+
+// Pandolf: W 80, L 20, V 1.34, G 0 -> 120 + 2*100*0.0625 + 100*1.5*1.7956 = 120 + 12.5 + 269.34 = 401.84 W
+near(C.pandolf({ W: 80, L: 20, V: 1.34, G: 0 }), 401.84, 1e-9, 'pandolf flat');
+// add 5% grade: + 100*0.35*1.34*5 = 234.5 -> 636.34 W
+near(C.pandolf({ W: 80, L: 20, V: 1.34, G: 5 }), 636.34, 1e-9, 'pandolf grade');
+near(C.wattsToKcalPerHour(4184 / 3.6), 1000, 1e-9, 'W to kcal/h');
+
+
+// Net carbs: US 30 total - 10 fiber - 8 polyols = 12; EU 20 carbs - 8 polyols = 12; floor at 0
+near(C.netCarbs({ total: 30, fiber: 10, polyols: 8 }).net, 12, 0, 'net us');
+near(C.netCarbs({ total: 30, fiber: 10, polyols: 8, subtractPolyols: false }).net, 20, 0, 'net us keep polyols');
+near(C.netCarbs({ total: 20, fiber: 10, polyols: 8, label: 'eu' }).net, 12, 0, 'net eu');
+near(C.netCarbs({ total: 5, fiber: 6 }).net, 0, 0, 'net floor'); near(C.netCarbs({ total: 5, fiber: 6 }).raw, -1, 0, 'net raw');
+
+// METs: 4 MET x 30 min = 120 MET-min; 70 kg -> 140 kcal
+near(C.metMinutes(4, 30), 120, 0, 'met-min'); near(C.metKcal(4, 70, 30), 140, 1e-12, 'met kcal');
+if (C.metBand(2.9) !== 'light' || C.metBand(3) !== 'moderate' || C.metBand(6) !== 'vigorous') throw new Error('metBand'); n++;
+
+// Naismith: 10 km + 600 m = 2 h + 1 h = 180 min; 9 mi (14.484 km) + 2,000 ft (609.6 m) -> 3 h + 1.016 h
+near(C.naismith(10, 600), 180, 1e-9, 'naismith');
+near(C.naismith(9 * 1.609344, 2000 * 0.3048), (9 * 1.609344 / 5 + 609.6 / 600) * 60, 1e-9, 'naismith imperial');
+
+// HRR: 160 - 140 = 20; cut-off 12
+near(C.hrr(160, 140), 20, 0, 'hrr'); near(C.HRR_ABNORMAL, 12, 0);
+
+// Clock: 20:00 + 16 h = 12:00 next day
+let ck = C.addClock(20 * 60, 16 * 60); near(ck.min, 720, 0, 'clock'); near(ck.dayOffset, 1, 0, 'clock day');
+
+
+// Recipe: overnight oats example from USDA SR Legacy values (kcal, protein, fat, carbs, fiber)
+const oats = [
+  { grams: 81, per100: [379, 13.15, 6.52, 67.7, 10.1] }, { grams: 244, per100: [50, 3.3, 1.98, 4.8, 0] },
+  { grams: 101, per100: [89, 1.09, 0.33, 22.84, 2.6] }, { grams: 32, per100: [598, 22.21, 51.36, 22.31, 5] },
+  { grams: 21, per100: [304, 0.3, 0, 82.4, 0.2] }];
+let rt = C.recipeTotals(oats, 2, 5);
+near(rt.total[0], 379 * 0.81 + 50 * 2.44 + 89 * 1.01 + 598 * 0.32 + 304 * 0.21, 1e-9, 'recipe kcal'); // 774.08
+near(rt.perServing[0], 387.04, 1e-9, 'recipe kcal per serving');
+near(rt.total[3], 67.7 * 0.81 + 4.8 * 2.44 + 22.84 * 1.01 + 22.31 * 0.32 + 82.4 * 0.21, 1e-9, 'recipe carbs'); // 54.837 + 11.712 + 23.068 + 7.139 + 17.304 = 114.06 near(rt.grams, 479, 0, 'recipe grams');
+let rm = C.recipeTotals([{ grams: 100, per100: [100, null] }, { grams: 50, per100: [200, 4] }], 1, 2);
+near(rm.total[1], 2, 1e-12, 'missing not zero-filled sum'); near(rm.missing[1], 1, 0, 'missing counted');
+throws(() => C.recipeTotals([], 0), 'zero servings');
+near(C.OZ * 16, 453.59237, 1e-9, 'oz');
+
 console.log(`Calculator core tests passed (${n} assertions).`);
